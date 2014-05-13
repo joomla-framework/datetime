@@ -1,2 +1,2 @@
-datetime
-========
+The DateTime Package
+================
