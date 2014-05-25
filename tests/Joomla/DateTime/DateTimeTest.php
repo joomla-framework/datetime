@@ -38,6 +38,14 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($propertyValue, $datetime->$property);
 	}
 
+	/** @test */
+	public function it_should_test()
+	{
+		//$this->assertEquals('', $this->SUT->toISO8601());
+		//$this->assertEquals('', $this->SUT->toRFC822());
+		$this->assertEquals('', $this->SUT->toUnix());
+	}
+
 	public function seedWithPropertiesAndValues()
 	{
 		$datetime = new DateTime("2014-05-25 12:27:39");

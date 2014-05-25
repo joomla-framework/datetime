@@ -57,51 +57,51 @@ class DateTime
 		switch ($name)
 		{
 			case 'daysinmonth':
-				$value = $this->datetime->format('t');
+				$value = $this->format('t');
 				break;
 
 			case 'dayofweek':
-				$value = $this->datetime->format('N');
+				$value = $this->format('N');
 				break;
 
 			case 'dayofyear':
-				$value = $this->datetime->format('z');
+				$value = $this->format('z');
 				break;
 
 			case 'isleapyear':
-				$value = (boolean) $this->datetime->format('L');
+				$value = (boolean) $this->format('L');
 				break;
 
 			case 'day':
-				$value = $this->datetime->format('d');
+				$value = $this->format('d');
 				break;
 
 			case 'hour':
-				$value = $this->datetime->format('H');
+				$value = $this->format('H');
 				break;
 
 			case 'minute':
-				$value = $this->datetime->format('i');
+				$value = $this->format('i');
 				break;
 
 			case 'second':
-				$value = $this->datetime->format('s');
+				$value = $this->format('s');
 				break;
 
 			case 'month':
-				$value = $this->datetime->format('m');
+				$value = $this->format('m');
 				break;
 
 			case 'ordinal':
-				$value = $this->datetime->format('S');
+				$value = $this->format('S');
 				break;
 
 			case 'week':
-				$value = $this->datetime->format('W');
+				$value = $this->format('W');
 				break;
 
 			case 'year':
-				$value = $this->datetime->format('Y');
+				$value = $this->format('Y');
 				break;
 
 			default:
@@ -113,5 +113,25 @@ class DateTime
 		}
 
 		return $value;
+	}
+
+	public function format($format)
+	{
+		return $this->datetime->format($format);
+	}
+
+	public function toISO8601()
+	{
+		return $this->format(\DateTime::RFC3339);
+	}
+
+	public function toRFC822()
+	{
+		return $this->format(\DateTime::RFC2822);
+	}
+
+	public function toUnix()
+	{
+		return (int) $this->format('U');
 	}
 }
