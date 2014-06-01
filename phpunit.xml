@@ -3,7 +3,7 @@
 <phpunit bootstrap="vendor/autoload.php" colors="true">
 	<testsuites>
 		<testsuite name="DateTime">
-			<directory>tests/Joomla/DateTime</directory>
+			<directory>tests/</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

@@ -115,9 +115,21 @@ class DateTime
 		return $value;
 	}
 
+	public function add()
+	{
+		$datetime = clone $this->datetime;
+		$datetime->add(new \DateInterval('P1D'));
+		return new DateTime($datetime->format('Y-m-d H:i:s'));
+	}
+
 	public function format($format)
 	{
 		return $this->datetime->format($format);
+	}
+
+	public function toDateTime()
+	{
+		return clone $this->datetime;
 	}
 
 	public function toISO8601()
