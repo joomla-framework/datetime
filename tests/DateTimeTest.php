@@ -10,7 +10,7 @@ namespace Joomla\DateTime;
 /**
  * Tests for Date class.
  *
- * @since  1.0
+ * @since  2.0
  */
 class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
