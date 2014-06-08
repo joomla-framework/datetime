@@ -43,6 +43,14 @@ class DateTime
 		$this->datetime = new \DateTime($datetime, $timezone);
 	}
 
+	public static function createFromFormat($format, $time, \DateTimeZone $timezone)
+	{
+		$datetime = \DateTime::createFromFormat($format, $time, $timezone);
+		$obj = new self();
+		$obj->setDateTime($datetime);
+		return $obj;
+	}
+
 	/**
 	 * Magic method to access properties of the date given by class to the format method.
 	 *
@@ -115,11 +123,106 @@ class DateTime
 		return $value;
 	}
 
-	public function add()
+	public function add(\DateInterval $interval)
 	{
 		$datetime = clone $this->datetime;
-		$datetime->add(new \DateInterval('P1D'));
-		return new DateTime($datetime->format('Y-m-d H:i:s'));
+		$datetime->add($interval);
+
+		$obj = new self();
+		$obj->setDateTime($datetime);
+
+		return $obj;
+	}
+
+	public function sub(\DateInterval $interval)
+	{
+		$datetime = clone $this->datetime;
+		$datetime->sub($interval);
+
+		$obj = new self();
+		$obj->setDateTime($datetime);
+
+		return $obj;
+	}
+
+	public function addDays($value)
+	{
+		return $this->calc($value, 'P%dD');
+	}
+
+	public function addMonths($value)
+	{
+		return $this->calc($value, 'P%dM');
+	}
+
+	public function addYears($value)
+	{
+		return $this->calc($value, 'P%dY');
+	}
+
+	public function addSeconds($value)
+	{
+		return $this->calc($value, 'PT%dS');
+	}
+
+	public function addMinutes($value)
+	{
+		return $this->calc($value, 'PT%dM');
+	}
+
+	public function addHours($value)
+	{
+		return $this->calc($value, 'PT%dH');
+	}
+
+	public function getYesterday()
+	{
+		return $this->addDays(-1);
+	}
+
+	public function getTomorrow()
+	{
+		return $this->addDays(1);
+	}
+
+	public function getBeginOfWeek()
+	{
+
+	}
+
+	public function getEndOfWeek()
+	{
+
+	}
+
+	public function getBeginOnMonth()
+	{
+
+	}
+
+	public function getEndOfMonth()
+	{
+
+	}
+
+	public function getBeginOfYear()
+	{
+		
+	}
+
+	public function getEndOfYear()
+	{
+
+	}
+
+	public function getBeginOfDay()
+	{
+
+	}
+
+	public function getEndOfDay()
+	{
+
 	}
 
 	public function format($format)
@@ -127,6 +230,22 @@ class DateTime
 		return $this->datetime->format($format);
 	}
 
+	public function getOffset()
+	{
+		return $this->datetime->getOffset();
+	}
+
+	public function getTimestamp()
+	{
+		return $this->datetime->getTimestamp();
+	}
+
+	public function getTimezone()
+	{
+		return clone $this->datetime->getTimezone();
+	}
+
+	/** @return \DateTime */
 	public function toDateTime()
 	{
 		return clone $this->datetime;
@@ -145,5 +264,18 @@ class DateTime
 	public function toUnix()
 	{
 		return (int) $this->format('U');
+	}
+
+	private function setDateTime(\DateTime $datetime)
+	{
+		$this->datetime = clone $datetime;
+	}
+
+	private function calc($value, $format)
+	{
+		$value = intval($value);
+		$spec = sprintf($format, abs($value));
+		return $value > 0 ? $this->add(new \DateInterval($spec))
+						  : $this->sub(new \DateInterval($spec));
 	}
 }
