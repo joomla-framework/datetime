@@ -7,7 +7,7 @@
 
 namespace Joomla\DateTime;
 
-class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase 
+class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase
 {
 	const CURRENT = '2014-05-22 12:22:42';
 
@@ -19,7 +19,8 @@ class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	protected function setUp() {
+	protected function setUp()
+	{
 		$this->SUT = new DateTimeWrapper(new DateTime(self::CURRENT));
 	}
 
@@ -30,21 +31,25 @@ class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase
 	 * @dataProvider seedWithPropertiesAndValues
 	 * @return void
 	 */
-	public function it_should_return_a_value_of_a_property(DateTimeWrapper $datetime, $property, $propertyValue) {
+	public function it_should_return_a_value_of_a_property(DateTimeWrapper $datetime, $property, $propertyValue)
+	{
 		$this->assertEquals($propertyValue, $datetime->$property);
 	}
-		
+
 	/** @test */
-	public function it_should_return_a_date_in_iso8601_format() {
+	public function it_should_return_a_date_in_iso8601_format()
+	{
 		$this->assertEquals('2014-05-22T12:22:42+02:00', $this->SUT->toISO8601());
 	}
 
 	/** @test */
-	public function it_should_return_a_date_in_rfc822_format() {
+	public function it_should_return_a_date_in_rfc822_format()
+	{
 		$this->assertEquals('Thu, 22 May 2014 12:22:42 +0200', $this->SUT->toRFC822());
 	}
-	
-	public function seedWithPropertiesAndValues() {
+
+	public function seedWithPropertiesAndValues()
+	{
 		$datetime = new DateTimeWrapper(new DateTime("2014-05-25 12:27:39"));
 		$leapyear = new DateTimeWrapper(new DateTime("2016-05-02"));
 
@@ -65,5 +70,4 @@ class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase
 			array($datetime, 'year', 2014),
 		);
 	}
-
 }

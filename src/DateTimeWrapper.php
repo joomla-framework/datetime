@@ -20,16 +20,16 @@ namespace Joomla\DateTime;
  *
  * @since  2.0
  */
-class DateTimeWrapper 
+class DateTimeWrapper
 {
 	/** @var DateTime */
 	private $datetime;
-	
+
 	public function __construct(DateTime $datetime)
 	{
 		$this->datetime = $datetime;
 	}
-	
+
 	/**
 	 * Magic method to access properties of the date given by class to the format method.
 	 *
@@ -37,7 +37,8 @@ class DateTimeWrapper
 	 *
 	 * @return  mixed
 	 */
-	public function __get($name) {
+	public function __get($name)
+	{
 		$value = null;
 
 		switch ($name) {
@@ -98,16 +99,19 @@ class DateTimeWrapper
 
 		return $value;
 	}
-	
-	public function toISO8601() {
+
+	public function toISO8601()
+	{
 		return $this->datetime->format(\DateTime::RFC3339);
 	}
 
-	public function toRFC822() {
+	public function toRFC822()
+	{
 		return $this->datetime->format(\DateTime::RFC2822);
 	}
 
-	public function toUnix() {
+	public function toUnix()
+	{
 		return (int) $this->datetime->format('U');
 	}
 }
