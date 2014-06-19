@@ -82,6 +82,16 @@ class DateTime
 		return $this->addDays(-intval($value));
 	}
 
+	public function addWeeks($value)
+	{
+		return $this->calc($value, 'P%dW');
+	}
+
+	public function subWeeks($value)
+	{
+		return $this->addWeeks(-intval($value));
+	}
+
 	public function addMonths($value)
 	{
 		return $this->calc($value, 'P%dM');
@@ -158,32 +168,65 @@ class DateTime
 
 	public function getBeginOfWeek()
 	{
+		$beginOfDay = $this->getBeginOfDay();
 
+		// @todo maybe closure is better? e.g. for strategy later - to keep the same way of date' modifications?
+
+		$diffInDays = 7 - intval($beginOfDay->format('N'));
+		return $beginOfDay->subDays($diffInDays);
 	}
 
 	public function getEndOfWeek()
 	{
+		$endOfDay = $this->getEndOfDay();
 
+		// @todo maybe closure is better? e.g. for strategy later - to keep the same way of date' modifications?
+
+		$diffInDays = 7 - intval($endOfDay->format('N'));
+		return $endOfDay->addDays($diffInDays);
 	}
 
-	public function getBeginOnMonth()
+	public function getBeginOfMonth()
 	{
+		$beginOfDay = $this->getBeginOfDay();
 
+		return $beginOfDay->modify(function(\DateTime $datetime) {
+			$year = $datetime->format('Y');
+			$month = $datetime->format('m');
+			$datetime->setDate($year, $month, 1);
+		});
 	}
 
 	public function getEndOfMonth()
 	{
+		$endOfDay = $this->getEndOfDay();
 
+		return $endOfDay->modify(function(\DateTime $datetime) {
+			$year = $datetime->format('Y');
+			$month = $datetime->format('m');
+			$day = $datetime->format('t');
+			$datetime->setDate($year, $month, $day);
+		});
 	}
 
 	public function getBeginOfYear()
 	{
+		$beginOfDay = $this->getBeginOfDay();
 
+		return $beginOfDay->modify(function(\DateTime $datetime) {
+			$year = $datetime->format('Y');
+			$datetime->setDate($year, 1, 1);
+		});
 	}
 
 	public function getEndOfYear()
 	{
+		$endOfDay = $this->getEndOfDay();
 
+		return $endOfDay->modify(function(\DateTime $datetime) {
+			$year = $datetime->format('Y');
+			$datetime->setDate($year, 12, 31);
+		});
 	}
 
 	public function format($format)
@@ -207,7 +250,7 @@ class DateTime
 	}
 
 	/** @return \DateTime */
-	public function toDateTime()
+	public function getDateTime()
 	{
 		return clone $this->datetime;
 	}

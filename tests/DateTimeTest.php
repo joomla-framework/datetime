@@ -78,7 +78,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals(-1, intval('-1'));
 
-		$this->assertAttributeNotSame($this->SUT->toDateTime(), 'datetime', $this->SUT);
+		$this->assertAttributeNotSame($this->SUT->getDateTime(), 'datetime', $this->SUT);
 	}
 
 	public function seedWithDateTimeObject()
@@ -109,8 +109,12 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 			array($sut, $sut->subDays(1), $sut->sub(new \DateInterval('P1D'))),
 			array($sut, $sut->subDays(-1), $sut->add(new \DateInterval('P1D'))),
 			array($sut, $sut->addDays(-1), $sut->sub(new \DateInterval('P1D'))),
+			array($sut, $sut->addWeeks(1), $sut->add(new \DateInterval('P1W'))),
+			array($sut, $sut->subWeeks(1), $sut->sub(new \DateInterval('P1W'))),
+			array($sut, $sut->subWeeks(-1), $sut->add(new \DateInterval('P1W'))),
+			array($sut, $sut->addWeeks(-1), $sut->sub(new \DateInterval('P1W'))),
 			array($sut, $sut->addMonths(1), $sut->add(new \DateInterval('P1M'))),
-			array($sut, $sut->subMonths(1), $sut->sub(new \DateInterval('P1M'))),
+			array($sut, $sut->subMonths(1), $sut->sub(new \DateInterval('P1M'))),						#10
 			array($sut, $sut->subMonths(-1), $sut->add(new \DateInterval('P1M'))),
 			array($sut, $sut->addMonths(-1), $sut->sub(new \DateInterval('P1M'))),
 			array($sut, $sut->addYears(1), $sut->add(new \DateInterval('P1Y'))),
@@ -120,7 +124,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 			array($sut, $sut->addSeconds(1), $sut->add(new \DateInterval('PT1S'))),
 			array($sut, $sut->subSeconds(1), $sut->sub(new \DateInterval('PT1S'))),
 			array($sut, $sut->subSeconds(-1), $sut->add(new \DateInterval('PT1S'))),
-			array($sut, $sut->addSeconds(-1), $sut->sub(new \DateInterval('PT1S'))),
+			array($sut, $sut->addSeconds(-1), $sut->sub(new \DateInterval('PT1S'))),					#20
 			array($sut, $sut->addMinutes(1), $sut->add(new \DateInterval('PT1M'))),
 			array($sut, $sut->subMinutes(1), $sut->sub(new \DateInterval('PT1M'))),
 			array($sut, $sut->subMinutes(-1), $sut->add(new \DateInterval('PT1M'))),
@@ -129,9 +133,14 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 			array($sut, $sut->subHours(1), $sut->sub(new \DateInterval('PT1H'))),
 			array($sut, $sut->subHours(-1), $sut->add(new \DateInterval('PT1H'))),
 			array($sut, $sut->addHours(-1), $sut->sub(new \DateInterval('PT1H'))),
-
-			array($sut, $sut->getBeginOfDay(), new DateTime($sut->format('Y-m-d 0:0:0'))),
-			array($sut, $sut->getEndOfDay(), new DateTime($sut->format('Y-m-d 23:59:59')))
+			array($sut, $sut->getBeginOfDay(), new DateTime($sut->format('Y-m-d 00:00:00'))),
+			array($sut, $sut->getEndOfDay(), new DateTime($sut->format('Y-m-d 23:59:59'))),				#30
+			array($sut, $sut->getBeginOfWeek(), new DateTime('2014-05-19 00:00:00')),
+			array($sut, $sut->getEndOfWeek(), new DateTime('2014-05-25 23:59:59')),
+			array($sut, $sut->getBeginOfMonth(), new DateTime($sut->format('Y-m-01 00:00:00'))),
+			array($sut, $sut->getEndOfMonth(), new DateTime($sut->format('Y-m-31 23:59:59'))),
+			array($sut, $sut->getBeginOfYear(), new DateTime($sut->format('Y-01-01 00:00:00'))),
+			array($sut, $sut->getEndOfYear(), new DateTime($sut->format('Y-12-31 23:59:59')))
 		);
 	}
 }
