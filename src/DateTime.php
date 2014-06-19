@@ -58,6 +58,23 @@ class DateTime
 		return self::createFromDateTime(date('Y'), date('m'), date('d'), $hour, $minute, $second, $timezone);
 	}
 
+	public static function today()
+	{
+		return self::createFromTime();
+	}
+
+	public static function yesterday()
+	{
+		$today = self::today();
+		return $today->subDays(1);
+	}
+
+	public static function tomorrow()
+	{
+		$today = self::today();
+		return $today->addDays(1);
+	}
+
 	public function add(\DateInterval $interval)
 	{
 		return $this->modify(function(\DateTime $datetime) use($interval) {
@@ -140,16 +157,6 @@ class DateTime
 	public function subHours($value)
 	{
 		return $this->addHours(-intval($value));
-	}
-
-	public function getYesterday()
-	{
-		return $this->addDays(-1);
-	}
-
-	public function getTomorrow()
-	{
-		return $this->addDays(1);
 	}
 
 	public function getBeginOfDay()

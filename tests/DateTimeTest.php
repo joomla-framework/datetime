@@ -36,9 +36,9 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @dataProvider seedWithDateTimeObject
 	 */
-	public function it_should_create_a_new_object(DateTime $sut, $expected)
+	public function it_should_create_a_new_object(DateTime $sut, DateTime $expected)
 	{
-		$this->assertEquals($expected, $sut->format(self::FORMAT));
+		$this->assertEquals($expected, $sut);
 	}
 
 	/** @test */
@@ -84,19 +84,22 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function seedWithDateTimeObject()
 	{
 		return array(
-			array(DateTime::createFromDateTime('2014', '06', '12', '08', '04', '09'), '2014-06-12 08:04:09'),
-			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4, 9),	'2014-06-12 08:04:09'),
-			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4),		'2014-06-12 08:04:00'),
-			array(DateTime::createFromDateTime(2014, 6, 12, 8),			'2014-06-12 08:00:00'),
-			array(DateTime::createFromDateTime(2014, 6, 12),			'2014-06-12 00:00:00'),
-			array(DateTime::createFromDateTime(2014, 6),				'2014-06-01 00:00:00'),
-			array(DateTime::createFromDateTime(2014),					'2014-01-01 00:00:00'),
-			array(DateTime::createFromDate(2014, 6, 12),				'2014-06-12 00:00:00'),
-			array(DateTime::createFromDate(2014, 6),					'2014-06-01 00:00:00'),
-			array(DateTime::createFromDate(2014),						'2014-01-01 00:00:00'),
-			array(DateTime::createFromTime(8, 4, 9),					sprintf('%s-%s-%s 08:04:09', date('Y'), date('m'), date('d'))),
-			array(DateTime::createFromTime(8, 4),						sprintf('%s-%s-%s 08:04:00', date('Y'), date('m'), date('d'))),
-			array(DateTime::createFromTime(8),							sprintf('%s-%s-%s 08:00:00', date('Y'), date('m'), date('d')))
+			array(DateTime::createFromDateTime('2014', '06', '12', '08', '04', '09'), new DateTime('2014-06-12 08:04:09')),
+			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4, 9),	new DateTime('2014-06-12 08:04:09')),
+			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4),		new DateTime('2014-06-12 08:04:00')),
+			array(DateTime::createFromDateTime(2014, 6, 12, 8),			new DateTime('2014-06-12 08:00:00')),
+			array(DateTime::createFromDateTime(2014, 6, 12),			new DateTime('2014-06-12 00:00:00')),
+			array(DateTime::createFromDateTime(2014, 6),				new DateTime('2014-06-01 00:00:00')),
+			array(DateTime::createFromDateTime(2014),					new DateTime('2014-01-01 00:00:00')),
+			array(DateTime::createFromDate(2014, 6, 12),				new DateTime('2014-06-12 00:00:00')),
+			array(DateTime::createFromDate(2014, 6),					new DateTime('2014-06-01 00:00:00')),
+			array(DateTime::createFromDate(2014),						new DateTime('2014-01-01 00:00:00')),
+			array(DateTime::createFromTime(8, 4, 9),					new DateTime(sprintf('%s-%s-%s 08:04:09', date('Y'), date('m'), date('d')))),
+			array(DateTime::createFromTime(8, 4),						new DateTime(sprintf('%s-%s-%s 08:04:00', date('Y'), date('m'), date('d')))),
+			array(DateTime::createFromTime(8),							new DateTime(sprintf('%s-%s-%s 08:00:00', date('Y'), date('m'), date('d')))),
+			array(DateTime::today(),									new DateTime(sprintf('%s-%s-%s 00:00:00', date('Y'), date('m'), date('d')))),
+			array(DateTime::yesterday(),								new DateTime(sprintf('%s-%s-%s 00:00:00', date('Y'), date('m'), date('d') - 1))),
+			array(DateTime::tomorrow(),									new DateTime(sprintf('%s-%s-%s 00:00:00', date('Y'), date('m'), date('d') + 1))),
 		);
 	}
 
