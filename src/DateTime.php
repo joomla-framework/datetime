@@ -60,24 +60,16 @@ class DateTime
 
 	public function add(\DateInterval $interval)
 	{
-		$datetime = clone $this->datetime;
-		$datetime->add($interval);
-
-		$obj = new self();
-		$obj->setDateTime($datetime);
-
-		return $obj;
+		return $this->modify(function(\DateTime $datetime) use($interval) {
+			$datetime->add($interval);
+		});
 	}
 
 	public function sub(\DateInterval $interval)
 	{
-		$datetime = clone $this->datetime;
-		$datetime->sub($interval);
-
-		$obj = new self();
-		$obj->setDateTime($datetime);
-
-		return $obj;
+		return $this->modify(function(\DateTime $datetime) use($interval) {
+			$datetime->sub($interval);
+		});
 	}
 
 	public function addDays($value)
@@ -150,6 +142,20 @@ class DateTime
 		return $this->addDays(1);
 	}
 
+	public function getBeginOfDay()
+	{
+		return $this->modify(function(\DateTime $datetime) {
+			$datetime->setTime(0, 0, 0);
+		});
+	}
+
+	public function getEndOfDay()
+	{
+		return $this->modify(function(\DateTime $datetime) {
+			$datetime->setTime(23, 59, 59);
+		});
+	}
+
 	public function getBeginOfWeek()
 	{
 
@@ -176,16 +182,6 @@ class DateTime
 	}
 
 	public function getEndOfYear()
-	{
-
-	}
-
-	public function getBeginOfDay()
-	{
-
-	}
-
-	public function getEndOfDay()
 	{
 
 	}
@@ -226,5 +222,17 @@ class DateTime
 		$value = intval($value);
 		$spec = sprintf($format, abs($value));
 		return $value > 0 ? $this->add(new \DateInterval($spec)) : $this->sub(new \DateInterval($spec));
+	}
+
+	private function modify($closure)
+	{
+		if(!is_callable($closure)) throw new \InvalidArgumentException(sprintf('Parameter for %s:modify() must be callable', get_class($this)));
+
+		$datetime = clone $this->datetime;
+		$closure($datetime);
+
+		$obj = new self();
+		$obj->setDateTime($datetime);
+		return $obj;
 	}
 }

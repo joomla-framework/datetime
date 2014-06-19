@@ -129,6 +129,9 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 			array($sut, $sut->subHours(1), $sut->sub(new \DateInterval('PT1H'))),
 			array($sut, $sut->subHours(-1), $sut->add(new \DateInterval('PT1H'))),
 			array($sut, $sut->addHours(-1), $sut->sub(new \DateInterval('PT1H'))),
+
+			array($sut, $sut->getBeginOfDay(), new DateTime($sut->format('Y-m-d 0:0:0'))),
+			array($sut, $sut->getEndOfDay(), new DateTime($sut->format('Y-m-d 23:59:59')))
 		);
 	}
 }
