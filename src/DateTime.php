@@ -30,12 +30,32 @@ class DateTime
 		$this->datetime = new \DateTime($datetime, $timezone);
 	}
 
-	public static function createFromFormat($format, $time, \DateTimeZone $timezone)
+	public static function createFromFormat($format, $time, \DateTimeZone $timezone = null)
 	{
-		$datetime = \DateTime::createFromFormat($format, $time, $timezone);
+		$datetime = is_null($timezone) ? \DateTime::createFromFormat($format, $time)
+									   : \DateTime::createFromFormat($format, $time, $timezone);
 		$obj = new self();
 		$obj->setDateTime($datetime);
 		return $obj;
+	}
+
+	public static function createFromDateTime($year, $month = null, $day = null, $hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
+	{
+		$month	= intval($month) < 1 ? 1 : $month;
+		$day	= intval($day) < 1 ? 1 : $day;
+
+		$time = sprintf('%d-%d-%d %d:%d:%d', $year, $month, $day, $hour, $minute, $second);
+		return new self($time, $timezone);
+	}
+
+	public static function createFromDate($year, $month = null, $day = null, \DateTimeZone $timezone = null)
+	{
+		return self::createFromDateTime($year, $month, $day, null, null, null, $timezone);
+	}
+
+	public static function createFromTime($hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
+	{
+		return self::createFromDateTime(date('Y'), date('m'), date('d'), $hour, $minute, $second, $timezone);
 	}
 
 	public function add(\DateInterval $interval)

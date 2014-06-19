@@ -32,6 +32,15 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 		$this->SUT = new DateTime(self::CURRENT);
 	}
 
+	/**
+	 * @test
+	 * @dataProvider seedWithDateTimeObject
+	 */
+	public function it_should_create_a_new_object(DateTime $sut, $expected)
+	{
+		$this->assertEquals($expected, $sut->format(self::FORMAT));
+	}
+
 	/** @test */
 	public function it_should_return_a_new_instance_with_added_interval()
 	{
@@ -70,6 +79,25 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(-1, intval('-1'));
 
 		$this->assertAttributeNotSame($this->SUT->toDateTime(), 'datetime', $this->SUT);
+	}
+
+	public function seedWithDateTimeObject()
+	{
+		return array(
+			array(DateTime::createFromDateTime('2014', '06', '12', '08', '04', '09'), '2014-06-12 08:04:09'),
+			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4, 9),	'2014-06-12 08:04:09'),
+			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4),		'2014-06-12 08:04:00'),
+			array(DateTime::createFromDateTime(2014, 6, 12, 8),			'2014-06-12 08:00:00'),
+			array(DateTime::createFromDateTime(2014, 6, 12),			'2014-06-12 00:00:00'),
+			array(DateTime::createFromDateTime(2014, 6),				'2014-06-01 00:00:00'),
+			array(DateTime::createFromDateTime(2014),					'2014-01-01 00:00:00'),
+			array(DateTime::createFromDate(2014, 6, 12),				'2014-06-12 00:00:00'),
+			array(DateTime::createFromDate(2014, 6),					'2014-06-01 00:00:00'),
+			array(DateTime::createFromDate(2014),						'2014-01-01 00:00:00'),
+			array(DateTime::createFromTime(8, 4, 9),					sprintf('%s-%s-%s 08:04:09', date('Y'), date('m'), date('d'))),
+			array(DateTime::createFromTime(8, 4),						sprintf('%s-%s-%s 08:04:00', date('Y'), date('m'), date('d'))),
+			array(DateTime::createFromTime(8),							sprintf('%s-%s-%s 08:00:00', date('Y'), date('m'), date('d')))
+		);
 	}
 
 	public function seedWithDateTimesForCalculations()
