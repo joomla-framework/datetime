@@ -34,7 +34,7 @@ final class DateTime
 	{
 		$datetime = is_null($timezone) ? \DateTime::createFromFormat($format, $time)
 									   : \DateTime::createFromFormat($format, $time, $timezone);
-		$obj = new self();
+		$obj = new DateTime();
 		$obj->setDateTime($datetime);
 		return $obj;
 	}
@@ -78,21 +78,6 @@ final class DateTime
 	{
 		$today = self::today();
 		return $today->addDays(1);
-	}
-
-	public function after(DateTime $datetime)
-	{
-		return $this > $datetime;
-	}
-
-	public function before(DateTime $datetime)
-	{
-		return $this < $datetime;
-	}
-
-	public function equals(DateTime $datetime)
-	{
-		return $this == $datetime;
 	}
 
 	public function add(\DateInterval $interval)
@@ -282,6 +267,34 @@ final class DateTime
 		return clone $this->datetime;
 	}
 
+	public function after(DateTime $datetime)
+	{
+		return $this > $datetime;
+	}
+
+	public function before(DateTime $datetime)
+	{
+		return $this < $datetime;
+	}
+
+	public function equals(DateTime $datetime)
+	{
+		return $this == $datetime;
+	}
+
+	public function compareTo(DateTime $datetime)
+	{
+		if($this->after($datetime)) {
+			return 1;
+		}
+
+		if($this->below($datetime)) {
+			return -1;
+		}
+
+		return 0;
+	}
+
 	private function setDateTime(\DateTime $datetime)
 	{
 		$this->datetime = clone $datetime;
@@ -301,7 +314,7 @@ final class DateTime
 		$datetime = clone $this->datetime;
 		$closure($datetime);
 
-		$obj = new self();
+		$obj = new DateTime();
 		$obj->setDateTime($datetime);
 		return $obj;
 	}
