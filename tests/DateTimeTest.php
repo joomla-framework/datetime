@@ -12,7 +12,7 @@ namespace Joomla\DateTime;
  *
  * @since  2.0
  */
-class DateTimeTest extends \PHPUnit_Framework_TestCase
+final class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
 	const FORMAT = 'Y-m-d H:i:s';
 	const CURRENT = '2014-05-22 12:22:42';
@@ -39,6 +39,25 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function it_should_create_a_new_object(DateTime $sut, DateTime $expected)
 	{
 		$this->assertEquals($expected, $sut);
+	}
+
+	/** @test */
+	public function it_should_equals_two_object()
+	{
+		$this->assertTrue($this->SUT->equals(new DateTime(self::CURRENT)));
+		$this->assertFalse($this->SUT->equals($this->SUT->addSeconds(1)));
+	}
+
+	/** @test */
+	public function it_should_check_that_date_is_after_the_other_one()
+	{
+		$this->assertTrue($this->SUT->after($this->SUT->subSeconds(1)));
+	}
+
+	/** @test */
+	public function it_should_check_that_date_is_before_the_other_one()
+	{
+		$this->assertTrue($this->SUT->before($this->SUT->addSeconds(1)));
 	}
 
 	/** @test */
@@ -84,22 +103,23 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function seedWithDateTimeObject()
 	{
 		return array(
-			array(DateTime::createFromDateTime('2014', '06', '12', '08', '04', '09'), new DateTime('2014-06-12 08:04:09')),
-			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4, 9),	new DateTime('2014-06-12 08:04:09')),
-			array(DateTime::createFromDateTime(2014, 6, 12, 8, 4),		new DateTime('2014-06-12 08:04:00')),
-			array(DateTime::createFromDateTime(2014, 6, 12, 8),			new DateTime('2014-06-12 08:00:00')),
-			array(DateTime::createFromDateTime(2014, 6, 12),			new DateTime('2014-06-12 00:00:00')),
-			array(DateTime::createFromDateTime(2014, 6),				new DateTime('2014-06-01 00:00:00')),
-			array(DateTime::createFromDateTime(2014),					new DateTime('2014-01-01 00:00:00')),
-			array(DateTime::createFromDate(2014, 6, 12),				new DateTime('2014-06-12 00:00:00')),
-			array(DateTime::createFromDate(2014, 6),					new DateTime('2014-06-01 00:00:00')),
-			array(DateTime::createFromDate(2014),						new DateTime('2014-01-01 00:00:00')),
-			array(DateTime::createFromTime(8, 4, 9),					new DateTime(sprintf('%s-%s-%s 08:04:09', date('Y'), date('m'), date('d')))),
-			array(DateTime::createFromTime(8, 4),						new DateTime(sprintf('%s-%s-%s 08:04:00', date('Y'), date('m'), date('d')))),
-			array(DateTime::createFromTime(8),							new DateTime(sprintf('%s-%s-%s 08:00:00', date('Y'), date('m'), date('d')))),
-			array(DateTime::today(),									new DateTime(sprintf('%s-%s-%s 00:00:00', date('Y'), date('m'), date('d')))),
-			array(DateTime::yesterday(),								new DateTime(sprintf('%s-%s-%s 00:00:00', date('Y'), date('m'), date('d') - 1))),
-			array(DateTime::tomorrow(),									new DateTime(sprintf('%s-%s-%s 00:00:00', date('Y'), date('m'), date('d') + 1))),
+			array(DateTime::create('2014', '06', '12', '08', '04', '09'), new DateTime('2014-06-12 08:04:09')),
+			array(DateTime::create(2014, 6, 12, 8, 4, 9),	new DateTime('2014-06-12 08:04:09')),
+			array(DateTime::create(2014, 6, 12, 8, 4),		new DateTime('2014-06-12 08:04:00')),
+			array(DateTime::create(2014, 6, 12, 8),			new DateTime('2014-06-12 08:00:00')),
+			array(DateTime::create(2014, 6, 12),			new DateTime('2014-06-12 00:00:00')),
+			array(DateTime::create(2014, 6),				new DateTime('2014-06-01 00:00:00')),
+			array(DateTime::create(2014),					new DateTime('2014-01-01 00:00:00')),
+			array(DateTime::createFromDate(2014, 6, 12),	new DateTime('2014-06-12 00:00:00')),
+			array(DateTime::createFromDate(2014, 6),		new DateTime('2014-06-01 00:00:00')),
+			array(DateTime::createFromDate(2014),			new DateTime('2014-01-01 00:00:00')),
+			array(DateTime::createFromTime(8, 4, 9),		new DateTime(sprintf('%s 08:04:09', date('Y-m-d')))),
+			array(DateTime::createFromTime(8, 4),			new DateTime(sprintf('%s 08:04:00', date('Y-m-d')))),
+			array(DateTime::createFromTime(8),				new DateTime(sprintf('%s 08:00:00', date('Y-m-d')))),
+			array(DateTime::now(),							new DateTime(date('Y-m-d H:i:s'))),
+			array(DateTime::today(),						new DateTime(sprintf('%s-%s 00:00:00', date('Y-m'), date('d')))),
+			array(DateTime::yesterday(),					new DateTime(sprintf('%s-%s 00:00:00', date('Y-m'), date('d') - 1))),
+			array(DateTime::tomorrow(),						new DateTime(sprintf('%s-%s 00:00:00', date('Y-m'), date('d') + 1)))
 		);
 	}
 
@@ -136,14 +156,14 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 			array($sut, $sut->subHours(1), $sut->sub(new \DateInterval('PT1H'))),
 			array($sut, $sut->subHours(-1), $sut->add(new \DateInterval('PT1H'))),
 			array($sut, $sut->addHours(-1), $sut->sub(new \DateInterval('PT1H'))),
-			array($sut, $sut->getBeginOfDay(), new DateTime($sut->format('Y-m-d 00:00:00'))),
-			array($sut, $sut->getEndOfDay(), new DateTime($sut->format('Y-m-d 23:59:59'))),				#30
-			array($sut, $sut->getBeginOfWeek(), new DateTime('2014-05-19 00:00:00')),
-			array($sut, $sut->getEndOfWeek(), new DateTime('2014-05-25 23:59:59')),
-			array($sut, $sut->getBeginOfMonth(), new DateTime($sut->format('Y-m-01 00:00:00'))),
-			array($sut, $sut->getEndOfMonth(), new DateTime($sut->format('Y-m-31 23:59:59'))),
-			array($sut, $sut->getBeginOfYear(), new DateTime($sut->format('Y-01-01 00:00:00'))),
-			array($sut, $sut->getEndOfYear(), new DateTime($sut->format('Y-12-31 23:59:59')))
+			array($sut, $sut->beginOfDay(), new DateTime($sut->format('Y-m-d 00:00:00'))),
+			array($sut, $sut->endOfDay(), new DateTime($sut->format('Y-m-d 23:59:59'))),				#30
+			array($sut, $sut->beginOfWeek(), new DateTime('2014-05-19 00:00:00')),
+			array($sut, $sut->endOfWeek(), new DateTime('2014-05-25 23:59:59')),
+			array($sut, $sut->beginOfMonth(), new DateTime($sut->format('Y-m-01 00:00:00'))),
+			array($sut, $sut->endOfMonth(), new DateTime($sut->format('Y-m-31 23:59:59'))),
+			array($sut, $sut->beginOfYear(), new DateTime($sut->format('Y-01-01 00:00:00'))),
+			array($sut, $sut->endOfYear(), new DateTime($sut->format('Y-12-31 23:59:59')))
 		);
 	}
 }

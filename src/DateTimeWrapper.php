@@ -20,7 +20,7 @@ namespace Joomla\DateTime;
  *
  * @since  2.0
  */
-class DateTimeWrapper
+final class DateTimeWrapper
 {
 	/** @var DateTime */
 	private $datetime;

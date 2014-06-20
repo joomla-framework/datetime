@@ -14,7 +14,7 @@ namespace Joomla\DateTime;
  *
  * @since  2.0
  */
-class DateTime
+final class DateTime
 {
 	/** @var \DateTime */
 	private $datetime;
@@ -39,23 +39,28 @@ class DateTime
 		return $obj;
 	}
 
-	public static function createFromDateTime($year, $month = null, $day = null, $hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
+	public static function create($year, $month = null, $day = null, $hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
 	{
 		$month	= intval($month) < 1 ? 1 : $month;
 		$day	= intval($day) < 1 ? 1 : $day;
 
-		$time = sprintf('%d-%d-%d %d:%d:%d', $year, $month, $day, $hour, $minute, $second);
-		return new self($time, $timezone);
+		$time = sprintf('%04s-%02s-%02s %02s:%02s:%02s', $year, $month, $day, $hour, $minute, $second);
+		return self::createFromFormat('Y-m-d H:i:s', $time, $timezone);
 	}
 
 	public static function createFromDate($year, $month = null, $day = null, \DateTimeZone $timezone = null)
 	{
-		return self::createFromDateTime($year, $month, $day, null, null, null, $timezone);
+		return self::create($year, $month, $day, null, null, null, $timezone);
 	}
 
 	public static function createFromTime($hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
 	{
-		return self::createFromDateTime(date('Y'), date('m'), date('d'), $hour, $minute, $second, $timezone);
+		return self::create(date('Y'), date('m'), date('d'), $hour, $minute, $second, $timezone);
+	}
+
+	public static function now()
+	{
+		return self::createFromTime(date('H'), date('i'), date('s'));
 	}
 
 	public static function today()
@@ -73,6 +78,21 @@ class DateTime
 	{
 		$today = self::today();
 		return $today->addDays(1);
+	}
+
+	public function after(DateTime $datetime)
+	{
+		return $this > $datetime;
+	}
+
+	public function before(DateTime $datetime)
+	{
+		return $this < $datetime;
+	}
+
+	public function equals(DateTime $datetime)
+	{
+		return $this == $datetime;
 	}
 
 	public function add(\DateInterval $interval)
@@ -159,23 +179,23 @@ class DateTime
 		return $this->addHours(-intval($value));
 	}
 
-	public function getBeginOfDay()
+	public function beginOfDay()
 	{
 		return $this->modify(function(\DateTime $datetime) {
 			$datetime->setTime(0, 0, 0);
 		});
 	}
 
-	public function getEndOfDay()
+	public function endOfDay()
 	{
 		return $this->modify(function(\DateTime $datetime) {
 			$datetime->setTime(23, 59, 59);
 		});
 	}
 
-	public function getBeginOfWeek()
+	public function beginOfWeek()
 	{
-		$beginOfDay = $this->getBeginOfDay();
+		$beginOfDay = $this->beginOfDay();
 
 		// @todo maybe closure is better? e.g. for strategy later - to keep the same way of date' modifications?
 
@@ -183,9 +203,9 @@ class DateTime
 		return $beginOfDay->subDays($diffInDays);
 	}
 
-	public function getEndOfWeek()
+	public function endOfWeek()
 	{
-		$endOfDay = $this->getEndOfDay();
+		$endOfDay = $this->endOfDay();
 
 		// @todo maybe closure is better? e.g. for strategy later - to keep the same way of date' modifications?
 
@@ -193,9 +213,9 @@ class DateTime
 		return $endOfDay->addDays($diffInDays);
 	}
 
-	public function getBeginOfMonth()
+	public function beginOfMonth()
 	{
-		$beginOfDay = $this->getBeginOfDay();
+		$beginOfDay = $this->beginOfDay();
 
 		return $beginOfDay->modify(function(\DateTime $datetime) {
 			$year = $datetime->format('Y');
@@ -204,9 +224,9 @@ class DateTime
 		});
 	}
 
-	public function getEndOfMonth()
+	public function endOfMonth()
 	{
-		$endOfDay = $this->getEndOfDay();
+		$endOfDay = $this->endOfDay();
 
 		return $endOfDay->modify(function(\DateTime $datetime) {
 			$year = $datetime->format('Y');
@@ -216,9 +236,9 @@ class DateTime
 		});
 	}
 
-	public function getBeginOfYear()
+	public function beginOfYear()
 	{
-		$beginOfDay = $this->getBeginOfDay();
+		$beginOfDay = $this->beginOfDay();
 
 		return $beginOfDay->modify(function(\DateTime $datetime) {
 			$year = $datetime->format('Y');
@@ -226,9 +246,9 @@ class DateTime
 		});
 	}
 
-	public function getEndOfYear()
+	public function endOfYear()
 	{
-		$endOfDay = $this->getEndOfDay();
+		$endOfDay = $this->endOfDay();
 
 		return $endOfDay->modify(function(\DateTime $datetime) {
 			$year = $datetime->format('Y');

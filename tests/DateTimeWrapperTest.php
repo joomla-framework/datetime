@@ -7,7 +7,7 @@
 
 namespace Joomla\DateTime;
 
-class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase
+final class DateTimeWrapperTest extends \PHPUnit_Framework_TestCase
 {
 	const CURRENT = '2014-05-22 12:22:42';
 
