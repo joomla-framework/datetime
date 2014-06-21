@@ -288,7 +288,7 @@ final class DateTime
 			return 1;
 		}
 
-		if($this->below($datetime)) {
+		if($this->before($datetime)) {
 			return -1;
 		}
 
