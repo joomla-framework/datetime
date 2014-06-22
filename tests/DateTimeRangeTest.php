@@ -17,7 +17,7 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
     {
 		$this->start = new DateTime('2014-06-12');
 		$this->end = new DateTime('2014-07-13');
-		$this->SUT = new DateTimeRange($this->start, $this->end);
+		$this->SUT = new DateTimeRange($this->start, $this->end, true);
     }
 
     /** @test */
@@ -43,8 +43,10 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	/** @test */
 	public function it_should_determine_if_two_objects_are_equal()
 	{
-		$range = new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'));
-		$this->assertTrue($this->SUT->equals($range));
+		$rangeA = new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'));
+		$rangeB = new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'), true);
+		$this->assertFalse($this->SUT->equals($rangeA));
+		$this->assertTrue($this->SUT->equals($rangeB));
 	}
 
 	/**
@@ -102,6 +104,28 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 		} else {
 			$this->assertFalse($sut->abuts($range));
 		}
+	}
+
+	/**
+	 * @test
+	 * @dataProvider seedWithContiguousRanges
+	 */
+	public function it_should_determine_if_ranges_are_contiguous($contiguous, array $ranges)
+	{
+		if($contiguous) {
+			$this->assertTrue(DateTimeRange::isContiguous($ranges));
+		} else {
+			$this->assertFalse(DateTimeRange::isContiguous($ranges));
+		}
+	}
+
+	/**
+	 * @test
+	 * @dataProvider seedWithCombinationRanges
+	 */
+	public function it_should_combinate_ranges_into_one(DateTimeRange $result, array $ranges)
+	{
+		$this->assertTrue($result->equals(DateTimeRange::combination($ranges)));
 	}
 
 	public function seedWithDatesAndRanges()
@@ -234,6 +258,44 @@ class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 			array(true,  $sutTime, new DateTimeRange(new DateTime('2014-06-13 12:01'), new DateTime('2014-06-15'))),
 			array(false, $sutTime, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-10 14:00'))),
 			array(true,  $sutTime, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-10 13:59'))),
+		);
+	}
+
+	public function seedWithContiguousRanges()
+	{
+		return array(
+			array(true, array(
+				new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-12 23:59')),
+				new DateTimeRange(new DateTime('2014-06-13'), new DateTime('2014-06-15 23:59')),
+				new DateTimeRange(new DateTime('2014-06-16'), new DateTime('2014-06-18'))
+			)),
+			array(true, array(
+				new DateTimeRange(new DateTime('2014-06-10 14:00'), new DateTime('2014-06-12 11:59')),
+				new DateTimeRange(new DateTime('2014-06-12 12:00'), new DateTime('2014-06-15 13:29')),
+				new DateTimeRange(new DateTime('2014-06-15 13:30'), new DateTime('2014-06-18'))
+			)),
+		);
+	}
+
+	public function seedWithCombinationRanges()
+	{
+		return array(
+			array(
+				new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-18')),
+				array(
+					new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-12 23:59')),
+					new DateTimeRange(new DateTime('2014-06-13'), new DateTime('2014-06-15 23:59')),
+					new DateTimeRange(new DateTime('2014-06-16'), new DateTime('2014-06-18'))
+				)
+			),
+			array(
+				new DateTimeRange(new DateTime('2014-06-10 14:00'), new DateTime('2014-06-18')),
+				array(
+					new DateTimeRange(new DateTime('2014-06-10 14:00'), new DateTime('2014-06-12 11:59')),
+					new DateTimeRange(new DateTime('2014-06-12 12:00'), new DateTime('2014-06-15 13:29')),
+					new DateTimeRange(new DateTime('2014-06-15 13:30'), new DateTime('2014-06-18'))
+				)
+			),
 		);
 	}
 }

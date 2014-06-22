@@ -100,20 +100,6 @@ final class DateTimeRange
 	}
 
 	/**
-	 * @todo tests
-	 *
-	 * @param DateTimeRange[] $ranges
-	 * @return boolean
-	 */
-	public function partitionedBy(array $ranges)
-	{
-		if(!self::isContiguous($ranges)) return false;
-		return $this->equals(self::combination($ranges));
-	}
-
-	/**
-	 * @todo tests
-	 *
 	 * @param DateTimeRange[] $ranges
 	 * @return DateTimeRange
 	 */
@@ -125,8 +111,6 @@ final class DateTimeRange
 	}
 
 	/**
-	 * @todo tests
-	 *
 	 * @param DateTimeRange[] $ranges
 	 * @return boolean
 	 */
@@ -147,9 +131,10 @@ final class DateTimeRange
 	 */
 	private static function sortArrayOfRanges(array $ranges)
 	{
-		return array_values(usort($ranges, function(DateTimeRange $a, DateTimeRange $b) {
+		usort($ranges, function(DateTimeRange $a, DateTimeRange $b) {
 			return $a->compareTo($b);
-		}));
+		});
+		return array_values($ranges);
 	}
 
 	private static function trimToMinutes(DateTime $datetime)
