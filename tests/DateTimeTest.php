@@ -95,9 +95,16 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	/** @test */
 	public function it_should_return_a_new_instance_of_php_datetime_object()
 	{
-		$this->assertEquals(-1, intval('-1'));
-
 		$this->assertAttributeNotSame($this->SUT->getDateTime(), 'datetime', $this->SUT);
+	}
+
+	/** @test */
+	public function it_should_return_a_string_for_a_time_difference()
+	{
+		$sut = DateTime::now();
+		$sut = $sut->addSeconds(-1);
+
+		$this->assertEquals('', $sut->timeSince());
 	}
 
 	public function seedWithDateTimeObject()

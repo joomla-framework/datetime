@@ -58,22 +58,26 @@ final class DateTime
 		return self::create(date('Y'), date('m'), date('d'), $hour, $minute, $second, $timezone);
 	}
 
+	/** @return DateTime */
 	public static function now()
 	{
 		return self::createFromTime(date('H'), date('i'), date('s'));
 	}
 
+	/** @return DateTime */
 	public static function today()
 	{
 		return self::createFromTime();
 	}
 
+	/** #return DateTime */
 	public static function yesterday()
 	{
 		$today = self::today();
 		return $today->subDays(1);
 	}
 
+	/** return DateTime */
 	public static function tomorrow()
 	{
 		$today = self::today();
@@ -293,6 +297,22 @@ final class DateTime
 		}
 
 		return 0;
+	}
+
+	public function timeSince()
+	{
+		$now = DateTime::now();
+		$diff = $this->datetime->diff($now->datetime);
+
+		$append = $prepend = '';
+
+		if($diff->invert) {
+			$append = ' ago';
+		} else {
+			$prepend = 'In ';
+		}
+
+		return sprintf('%s%s%s', $prepend, $diff->format('%R%s seconds'), $append);
 	}
 
 	private function setDateTime(\DateTime $datetime)
