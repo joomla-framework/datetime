@@ -30,6 +30,13 @@ final class DateTime
 		$this->datetime = new \DateTime($datetime, $timezone);
 	}
 
+	/**
+	 *
+	 * @param type $format
+	 * @param type $time
+	 * @param \DateTimeZone $timezone
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function createFromFormat($format, $time, \DateTimeZone $timezone = null)
 	{
 		$datetime = is_null($timezone) ? \DateTime::createFromFormat($format, $time)
@@ -39,6 +46,17 @@ final class DateTime
 		return $obj;
 	}
 
+	/**
+	 *
+	 * @param type $year
+	 * @param type $month
+	 * @param type $day
+	 * @param type $hour
+	 * @param type $minute
+	 * @param type $second
+	 * @param \DateTimeZone $timezone
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function create($year, $month = null, $day = null, $hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
 	{
 		$month	= intval($month) < 1 ? 1 : $month;
@@ -48,42 +66,75 @@ final class DateTime
 		return self::createFromFormat('Y-m-d H:i:s', $time, $timezone);
 	}
 
+	/**
+	 *
+	 * @param type $year
+	 * @param type $month
+	 * @param type $day
+	 * @param \DateTimeZone $timezone
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function createFromDate($year, $month = null, $day = null, \DateTimeZone $timezone = null)
 	{
 		return self::create($year, $month, $day, null, null, null, $timezone);
 	}
 
+	/**
+	 *
+	 * @param type $hour
+	 * @param type $minute
+	 * @param type $second
+	 * @param \DateTimeZone $timezone
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function createFromTime($hour = null, $minute = null, $second = null, \DateTimeZone $timezone = null)
 	{
 		return self::create(date('Y'), date('m'), date('d'), $hour, $minute, $second, $timezone);
 	}
 
-	/** @return DateTime */
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function now()
 	{
 		return self::createFromTime(date('H'), date('i'), date('s'));
 	}
 
-	/** @return DateTime */
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function today()
 	{
 		return self::createFromTime();
 	}
 
-	/** #return DateTime */
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function yesterday()
 	{
 		$today = self::today();
 		return $today->subDays(1);
 	}
 
-	/** return DateTime */
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public static function tomorrow()
 	{
 		$today = self::today();
 		return $today->addDays(1);
 	}
 
+	/**
+	 *
+	 * @param \DateInterval $interval
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function add(\DateInterval $interval)
 	{
 		return $this->modify(function(\DateTime $datetime) use($interval) {
@@ -91,6 +142,11 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @param \DateInterval $interval
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function sub(\DateInterval $interval)
 	{
 		return $this->modify(function(\DateTime $datetime) use($interval) {
@@ -98,76 +154,150 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addDays($value)
 	{
 		return $this->calc($value, 'P%dD');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subDays($value)
 	{
 		return $this->addDays(-intval($value));
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addWeeks($value)
 	{
 		return $this->calc($value, 'P%dW');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subWeeks($value)
 	{
 		return $this->addWeeks(-intval($value));
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addMonths($value)
 	{
 		return $this->calc($value, 'P%dM');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subMonths($value)
 	{
 		return $this->addMonths(-intval($value));
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addYears($value)
 	{
 		return $this->calc($value, 'P%dY');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subYears($value)
 	{
 		return $this->addYears(-intval($value));
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addSeconds($value)
 	{
 		return $this->calc($value, 'PT%dS');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subSeconds($value)
 	{
 		return $this->addSeconds(-intval($value));
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addMinutes($value)
 	{
 		return $this->calc($value, 'PT%dM');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subMinutes($value)
 	{
 		return $this->addMinutes(-intval($value));
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function addHours($value)
 	{
 		return $this->calc($value, 'PT%dH');
 	}
 
+	/**
+	 *
+	 * @param type $value
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function subHours($value)
 	{
 		return $this->addHours(-intval($value));
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function beginOfDay()
 	{
 		return $this->modify(function(\DateTime $datetime) {
@@ -175,6 +305,10 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function endOfDay()
 	{
 		return $this->modify(function(\DateTime $datetime) {
@@ -182,6 +316,10 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function beginOfWeek()
 	{
 		$beginOfDay = $this->beginOfDay();
@@ -192,6 +330,10 @@ final class DateTime
 		return $beginOfDay->subDays($diffInDays);
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function endOfWeek()
 	{
 		$endOfDay = $this->endOfDay();
@@ -202,6 +344,10 @@ final class DateTime
 		return $endOfDay->addDays($diffInDays);
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function beginOfMonth()
 	{
 		$beginOfDay = $this->beginOfDay();
@@ -213,6 +359,10 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function endOfMonth()
 	{
 		$endOfDay = $this->endOfDay();
@@ -225,6 +375,10 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function beginOfYear()
 	{
 		$beginOfDay = $this->beginOfDay();
@@ -235,6 +389,10 @@ final class DateTime
 		});
 	}
 
+	/**
+	 *
+	 * @return \Joomla\DateTime\DateTime
+	 */
 	public function endOfYear()
 	{
 		$endOfDay = $this->endOfDay();
@@ -273,17 +431,22 @@ final class DateTime
 
 	public function after(DateTime $datetime)
 	{
-		return $this > $datetime;
+		return $this->datetime > $datetime->datetime;
 	}
 
 	public function before(DateTime $datetime)
 	{
-		return $this < $datetime;
+		return $this->datetime < $datetime->datetime;
+	}
+
+	public function diff(DateTime $datetime, $absolute)
+	{
+		return $this->datetime->diff($datetime->datetime, $absolute);
 	}
 
 	public function equals(DateTime $datetime)
 	{
-		return $this == $datetime;
+		return $this->datetime == $datetime->datetime;
 	}
 
 	public function compareTo(DateTime $datetime)
@@ -299,20 +462,24 @@ final class DateTime
 		return 0;
 	}
 
-	public function timeSince()
+	public function timeSince(DateTime $datetime = null, $detailLevel = 1)
 	{
-		$now = DateTime::now();
-		$diff = $this->datetime->diff($now->datetime);
+		$datetime = is_null($datetime) ? DateTime::now() : $datetime;
+		$detailLevel = intval($detailLevel);
 
-		$append = $prepend = '';
+		$diff = $this->unitsOfTime($this->diff($datetime, true), $detailLevel);
 
-		if($diff->invert) {
-			$append = ' ago';
-		} else {
-			$prepend = 'In ';
+		/** For all differences below one minute */
+		if(empty($diff) || $diff[0]['unit'] == 'second') {
+			return 'just now';
 		}
 
-		return sprintf('%s%s%s', $prepend, $diff->format('%R%s seconds'), $append);
+		$format = '%s ago';
+		if($this->after($datetime)) {
+			$format = 'in %s';
+		}
+
+		return sprintf($format, $this->parseUnitsOfTime($diff));
 	}
 
 	private function setDateTime(\DateTime $datetime)
@@ -329,13 +496,73 @@ final class DateTime
 
 	private function modify($closure)
 	{
-		if(!is_callable($closure)) throw new \InvalidArgumentException(sprintf('Parameter for %s:modify() must be callable', get_class($this)));
+		if(!is_callable($closure)) throw new \InvalidArgumentException(sprintf('Parameter for %s::modify() must be callable', get_class($this)));
 
 		$datetime = clone $this->datetime;
-		$closure($datetime);
+		call_user_func($closure, $datetime);
 
 		$obj = new DateTime();
 		$obj->setDateTime($datetime);
 		return $obj;
+	}
+
+	private function unitsOfTime(\DateInterval $interval, $detailLevel)
+	{
+		$units = array('y' => 'year', 'm' => 'month', 'd' => 'day',
+			'h' => 'hour', 'i' => 'minute', 's' => 'second'
+		);
+
+		$diff = array();
+		foreach($units as $format => $unit) {
+			$amount = $interval->format('%' . $format);
+
+			/** Adding support for weeks */
+			if($unit == 'day' && $amount >= 7) {
+				$weeks = floor($amount / 7);
+				$amount -= $weeks * 7;
+				$diff[] = array(
+					'amount' => $weeks,
+					'unit' => 'week'
+				);
+
+				$detailLevel--;
+			}
+
+			/** Save only non-zero units of time */
+			if($amount > 0 && $detailLevel > 0) {
+				$diff[] = array(
+					'amount' => $amount,
+					'unit' => $unit
+				);
+
+				$detailLevel--;
+			}
+
+			if($detailLevel === 0) {
+				break;
+			}
+		}
+
+		return $diff;
+	}
+
+	private function parseUnitsOfTime($units)
+	{
+		$string = array();
+		foreach($units as $time) {
+			if($time['amount'] > 1) {
+				$time['unit'] .= 's';
+			}
+			$string[] = implode(' ', $time);
+		}
+
+		if(count($string) > 1) {
+			$theLastOne = $string[count($string) - 1];
+			unset($string[count($string) - 1]);
+
+			return sprintf('%s and %s', implode(', ', $string), $theLastOne);
+		}
+
+		return $string[0];
 	}
 }

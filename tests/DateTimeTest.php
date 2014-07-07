@@ -98,13 +98,13 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertAttributeNotSame($this->SUT->getDateTime(), 'datetime', $this->SUT);
 	}
 
-	/** @test */
-	public function it_should_return_a_string_for_a_time_difference()
+	/**
+	 * @test
+	 * @dataProvider seedWithHumanizeDifference
+	 */
+	public function it_should_return_a_string_for_a_time_difference($detailLevel, DateTime $since, DateTime $sut, $string)
 	{
-		$sut = DateTime::now();
-		$sut = $sut->addSeconds(-1);
-
-		$this->assertEquals('', $sut->timeSince());
+		$this->assertEquals($string, $sut->timeSince($since, $detailLevel));
 	}
 
 	public function seedWithDateTimeObject()
@@ -171,6 +171,77 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 			array($sut, $sut->endOfMonth(), new DateTime($sut->format('Y-m-31 23:59:59'))),
 			array($sut, $sut->beginOfYear(), new DateTime($sut->format('Y-01-01 00:00:00'))),
 			array($sut, $sut->endOfYear(), new DateTime($sut->format('Y-12-31 23:59:59')))
+		);
+	}
+
+	public function seedWithHumanizeDifference()
+	{
+		$since = new DateTime('2014-06-30 12:00:00');
+		$someDate = $since->subYears(1)->subMonths(1)->subWeeks(2)->subDays(4)->subHours(6)->subMinutes(15)->subSeconds(25);
+
+		return array(
+			/** $since is in the past */
+			array(1, $since, $since, 'just now'),
+			array(1, $since, $since->subSeconds(1),  'just now'),
+			array(1, $since, $since->subSeconds(59), 'just now'),
+			array(1, $since, $since->subMinutes(1),  '1 minute ago'),
+			array(1, $since, $since->subMinutes(2),  '2 minutes ago'),
+			array(1, $since, $since->subMinutes(59), '59 minutes ago'),
+			array(1, $since, $since->subHours(1),    '1 hour ago'),
+			array(1, $since, $since->subHours(2),    '2 hours ago'),
+			array(1, $since, $since->subHours(23),   '23 hours ago'),
+			array(1, $since, $since->subDays(1),     '1 day ago'),
+			array(1, $since, $since->subDays(2),     '2 days ago'),
+			array(1, $since, $since->subDays(6),     '6 days ago'),
+			array(1, $since, $since->subWeeks(1),    '1 week ago'),
+			array(1, $since, $since->subWeeks(2),    '2 weeks ago'),
+			array(1, $since, $since->subWeeks(4),    '4 weeks ago'),
+			array(1, $since, $since->subMonths(1),   '1 month ago'),
+			array(1, $since, $since->subMonths(2),   '2 months ago'),
+			array(1, $since, $since->subMonths(11),  '11 months ago'),
+			array(1, $since, $since->subYears(1),    '1 year ago'),
+			array(1, $since, $since->subYears(2),    '2 years ago'),
+			/** $since is in the future */
+			array(1, $since, $since->addSeconds(1),  'just now'),
+			array(1, $since, $since->addSeconds(59), 'just now'),
+			array(1, $since, $since->addMinutes(1),  'in 1 minute'),
+			array(1, $since, $since->addMinutes(2),  'in 2 minutes'),
+			array(1, $since, $since->addMinutes(59), 'in 59 minutes'),
+			array(1, $since, $since->addHours(1),    'in 1 hour'),
+			array(1, $since, $since->addHours(2),    'in 2 hours'),
+			array(1, $since, $since->addHours(23),   'in 23 hours'),
+			array(1, $since, $since->addDays(1),     'in 1 day'),
+			array(1, $since, $since->addDays(2),     'in 2 days'),
+			array(1, $since, $since->addDays(6),     'in 6 days'),
+			array(1, $since, $since->addWeeks(1),    'in 1 week'),
+			array(1, $since, $since->addWeeks(2),    'in 2 weeks'),
+			array(1, $since, $since->addWeeks(4),    'in 4 weeks'),
+			array(1, $since, $since->addMonths(1),   'in 1 month'),
+			array(1, $since, $since->addMonths(2),   'in 2 months'),
+			array(1, $since, $since->addMonths(11),  'in 11 months'),
+			array(1, $since, $since->addYears(1),    'in 1 year'),
+			array(1, $since, $since->addYears(2),    'in 2 years'),
+			/** with differents detailLevels */
+			array(1, $since, $since->addHours(30),   'in 1 day'),
+			array(2, $since, $since->addHours(30),   'in 1 day and 6 hours'),
+			array(3, $since, $since->addHours(30),   'in 1 day and 6 hours'),
+			array(1, $since, $since->addMinutes(1830), 'in 1 day'),
+			array(2, $since, $since->addMinutes(1830), 'in 1 day and 6 hours'),
+			array(3, $since, $since->addMinutes(1830), 'in 1 day, 6 hours and 30 minutes'),
+			array(4, $since, $since->addMinutes(1830), 'in 1 day, 6 hours and 30 minutes'),
+			array(1, $since, $since->addSeconds(109830), 'in 1 day'),
+			array(2, $since, $since->addSeconds(109830), 'in 1 day and 6 hours'),
+			array(3, $since, $since->addSeconds(109830), 'in 1 day, 6 hours and 30 minutes'),
+			array(4, $since, $since->addSeconds(109830), 'in 1 day, 6 hours, 30 minutes and 30 seconds'),
+			array(5, $since, $since->addSeconds(109830), 'in 1 day, 6 hours, 30 minutes and 30 seconds'),
+
+			array(1, $since, $someDate, '1 year ago'),
+			array(2, $since, $someDate, '1 year and 1 month ago'),
+			array(3, $since, $someDate, '1 year, 1 month and 2 weeks ago'),
+			array(4, $since, $someDate, '1 year, 1 month, 2 weeks and 4 days ago'),
+			array(5, $since, $someDate, '1 year, 1 month, 2 weeks, 4 days and 6 hours ago'),
+			array(6, $since, $someDate, '1 year, 1 month, 2 weeks, 4 days, 6 hours and 15 minutes ago'),
+			array(7, $since, $someDate, '1 year, 1 month, 2 weeks, 4 days, 6 hours, 15 minutes and 25 seconds ago'),
 		);
 	}
 }
