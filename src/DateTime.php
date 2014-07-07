@@ -462,7 +462,7 @@ final class DateTime
 		return 0;
 	}
 
-	public function timeSince(DateTime $datetime = null, $detailLevel = 1)
+	public function timeSince(DateTime $datetime = null, $detailLevel = 1, $allowAlmost = false)
 	{
 		$datetime = is_null($datetime) ? DateTime::now() : $datetime;
 		$detailLevel = intval($detailLevel);
@@ -479,7 +479,12 @@ final class DateTime
 			$format = 'in %s';
 		}
 
-		return sprintf($format, $this->parseUnitsOfTime($diff));
+		return sprintf($format, $this->parseUnitsOfTime($diff, $allowAlmost));
+	}
+
+	public function almostTimeSince(DateTime $datetime = null, $detailLevel = 1)
+	{
+		return $this->timeSince($datetime, $detailLevel, true);
 	}
 
 	private function setDateTime(\DateTime $datetime)
@@ -546,23 +551,60 @@ final class DateTime
 		return $diff;
 	}
 
-	private function parseUnitsOfTime($units)
+	private function parseUnitsOfTime($units, $allowAlmost)
 	{
+		$isAlmost = false;
 		$string = array();
 		foreach($units as $time) {
+			if($allowAlmost) {
+				$isAlmost = $this->isAlmost($time);
+			}
+
 			if($time['amount'] > 1) {
 				$time['unit'] .= 's';
 			}
 			$string[] = implode(' ', $time);
 		}
 
+		$parsed = $string[0];
 		if(count($string) > 1) {
 			$theLastOne = $string[count($string) - 1];
 			unset($string[count($string) - 1]);
 
-			return sprintf('%s and %s', implode(', ', $string), $theLastOne);
+			$parsed = sprintf('%s and %s', implode(', ', $string), $theLastOne);
 		}
 
-		return $string[0];
+		if($isAlmost) {
+			$parsed = sprintf('almost %s', $parsed);
+		}
+
+		return $parsed;
+	}
+
+	private function isAlmost(&$time)
+	{
+		$units = array('second'	=> 60, 'minute'	=> 60, 'hour' => 24,
+			'day' => 7, 'week' => 4.35, 'month'	=> 12, 'year' => null
+		);
+
+		$current = null;
+		while(key($units)) {
+			if(key($units) === $time['unit']) {
+				$current = current($units);
+				next($units);
+				break;
+			}
+			next($units);
+		}
+
+		if($current && $current < $time['amount'] * 1.2) {
+			$time = array(
+				'amount' => 1,
+				'unit' => key($units)
+			);
+			return true;
+		}
+
+		return false;
 	}
 }
