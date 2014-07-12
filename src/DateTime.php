@@ -130,6 +130,39 @@ final class DateTime
 		return $today->addDays(1);
 	}
 
+	public function after(DateTime $datetime)
+	{
+		return $this->datetime > $datetime->datetime;
+	}
+
+	public function before(DateTime $datetime)
+	{
+		return $this->datetime < $datetime->datetime;
+	}
+
+	public function compareTo(DateTime $datetime)
+	{
+		if($this->after($datetime)) {
+			return 1;
+		}
+
+		if($this->before($datetime)) {
+			return -1;
+		}
+
+		return 0;
+	}
+
+	public function diff(DateTime $datetime, $absolute)
+	{
+		return $this->datetime->diff($datetime->datetime, $absolute);
+	}
+
+	public function equals(DateTime $datetime)
+	{
+		return $this->datetime == $datetime->datetime;
+	}
+
 	/**
 	 *
 	 * @param \DateInterval $interval
@@ -429,45 +462,12 @@ final class DateTime
 		return clone $this->datetime;
 	}
 
-	public function after(DateTime $datetime)
-	{
-		return $this->datetime > $datetime->datetime;
-	}
-
-	public function before(DateTime $datetime)
-	{
-		return $this->datetime < $datetime->datetime;
-	}
-
-	public function diff(DateTime $datetime, $absolute)
-	{
-		return $this->datetime->diff($datetime->datetime, $absolute);
-	}
-
-	public function equals(DateTime $datetime)
-	{
-		return $this->datetime == $datetime->datetime;
-	}
-
-	public function compareTo(DateTime $datetime)
-	{
-		if($this->after($datetime)) {
-			return 1;
-		}
-
-		if($this->before($datetime)) {
-			return -1;
-		}
-
-		return 0;
-	}
-
 	public function timeSince(DateTime $datetime = null, $detailLevel = 1, $allowAlmost = false)
 	{
 		$datetime = is_null($datetime) ? DateTime::now() : $datetime;
 		$detailLevel = intval($detailLevel);
 
-		$diff = $this->unitsOfTime($this->diff($datetime, true), $detailLevel);
+		$diff = $this->diffInUnits($this->diff($datetime, true), $detailLevel);
 
 		/** For all differences below one minute */
 		if(empty($diff) || $diff[0]['unit'] == 'second') {
@@ -479,7 +479,7 @@ final class DateTime
 			$format = 'in %s';
 		}
 
-		return sprintf($format, $this->parseUnitsOfTime($diff, $allowAlmost));
+		return sprintf($format, $this->parseUnits($diff, $allowAlmost));
 	}
 
 	public function almostTimeSince(DateTime $datetime = null, $detailLevel = 1)
@@ -511,7 +511,7 @@ final class DateTime
 		return $obj;
 	}
 
-	private function unitsOfTime(\DateInterval $interval, $detailLevel)
+	private function diffInUnits(\DateInterval $interval, $detailLevel)
 	{
 		$units = array('y' => 'year', 'm' => 'month', 'd' => 'day',
 			'h' => 'hour', 'i' => 'minute', 's' => 'second'
@@ -551,7 +551,7 @@ final class DateTime
 		return $diff;
 	}
 
-	private function parseUnitsOfTime($units, $allowAlmost)
+	private function parseUnits($units, $allowAlmost)
 	{
 		$isAlmost = false;
 		$string = array();
@@ -567,6 +567,8 @@ final class DateTime
 		}
 
 		$parsed = $string[0];
+
+		/** Add 'and' separator */
 		if(count($string) > 1) {
 			$theLastOne = $string[count($string) - 1];
 			unset($string[count($string) - 1]);
@@ -587,15 +589,10 @@ final class DateTime
 			'day' => 7, 'week' => 4.35, 'month'	=> 12, 'year' => null
 		);
 
-		$current = null;
-		while(key($units)) {
-			if(key($units) === $time['unit']) {
-				$current = current($units);
-				next($units);
-				break;
-			}
-			next($units);
-		}
+		do {
+			$current = current($units);
+		} while(key($units) !== $time['unit'] && next($units));
+		next($units);
 
 		if($current && $current < $time['amount'] * 1.2) {
 			$time = array(
