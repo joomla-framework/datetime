@@ -14,10 +14,13 @@ namespace Joomla\DateTime;
  *
  * @since  2.0
  */
-final class DateTime
+class DateTime
 {
+	/** @var Translator */
+	protected static $translator;
+
 	/** @var \DateTime */
-	private $datetime;
+	protected $datetime;
 
 	/**
 	 * Constructor
@@ -438,7 +441,56 @@ final class DateTime
 
 	public function format($format)
 	{
-		return $this->datetime->format($format);
+		$replace = array();
+
+		// Loop all format characters and check if we can translate them.
+        for ($i = 0; $i < strlen($format); $i++)
+        {
+            $character = $format[$i];
+
+            // Check if we can replace it with a translated version.
+            if (in_array($character, array('D', 'l', 'F', 'M')))
+            {
+                // Check escaped characters.
+                if ($i > 0 and $format[$i-1] == '\\') continue;
+
+                switch ($character)
+                {
+                    case 'D':
+                        $key = $this->datetime->format('l');
+                        break;
+                    case 'M':
+                        $key = $this->datetime->format('F');
+                        break;
+                    default:
+                        $key = $this->datetime->format($character);
+                }
+
+                // The original result.
+                $original = $this->datetime->format($character);
+
+                // Translate.
+                $lang = $this->getTranslator();
+                $translated = $lang->get(strtolower($key));
+
+                // Short notations.
+                if (in_array($character, array('D', 'M')))
+                {
+                    $translated = substr($translated, 0, 3);
+                }
+
+                // Add to replace list.
+                if ($translated and $original != $translated) $replace[$original] = $translated;
+            }
+        }
+
+        // Replace translations.
+        if ($replace)
+        {
+            return str_replace(array_keys($replace), array_values($replace), $this->datetime->format($format));
+        }
+
+        return $this->datetime->format($format);
 	}
 
 	public function getOffset()
@@ -487,19 +539,38 @@ final class DateTime
 		return $this->timeSince($datetime, $detailLevel, true);
 	}
 
-	private function setDateTime(\DateTime $datetime)
+	protected static function getTranslator()
+	{
+		if(is_null(static::$translator)) {
+			static::$translator = new Translator();
+		}
+
+		return static::$translator;
+	}
+
+	public static function setTranslator(Translator $translator)
+	{
+		static::$translator = $translator;
+	}
+
+	public static function setLocale($locale)
+	{
+		static::getTranslator()->setLocale($locale);
+	}
+
+	protected function setDateTime(\DateTime $datetime)
 	{
 		$this->datetime = clone $datetime;
 	}
 
-	private function calc($value, $format)
+	protected function calc($value, $format)
 	{
 		$value = intval($value);
 		$spec = sprintf($format, abs($value));
 		return $value > 0 ? $this->add(new \DateInterval($spec)) : $this->sub(new \DateInterval($spec));
 	}
 
-	private function modify($closure)
+	protected function modify($closure)
 	{
 		if(!is_callable($closure)) throw new \InvalidArgumentException(sprintf('Parameter for %s::modify() must be callable', get_class($this)));
 
@@ -511,7 +582,7 @@ final class DateTime
 		return $obj;
 	}
 
-	private function diffInUnits(\DateInterval $interval, $detailLevel)
+	protected function diffInUnits(\DateInterval $interval, $detailLevel)
 	{
 		$units = array('y' => 'year', 'm' => 'month', 'd' => 'day',
 			'h' => 'hour', 'i' => 'minute', 's' => 'second'
@@ -551,7 +622,7 @@ final class DateTime
 		return $diff;
 	}
 
-	private function parseUnits($units, $allowAlmost)
+	protected function parseUnits($units, $allowAlmost)
 	{
 		$isAlmost = false;
 		$string = array();
@@ -583,7 +654,7 @@ final class DateTime
 		return $parsed;
 	}
 
-	private function isAlmost(&$time)
+	protected function isAlmost(&$time)
 	{
 		$units = array('second'	=> 60, 'minute'	=> 60, 'hour' => 24,
 			'day' => 7, 'week' => 4.35, 'month'	=> 12, 'year' => null
