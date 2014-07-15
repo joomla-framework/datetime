@@ -219,6 +219,54 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
 	}
 
+	public function testCanCreateAnObjectForTheBeginOfADay()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-15 00:00:00'), $date->beginOfDay());
+	}
+
+	public function testCanCreateAnObjectForTheEndOfADay()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-15 23:59:59'), $date->endOfDay());
+	}
+
+	public function testCanCreateAnObjectForTheBeginOfAWeek()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-14 00:00:00'), $date->beginOfWeek());
+	}
+
+	public function testCanCreateAnObjectForTheEndOfAWeek()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-20 23:59:59'), $date->endOfWeek());
+	}
+
+	public function testCanCreateAnObjectForTheBeginOfAMonth()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-01 00:00:00'), $date->beginOfMonth());
+	}
+
+	public function testCanCreateAnObjectForTheEndOfAMonth()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-31 23:59:59'), $date->endOfMonth());
+	}
+
+	public function testCanCreateAnObjectForTheBeginOfAYear()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-01-01 00:00:00'), $date->beginOfYear());
+	}
+
+	public function testCanCreateAnObjectForTheEndOfAYear()
+	{
+		$date = new DateTime('2014-07-15 21:14:25');
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-12-31 23:59:59'), $date->endOfYear());
+	}
+
 	/**
 	 * @dataProvider seedForTimeSince
 	 */
@@ -232,97 +280,94 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 		$this->assertAttributeNotSame($this->SUT->getDateTime(), 'datetime', $this->SUT);
 	}
 
-
-
-
 	public function seedForCreateFactoryMethod()
 	{
-		return Fixture\DateTimeTestProvider::createFactoryMethod();
+		return Fixture\DataProvider::createFactoryMethod();
 	}
 
 	public function seedForCreateFromDateFactoryMethod()
 	{
-		return Fixture\DateTimeTestProvider::createFromDateFactoryMethod();
+		return Fixture\DataProvider::createFromDateFactoryMethod();
 	}
 
 	public function seedForCreateFromTimeFactoryMethod()
 	{
-		return Fixture\DateTimeTestProvider::createFromTimeFactoryMethod();
+		return Fixture\DataProvider::createFromTimeFactoryMethod();
 	}
 
 	public function seedForAddDays()
 	{
-		return Fixture\DateTimeTestProvider::addDays(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addDays();
 	}
 
 	public function seedForSubDays()
 	{
-		return Fixture\DateTimeTestProvider::subDays(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subDays();
 	}
 
 	public function seedForAddMonths()
 	{
-		return Fixture\DateTimeTestProvider::addMonths(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addMonths();
 	}
 
 	public function seedForSubMonths()
 	{
-		return Fixture\DateTimeTestProvider::subMonths(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subMonths();
 	}
 
 	public function seedForAddWeeks()
 	{
-		return Fixture\DateTimeTestProvider::addWeeks(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addWeeks();
 	}
 
 	public function seedForSubWeeks()
 	{
-		return Fixture\DateTimeTestProvider::subWeeks(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subWeeks();
 	}
 
 	public function seedForAddYears()
 	{
-		return Fixture\DateTimeTestProvider::addYears(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addYears();
 	}
 
 	public function seedForSubYears()
 	{
-		return Fixture\DateTimeTestProvider::subYears(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subYears();
 	}
 
 	public function seedForAddSeconds()
 	{
-		return Fixture\DateTimeTestProvider::addSeconds(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addSeconds();
 	}
 
 	public function seedForSubSeconds()
 	{
-		return Fixture\DateTimeTestProvider::subSeconds(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subSeconds();
 	}
 
 	public function seedForAddMinutes()
 	{
-		return Fixture\DateTimeTestProvider::addMinutes(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addMinutes();
 	}
 
 	public function seedForSubMinutes()
 	{
-		return Fixture\DateTimeTestProvider::subMinutes(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subMinutes();
 	}
 
 	public function seedForAddHours()
 	{
-		return Fixture\DateTimeTestProvider::addHours(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::addHours();
 	}
 
 	public function seedForSubHours()
 	{
-		return Fixture\DateTimeTestProvider::subHours(new DateTime(self::CURRENT));
+		return Fixture\DataProvider::subHours();
 	}
 
 	public function seedForTimeSince()
 	{
-		return Fixture\DateTimeTestProvider::timeSince();
+		return Fixture\DataProvider::timeSince();
 	}
 
 	private function assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual)

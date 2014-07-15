@@ -2,42 +2,35 @@
 
 namespace Joomla\DateTime;
 
-
-/**
- * @todo parametr for precision? date, hour, minute, second?
- * @todo Composite pattern?
- */
-final class DateTimeRange
+final class DateRange
 {
-	/** @var DateTime */
+	/** @var Date */
 	private $start;
 
-	/** @var DateTime */
+	/** @var Date */
 	private $end;
 
-	public function __construct(DateTime $start, DateTime $end, $adjustTime = false)
+	public function __construct(Date $start, Date $end)
 	{
-		if($adjustTime) {
-			$start = $start->beginOfDay();
-			$end = $end->endOfDay();
-		}
+		// @todo jak DateTime bedzie dziedzyc po Date to bedzie mozna tutaj miec dateTime! - trzeba zrobic trim na
+		// lub stworz nowy Date na podsatwie DateTime i w konstkrutorze date martw sie by trimowac!
 
-		$this->start = self::trimToMinutes($start);
-		$this->end   = self::trimToMinutes($end);
+		$this->start = $start;
+		$this->end   = $end;
 	}
 
 	public static function emptyRange()
 	{
-		return new DateTimeRange(DateTime::tomorrow(), DateTime::yesterday());
+		return new DateRange(Date::tomorrow(), Date::yesterday());
 	}
 
-	/** @return DateTime */
+	/** @return Date */
 	public function start()
 	{
 		return $this->start;
 	}
 
-	/** @return DateTime */
+	/** @return Date */
 	public function end()
 	{
 		return $this->end;
@@ -48,27 +41,27 @@ final class DateTimeRange
 		return $this->start->after($this->end);
 	}
 
-	public function includes(DateTime $date)
+	public function includes(Date $date)
 	{
 		return !$date->before($this->start) && !$date->after($this->end);
 	}
 
-	public function equals(DateTimeRange $range)
+	public function equals(DateRange $range)
 	{
 		return $this->start->equals($range->start) && $this->end->equals($range->end);
 	}
 
-	public function overlaps(DateTimeRange $range)
+	public function overlaps(DateRange $range)
 	{
 		return $range->includes($this->start) || $range->includes($this->end) || $this->includesRange($range);
 	}
 
-	public function includesRange(DateTimeRange $range)
+	public function includesRange(DateRange $range)
 	{
 		return $this->includes($range->start) && $this->includes($range->end);
 	}
 
-	public function compareTo(DateTimeRange $range)
+	public function compareTo(DateRange $range)
 	{
 		if(!$this->start->equals($range->start)) {
 			return $this->start->compareTo($range->start);
@@ -77,8 +70,8 @@ final class DateTimeRange
 		return $this->end->compareTo($range->end);
 	}
 
-	/** @return DateTimeRange */
-	public function gap(DateTimeRange $range)
+	/** @return DateRange */
+	public function gap(DateRange $range)
 	{
 		if($this->overlaps($range)) return self::emptyRange();
 
@@ -91,27 +84,27 @@ final class DateTimeRange
 			$higher = $this;
 		}
 
-		return new DateTimeRange($lower->end->addMinutes(1), $higher->start->subMinutes(1));
+		return new DateRange($lower->end->addDays(1), $higher->start->subDays(1));
 	}
 
-	public function abuts(DateTimeRange $range)
+	public function abuts(DateRange $range)
 	{
 		return !$this->overlaps($range) && $this->gap($range)->isEmpty();
 	}
 
 	/**
-	 * @param DateTimeRange[] $ranges
-	 * @return DateTimeRange
+	 * @param DateRange[] $ranges
+	 * @return DateRange
 	 */
 	public static function combination(array $ranges)
 	{
 		$ranges = self::sortArrayOfRanges($ranges);
 		if(!self::isContiguous($ranges)) throw new \InvalidArgumentException('Unable to combine date ranges');
-		return new DateTimeRange($ranges[0]->start, $ranges[count($ranges)-1]->end);
+		return new DateRange($ranges[0]->start, $ranges[count($ranges)-1]->end);
 	}
 
 	/**
-	 * @param DateTimeRange[] $ranges
+	 * @param DateRange[] $ranges
 	 * @return boolean
 	 */
 	public static function isContiguous(array $ranges)
@@ -126,19 +119,16 @@ final class DateTimeRange
 	}
 
 	/**
-	 * @param DateTimeRange[] $ranges
-	 * @return DateTimeRange[]
+	 * @param DateRange[] $ranges
+	 * @return DateRange[]
 	 */
 	private static function sortArrayOfRanges(array $ranges)
 	{
-		usort($ranges, function(DateTimeRange $a, DateTimeRange $b) {
+		usort($ranges, function(DateRange $a, DateRange $b) {
 			return $a->compareTo($b);
 		});
 		return array_values($ranges);
 	}
 
-	private static function trimToMinutes(DateTime $datetime)
-	{
-		return $datetime->subSeconds($datetime->format('s'));
-	}
+
 }

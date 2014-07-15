@@ -28,6 +28,9 @@ class DateTime
 	 * @param   string  $datetime
 	 * @param   mixed   $timezone
 	 */
+
+	// @todo trzeba podac datetime, nie bierz null as default!
+
 	public function __construct($datetime = 'now', \DateTimeZone $timezone = null)
 	{
 		$this->datetime = new \DateTime($datetime, $timezone);
@@ -360,9 +363,7 @@ class DateTime
 	{
 		$beginOfDay = $this->beginOfDay();
 
-		// @todo maybe closure is better? e.g. for strategy later - to keep the same way of date' modifications?
-
-		$diffInDays = 7 - intval($beginOfDay->format('N'));
+		$diffInDays = intval($beginOfDay->format('N')) - 1;
 		return $beginOfDay->subDays($diffInDays);
 	}
 
@@ -373,8 +374,6 @@ class DateTime
 	public function endOfWeek()
 	{
 		$endOfDay = $this->endOfDay();
-
-		// @todo maybe closure is better? e.g. for strategy later - to keep the same way of date' modifications?
 
 		$diffInDays = 7 - intval($endOfDay->format('N'));
 		return $endOfDay->addDays($diffInDays);
