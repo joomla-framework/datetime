@@ -136,23 +136,23 @@ class DateTime
 		return $today->addDays(1);
 	}
 
-	public function after(DateTime $datetime)
+	public function isAfter(DateTime $datetime)
 	{
 		return $this->datetime > $datetime->datetime;
 	}
 
-	public function before(DateTime $datetime)
+	public function isBefore(DateTime $datetime)
 	{
 		return $this->datetime < $datetime->datetime;
 	}
 
 	public function compareTo(DateTime $datetime)
 	{
-		if($this->after($datetime)) {
+		if($this->isAfter($datetime)) {
 			return 1;
 		}
 
-		if($this->before($datetime)) {
+		if($this->isBefore($datetime)) {
 			return -1;
 		}
 
@@ -337,7 +337,7 @@ class DateTime
 	 *
 	 * @return \Joomla\DateTime\DateTime
 	 */
-	public function beginOfDay()
+	public function startOfDay()
 	{
 		return $this->modify(function(\DateTime $datetime) {
 			$datetime->setTime(0, 0, 0);
@@ -359,9 +359,9 @@ class DateTime
 	 *
 	 * @return \Joomla\DateTime\DateTime
 	 */
-	public function beginOfWeek()
+	public function startOfWeek()
 	{
-		$beginOfDay = $this->beginOfDay();
+		$beginOfDay = $this->startOfDay();
 
 		$diffInDays = intval($beginOfDay->format('N')) - 1;
 		return $beginOfDay->subDays($diffInDays);
@@ -383,9 +383,9 @@ class DateTime
 	 *
 	 * @return \Joomla\DateTime\DateTime
 	 */
-	public function beginOfMonth()
+	public function startOfMonth()
 	{
-		$beginOfDay = $this->beginOfDay();
+		$beginOfDay = $this->startOfDay();
 
 		return $beginOfDay->modify(function(\DateTime $datetime) {
 			$year = $datetime->format('Y');
@@ -414,9 +414,9 @@ class DateTime
 	 *
 	 * @return \Joomla\DateTime\DateTime
 	 */
-	public function beginOfYear()
+	public function startOfYear()
 	{
-		$beginOfDay = $this->beginOfDay();
+		$beginOfDay = $this->startOfDay();
 
 		return $beginOfDay->modify(function(\DateTime $datetime) {
 			$year = $datetime->format('Y');
@@ -526,7 +526,7 @@ class DateTime
 		}
 
 		$format = '%s ago';
-		if($this->after($datetime)) {
+		if($this->isAfter($datetime)) {
 			$format = 'in %s';
 		}
 
