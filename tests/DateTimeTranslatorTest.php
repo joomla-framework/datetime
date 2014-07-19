@@ -126,14 +126,16 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
                     continue;
                 }
 
-                if (in_array($item, array('ago', 'from_now', 'after', 'before')))
-                {
-                    $this->assertContains(':time', $translations[$item], "Language: $language");
-                }
-                else
-                {
-                    $this->assertContains(':count', $translations[$item], "Language: $language");
-                }
+				if(!in_array($item, array('just_now', 'and'))) {
+					if (in_array($item, array('in', 'almost', 'ago', 'from_now', 'after', 'before')))
+					{
+						$this->assertContains(':time', $translations[$item], "Language: $language");
+					}
+					else
+					{
+						$this->assertContains(':count', $translations[$item], "Language: $language");
+					}
+				}
             }
         }
     }

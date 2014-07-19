@@ -12,16 +12,12 @@ return array(
     |
     */
 
-
-    'ago'       => ':time ago',
-    'from_now'  => ':time from now',
-	'just_now'	=> 'just now',
-	'and'		=> 'and',
-	'almost'	=> 'almost :time',
-
 	'in'        => '',
     'ago'       => 'for :time siden',
     'from_now'  => 'om :time fra nu',
+	'just_now'	=> '',
+	'and'		=> '',
+	'almost'	=> '',
     'after'     => ':time efter',
     'before'    => ':time før',
     'year'      => '1 år|:count år',
