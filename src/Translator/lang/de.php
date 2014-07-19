@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'in :time',
     'ago'       => 'vor :time',
     'from_now'  => ':time von jetzt',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'soeben',
+	'and'		=> 'und',
+	'almost'	=> 'fast :time',
     'after'     => ':time nach',
     'before'    => ':time vor',
     'year'      => '1 Jahr|:count Jahre',

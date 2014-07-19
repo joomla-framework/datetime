@@ -433,7 +433,6 @@ final class DataProvider
 
 	public static function timeSince_pl()
 	{
-		DateTime::setLocale('pl');
 		$since = new DateTime('2014-06-30 12:00:00');
 		$someDate = $since->subYears(1)->subMonths(1)->subWeeks(2)->subDays(4)->subHours(6)->subMinutes(15)->subSeconds(25);
 
@@ -527,7 +526,6 @@ final class DataProvider
 
 	public static function almostTimeSince_pl()
 	{
-		DateTime::setLocale('pl');
 		$since = new DateTime('2014-06-30 12:00:00');
 
 		return array(

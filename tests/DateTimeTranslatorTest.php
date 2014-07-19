@@ -20,6 +20,7 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testTimeSince_pl($detailLevel, DateTime $since, DateTime $sut, $string)
 	{
+		DateTime::setLocale('pl');
 		$this->assertEquals($string, $sut->timeSince($since, $detailLevel));
 	}
 
@@ -28,6 +29,7 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAlmostTimeSince_pl(DateTime $since, DateTime $sut, $string)
 	{
+		DateTime::setLocale('pl');
 		$this->assertEquals($string, $sut->almostTimeSince($since));
 	}
 
