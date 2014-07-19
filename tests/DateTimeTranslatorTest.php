@@ -2,9 +2,7 @@
 
 namespace Joomla\DateTime;
 
-//use Symfony\Component\Translation\MessageSelector;
-
-final class TranslationTest extends \PHPUnit_Framework_TestCase
+final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 {
 	private $path;
 
@@ -17,32 +15,22 @@ final class TranslationTest extends \PHPUnit_Framework_TestCase
 		$this->languages = array_slice(str_replace('.php', '', scandir($this->path)), 2);
     }
 
-    public function testMultiplePluralForms()
-    {
-        /*DateTime::setLocale('pl');
+	/**
+	 * @dataProvider seedForTimeSince_pl
+	 */
+	public function testTimeSince_pl($detailLevel, DateTime $since, DateTime $sut, $string)
+	{
+		$this->assertEquals($string, $sut->timeSince($since, $detailLevel));
+	}
 
-		$date = DateTime::now();
+	/**
+	 * @dataProvider seedForAlmostTimeSince_pl
+	 */
+	public function testAlmostTimeSince_pl(DateTime $since, DateTime $sut, $string)
+	{
+		$this->assertEquals($string, $sut->almostTimeSince($since));
+	}
 
-        $this->assertSame("Prije 1 godinu", $date->subHours(1)->timeSince());
-        $this->assertSame("Prije 2 godine", $date->subHours(2)->timeSince());
-        $this->assertSame("Prije 3 godine", $date->subHours(3)->timeSince());
-        $this->assertSame("Prije 5 godina", $date->subHours(4)->timeSince());*/
-    }
-/*
-    public function testCustomSuffix()
-    {
-        Date::setLocale('de');
-
-        $date = Date::parse('-1 month');
-        $this->assertSame("vor 1 Monat", $date->ago());
-
-        $date = Date::parse('-5 months');
-        $this->assertSame("vor 5 Monaten", $date->ago());
-
-        $date = Date::parse('-5 seconds');
-        $this->assertSame("vor 5 Sekunden", $date->ago());
-    }
-*/
     public function testTranslatesMonths()
     {
         $months = array(
@@ -107,8 +95,12 @@ final class TranslationTest extends \PHPUnit_Framework_TestCase
     public function testTranslatesDiffForHumans()
     {
         $items = array(
+			'in',
             'ago',
             'from_now',
+			'just_now',
+			'and',
+			'almost',
             'after',
             'before',
             'year',
@@ -126,7 +118,7 @@ final class TranslationTest extends \PHPUnit_Framework_TestCase
 
             foreach ($items as $item)
             {
-                $this->assertTrue(isset($translations[$item]), "Language: $language");
+                $this->assertTrue(isset($translations[$item]), "Language: $language, Item: $item");
 
                 if ( ! $translations[$item])
                 {
@@ -145,4 +137,14 @@ final class TranslationTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+	public function seedForTimeSince_pl()
+	{
+		return Fixture\DataProvider::timeSince_pl();
+	}
+
+	public function seedForAlmostTimeSince_pl()
+	{
+		return Fixture\DataProvider::AlmostTimeSince_pl();
+	}
 }

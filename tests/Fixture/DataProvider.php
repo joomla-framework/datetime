@@ -431,6 +431,82 @@ final class DataProvider
 		);
 	}
 
+	public static function timeSince_pl()
+	{
+		DateTime::setLocale('pl');
+		$since = new DateTime('2014-06-30 12:00:00');
+		$someDate = $since->subYears(1)->subMonths(1)->subWeeks(2)->subDays(4)->subHours(6)->subMinutes(15)->subSeconds(25);
+
+		return array(
+			/** $since is in the past */
+			array(1, $since, $since, 'przed chwilą'),
+			array(1, $since, $since->subSeconds(1),  'przed chwilą'),
+			array(1, $since, $since->subSeconds(59), 'przed chwilą'),
+			array(1, $since, $since->subMinutes(1),  '1 minutę temu'),
+			array(1, $since, $since->subMinutes(2),  '2 minuty temu'),
+			array(1, $since, $since->subMinutes(59), '59 minut temu'),
+			array(1, $since, $since->subHours(1),    '1 godzinę temu'),
+			array(1, $since, $since->subHours(2),    '2 godziny temu'),
+			array(1, $since, $since->subHours(5),    '5 godzin temu'),
+			array(1, $since, $since->subHours(23),   '23 godziny temu'),
+			array(1, $since, $since->subDays(1),     '1 dzień temu'),
+			array(1, $since, $since->subDays(2),     '2 dni temu'),
+			array(1, $since, $since->subDays(5),     '5 dni temu'),
+			array(1, $since, $since->subWeeks(1),    '1 tydzień temu'),
+			array(1, $since, $since->subWeeks(2),    '2 tygodnie temu'),
+			array(1, $since, $since->subWeeks(4),    '4 tygodnie temu'),
+			array(1, $since, $since->subMonths(1),   '1 miesiąc temu'),
+			array(1, $since, $since->subMonths(2),   '2 miesiące temu'),
+			array(1, $since, $since->subMonths(11),  '11 miesięcy temu'),
+			array(1, $since, $since->subYears(1),    '1 rok temu'),
+			array(1, $since, $since->subYears(2),    '2 lata temu'),
+			array(1, $since, $since->subYears(5),    '5 lat temu'),
+			/** $since is in the future */
+			array(1, $since, $since->addSeconds(1),  'przed chwilą'),
+			array(1, $since, $since->addSeconds(59), 'przed chwilą'),
+			array(1, $since, $since->addMinutes(1),  'za 1 minutę'),
+			array(1, $since, $since->addMinutes(2),  'za 2 minuty'),
+			array(1, $since, $since->addMinutes(59), 'za 59 minut'),
+			array(1, $since, $since->addHours(1),    'za 1 godzinę'),
+			array(1, $since, $since->addHours(2),    'za 2 godziny'),
+			array(1, $since, $since->addHours(5),    'za 5 godzin'),
+			array(1, $since, $since->addHours(23),   'za 23 godziny'),
+			array(1, $since, $since->addDays(1),     'za 1 dzień'),
+			array(1, $since, $since->addDays(2),     'za 2 dni'),
+			array(1, $since, $since->addDays(5),     'za 5 dni'),
+			array(1, $since, $since->addWeeks(1),    'za 1 tydzień'),
+			array(1, $since, $since->addWeeks(2),    'za 2 tygodnie'),
+			array(1, $since, $since->addWeeks(4),    'za 4 tygodnie'),
+			array(1, $since, $since->addMonths(1),   'za 1 miesiąc'),
+			array(1, $since, $since->addMonths(2),   'za 2 miesiące'),
+			array(1, $since, $since->addMonths(11),  'za 11 miesięcy'),
+			array(1, $since, $since->addYears(1),    'za 1 rok'),
+			array(1, $since, $since->addYears(2),    'za 2 lata'),
+			array(1, $since, $since->addYears(5),    'za 5 lat'),
+			/** with differents detailLevels */
+			array(1, $since, $since->addHours(30),   'za 1 dzień'),
+			array(2, $since, $since->addHours(30),   'za 1 dzień i 6 godzin'),
+			array(3, $since, $since->addHours(30),   'za 1 dzień i 6 godzin'),
+			array(1, $since, $since->addMinutes(1830), 'za 1 dzień'),
+			array(2, $since, $since->addMinutes(1830), 'za 1 dzień i 6 godzin'),
+			array(3, $since, $since->addMinutes(1830), 'za 1 dzień, 6 godzin i 30 minut'),
+			array(4, $since, $since->addMinutes(1830), 'za 1 dzień, 6 godzin i 30 minut'),
+			array(1, $since, $since->addSeconds(109830), 'za 1 dzień'),
+			array(2, $since, $since->addSeconds(109830), 'za 1 dzień i 6 godzin'),
+			array(3, $since, $since->addSeconds(109830), 'za 1 dzień, 6 godzin i 30 minut'),
+			array(4, $since, $since->addSeconds(109830), 'za 1 dzień, 6 godzin, 30 minut i 30 sekund'),
+			array(5, $since, $since->addSeconds(109830), 'za 1 dzień, 6 godzin, 30 minut i 30 sekund'),
+			/** the big one */
+			array(1, $since, $someDate, '1 rok temu'),
+			array(2, $since, $someDate, '1 rok i 1 miesiąc temu'),
+			array(3, $since, $someDate, '1 rok, 1 miesiąc i 2 tygodnie temu'),
+			array(4, $since, $someDate, '1 rok, 1 miesiąc, 2 tygodnie i 4 dni temu'),
+			array(5, $since, $someDate, '1 rok, 1 miesiąc, 2 tygodnie, 4 dni i 6 godzin temu'),
+			array(6, $since, $someDate, '1 rok, 1 miesiąc, 2 tygodnie, 4 dni, 6 godzin i 15 minut temu'),
+			array(7, $since, $someDate, '1 rok, 1 miesiąc, 2 tygodnie, 4 dni, 6 godzin, 15 minut i 25 sekund temu'),
+		);
+	}
+
 	public static function almostTimeSince()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
@@ -439,7 +515,32 @@ final class DataProvider
 			array($since, $since->subMinutes(51),	'almost 1 hour ago'),
 			array($since, $since->subHours(21),		'almost 1 day ago'),
 			array($since, $since->subHours(164),	'almost 1 week ago'),
-			array($since, $since->subMonths(11),	'almost 1 year ago')
+			array($since, $since->subDays(28),		'almost 1 month ago'),
+			array($since, $since->subMonths(11),	'almost 1 year ago'),
+			array($since, $since->addMinutes(51),	'in almost 1 hour'),
+			array($since, $since->addHours(21),		'in almost 1 day'),
+			array($since, $since->addHours(164),	'in almost 1 week'),
+			array($since, $since->addDays(28),		'in almost 1 month'),
+			array($since, $since->addMonths(11),	'in almost 1 year')
+		);
+	}
+
+	public static function almostTimeSince_pl()
+	{
+		DateTime::setLocale('pl');
+		$since = new DateTime('2014-06-30 12:00:00');
+
+		return array(
+			array($since, $since->subMinutes(51),	'prawie 1 godzinę temu'),
+			array($since, $since->subHours(21),		'prawie 1 dzień temu'),
+			array($since, $since->subHours(164),	'prawie 1 tydzień temu'),
+			array($since, $since->subDays(28),		'prawie 1 miesiąc temu'),
+			array($since, $since->subMonths(11),	'prawie 1 rok temu'),
+			array($since, $since->addMinutes(51),	'za prawie 1 godzinę'),
+			array($since, $since->addHours(21),		'za prawie 1 dzień'),
+			array($since, $since->addHours(164),	'za prawie 1 tydzień'),
+			array($since, $since->addDays(28),		'za prawie 1 miesiąc'),
+			array($since, $since->addMonths(11),	'za prawie 1 rok')
 		);
 	}
 }

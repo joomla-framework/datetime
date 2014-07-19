@@ -312,8 +312,8 @@ final class DateTime
                 $original = $this->datetime->format($character);
 
                 // Translate.
-                $lang = $this->getTranslator();
-                $translated = $lang->get(strtolower($key));
+                $translator = $this->getTranslator();
+                $translated = $translator->get(strtolower($key));
 
                 // Short notations.
                 if (in_array($character, array('D', 'M'))) {
@@ -405,6 +405,16 @@ final class DateTime
 		static::getTranslator()->setLocale($locale);
 	}
 
+	/** @return Translator */
+	public static function getTranslator()
+	{
+		if(is_null(static::$translator)) {
+			static::$translator = new DateTimeTranslator();
+		}
+
+		return static::$translator;
+	}
+
 	private function calc($value, $format)
 	{
 		$value = intval($value);
@@ -430,15 +440,6 @@ final class DateTime
 		}
 
 		return static::$since;
-	}
-
-	private static function getTranslator()
-	{
-		if(is_null(static::$translator)) {
-			static::$translator = new DateTimeTranslator();
-		}
-
-		return static::$translator;
 	}
 
 	private static function getWrapper()

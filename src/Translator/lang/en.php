@@ -11,9 +11,13 @@ return array(
     | have a singular and plural translation separated by a '|'.
     |
     */
-
+	
+	'in'        => 'in :time',
     'ago'       => ':time ago',
     'from_now'  => ':time from now',
+	'just_now'	=> 'just now',
+	'and'		=> 'and',
+	'almost'	=> 'almost :time',
     'after'     => ':time after',
     'before'    => ':time before',
     'year'      => '1 year|:count years',

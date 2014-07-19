@@ -12,6 +12,7 @@ return array(
     |
     */
 
+	'in'        => '',
     'ago'       => 'Hace :time',
     'from_now'  => 'Dentro de :time',
     'after'     => ':time después',

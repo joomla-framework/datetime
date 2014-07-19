@@ -3,34 +3,40 @@
 namespace Joomla\DateTime\Since;
 
 use Joomla\DateTime\DateTime;
+use Joomla\DateTime\Translator\Translator;
 
 final class DateTimeSince implements Since
 {
+	/** @var Translator */
+	private $translator;
+
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
-		list($format, $diff) = $this->calc($base, $datetime, $detailLevel);
-		return sprintf($format, $this->parseUnits($diff));
+		list($item, $diff) = $this->calc($base, $datetime, $detailLevel);
+		return $this->translator->get($item, array('time' => $this->parseUnits($diff)));
 	}
 
 	public function almost(DateTime $base, DateTime $datetime = null)
 	{
-		list($format, $diff) = $this->calc($base, $datetime);
-		return sprintf($format, $this->parseUnits($diff, true));
+		list($item, $diff) = $this->calc($base, $datetime);
+		return $this->translator->get($item, array('time' => $this->parseUnits($diff, true)));
 	}
 
 	private function calc(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
+		$this->translator = $base->getTranslator();
+
 		$datetime = is_null($datetime) ? DateTime::now() : $datetime;
 		$detailLevel = intval($detailLevel);
 
 		$diff = $this->diffInUnits($base->diff($datetime, true), $detailLevel);
 
-		$format = 'just now';
+		$item = 'just_now';
 		if(!$this->isNow($diff)) {
-			$format = $base->isAfter($datetime) ? 'in %s' : '%s ago';
+			$item = $base->isAfter($datetime) ? 'in' : 'ago';
 		}
 
-		return array($format, $diff);
+		return array($item, $diff);
 	}
 
 	private function diffInUnits(\DateInterval $interval, $detailLevel)
@@ -84,10 +90,7 @@ final class DateTimeSince implements Since
 				$isAlmost = $this->isAlmost($time);
 			}
 
-			if($time['amount'] > 1) {
-				$time['unit'] .= 's';
-			}
-			$string[] = implode(' ', $time);
+			$string[] = $this->translator->choice($time['unit'], $time['amount']);
 		}
 
 		$parsed = $string[0];
@@ -97,11 +100,12 @@ final class DateTimeSince implements Since
 			$theLastOne = $string[count($string) - 1];
 			unset($string[count($string) - 1]);
 
-			$parsed = sprintf('%s and %s', implode(', ', $string), $theLastOne);
+			$and = $this->translator->get('and');
+			$parsed = sprintf('%s %s %s', implode(', ', $string), $and, $theLastOne);
 		}
 
 		if($isAlmost) {
-			$parsed = sprintf('almost %s', $parsed);
+			$parsed = $this->translator->get('almost', array('time' => $parsed));
 		}
 
 		return $parsed;
@@ -110,7 +114,7 @@ final class DateTimeSince implements Since
 	private function isAlmost(&$time)
 	{
 		$units = array('second'	=> 60, 'minute'	=> 60, 'hour' => 24,
-			'day' => 7, 'week' => 4.35, 'month'	=> 12, 'year' => null
+			'day' => 7, 'week' => 4, 'month' => 12, 'year' => null
 		);
 
 		do {

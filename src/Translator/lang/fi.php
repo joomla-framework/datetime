@@ -12,6 +12,7 @@ return array(
     |
     */
 
+	'in'        => '',
     'ago'       => ':time sitten',
     'from_now'  => ':time tästä hetkestä',
     'after'     => '',
