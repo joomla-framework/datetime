@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'in :time',
     'ago'       => 'Orain dela :time',
     'from_now'  => ':time barru',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'oraintxe',
+	'and'		=> 'eta',
+	'almost'	=> 'ia :time',
     'after'     => ':time geroago',
     'before'    => ':time lehenago',
     'year'      => 'Urte 1|:count urte',

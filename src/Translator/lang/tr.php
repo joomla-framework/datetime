@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => ':time içinde',
     'ago'       => ':time önce',
     'from_now'  => ':time sonra',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'Şu anda',
+	'and'		=> 've',
+	'almost'	=> 'neredeyse :time',
     'after'     => ':time sonra',
     'before'    => ':time önce',
     'year'      => '1 yıl|:count yıl',

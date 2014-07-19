@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'σε :time',
     'ago'       => 'πρίν απο :time',
     'from_now'  => 'σε :time απο τώρα',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'μόλις τώρα',
+	'and'		=> 'και',
+	'almost'	=> 'σχεδόν :time',
     'after'     => ':time μετά',
     'before'    => ':time πρίν',
     'year'      => '1 χρόνος|:count χρόνια',

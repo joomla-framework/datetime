@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'in :time',
     'ago'       => ':time geleden',
     'from_now'  => ':time vanaf nu',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'daarnet',
+	'and'		=> 'en',
+	'almost'	=> 'bijna :time',
     'after'     => ':time na',
     'before'    => ':time voor',
     'year'      => '1 jaar|:count jaren',

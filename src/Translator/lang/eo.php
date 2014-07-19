@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'en :time',
     'ago'       => 'antaŭ :time',
     'from_now'  => 'je :time',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'jxus',
+	'and'		=> 'kaj',
+	'almost'	=> 'preskaŭ :time',
     'after'     => ':time poste',
     'before'    => ':time antaŭe',
     'year'      => '1 jaro|:count jaroj',

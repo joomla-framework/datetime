@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'u :time',
     'ago'       => 'Prije :time',
     'from_now'  => ':time od sad',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'upravo sada',
+	'and'		=> 'i',
+	'almost'	=> 'skoro :time',
     'after'     => 'Nakon :time',
     'before'    => 'Prije :time',
     'year'      => ':count godinu|:count godine|:count godina',

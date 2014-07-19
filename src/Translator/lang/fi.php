@@ -12,14 +12,14 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'sisään :time',
     'ago'       => ':time sitten',
     'from_now'  => ':time tästä hetkestä',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
-    'after'     => '',
-    'before'    => '',
+	'just_now'	=> 'juuri nyt',
+	'and'		=> 'ja',
+	'almost'	=> 'lähes :time',
+    'after'     => ':time jälkeen',
+    'before'    => ':time ennen',
     'year'      => '1 vuosi|:count vuotta',
     'month'     => '1 kuukausi|:count kuukautta',
     'week'      => '1 viikko|:count viikkoa',

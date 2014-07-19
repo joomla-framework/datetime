@@ -12,12 +12,12 @@ return array(
     |
     */
 
-	'in'        => '',
+	'in'        => 'egy :time',
     'ago'       => ':time korábban',
     'from_now'  => ':time később',
-	'just_now'	=> '',
-	'and'		=> '',
-	'almost'	=> '',
+	'just_now'	=> 'éppen most',
+	'and'		=> 'és ',
+	'almost'	=> 'majdnem :time',
     'after'     => ':time később',
     'before'    => ':time korábban',
     'year'      => '1 évvel|:count évvel',
