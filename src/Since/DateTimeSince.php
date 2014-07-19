@@ -8,35 +8,32 @@ final class DateTimeSince implements Since
 {
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
-		return $this->calc($base, $datetime, $detailLevel, false);
+		list($format, $diff) = $this->calc($base, $datetime, $detailLevel);
+		return sprintf($format, $this->parseUnits($diff));
 	}
 
 	public function almost(DateTime $base, DateTime $datetime = null)
 	{
-		return $this->calc($base, $datetime, 1, true);
+		list($format, $diff) = $this->calc($base, $datetime);
+		return sprintf($format, $this->parseUnits($diff, true));
 	}
 
-	protected function calc(DateTime $base, DateTime $datetime = null, $detailLevel = 1, $allowAlmost = false)
+	private function calc(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
 		$datetime = is_null($datetime) ? DateTime::now() : $datetime;
-		$detailLevel = $allowAlmost ? 1 : intval($detailLevel);
+		$detailLevel = intval($detailLevel);
 
 		$diff = $this->diffInUnits($base->diff($datetime, true), $detailLevel);
 
-		/** For all differences below one minute */
-		if(empty($diff) || $diff[0]['unit'] == 'second') {
-			return 'just now';
+		$format = 'just now';
+		if(!$this->isNow($diff)) {
+			$format = $base->isAfter($datetime) ? 'in %s' : '%s ago';
 		}
 
-		$format = '%s ago';
-		if($base->isAfter($datetime)) {
-			$format = 'in %s';
-		}
-
-		return sprintf($format, $this->parseUnits($diff, $allowAlmost));
+		return array($format, $diff);
 	}
 
-	protected function diffInUnits(\DateInterval $interval, $detailLevel)
+	private function diffInUnits(\DateInterval $interval, $detailLevel)
 	{
 		$units = array('y' => 'year', 'm' => 'month', 'd' => 'day',
 			'h' => 'hour', 'i' => 'minute', 's' => 'second'
@@ -76,8 +73,10 @@ final class DateTimeSince implements Since
 		return $diff;
 	}
 
-	protected function parseUnits($units, $allowAlmost)
+	private function parseUnits($units, $allowAlmost = false)
 	{
+		if(empty($units)) return;
+
 		$isAlmost = false;
 		$string = array();
 		foreach($units as $time) {
@@ -108,7 +107,7 @@ final class DateTimeSince implements Since
 		return $parsed;
 	}
 
-	protected function isAlmost(&$time)
+	private function isAlmost(&$time)
 	{
 		$units = array('second'	=> 60, 'minute'	=> 60, 'hour' => 24,
 			'day' => 7, 'week' => 4.35, 'month'	=> 12, 'year' => null
@@ -128,5 +127,11 @@ final class DateTimeSince implements Since
 		}
 
 		return false;
+	}
+
+	private function isNow($diff)
+	{
+		/** For all differences below one minute */
+		return empty($diff) || $diff[0]['unit'] == 'second';
 	}
 }
