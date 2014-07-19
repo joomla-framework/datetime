@@ -2,7 +2,7 @@
 
 namespace Joomla\DateTime;
 
-final class DateRange
+final class DateRange implements \Iterator
 {
 	/** @var Date */
 	private $start;
@@ -10,13 +10,14 @@ final class DateRange
 	/** @var Date */
 	private $end;
 
+	/** @var integer */
+	private $position;
+
 	public function __construct(Date $start, Date $end)
 	{
-		// @todo jak DateTime bedzie dziedzyc po Date to bedzie mozna tutaj miec dateTime! - trzeba zrobic trim na
-		// lub stworz nowy Date na podsatwie DateTime i w konstkrutorze date martw sie by trimowac!
-
-		$this->start = $start;
-		$this->end   = $end;
+		$this->position	= 0;
+		$this->start	= $start;
+		$this->end		= $end;
 	}
 
 	public static function emptyRange()
@@ -38,12 +39,12 @@ final class DateRange
 
 	public function isEmpty()
 	{
-		return $this->start->after($this->end);
+		return $this->start->isAfter($this->end);
 	}
 
 	public function includes(Date $date)
 	{
-		return !$date->before($this->start) && !$date->after($this->end);
+		return !$date->isBefore($this->start) && !$date->isAfter($this->end);
 	}
 
 	public function equals(DateRange $range)
@@ -61,22 +62,13 @@ final class DateRange
 		return $this->includes($range->start) && $this->includes($range->end);
 	}
 
-	public function compareTo(DateRange $range)
-	{
-		if(!$this->start->equals($range->start)) {
-			return $this->start->compareTo($range->start);
-		}
-
-		return $this->end->compareTo($range->end);
-	}
-
 	/** @return DateRange */
 	public function gap(DateRange $range)
 	{
 		if($this->overlaps($range)) return self::emptyRange();
 
 		$lower = $higher = null;
-		if($this->compareTo($range) < 0) {
+		if($this->start->isBefore($range->start)) {
 			$lower = $this;
 			$higher = $range;
 		} else {
@@ -90,6 +82,42 @@ final class DateRange
 	public function abuts(DateRange $range)
 	{
 		return !$this->overlaps($range) && $this->gap($range)->isEmpty();
+	}
+
+	public function toArray()
+	{
+		$range = array();
+		foreach($this as $day) {
+			$range[] = $day;
+		}
+
+		return $range;
+	}
+
+	public function current()
+	{
+		return $this->start->addDays($this->position);
+	}
+
+	public function key()
+	{
+		return $this->position;
+	}
+
+	public function next()
+	{
+		$this->position++;
+		return $this->valid();
+	}
+
+	public function rewind()
+	{
+		$this->position = 0;
+	}
+
+	public function valid()
+	{
+		return $this->position <= $this->end->diff($this->start)->format('%d');
 	}
 
 	/**
@@ -125,10 +153,14 @@ final class DateRange
 	private static function sortArrayOfRanges(array $ranges)
 	{
 		usort($ranges, function(DateRange $a, DateRange $b) {
-			return $a->compareTo($b);
+			if($a->equals($b)) return 0;
+
+			if($a->start->isAfter($b->start)) return 1;
+			if($a->start->isBefore($b->start) || $a->end->isBefore($b->end)) return -1;
+
+			return 1;
 		});
+
 		return array_values($ranges);
 	}
-
-
 }

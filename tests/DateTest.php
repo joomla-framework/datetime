@@ -4,17 +4,6 @@ namespace Joomla\DateTime;
 
 final class DateTest extends \PHPUnit_Framework_TestCase
 {
-	public function testCanCreateAnObjectFromJoomlaDateTimeObject()
-	{
-		$datetime = DateTime::now();
-		$this->assertEquals(new Date(date('Y-m-d')), new Date($datetime));
-	}
-
-	public function testCanCreateAnObjectFromFormat()
-	{
-		$this->assertEquals(new Date(date('Y-m-d')), Date::createFromFormat('Y-m-d', date('Y-m-d')));
-	}
-
 	public function testCanCreateAnObjectRepresentingToday()
 	{
 		$this->assertEquals(new Date(date('Y-m-d')), Date::today());
@@ -30,19 +19,19 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(new Date(sprintf('%s-%s', date('Y-m'), date('d') - 1)), Date::yesterday());
 	}
 
-	public function testCanDetermineIfIsAfterAnotherDatetime()
+	public function testCanDetermineIfIsAfterAnotherDate()
 	{
 		$date = new Date('2014-07-15');
-		$this->assertTrue($date->after(new Date('2014-07-14')));
+		$this->assertTrue($date->isAfter(new Date('2014-07-14')));
 	}
 
-	public function testCanDetermineIfIsBeforeAnotherDatetime()
+	public function testCanDetermineIfIsBeforeAnotherDate()
 	{
 		$date = new Date('2014-07-15');
-		$this->assertTrue($date->before(new Date('2014-07-16')));
+		$this->assertTrue($date->isBefore(new Date('2014-07-16')));
 	}
 
-	public function testCanDetermineIfIsEqualToAnotherDatetime()
+	public function testCanDetermineIfIsEqualToAnotherDate()
 	{
 		$date = new Date('2014-07-15');
 		$this->assertTrue($date->equals(new Date('2014-07-15')));
@@ -116,7 +105,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfAWeek()
 	{
 		$date = new Date('2014-07-15');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-07-14'), $date->beginOfWeek());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-07-14'), $date->startOfWeek());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfAWeek()
@@ -128,7 +117,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfAMonth()
 	{
 		$date = new Date('2014-07-15');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-07-01'), $date->beginOfMonth());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-07-01'), $date->startOfMonth());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfAMonth()
@@ -140,7 +129,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfAYear()
 	{
 		$date = new Date('2014-07-15');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-01-01'), $date->beginOfYear());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-01-01'), $date->startOfYear());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfAYear()
@@ -151,42 +140,42 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 
 	public function seedForAddDays()
 	{
-		return Fixture\DataProvider::addDays();
+		return Fixture\DataProvider::addDays_Date();
 	}
 
 	public function seedForSubDays()
 	{
-		return Fixture\DataProvider::subDays();
+		return Fixture\DataProvider::subDays_Date();
 	}
 
 	public function seedForAddMonths()
 	{
-		return Fixture\DataProvider::addMonths();
+		return Fixture\DataProvider::addMonths_Date();
 	}
 
 	public function seedForSubMonths()
 	{
-		return Fixture\DataProvider::subMonths();
+		return Fixture\DataProvider::subMonths_Date();
 	}
 
 	public function seedForAddWeeks()
 	{
-		return Fixture\DataProvider::addWeeks();
+		return Fixture\DataProvider::addWeeks_Date();
 	}
 
 	public function seedForSubWeeks()
 	{
-		return Fixture\DataProvider::subWeeks();
+		return Fixture\DataProvider::subWeeks_Date();
 	}
 
 	public function seedForAddYears()
 	{
-		return Fixture\DataProvider::addYears();
+		return Fixture\DataProvider::addYears_Date();
 	}
 
 	public function seedForSubYears()
 	{
-		return Fixture\DataProvider::subYears();
+		return Fixture\DataProvider::subYears_Date();
 	}
 
 	private function assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual)

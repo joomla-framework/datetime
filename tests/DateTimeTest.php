@@ -73,12 +73,12 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 
 	public function testCanDetermineIfIsAfterAnotherDatetime()
 	{
-		$this->assertTrue($this->SUT->after($this->SUT->subSeconds(1)));
+		$this->assertTrue($this->SUT->isAfter($this->SUT->subSeconds(1)));
 	}
 
 	public function testCanDetermineIfIsBeforeAnotherDatetime()
 	{
-		$this->assertTrue($this->SUT->before($this->SUT->addSeconds(1)));
+		$this->assertTrue($this->SUT->isBefore($this->SUT->addSeconds(1)));
 	}
 
 	public function testCanDetermineIfIsEqualToAnotherDatetime()
@@ -222,7 +222,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfADay()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-15 00:00:00'), $date->beginOfDay());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-15 00:00:00'), $date->startOfDay());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfADay()
@@ -234,7 +234,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfAWeek()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-14 00:00:00'), $date->beginOfWeek());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-14 00:00:00'), $date->startOfWeek());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfAWeek()
@@ -246,7 +246,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfAMonth()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-01 00:00:00'), $date->beginOfMonth());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-01 00:00:00'), $date->startOfMonth());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfAMonth()
@@ -258,7 +258,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheBeginOfAYear()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-01-01 00:00:00'), $date->beginOfYear());
+		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-01-01 00:00:00'), $date->startOfYear());
 	}
 
 	public function testCanCreateAnObjectForTheEndOfAYear()
@@ -270,14 +270,51 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider seedForTimeSince
 	 */
-	public function testCanCreateAStringOfATimeDifference($allowAlmost, $detailLevel, DateTime $since, DateTime $sut, $string)
+	public function testCanCreateAStringOfATimeDifference($detailLevel, DateTime $since, DateTime $sut, $string)
 	{
-		$this->assertEquals($string, $sut->timeSince($since, $detailLevel, $allowAlmost));
+		$this->assertEquals($string, $sut->timeSince($since, $detailLevel));
+	}
+
+	/**
+	 * @dataProvider seedForAlmostTimeSince
+	 */
+	public function testCanCreateAStringOfAlmostTimeDifference(DateTime $since, DateTime $sut, $string)
+	{
+		$this->assertEquals($string, $sut->almostTimeSince($since));
 	}
 
 	public function testCanCreateACopyOfPhpDatetimeObject()
 	{
 		$this->assertAttributeNotSame($this->SUT->getDateTime(), 'datetime', $this->SUT);
+	}
+
+	/**
+	 * @dataProvider seedWithPropertiesAndValues
+	 */
+	public function testHasProperties(DateTime $datetime, $property, $propertyValue)
+	{
+		$this->assertEquals($propertyValue, $datetime->$property);
+	}
+
+	/**
+	 * @dataProvider seedForDummyWrapper
+	 */
+	public function testCanBeEasilyExtendedByCustomProperties(DateTime $datetime, $property, $propertyValue)
+	{
+		DateTime::setWrapper(new Fixture\DummyWrapper(new Wrapper\DateTimeWrapper()));
+		$this->assertEquals($propertyValue, $datetime->$property);
+	}
+
+	public function testCanReturnADateInIso8601Format()
+	{
+		$datetime = new DateTime('2014-05-22 12:22:42');
+		$this->assertEquals('2014-05-22T12:22:42+02:00', $datetime->toISO8601());
+	}
+
+	public function testCanReturnADateInRfc822Format()
+	{
+		$datetime = new DateTime('2014-05-22 12:22:42');
+		$this->assertEquals('Thu, 22 May 2014 12:22:42 +0200', $datetime->toRFC822());
 	}
 
 	public function seedForCreateFactoryMethod()
@@ -368,6 +405,43 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function seedForTimeSince()
 	{
 		return Fixture\DataProvider::timeSince();
+	}
+
+	public function seedForAlmostTimeSince()
+	{
+		return Fixture\DataProvider::almostTimeSince();
+	}
+
+	public function seedWithPropertiesAndValues()
+	{
+		$datetime = new DateTime("2014-05-25 12:27:39");
+		$leapyear = new DateTime("2016-05-02");
+
+		return array(
+			array($datetime, 'daysinmonth', 31),
+			array($datetime, 'dayofweek', 7),
+			array($datetime, 'dayofyear', 144),
+			array($datetime, 'isleapyear', false),
+			array($leapyear, 'isleapyear', true),
+			array($datetime, 'day', 25),
+			array($datetime, 'hour', 12),
+			array($datetime, 'minute', 27),
+			array($datetime, 'second', 39),
+			array($datetime, 'month', 5),
+			array($datetime, 'ordinal', 'th'),
+			array($leapyear, 'ordinal', 'nd'),
+			array($datetime, 'week', 21),
+			array($datetime, 'year', 2014),
+		);
+	}
+
+	public function seedForDummyWrapper()
+	{
+		$datetime = new DateTime("2014-05-25 12:27:39");
+
+		return array_merge($this->seedWithPropertiesAndValues(), array(
+			array($datetime, 'test', 'It works!')
+		));
 	}
 
 	private function assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual)

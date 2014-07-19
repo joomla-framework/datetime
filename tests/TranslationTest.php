@@ -13,7 +13,7 @@ final class TranslationTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->path = __DIR__ . '/../lang/';
+        $this->path = __DIR__ . '/../src/Translator/lang/';
 		$this->languages = array_slice(str_replace('.php', '', scandir($this->path)), 2);
     }
 

@@ -2,21 +2,18 @@
 
 namespace Joomla\DateTime;
 
-class Date
+final class Date
 {
 	/** @var DateTime */
 	protected $datetime;
 
 	public function __construct($date)
 	{
-		$datetime = $date instanceof DateTime ? $date : new DateTime($date);
-		$this->datetime = $datetime->beginOfDay();
-	}
+		if(!$date instanceof DateTime) {
+			$date = new DateTime($date);
+		}
 
-	public static function createFromFormat($format, $date)
-	{
-		$obj = new Date(DateTime::createFromFormat($format, $date));
-		return $obj;
+		$this->datetime = $date->startOfDay();
 	}
 
 	public static function today()
@@ -34,82 +31,69 @@ class Date
 		return new Date(DateTime::yesterday());
 	}
 
-	public function after(Date $date)
+	public function isAfter(Date $date)
 	{
-		return $this->datetime > $date->datetime;
+		return $this->datetime->isAfter($date->datetime);
 	}
 
-	public function before(Date $date)
+	public function isBefore(Date $date)
 	{
-		return $this->datetime < $date->datetime;
+		return $this->datetime->isBefore($date->datetime);
 	}
 
-	public function compareTo(Date $date)
+	public function equals(Date $date)
 	{
-		if($this->after($date)) {
-			return 1;
-		}
-
-		if($this->before($date)) {
-			return -1;
-		}
-
-		return 0;
+		return $this->datetime->equals($date->datetime);
 	}
 
-	public function diff(Date $date, $absolute)
+	public function diff(Date $date, $absolute = false)
 	{
 		return $this->datetime->diff($date->datetime, $absolute);
 	}
 
-	public function equals(Date $datetime)
+	public function addDays($value)
 	{
-		return $this->datetime == $datetime->datetime;
+		return new Date($this->datetime->addDays($value));
 	}
 
-	public function addDays($days)
+	public function subDays($value)
 	{
-		return new Date($this->datetime->addDays($days));
+		return new Date($this->datetime->subDays($value));
 	}
 
-	public function subDays($days)
+	public function addWeeks($value)
 	{
-		return new Date($this->datetime->subDays($days));
+		return new Date($this->datetime->addWeeks($value));
 	}
 
-	public function addWeeks($weeks)
+	public function subWeeks($value)
 	{
-		return new Date($this->datetime->addWeeks($weeks));
+		return new Date($this->datetime->subWeeks($value));
 	}
 
-	public function subWeeks($weeks)
+	public function addMonths($value)
 	{
-		return new Date($this->datetime->subWeeks($weeks));
+		return new Date($this->datetime->addMonths($value));
 	}
 
-	public function addMonths($months)
+	public function subMonths($value)
 	{
-		return new Date($this->datetime->addMonths($months));
+		return new Date($this->datetime->subMonths($value));
 	}
 
-	public function subMonths($months)
+	public function addYears($value)
 	{
-		return new Date($this->datetime->subMonths($months));
+		return new Date($this->datetime->addYears($value));
 	}
 
-	public function addYears($years)
+	public function subYears($value)
 	{
-		return new Date($this->datetime->addYears($years));
+		return new Date($this->datetime->subYears($value));
 	}
 
-	public function subYears($years)
+	public function startOfWeek()
 	{
-		return new Date($this->datetime->subYears($years));
-	}
-
-	public function beginOfWeek()
-	{
-		return new Date($this->datetime->beginOfWeek());
+		return new Date($this->datetime->startOfWeek());
 	}
 
 	public function endOfWeek()
@@ -117,9 +101,9 @@ class Date
 		return new Date($this->datetime->endOfWeek());
 	}
 
-	public function beginOfMonth()
+	public function startOfMonth()
 	{
-		return new Date($this->datetime->beginOfMonth());
+		return new Date($this->datetime->startOfMonth());
 	}
 
 	public function endOfMonth()
@@ -127,9 +111,9 @@ class Date
 		return new Date($this->datetime->endOfMonth());
 	}
 
-	public function beginOfYear()
+	public function startOfYear()
 	{
-		return new Date($this->datetime->beginOfYear());
+		return new Date($this->datetime->startOfYear());
 	}
 
 	public function endOfYear()
@@ -140,6 +124,27 @@ class Date
 	public function format($format)
 	{
 		return $this->datetime->format($format);
+	}
+
+	public function timeSince(DateTime $datetime = null, $detailLevel = 1, $allowAlmost = false)
+	{
+		$this->datetime->timeSince($datetime, $detailLevel, $allowAlmost);
+	}
+
+	public function almostTimeSince(DateTime $datetime = null, $detailLevel = 1)
+	{
+		$this->datetime->almostTimeSince($datetime, $detailLevel);
+	}
+
+	/** @return \DateTime */
+	public function getDateTime()
+	{
+		return $this->datetime->getDateTime();
+	}
+
+	public static function setTranslator(DateTimeTranslator $translator)
+	{
+		DateTime::setTranslator($translator);
 	}
 
 	public static function setLocale($locale)

@@ -1,14 +1,12 @@
 <?php
 
-namespace Joomla\DateTime;
+namespace Joomla\DateTime\Translator;
 
 //use Symfony\Component\Translation\MessageSelector;
 
-final class Translator
+final class DateTimeTranslator extends Translator
 {
-    protected $locale = 'en';
-
-    protected $loaded = array();
+    private $loaded = array();
 
     public function get($item, array $replace = array())
     {
@@ -32,25 +30,20 @@ final class Translator
         return $this->makeReplacements($this->getSelector()->choose($lines, $number, $this->locale), $replace);
     }
 
-	public function load()
+	public function setSelector(MessageSelector $selector)
+    {
+        $this->selector = $selector;
+    }
+
+	private function load()
     {
         if($this->isLoaded()) return;
 
-        $path = sprintf('%s/../lang/%s.php', __DIR__, $this->locale);
+        $path = sprintf('%s/lang/%s.php', __DIR__, $this->locale);
 
         if(file_exists($path)) {
 			$this->loaded[$this->locale] = require $path;
         }
-    }
-
-	public function setLocale($locale)
-    {
-        $this->locale = $locale;
-    }
-
-	public function setSelector(MessageSelector $selector)
-    {
-        $this->selector = $selector;
     }
 
     private function isLoaded()
