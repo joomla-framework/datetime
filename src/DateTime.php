@@ -9,12 +9,12 @@
 
 namespace Joomla\DateTime;
 
-use Joomla\DateTime\Since\Since;
+use Joomla\DateTime\Getter\DateTimeGetter;
+use Joomla\DateTime\Getter\Getter;
 use Joomla\DateTime\Since\DateTimeSince;
-use Joomla\DateTime\Translator\Translator;
+use Joomla\DateTime\Since\Since;
 use Joomla\DateTime\Translator\DateTimeTranslator;
-use Joomla\DateTime\Wrapper\Wrapper;
-use Joomla\DateTime\Wrapper\DateTimeWrapper;
+use Joomla\DateTime\Translator\Translator;
 
 /**
  * @property-read  string   $daysinmonth   t - Number of days in the given month.
@@ -32,14 +32,14 @@ use Joomla\DateTime\Wrapper\DateTimeWrapper;
  */
 final class DateTime
 {
+	/** @var Getter */
+	private static $getter;
+
 	/** @var Since */
 	private static $since;
 
 	/** @var Translator */
 	private static $translator;
-
-	/** @var Wrapper */
-	private static $wrapper;
 
 	/** @var \DateTime */
 	private $datetime;
@@ -287,7 +287,7 @@ final class DateTime
 		$replace = array();
 
 		// Loop all format characters and check if we can translate them.
-        for ($i = 0; $i < strlen($format); $i++) {
+        for($i = 0; $i < strlen($format); $i++) {
             $character = $format[$i];
 
             // Check if we can replace it with a translated version.
@@ -308,12 +308,8 @@ final class DateTime
                         $key = $this->datetime->format($character);
                 }
 
-                // The original result.
                 $original = $this->datetime->format($character);
-
-                // Translate.
-                $translator = $this->getTranslator();
-                $translated = $translator->get(strtolower($key));
+				$translated = $this->getTranslator()->get(strtolower($key));
 
                 // Short notations.
                 if (in_array($character, array('D', 'M'))) {
@@ -337,17 +333,17 @@ final class DateTime
 
 	public function timeSince(DateTime $datetime = null, $detailLevel = 1)
 	{
-		return self::getSince()->since($this, $datetime, $detailLevel);
+		return $this->getSince()->since($this, $datetime, $detailLevel);
 	}
 
 	public function almostTimeSince(DateTime $datetime = null)
 	{
-		return self::getSince()->almost($this, $datetime);
+		return $this->getSince()->almost($this, $datetime);
 	}
 
 	public function __get($name)
 	{
-		return self::getWrapper()->get($this, $name);
+		return $this->getGetter()->get($this, $name);
 	}
 
 	public function getOffset()
@@ -395,9 +391,9 @@ final class DateTime
 		static::$translator = $translator;
 	}
 
-	public static function setWrapper(Wrapper $wrapper)
+	public static function setGetter(Getter $getter)
 	{
-		static::$wrapper = $wrapper;
+		static::$getter = $getter;
 	}
 
 	public static function setLocale($locale)
@@ -429,8 +425,7 @@ final class DateTime
 		$datetime = clone $this->datetime;
 		call_user_func($closure, $datetime);
 
-		$obj = new DateTime($datetime);
-		return $obj;
+		return new DateTime($datetime);
 	}
 
 	private static function getSince()
@@ -442,12 +437,12 @@ final class DateTime
 		return static::$since;
 	}
 
-	private static function getWrapper()
+	private static function getGetter()
 	{
-		if(is_null(static::$wrapper)) {
-			static::$wrapper = new DateTimeWrapper();
+		if(is_null(static::$getter)) {
+			static::$getter = new DateTimeGetter();
 		}
 
-		return static::$wrapper;
+		return static::$getter;
 	}
 }

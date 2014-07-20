@@ -297,11 +297,11 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider seedForDummyWrapper
+	 * @dataProvider seedForDummyGetter
 	 */
 	public function testCanBeEasilyExtendedByCustomProperties(DateTime $datetime, $property, $propertyValue)
 	{
-		DateTime::setWrapper(new Fixture\DummyWrapper(new Wrapper\DateTimeWrapper()));
+		DateTime::setGetter(new Fixture\DummyGetter(new Getter\DateTimeGetter()));
 		$this->assertEquals($propertyValue, $datetime->$property);
 	}
 
@@ -435,7 +435,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 
-	public function seedForDummyWrapper()
+	public function seedForDummyGetter()
 	{
 		$datetime = new DateTime("2014-05-25 12:27:39");
 

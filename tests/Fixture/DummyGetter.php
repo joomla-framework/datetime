@@ -3,16 +3,16 @@
 namespace Joomla\DateTime\Fixture;
 
 use Joomla\DateTime\DateTime;
-use Joomla\DateTime\Wrapper\Wrapper;
+use Joomla\DateTime\Getter\Getter;
 
-final class DummyWrapper implements Wrapper
+final class DummyGetter implements Getter
 {
-	/** @var Wrapper */
-	private $wrapper;
+	/** @var Getter */
+	private $getter;
 
-	public function __construct(Wrapper $wrapper)
+	public function __construct(Getter $getter)
 	{
-		$this->wrapper = $wrapper;
+		$this->getter = $getter;
 	}
 
 	public function get(DateTime $datetime, $name)
@@ -25,7 +25,7 @@ final class DummyWrapper implements Wrapper
 				break;
 
 			default:
-				$value = $this->wrapper->get($datetime, $name);
+				$value = $this->getter->get($datetime, $name);
 		}
 
 		return $value;

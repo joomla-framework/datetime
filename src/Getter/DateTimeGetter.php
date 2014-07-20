@@ -1,10 +1,10 @@
 <?php
 
-namespace Joomla\DateTime\Wrapper;
+namespace Joomla\DateTime\Getter;
 
 use Joomla\DateTime\DateTime;
 
-final class DateTimeWrapper implements Wrapper
+final class DateTimeGetter implements Getter
 {
 	public function get(DateTime $datetime, $name)
 	{
