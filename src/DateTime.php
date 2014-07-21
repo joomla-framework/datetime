@@ -9,13 +9,6 @@
 
 namespace Joomla\DateTime;
 
-use Joomla\DateTime\Getter\DateTimeGetter;
-use Joomla\DateTime\Getter\Getter;
-use Joomla\DateTime\Since\DateTimeSince;
-use Joomla\DateTime\Since\Since;
-use Joomla\DateTime\Translator\DateTimeTranslator;
-use Joomla\DateTime\Translator\Translator;
-
 /**
  * @property-read  string   $daysinmonth   t - Number of days in the given month.
  * @property-read  string   $dayofweek     N - ISO-8601 numeric representation of the day of the week.
@@ -32,14 +25,17 @@ use Joomla\DateTime\Translator\Translator;
  */
 final class DateTime
 {
-	/** @var Getter */
+	/** @var Getter\Getter */
 	private static $getter;
 
-	/** @var Since */
+	/** @var Since\Since */
 	private static $since;
 
-	/** @var Translator */
+	/** @var Translator\Translator */
 	private static $translator;
+
+	/** @var Strategy\Strategy */
+	private $strategy;
 
 	/** @var \DateTime */
 	private $datetime;
@@ -211,75 +207,48 @@ final class DateTime
 
 	public function startOfDay()
 	{
-		return $this->modify(function(\DateTime $datetime) {
-			$datetime->setTime(0, 0, 0);
-		});
+		return $this->modify(array($this->getStrategy(), 'startOfDay'));
 	}
 
 	public function endOfDay()
 	{
-		return $this->modify(function(\DateTime $datetime) {
-			$datetime->setTime(23, 59, 59);
-		});
+		return $this->modify(array($this->getStrategy(), 'endOfDay'));
 	}
 
 	public function startOfWeek()
 	{
 		$startOfDay = $this->startOfDay();
-
-		$diffInDays = intval($startOfDay->format('N')) - 1;
-		return $startOfDay->subDays($diffInDays);
+		return $startOfDay->modify(array($this->getStrategy(), 'startOfWeek'));
 	}
 
 	public function endOfWeek()
 	{
 		$endOfDay = $this->endOfDay();
-
-		$diffInDays = 7 - intval($endOfDay->format('N'));
-		return $endOfDay->addDays($diffInDays);
+		return $endOfDay->modify(array($this->getStrategy(), 'endOfWeek'));
 	}
 
 	public function startOfMonth()
 	{
 		$startOfDay = $this->startOfDay();
-
-		return $startOfDay->modify(function(\DateTime $datetime) {
-			$year = $datetime->format('Y');
-			$month = $datetime->format('m');
-			$datetime->setDate($year, $month, 1);
-		});
+		return $startOfDay->modify(array($this->getStrategy(), 'startOfMonth'));
 	}
 
 	public function endOfMonth()
 	{
 		$endOfDay = $this->endOfDay();
-
-		return $endOfDay->modify(function(\DateTime $datetime) {
-			$year = $datetime->format('Y');
-			$month = $datetime->format('m');
-			$day = $datetime->format('t');
-			$datetime->setDate($year, $month, $day);
-		});
+		return $endOfDay->modify(array($this->getStrategy(), 'endOfMonth'));
 	}
 
 	public function startOfYear()
 	{
 		$startOfDay = $this->startOfDay();
-
-		return $startOfDay->modify(function(\DateTime $datetime) {
-			$year = $datetime->format('Y');
-			$datetime->setDate($year, 1, 1);
-		});
+		return $startOfDay->modify(array($this->getStrategy(), 'startOfYear'));
 	}
 
 	public function endOfYear()
 	{
 		$endOfDay = $this->endOfDay();
-
-		return $endOfDay->modify(function(\DateTime $datetime) {
-			$year = $datetime->format('Y');
-			$datetime->setDate($year, 12, 31);
-		});
+		return $endOfDay->modify(array($this->getStrategy(), 'endOfYear'));
 	}
 
 	public function format($format)
@@ -366,6 +335,16 @@ final class DateTime
 		return clone $this->datetime;
 	}
 
+	/** @return Strategy\Strategy */
+	public function getStrategy()
+	{
+		if(is_null($this->strategy)) {
+			$this->strategy = new Strategy\DateTimeStrategy();
+		}
+
+		return $this->strategy;
+	}
+
 	public function toISO8601()
 	{
 		return $this->datetime->format(\DateTime::RFC3339);
@@ -381,17 +360,22 @@ final class DateTime
 		return (int) $this->datetime->format('U');
 	}
 
-	public static function setSince(Since $since)
+	public function setStrategy(Strategy\Strategy $strategy)
+	{
+		$this->strategy = $strategy;
+	}
+
+	public static function setSince(Since\Since $since)
 	{
 		static::$since = $since;
 	}
 
-	public static function setTranslator(Translator $translator)
+	public static function setTranslator(Translator\Translator $translator)
 	{
 		static::$translator = $translator;
 	}
 
-	public static function setGetter(Getter $getter)
+	public static function setGetter(Getter\Getter $getter)
 	{
 		static::$getter = $getter;
 	}
@@ -405,7 +389,7 @@ final class DateTime
 	public static function getTranslator()
 	{
 		if(is_null(static::$translator)) {
-			static::$translator = new DateTimeTranslator();
+			static::$translator = new Translator\DateTimeTranslator();
 		}
 
 		return static::$translator;
@@ -418,12 +402,10 @@ final class DateTime
 		return $value > 0 ? $this->add(new \DateInterval($spec)) : $this->sub(new \DateInterval($spec));
 	}
 
-	private function modify($closure)
+	private function modify(callable $callable)
 	{
-		if(!is_callable($closure)) throw new \InvalidArgumentException(sprintf('Parameter for %s::modify() must be callable', get_class($this)));
-
 		$datetime = clone $this->datetime;
-		call_user_func($closure, $datetime);
+		call_user_func_array($callable, array($datetime));
 
 		return new DateTime($datetime);
 	}
@@ -431,7 +413,7 @@ final class DateTime
 	private static function getSince()
 	{
 		if(is_null(static::$since)) {
-			static::$since = new DateTimeSince();
+			static::$since = new Since\DateTimeSince();
 		}
 
 		return static::$since;
@@ -440,7 +422,7 @@ final class DateTime
 	private static function getGetter()
 	{
 		if(is_null(static::$getter)) {
-			static::$getter = new DateTimeGetter();
+			static::$getter = new Getter\DateTimeGetter();
 		}
 
 		return static::$getter;

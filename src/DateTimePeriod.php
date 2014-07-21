@@ -17,7 +17,7 @@ class DateTimePeriod implements \Iterator
 	protected $current;
 
 	/** @var integer */
-	private $key;
+	protected $key;
 
 	public function __construct(DateTime $start, DateTime $end, \DateInterval $interval)
 	{
