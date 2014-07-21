@@ -94,6 +94,11 @@ final class DateRange implements \Iterator
 		return $range;
 	}
 
+	public function __toString()
+	{
+		return sprintf('%s - %s', $this->start->format('Y-m-d'), $this->end->format('Y-m-d'));
+	}
+
 	public function current()
 	{
 		return $this->start->addDays($this->position);

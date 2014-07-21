@@ -111,6 +111,13 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 
+	public function testCanConvertToString()
+	{
+		$range = new DateRange(new Date('2014-05-19'), new Date('2014-08-15'));
+
+		$this->assertSame('2014-05-19 - 2014-08-15', (string) $range);
+	}
+
 	public function seedForIncludesADate()
 	{
 		$start = new Date('2014-06-12');
