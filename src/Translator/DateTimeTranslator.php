@@ -2,13 +2,20 @@
 
 namespace Joomla\DateTime\Translator;
 
+use Symfony\Component\Translation\MessageSelector;
+
 final class DateTimeTranslator extends Translator
 {
-    /** @var Symfony\MessageSelector */
+    /** @var MessageSelector */
 	private $selector;
 
 	/** @var  array */
 	private $loaded = array();
+
+	public function __construct()
+	{
+		 $this->selector = new MessageSelector();
+	}
 
     public function get($item, array $replace = array())
     {
@@ -29,12 +36,7 @@ final class DateTimeTranslator extends Translator
 
         $replace['count'] = $number;
 
-        return $this->makeReplacements($this->getSelector()->choose($lines, $number, $this->locale), $replace);
-    }
-
-	public function setSelector(Symfony\MessageSelector $selector)
-    {
-        $this->selector = $selector;
+        return $this->makeReplacements($this->selector->choose($lines, $number, $this->locale), $replace);
     }
 
 	private function load()
@@ -61,18 +63,5 @@ final class DateTimeTranslator extends Translator
         }
 
         return $line;
-    }
-
-    /**
-     * @return Symfony\MessageSelector
-     */
-    private function getSelector()
-    {
-        if(is_null($this->selector))
-        {
-            $this->selector = new Symfony\MessageSelector();
-        }
-
-        return $this->selector;
     }
 }
