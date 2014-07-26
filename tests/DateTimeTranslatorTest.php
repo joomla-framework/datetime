@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
 namespace Joomla\DateTime;
 
@@ -11,7 +15,7 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->path = __DIR__ . '/../src/Translator/lang/';
+        $this->path = __DIR__ . '/../lang/';
 		$this->languages = array_slice(str_replace('.php', '', scandir($this->path)), 2);
     }
 

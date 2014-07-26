@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -12,15 +11,16 @@ namespace Joomla\DateTime;
  *
  * @since  2.0
  */
-final class Date
+class Date
 {
 	/** @var DateTime */
-	protected $datetime;
+	private $datetime;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param   mixed  $date  Might be a Joomla\DateTime object or a PHP DateTime object or a string in a format accepted by strtotime().
+	 * @param   mixed  $date  Might be a Joomla\DateTime object or a PHP DateTime object
+	 *                         or a string in a format accepted by strtotime().
 	 */
 	public function __construct($date)
 	{
@@ -282,28 +282,38 @@ final class Date
 	/**
 	 * Returns the difference in a human readable format.
 	 *
-	 * @param   DateTime  $datetime     The date to compare to. Default is null and this means that
-	 *                                   the current object will be compared to the current time.
-	 * @param   integer   $detailLevel  How much details do you want to get
+	 * @param   Date     $date         The date to compare to. Default is null and this means that
+	 *                                  the current object will be compared to the current time.
+	 * @param   integer  $detailLevel  How much details do you want to get
 	 *
 	 * @return string
 	 */
-	public function timeSince(DateTime $datetime = null, $detailLevel = 1)
+	public function timeSince(Date $date = null, $detailLevel = 1)
 	{
-		$this->datetime->timeSince($datetime, $detailLevel);
+		if (!is_null($date))
+		{
+			$date = new DateTime($date);
+		}
+
+		$this->datetime->timeSince($date, $detailLevel);
 	}
 
 	/**
 	 * Returns the almost difference in a human readable format.
 	 *
-	 * @param   DateTime  $datetime  The date to compare to. Default is null and this means that
-	 *                                the current object will be compared to the current time.
+	 * @param   Date  $date  The date to compare to. Default is null and this means that
+	 *                        the current object will be compared to the current time.
 	 *
 	 * @return string
 	 */
-	public function almostTimeSince(DateTime $datetime = null)
+	public function almostTimeSince(Date $date = null)
 	{
-		$this->datetime->almostTimeSince($datetime);
+		if (!is_null($date))
+		{
+			$date = new DateTime($date);
+		}
+
+		$this->datetime->almostTimeSince($date);
 	}
 
 	/**
@@ -317,7 +327,7 @@ final class Date
 	}
 
 	/**
-	 * Sets the Translator implementation
+	 * Sets the Translator implementation.
 	 *
 	 * @param   Translator\Translator  $translator  The Translator implementation.
 	 *

@@ -1,16 +1,35 @@
 <?php
 
+/**
+ * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
 namespace Joomla\DateTime\Getter;
 
 use Joomla\DateTime\DateTime;
 
+/**
+ * Default implemenation of Getter interface.
+ *
+ * @since  2.0
+ */
 final class DateTimeGetter implements Getter
 {
+	/**
+	 * Return a value of the property.
+	 *
+	 * @param   DateTime  $datetime  The DateTime object.
+	 * @param   string    $name      The name of the property.
+	 *
+	 * @return string
+	 */
 	public function get(DateTime $datetime, $name)
 	{
 		$value = null;
 
-		switch($name) {
+		switch ($name)
+		{
 			case 'daysinmonth':
 				$value = $datetime->format('t');
 				break;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @copyright  Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -303,18 +302,6 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	{
 		DateTime::setGetter(new Fixture\DummyGetter(new Getter\DateTimeGetter()));
 		$this->assertEquals($propertyValue, $datetime->$property);
-	}
-
-	public function testCanReturnADateInIso8601Format()
-	{
-		$datetime = new DateTime('2014-05-22 12:22:42');
-		$this->assertEquals('2014-05-22T12:22:42+02:00', $datetime->toISO8601());
-	}
-
-	public function testCanReturnADateInRfc822Format()
-	{
-		$datetime = new DateTime('2014-05-22 12:22:42');
-		$this->assertEquals('Thu, 22 May 2014 12:22:42 +0200', $datetime->toRFC822());
 	}
 
 	public function seedForCreateFactoryMethod()

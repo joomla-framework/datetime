@@ -1,52 +1,52 @@
 <?php
+/**
+ * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
 return array(
+	/*
+	  |--------------------------------------------------------------------------
+	  | Date Language Lines
+	  |--------------------------------------------------------------------------
+	  |
+	  | The following language lines are used by the date library. Each line can
+	  | have a singular and plural translation separated by a '|'.
+	  |
+	 */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Date Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used by the date library. Each line can
-    | have a singular and plural translation separated by a '|'.
-    |
-    */
-
-	'in'        => 'dans :time',
-    'ago'       => 'Il y a :time',
-    'from_now'  => 'Dans :time',
-	'just_now'	=> 'juste maintenant',
-	'and'		=> 'et',
-	'almost'	=> 'presque :time',
-    'after'     => ':time après',
-    'before'    => ':time avant',
-    'year'      => '1 an|:count ans',
-    'month'     => '1 mois|:count mois',
-    'week'      => '1 semaine|:count semaines',
-    'day'       => '1 jour|:count jours',
-    'hour'      => '1 heure|:count heures',
-    'minute'    => '1 minute|:count minutes',
-    'second'    => '1 seconde|:count secondes',
-
-    'january'   => 'janvier',
-    'february'  => 'février',
-    'march'     => 'mars',
-    'april'     => 'avril',
-    'may'       => 'mai',
-    'june'      => 'juin',
-    'july'      => 'juillet',
-    'august'    => 'août',
-    'september' => 'septembre',
-    'october'   => 'octobre',
-    'november'  => 'novembre',
-    'december'  => 'décembre',
-
-    'monday'    => 'lundi',
-    'tuesday'   => 'mardi',
-    'wednesday' => 'mercredi',
-    'thursday'  => 'jeudi',
-    'friday'    => 'vendredi',
-    'saturday'  => 'samedi',
-    'sunday'    => 'dimanche',
-
+	'in' => 'sisään :time',
+	'ago' => ':time sitten',
+	'from_now' => ':time tästä hetkestä',
+	'just_now' => 'juuri nyt',
+	'and' => 'ja',
+	'almost' => 'lähes :time',
+	'after' => ':time jälkeen',
+	'before' => ':time ennen',
+	'year' => '1 vuosi|:count vuotta',
+	'month' => '1 kuukausi|:count kuukautta',
+	'week' => '1 viikko|:count viikkoa',
+	'day' => '1 päivä|:count päivää',
+	'hour' => '1 tunti|:count tuntia',
+	'minute' => '1 minuutti|:count minuuttia',
+	'second' => '1 sekunti|:count sekuntia',
+	'january' => 'tammikuu',
+	'february' => 'helmikuu',
+	'march' => 'maaliskuu',
+	'april' => 'huhtikuu',
+	'may' => 'toukokuu',
+	'june' => 'kesäkuu',
+	'july' => 'heinäkuu',
+	'august' => 'elokuu',
+	'september' => 'syyskuu',
+	'october' => 'lokakuu',
+	'november' => 'marraskuu',
+	'december' => 'joulukuu',
+	'monday' => 'maanantai',
+	'tuesday' => 'tiistai',
+	'wednesday' => 'keskiviikko',
+	'thursday' => 'torstai',
+	'friday' => 'perjantai',
+	'saturday' => 'lauantai',
+	'sunday' => 'sunnuntai',
 );
