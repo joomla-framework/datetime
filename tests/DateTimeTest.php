@@ -7,7 +7,7 @@
 namespace Joomla\DateTime;
 
 /**
- * Tests for Date class.
+ * Tests for DateTime class.
  *
  * @since  2.0
  */

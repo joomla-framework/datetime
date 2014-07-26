@@ -9,8 +9,18 @@ namespace Joomla\DateTime\Fixture;
 use Joomla\DateTime\Date;
 use Joomla\DateTime\DateTime;
 
+/**
+ * Data provider for tests.
+ *
+ * @since  2.0
+ */
 final class DataProvider
 {
+	/**
+	 * Test cases for create.
+	 *
+	 * @return array
+	 */
 	public static function createFactoryMethod()
 	{
 		return array(
@@ -24,6 +34,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for createFromDate.
+	 *
+	 * @return array
+	 */
 	public static function createFromDateFactoryMethod()
 	{
 		return array(
@@ -33,6 +48,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for createFromTime.
+	 *
+	 * @return array
+	 */
 	public static function createFromTimeFactoryMethod()
 	{
 		return array(
@@ -42,6 +62,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addDays (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function addDays_Date()
 	{
 		$date1 = new Date('2014-07-01');
@@ -55,6 +80,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subDays (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function subDays_Date()
 	{
 		$date1 = new Date('2014-07-01');
@@ -68,6 +98,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addWeeks (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function addWeeks_Date()
 	{
 		$date1 = new Date('2014-07-01');
@@ -81,6 +116,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subWeeks (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function subWeeks_Date()
 	{
 		$date1 = new Date('2014-07-01');
@@ -94,6 +134,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addMonths (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function addMonths_Date()
 	{
 		$date1 = new Date('2014-08-01');
@@ -116,6 +161,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subMonths (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function subMonths_Date()
 	{
 		$date1 = new Date('2014-08-01');
@@ -138,6 +188,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addYears (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function addYears_Date()
 	{
 		$date1 = new Date('2014-07-01');
@@ -151,6 +206,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subYears (for Date class).
+	 *
+	 * @return array
+	 */
 	public static function subYears_Date()
 	{
 		$date1 = new Date('2014-07-01');
@@ -164,6 +224,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addDays.
+	 *
+	 * @return array
+	 */
 	public static function addDays()
 	{
 		$date1 = new DateTime('2014-07-01');
@@ -177,6 +242,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subDays.
+	 *
+	 * @return array
+	 */
 	public static function subDays()
 	{
 		$date1 = new DateTime('2014-07-01');
@@ -190,6 +260,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addWeeks.
+	 *
+	 * @return array
+	 */
 	public static function addWeeks()
 	{
 		$date1 = new DateTime('2014-07-01');
@@ -203,6 +278,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subWeeks.
+	 *
+	 * @return array
+	 */
 	public static function subWeeks()
 	{
 		$date1 = new DateTime('2014-07-01');
@@ -216,6 +296,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addMonths.
+	 *
+	 * @return array
+	 */
 	public static function addMonths()
 	{
 		$date1 = new DateTime('2014-08-01');
@@ -238,6 +323,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subMonths.
+	 *
+	 * @return array
+	 */
 	public static function subMonths()
 	{
 		$date1 = new DateTime('2014-08-01');
@@ -260,6 +350,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addYears.
+	 *
+	 * @return array
+	 */
 	public static function addYears()
 	{
 		$date1 = new DateTime('2014-07-01');
@@ -273,6 +368,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subYears.
+	 *
+	 * @return array
+	 */
 	public static function subYears()
 	{
 		$date1 = new DateTime('2014-07-01');
@@ -286,6 +386,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addSeconds.
+	 *
+	 * @return array
+	 */
 	public static function addSeconds()
 	{
 		$date1 = new DateTime('2014-07-10 23:59:59');
@@ -299,6 +404,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subSeconds.
+	 *
+	 * @return array
+	 */
 	public static function subSeconds()
 	{
 		$date1 = new DateTime('2014-07-10 23:59:59');
@@ -312,6 +422,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addMinutes.
+	 *
+	 * @return array
+	 */
 	public static function addMinutes()
 	{
 		$date1 = new DateTime('2014-07-10 23:59:00');
@@ -325,6 +440,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subMinutes.
+	 *
+	 * @return array
+	 */
 	public static function subMinutes()
 	{
 		$date1 = new DateTime('2014-07-10 23:59:00');
@@ -338,6 +458,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for addHours.
+	 *
+	 * @return array
+	 */
 	public static function addHours()
 	{
 		$date1 = new DateTime('2014-07-10 23:00:00');
@@ -351,6 +476,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for subHours.
+	 *
+	 * @return array
+	 */
 	public static function subHours()
 	{
 		$date1 = new DateTime('2014-07-10 23:00:00');
@@ -364,6 +494,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for timeSince.
+	 *
+	 * @return array
+	 */
 	public static function timeSince()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
@@ -435,6 +570,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for timeSince in polish.
+	 *
+	 * @return array
+	 */
 	public static function timeSince_pl()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
@@ -510,6 +650,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for almostTimeSince.
+	 *
+	 * @return array
+	 */
 	public static function almostTimeSince()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
@@ -528,6 +673,11 @@ final class DataProvider
 		);
 	}
 
+	/**
+	 * Test cases for amostTimeSince in polish.
+	 *
+	 * @return array
+	 */
 	public static function almostTimeSince_pl()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
