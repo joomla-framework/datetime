@@ -695,4 +695,48 @@ final class DataProvider
 			array($since, $since->addMonths(11),	'za prawie 1 rok')
 		);
 	}
+
+	/**
+	 * Test cases for __get.
+	 *
+	 * @return array
+	 */
+	public static function DateTimeGetter()
+	{
+		$datetime = new DateTime("2014-05-25 12:27:39");
+		$leapyear = new DateTime("2016-05-02");
+
+		return array(
+			array($datetime, 'daysinmonth', 31),
+			array($datetime, 'dayofweek', 7),
+			array($datetime, 'dayofyear', 144),
+			array($datetime, 'isleapyear', false),
+			array($leapyear, 'isleapyear', true),
+			array($datetime, 'day', 25),
+			array($datetime, 'hour', 12),
+			array($datetime, 'minute', 27),
+			array($datetime, 'second', 39),
+			array($datetime, 'month', 5),
+			array($datetime, 'ordinal', 'th'),
+			array($leapyear, 'ordinal', 'nd'),
+			array($datetime, 'week', 21),
+			array($datetime, 'year', 2014),
+		);
+	}
+
+	/**
+	 * Test cases for __get.
+	 *
+	 * @return array
+	 */
+	public static function DummyGetter()
+	{
+		$datetime = new DateTime("2014-05-25 12:27:39");
+
+		return array_merge(
+			static::DateTimeGetter(), array(
+				array($datetime, 'test', 'It works!')
+			)
+		);
+	}
 }
