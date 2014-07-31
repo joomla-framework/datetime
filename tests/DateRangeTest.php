@@ -31,7 +31,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanDetermineIfARangeIsEmpty()
 	{
-		$range = new DateRange(new Date('2014-07-13'), new Date('2014-06-12'));
+		$range = new DateRange(Date::tomorrow(), Date::yesterday());
 		$this->assertTrue($range->isEmpty());
 	}
 
@@ -194,6 +194,21 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Testing combination when ranges are not contiguous
+	 *
+	 * @param   array  $ranges  An array of ranges to test.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForCombinationWithNotContigousRanges
+	 */
+	public function testWillThrowAnExceptionIfRangesAreNotContiguous(array $ranges)
+	{
+		$this->setExpectedException("\InvalidArgumentException");
+		DateRange::combination($ranges);
+	}
+
+	/**
 	 * Testing toArray.
 	 *
 	 * @return void
@@ -300,9 +315,11 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 
 		return array(
 			array($sut, new DateRange(new Date('2014-06-07'), new Date('2014-06-08')),
-				new DateRange(new Date('2014-06-09'), new Date('2014-06-09'))),
+				        new DateRange(new Date('2014-06-09'), new Date('2014-06-09'))),
 			array($sut, new DateRange(new Date('2014-06-16'), new Date('2014-06-17')),
-				new DateRange(new Date('2014-06-14'), new Date('2014-06-15')))
+				        new DateRange(new Date('2014-06-14'), new Date('2014-06-15'))),
+			array($sut, new DateRange(new Date('2014-06-12'), new Date('2014-06-17')),
+						DateRange::emptyRange())
 		);
 	}
 
@@ -361,6 +378,33 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 					new DateRange(new Date('2014-06-30'), new Date('2014-07-18'))
 				)
 			),
+		);
+	}
+
+	/**
+	 * Test cases for combination.
+	 *
+	 * @return array
+	 */
+	public function seedForCombinationWithNotContigousRanges()
+	{
+		return array(
+			array(
+				array(
+					new DateRange(new Date('2014-07-15'), new Date('2014-07-16')),
+					new DateRange(new Date('2014-07-25'), new Date('2014-07-26')))),
+			array(
+				array(
+					new DateRange(Date::today(), Date::tomorrow()),
+					new DateRange(Date::today(), Date::tomorrow()))),
+			array(
+				array(
+					new DateRange(new Date('2014-07-16'), new Date('2014-07-26')),
+					new DateRange(new Date('2014-07-15'), new Date('2014-07-20')))),
+			array(
+				array(
+					new DateRange(new Date('2014-07-15'), new Date('2014-07-26')),
+					new DateRange(new Date('2014-07-15'), new Date('2014-07-20')))),
 		);
 	}
 }

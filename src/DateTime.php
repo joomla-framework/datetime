@@ -549,12 +549,6 @@ class DateTime
 			/** Check if we can replace it with a translated version. */
 			if (in_array($character, array('D', 'l', 'F', 'M')))
 			{
-				// Check escaped characters.
-				if ($i > 0 and $format[$i - 1] == '\\')
-				{
-					continue;
-				}
-
 				switch ($character)
 				{
 					case 'D':

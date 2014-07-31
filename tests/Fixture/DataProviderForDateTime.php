@@ -6,7 +6,6 @@
 
 namespace Joomla\DateTime\Fixture;
 
-use Joomla\DateTime\Date;
 use Joomla\DateTime\DateTime;
 
 /**
@@ -14,7 +13,7 @@ use Joomla\DateTime\DateTime;
  *
  * @since  2.0
  */
-final class DataProvider
+final class DataProviderForDateTime
 {
 	/**
 	 * Test cases for create.
@@ -63,168 +62,6 @@ final class DataProvider
 	}
 
 	/**
-	 * Test cases for addDays (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function addDays_Date()
-	{
-		$date1 = new Date('2014-07-01');
-		$date2 = new Date('2014-07-31');
-
-		return array(
-			array($date1, $date1->addDays(1),  new Date('2014-07-02')),
-			array($date1, $date1->addDays(-1), new Date('2014-06-30')),
-			array($date2, $date2->addDays(1),  new Date('2014-08-01')),
-			array($date2, $date2->addDays(-1), new Date('2014-07-30')),
-		);
-	}
-
-	/**
-	 * Test cases for subDays (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function subDays_Date()
-	{
-		$date1 = new Date('2014-07-01');
-		$date2 = new Date('2014-07-31');
-
-		return array(
-			array($date1, $date1->subDays(1),  new Date('2014-06-30')),
-			array($date1, $date1->subDays(-1), new Date('2014-07-02')),
-			array($date2, $date2->subDays(1),  new Date('2014-07-30')),
-			array($date2, $date2->subDays(-1), new Date('2014-08-01')),
-		);
-	}
-
-	/**
-	 * Test cases for addWeeks (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function addWeeks_Date()
-	{
-		$date1 = new Date('2014-07-01');
-		$date2 = new Date('2014-07-31');
-
-		return array(
-			array($date1, $date1->addWeeks(1),  new Date('2014-07-08')),
-			array($date1, $date1->addWeeks(-1), new Date('2014-06-24')),
-			array($date2, $date2->addWeeks(1),  new Date('2014-08-07')),
-			array($date2, $date2->addWeeks(-1), new Date('2014-07-24')),
-		);
-	}
-
-	/**
-	 * Test cases for subWeeks (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function subWeeks_Date()
-	{
-		$date1 = new Date('2014-07-01');
-		$date2 = new Date('2014-07-31');
-
-		return array(
-			array($date1, $date1->subWeeks(1),  new Date('2014-06-24')),
-			array($date1, $date1->subWeeks(-1), new Date('2014-07-08')),
-			array($date2, $date2->subWeeks(1),  new Date('2014-07-24')),
-			array($date2, $date2->subWeeks(-1), new Date('2014-08-07')),
-		);
-	}
-
-	/**
-	 * Test cases for addMonths (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function addMonths_Date()
-	{
-		$date1 = new Date('2014-08-01');
-		$date2 = new Date('2014-08-31');
-		$date3 = new Date('2014-12-01');
-		$date4 = new Date('2014-12-31');
-		$date5 = new Date('2014-01-31');
-
-		return array(
-			array($date1, $date1->addMonths(1),  new Date('2014-09-01')),
-			array($date1, $date1->addMonths(-1), new Date('2014-07-01')),
-			array($date2, $date2->addMonths(1),  new Date('2014-10-01')), // @todo check!
-			array($date2, $date2->addMonths(-1), new Date('2014-07-31')),
-			array($date3, $date3->addMonths(1),  new Date('2015-01-01')),
-			array($date3, $date3->addMonths(-1), new Date('2014-11-01')),
-			array($date4, $date4->addMonths(1),  new Date('2015-01-31')),
-			array($date4, $date4->addMonths(-1), new Date('2014-12-01')),  // @todo check!
-			array($date5, $date5->addMonths(1),  new Date('2014-03-03')),  // @todo check!
-			array($date5, $date5->addMonths(-1), new Date('2013-12-31')),
-		);
-	}
-
-	/**
-	 * Test cases for subMonths (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function subMonths_Date()
-	{
-		$date1 = new Date('2014-08-01');
-		$date2 = new Date('2014-08-31');
-		$date3 = new Date('2014-12-01');
-		$date4 = new Date('2014-12-31');
-		$date5 = new Date('2014-01-31');
-
-		return array(
-			array($date1, $date1->subMonths(1),  new Date('2014-07-01')),
-			array($date1, $date1->subMonths(-1), new Date('2014-09-01')),
-			array($date2, $date2->subMonths(1),  new Date('2014-07-31')),
-			array($date2, $date2->subMonths(-1), new Date('2014-10-01')), // @todo check!
-			array($date3, $date3->subMonths(1),  new Date('2014-11-01')),
-			array($date3, $date3->subMonths(-1), new Date('2015-01-01')),
-			array($date4, $date4->subMonths(1),  new Date('2014-12-01')), // @todo check!
-			array($date4, $date4->subMonths(-1), new Date('2015-01-31')),
-			array($date5, $date5->subMonths(1),  new Date('2013-12-31')),
-			array($date5, $date5->subMonths(-1), new Date('2014-03-03')), // @todo check!
-		);
-	}
-
-	/**
-	 * Test cases for addYears (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function addYears_Date()
-	{
-		$date1 = new Date('2014-07-01');
-		$date2 = new Date('2016-02-29');
-
-		return array(
-			array($date1, $date1->addYears(1),  new Date('2015-07-01')),
-			array($date1, $date1->addYears(-1), new Date('2013-07-01')),
-			array($date2, $date2->addYears(1),  new Date('2017-03-01')), // @todo check!
-			array($date2, $date2->addYears(-1), new Date('2015-03-01')), // @todo check!
-		);
-	}
-
-	/**
-	 * Test cases for subYears (for Date class).
-	 *
-	 * @return array
-	 */
-	public static function subYears_Date()
-	{
-		$date1 = new Date('2014-07-01');
-		$date2 = new Date('2016-02-29');
-
-		return array(
-			array($date1, $date1->subYears(1),  new Date('2013-07-01')),
-			array($date1, $date1->subYears(-1), new Date('2015-07-01')),
-			array($date2, $date2->subYears(1),  new Date('2015-03-01')), // @todo check!
-			array($date2, $date2->subYears(-1), new Date('2017-03-01')), // @todo check!
-		);
-	}
-
-	/**
 	 * Test cases for addDays.
 	 *
 	 * @return array
@@ -235,10 +72,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-31');
 
 		return array(
-			array($date1, $date1->addDays(1),  new DateTime('2014-07-02')),
-			array($date1, $date1->addDays(-1), new DateTime('2014-06-30')),
-			array($date2, $date2->addDays(1),  new DateTime('2014-08-01')),
-			array($date2, $date2->addDays(-1), new DateTime('2014-07-30')),
+			array($date1, 1,  new DateTime('2014-07-02')),
+			array($date1, -1, new DateTime('2014-06-30')),
+			array($date2, 1,  new DateTime('2014-08-01')),
+			array($date2, -1, new DateTime('2014-07-30')),
 		);
 	}
 
@@ -253,10 +90,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-31');
 
 		return array(
-			array($date1, $date1->subDays(1),  new DateTime('2014-06-30')),
-			array($date1, $date1->subDays(-1), new DateTime('2014-07-02')),
-			array($date2, $date2->subDays(1),  new DateTime('2014-07-30')),
-			array($date2, $date2->subDays(-1), new DateTime('2014-08-01')),
+			array($date1, 1,  new DateTime('2014-06-30')),
+			array($date1, -1, new DateTime('2014-07-02')),
+			array($date2, 1,  new DateTime('2014-07-30')),
+			array($date2, -1, new DateTime('2014-08-01')),
 		);
 	}
 
@@ -271,10 +108,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-31');
 
 		return array(
-			array($date1, $date1->addWeeks(1),  new DateTime('2014-07-08')),
-			array($date1, $date1->addWeeks(-1), new DateTime('2014-06-24')),
-			array($date2, $date2->addWeeks(1),  new DateTime('2014-08-07')),
-			array($date2, $date2->addWeeks(-1), new DateTime('2014-07-24')),
+			array($date1, 1,  new DateTime('2014-07-08')),
+			array($date1, -1, new DateTime('2014-06-24')),
+			array($date2, 1,  new DateTime('2014-08-07')),
+			array($date2, -1, new DateTime('2014-07-24')),
 		);
 	}
 
@@ -289,10 +126,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-31');
 
 		return array(
-			array($date1, $date1->subWeeks(1),  new DateTime('2014-06-24')),
-			array($date1, $date1->subWeeks(-1), new DateTime('2014-07-08')),
-			array($date2, $date2->subWeeks(1),  new DateTime('2014-07-24')),
-			array($date2, $date2->subWeeks(-1), new DateTime('2014-08-07')),
+			array($date1, 1,  new DateTime('2014-06-24')),
+			array($date1, -1, new DateTime('2014-07-08')),
+			array($date2, 1,  new DateTime('2014-07-24')),
+			array($date2, -1, new DateTime('2014-08-07')),
 		);
 	}
 
@@ -310,16 +147,16 @@ final class DataProvider
 		$date5 = new DateTime('2014-01-31');
 
 		return array(
-			array($date1, $date1->addMonths(1),  new DateTime('2014-09-01')),
-			array($date1, $date1->addMonths(-1), new DateTime('2014-07-01')),
-			array($date2, $date2->addMonths(1),  new DateTime('2014-10-01')), // @todo check!
-			array($date2, $date2->addMonths(-1), new DateTime('2014-07-31')),
-			array($date3, $date3->addMonths(1),  new DateTime('2015-01-01')),
-			array($date3, $date3->addMonths(-1), new DateTime('2014-11-01')),
-			array($date4, $date4->addMonths(1),  new DateTime('2015-01-31')),
-			array($date4, $date4->addMonths(-1), new DateTime('2014-12-01')),  // @todo check!
-			array($date5, $date5->addMonths(1),  new DateTime('2014-03-03')),  // @todo check!
-			array($date5, $date5->addMonths(-1), new DateTime('2013-12-31')),
+			array($date1, 1,  new DateTime('2014-09-01')),
+			array($date1, -1, new DateTime('2014-07-01')),
+			array($date2, 1,  new DateTime('2014-10-01')), // @todo check!
+			array($date2, -1, new DateTime('2014-07-31')),
+			array($date3, 1,  new DateTime('2015-01-01')),
+			array($date3, -1, new DateTime('2014-11-01')),
+			array($date4, 1,  new DateTime('2015-01-31')),
+			array($date4, -1, new DateTime('2014-12-01')),  // @todo check!
+			array($date5, 1,  new DateTime('2014-03-03')),  // @todo check!
+			array($date5, -1, new DateTime('2013-12-31')),
 		);
 	}
 
@@ -337,16 +174,16 @@ final class DataProvider
 		$date5 = new DateTime('2014-01-31');
 
 		return array(
-			array($date1, $date1->subMonths(1),  new DateTime('2014-07-01')),
-			array($date1, $date1->subMonths(-1), new DateTime('2014-09-01')),
-			array($date2, $date2->subMonths(1),  new DateTime('2014-07-31')),
-			array($date2, $date2->subMonths(-1), new DateTime('2014-10-01')), // @todo check!
-			array($date3, $date3->subMonths(1),  new DateTime('2014-11-01')),
-			array($date3, $date3->subMonths(-1), new DateTime('2015-01-01')),
-			array($date4, $date4->subMonths(1),  new DateTime('2014-12-01')), // @todo check!
-			array($date4, $date4->subMonths(-1), new DateTime('2015-01-31')),
-			array($date5, $date5->subMonths(1),  new DateTime('2013-12-31')),
-			array($date5, $date5->subMonths(-1), new DateTime('2014-03-03')), // @todo check!
+			array($date1, 1,  new DateTime('2014-07-01')),
+			array($date1, -1, new DateTime('2014-09-01')),
+			array($date2, 1,  new DateTime('2014-07-31')),
+			array($date2, -1, new DateTime('2014-10-01')), // @todo check!
+			array($date3, 1,  new DateTime('2014-11-01')),
+			array($date3, -1, new DateTime('2015-01-01')),
+			array($date4, 1,  new DateTime('2014-12-01')), // @todo check!
+			array($date4, -1, new DateTime('2015-01-31')),
+			array($date5, 1,  new DateTime('2013-12-31')),
+			array($date5, -1, new DateTime('2014-03-03')), // @todo check!
 		);
 	}
 
@@ -361,10 +198,10 @@ final class DataProvider
 		$date2 = new DateTime('2016-02-29');
 
 		return array(
-			array($date1, $date1->addYears(1),  new DateTime('2015-07-01')),
-			array($date1, $date1->addYears(-1), new DateTime('2013-07-01')),
-			array($date2, $date2->addYears(1),  new DateTime('2017-03-01')), // @todo check!
-			array($date2, $date2->addYears(-1), new DateTime('2015-03-01')), // @todo check!
+			array($date1, 1,  new DateTime('2015-07-01')),
+			array($date1, -1, new DateTime('2013-07-01')),
+			array($date2, 1,  new DateTime('2017-03-01')), // @todo check!
+			array($date2, -1, new DateTime('2015-03-01')), // @todo check!
 		);
 	}
 
@@ -379,10 +216,10 @@ final class DataProvider
 		$date2 = new DateTime('2016-02-29');
 
 		return array(
-			array($date1, $date1->subYears(1),  new DateTime('2013-07-01')),
-			array($date1, $date1->subYears(-1), new DateTime('2015-07-01')),
-			array($date2, $date2->subYears(1),  new DateTime('2015-03-01')), // @todo check!
-			array($date2, $date2->subYears(-1), new DateTime('2017-03-01')), // @todo check!
+			array($date1, 1,  new DateTime('2013-07-01')),
+			array($date1, -1, new DateTime('2015-07-01')),
+			array($date2, 1,  new DateTime('2015-03-01')), // @todo check!
+			array($date2, -1, new DateTime('2017-03-01')), // @todo check!
 		);
 	}
 
@@ -397,10 +234,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-10 00:00:00');
 
 		return array(
-			array($date1, $date1->addSeconds(1),  new DateTime('2014-07-11 00:00:00')),
-			array($date1, $date1->addSeconds(-1), new DateTime('2014-07-10 23:59:58')),
-			array($date2, $date2->addSeconds(1),  new DateTime('2014-07-10 00:00:01')),
-			array($date2, $date2->addSeconds(-1), new DateTime('2014-07-09 23:59:59')),
+			array($date1, 1,  new DateTime('2014-07-11 00:00:00')),
+			array($date1, -1, new DateTime('2014-07-10 23:59:58')),
+			array($date2, 1,  new DateTime('2014-07-10 00:00:01')),
+			array($date2, -1, new DateTime('2014-07-09 23:59:59')),
 		);
 	}
 
@@ -415,10 +252,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-10 00:00:00');
 
 		return array(
-			array($date1, $date1->subSeconds(1),  new DateTime('2014-07-10 23:59:58')),
-			array($date1, $date1->subSeconds(-1), new DateTime('2014-07-11 00:00:00')),
-			array($date2, $date2->subSeconds(1),  new DateTime('2014-07-09 23:59:59')),
-			array($date2, $date2->subSeconds(-1), new DateTime('2014-07-10 00:00:01')),
+			array($date1, 1,  new DateTime('2014-07-10 23:59:58')),
+			array($date1, -1, new DateTime('2014-07-11 00:00:00')),
+			array($date2, 1,  new DateTime('2014-07-09 23:59:59')),
+			array($date2, -1, new DateTime('2014-07-10 00:00:01')),
 		);
 	}
 
@@ -433,10 +270,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-10 00:00:00');
 
 		return array(
-			array($date1, $date1->addMinutes(1),  new DateTime('2014-07-11 00:00:00')),
-			array($date1, $date1->addMinutes(-1), new DateTime('2014-07-10 23:58:00')),
-			array($date2, $date2->addMinutes(1),  new DateTime('2014-07-10 00:01:00')),
-			array($date2, $date2->addMinutes(-1), new DateTime('2014-07-09 23:59:00')),
+			array($date1, 1,  new DateTime('2014-07-11 00:00:00')),
+			array($date1, -1, new DateTime('2014-07-10 23:58:00')),
+			array($date2, 1,  new DateTime('2014-07-10 00:01:00')),
+			array($date2, -1, new DateTime('2014-07-09 23:59:00')),
 		);
 	}
 
@@ -451,10 +288,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-10 00:00:00');
 
 		return array(
-			array($date1, $date1->subMinutes(1),  new DateTime('2014-07-10 23:58:00')),
-			array($date1, $date1->subMinutes(-1), new DateTime('2014-07-11 00:00:00')),
-			array($date2, $date2->subMinutes(1),  new DateTime('2014-07-09 23:59:00')),
-			array($date2, $date2->subMinutes(-1), new DateTime('2014-07-10 00:01:00')),
+			array($date1, 1,  new DateTime('2014-07-10 23:58:00')),
+			array($date1, -1, new DateTime('2014-07-11 00:00:00')),
+			array($date2, 1,  new DateTime('2014-07-09 23:59:00')),
+			array($date2, -1, new DateTime('2014-07-10 00:01:00')),
 		);
 	}
 
@@ -469,10 +306,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-10 00:00:00');
 
 		return array(
-			array($date1, $date1->addHours(1),  new DateTime('2014-07-11 00:00:00')),
-			array($date1, $date1->addHours(-1), new DateTime('2014-07-10 22:00:00')),
-			array($date2, $date2->addHours(1),  new DateTime('2014-07-10 01:00:00')),
-			array($date2, $date2->addHours(-1), new DateTime('2014-07-09 23:00:00')),
+			array($date1, 1,  new DateTime('2014-07-11 00:00:00')),
+			array($date1, -1, new DateTime('2014-07-10 22:00:00')),
+			array($date2, 1,  new DateTime('2014-07-10 01:00:00')),
+			array($date2, -1, new DateTime('2014-07-09 23:00:00')),
 		);
 	}
 
@@ -487,10 +324,10 @@ final class DataProvider
 		$date2 = new DateTime('2014-07-10 00:00:00');
 
 		return array(
-			array($date1, $date1->subHours(1),  new DateTime('2014-07-10 22:00:00')),
-			array($date1, $date1->subHours(-1), new DateTime('2014-07-11 00:00:00')),
-			array($date2, $date2->subHours(1),  new DateTime('2014-07-09 23:00:00')),
-			array($date2, $date2->subHours(-1), new DateTime('2014-07-10 01:00:00')),
+			array($date1, 1,  new DateTime('2014-07-10 22:00:00')),
+			array($date1, -1, new DateTime('2014-07-11 00:00:00')),
+			array($date2, 1,  new DateTime('2014-07-09 23:00:00')),
+			array($date2, -1, new DateTime('2014-07-10 01:00:00')),
 		);
 	}
 
@@ -669,7 +506,8 @@ final class DataProvider
 			array($since, $since->addHours(21),		'in almost 1 day'),
 			array($since, $since->addHours(164),	'in almost 1 week'),
 			array($since, $since->addDays(28),		'in almost 1 month'),
-			array($since, $since->addMonths(11),	'in almost 1 year')
+			array($since, $since->addMonths(11),	'in almost 1 year'),
+			array($since, $since->subYears(2),		'2 years ago')
 		);
 	}
 

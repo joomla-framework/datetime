@@ -197,7 +197,7 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForTimeSince_pl()
 	{
-		return Fixture\DataProvider::timeSince_pl();
+		return Fixture\DataProviderForDateTime::timeSince_pl();
 	}
 
 	/**
@@ -207,6 +207,6 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForAlmostTimeSince_pl()
 	{
-		return Fixture\DataProvider::AlmostTimeSince_pl();
+		return Fixture\DataProviderForDateTime::AlmostTimeSince_pl();
 	}
 }

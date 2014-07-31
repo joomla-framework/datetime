@@ -19,9 +19,6 @@ final class DateRange implements \IteratorAggregate
 	/** @var Date */
 	private $end;
 
-	/** @var integer */
-	private $position;
-
 	/**
 	 * Constructor.
 	 *
@@ -30,7 +27,6 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function __construct(Date $start, Date $end)
 	{
-		$this->position = 0;
 		$this->start = $start;
 		$this->end = $end;
 	}
@@ -263,12 +259,12 @@ final class DateRange implements \IteratorAggregate
 					return 0;
 				}
 
-				if ($a->start->isAfter($b->start))
+				if ($a->start()->isAfter($b->start()))
 				{
 					return 1;
 				}
 
-				if ($a->start->isBefore($b->start) || $a->end->isBefore($b->end))
+				if ($a->start()->isBefore($b->start()) || $a->end()->isBefore($b->end()))
 				{
 					return -1;
 				}

@@ -53,8 +53,8 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanDetermineIfIsAfterAnotherDate()
 	{
-		$date = new Date('2014-07-15');
-		$this->assertTrue($date->isAfter(new Date('2014-07-14')));
+		$today = Date::today();
+		$this->assertTrue($today->isAfter(Date::yesterday()));
 	}
 
 	/**
@@ -64,8 +64,23 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanDetermineIfIsBeforeAnotherDate()
 	{
-		$date = new Date('2014-07-15');
-		$this->assertTrue($date->isBefore(new Date('2014-07-16')));
+		$today = Date::today();
+		$this->assertTrue($today->isBefore(Date::tomorrow()));
+	}
+
+	/**
+	 * Testing diff.
+	 *
+	 * @return void
+	 */
+	public function testCanReturnADateIntervalObjectAsADifferenceBetweenTwoObjects()
+	{
+		$today = Date::today();
+
+		$datetime = new \DateTime('2014-08-24');
+		$interval = $datetime->diff(new \DateTime('2014-08-24'));
+
+		$this->assertEquals($interval, $today->diff(Date::tomorrow()));
 	}
 
 	/**
@@ -75,137 +90,137 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanDetermineIfIsEqualToAnotherDate()
 	{
-		$date = new Date('2014-07-15');
-		$this->assertTrue($date->equals(new Date('2014-07-15')));
-		$this->assertFalse($date->equals(new Date('2014-07-16')));
+		$today = Date::today();
+		$this->assertTrue($today->equals(Date::today()));
+		$this->assertFalse($today->equals(Date::yesterday()));
 	}
 
 	/**
 	 * Testing addDays.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of days to add.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForAddDays
 	 */
-	public function testCanCreateAnObjectByAddingDaysToIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectByAddingDaysToIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addDays($value));
 	}
 
 	/**
 	 * Testing subDays.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of days to substract.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForSubDays
 	 */
-	public function testCanCreateAnObjectBySubtractingDaysFromIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectBySubtractingDaysFromIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subDays($value));
 	}
 
 	/**
 	 * Testing addWeeks.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of weeks to add.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForAddWeeks
 	 */
-	public function testCanCreateAnObjectByAddingWeeksToIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectByAddingWeeksToIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addWeeks($value));
 	}
 
 	/**
 	 * Testing subWeeks.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of weeks to substract.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForSubWeeks
 	 */
-	public function testCanCreateAnObjectBySubtractingWeeksFromIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectBySubtractingWeeksFromIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subWeeks($value));
 	}
 
 	/**
 	 * Testing addMonths.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of months to add.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForAddMonths
 	 */
-	public function testCanCreateAnObjectByAddingMonthsToIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectByAddingMonthsToIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addMonths($value));
 	}
 
 	/**
 	 * Testing subMonths.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of months to substract.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForSubMonths
 	 */
-	public function testCanCreateAnObjectBySubtractingMonthsFromIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectBySubtractingMonthsFromIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subMonths($value));
 	}
 
 	/**
 	 * Testing addYears.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of years to add.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForAddYears
 	 */
-	public function testCanCreateAnObjectByAddingYearsToIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectByAddingYearsToIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addYears($value));
 	}
 
 	/**
 	 * Testing subYears.
 	 *
-	 * @param   Date  $sut       The object to test.
-	 * @param   Date  $actual    An actual object.
-	 * @param   Date  $expected  An expected object.
+	 * @param   Date    $sut       The object to test.
+	 * @param   integer $value     Number of years to substract.
+	 * @param   Date    $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForSubYears
 	 */
-	public function testCanCreateAnObjectBySubtractingYearsFromIt(Date $sut, Date $actual, Date $expected)
+	public function testCanCreateAnObjectBySubtractingYearsFromIt(Date $sut, $value, Date $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $actual);
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subYears($value));
 	}
 
 	/**
@@ -275,13 +290,35 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Testing timeSince.
+	 *
+	 * @return void
+	 */
+	public function testCanCreateAStringOfATimeDifference()
+	{
+		$date = new Date('2014-08-24');
+		$this->assertEquals('2 days ago', $date->timeSince($date->addDays(2)));
+	}
+
+	/**
+	 * Testing almostTimeSince.
+	 *
+	 * @return void
+	 */
+	public function testCanCreateAStringOfAlmostTimeDifference()
+	{
+		$date = new Date('2014-08-24');
+		$this->assertEquals('almost 1 month ago', $date->almostTimeSince($date->addDays(28)));
+	}
+
+	/**
 	 * Test cases for addDays.
 	 *
 	 * @return array
 	 */
 	public function seedForAddDays()
 	{
-		return Fixture\DataProvider::addDays_Date();
+		return Fixture\DataProviderForDate::addDays();
 	}
 
 	/**
@@ -291,7 +328,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForSubDays()
 	{
-		return Fixture\DataProvider::subDays_Date();
+		return Fixture\DataProviderForDate::subDays();
 	}
 
 	/**
@@ -301,7 +338,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForAddMonths()
 	{
-		return Fixture\DataProvider::addMonths_Date();
+		return Fixture\DataProviderForDate::addMonths();
 	}
 
 	/**
@@ -311,7 +348,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForSubMonths()
 	{
-		return Fixture\DataProvider::subMonths_Date();
+		return Fixture\DataProviderForDate::subMonths();
 	}
 
 	/**
@@ -321,7 +358,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForAddWeeks()
 	{
-		return Fixture\DataProvider::addWeeks_Date();
+		return Fixture\DataProviderForDate::addWeeks();
 	}
 
 	/**
@@ -331,7 +368,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForSubWeeks()
 	{
-		return Fixture\DataProvider::subWeeks_Date();
+		return Fixture\DataProviderForDate::subWeeks();
 	}
 
 	/**
@@ -341,7 +378,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForAddYears()
 	{
-		return Fixture\DataProvider::addYears_Date();
+		return Fixture\DataProviderForDate::addYears();
 	}
 
 	/**
@@ -351,7 +388,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForSubYears()
 	{
-		return Fixture\DataProvider::subYears_Date();
+		return Fixture\DataProviderForDate::subYears();
 	}
 
 	/**

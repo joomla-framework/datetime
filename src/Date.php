@@ -301,7 +301,7 @@ class Date
 			$date = new DateTime($date);
 		}
 
-		$this->datetime->timeSince($date, $detailLevel);
+		return $this->datetime->timeSince($date, $detailLevel);
 	}
 
 	/**
@@ -319,7 +319,7 @@ class Date
 			$date = new DateTime($date);
 		}
 
-		$this->datetime->almostTimeSince($date);
+		return $this->datetime->almostTimeSince($date);
 	}
 
 	/**
