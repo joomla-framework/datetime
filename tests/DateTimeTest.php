@@ -103,7 +103,8 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectRepresentingYesterday()
 	{
-		$this->assertEquals(new DateTime(sprintf('%s-%s 00:00:00', date('Y-m'), date('d') - 1)), DateTime::yesterday());
+		$today = DateTime::today();
+		$this->assertEquals($today->subDays(1), DateTime::yesterday());
 	}
 
 	/**
@@ -113,7 +114,8 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectRepresentingTomorrow()
 	{
-		$this->assertEquals(new DateTime(sprintf('%s-%s 00:00:00', date('Y-m'), date('d') + 1)), DateTime::tomorrow());
+		$today = DateTime::today();
+		$this->assertEquals($today->addDays(1), DateTime::tomorrow());
 	}
 
 	/**

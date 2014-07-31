@@ -734,7 +734,8 @@ final class DataProvider
 		$datetime = new DateTime("2014-05-25 12:27:39");
 
 		return array_merge(
-			static::DateTimeGetter(), array(
+			static::DateTimeGetter(),
+			array(
 				array($datetime, 'test', 'It works!')
 			)
 		);
