@@ -35,31 +35,37 @@ class Date
 	/**
 	 * Creates a Date object which represents today.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return Date
 	 */
-	public static function today()
+	public static function today(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::today());
+		return new Date(DateTime::today($timezone));
 	}
 
 	/**
 	 * Creates a Date object which represents tomorrow.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return Date
 	 */
-	public static function tomorrow()
+	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::tomorrow());
+		return new Date(DateTime::tomorrow($timezone));
 	}
 
 	/**
 	 * Creates a Date object which represents yesterday.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return Date
 	 */
-	public static function yesterday()
+	public static function yesterday(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::yesterday());
+		return new Date(DateTime::yesterday($timezone));
 	}
 
 	/**

@@ -138,31 +138,37 @@ class DateTime
 	/**
 	 * Creates a DateTime object which represents now.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return DateTime
 	 */
-	public static function now()
+	public static function now(\DateTimeZone $timezone = null)
 	{
-		return static::createFromTime(date('H'), date('i'), date('s'));
+		return static::createFromTime(date('H'), date('i'), date('s'), $timezone);
 	}
 
 	/**
 	 * Creates a DateTime object which represents today.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return DateTime
 	 */
-	public static function today()
+	public static function today(\DateTimeZone $timezone = null)
 	{
-		return static::createFromDate(date('Y'), date('m'), date('d'));
+		return static::createFromDate(date('Y'), date('m'), date('d'), $timezone);
 	}
 
 	/**
 	 * Creates a DateTime object which represents tomorrow.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return DateTime
 	 */
-	public static function tomorrow()
+	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
-		$today = static::today();
+		$today = static::today($timezone);
 
 		return $today->addDays(1);
 	}
@@ -170,11 +176,13 @@ class DateTime
 	/**
 	 * Creates a DateTime object which represents yesterday.
 	 *
+	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
 	 * @return DateTime
 	 */
-	public static function yesterday()
+	public static function yesterday(\DateTimeZone $timezone = null)
 	{
-		$today = static::today();
+		$today = static::today($timezone);
 
 		return $today->subDays(1);
 	}
