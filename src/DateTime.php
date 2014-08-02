@@ -346,7 +346,8 @@ class DateTime
 		$result = $this->calc($value, 'P%dM');
 
 		/** If a day has changed, set as a result the last day of the previous month */
-		if($result->format('d') != $this->format('d')) {
+		if ($result->format('d') != $this->format('d'))
+		{
 			$result = $result->subMonths(1);
 			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
 		}
@@ -378,7 +379,8 @@ class DateTime
 		$result = $this->calc($value, 'P%dY');
 
 		/** If a day has changed, set as a result the last day of the previous month */
-		if($result->format('d') != $this->format('d')) {
+		if ($result->format('d') != $this->format('d'))
+		{
 			$result = $result->subMonths(1);
 			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
 		}
