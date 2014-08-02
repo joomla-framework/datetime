@@ -343,7 +343,15 @@ class DateTime
 	 */
 	public function addMonths($value)
 	{
-		return $this->calc($value, 'P%dM');
+		$result = $this->calc($value, 'P%dM');
+
+		/** If a day has changed, set as a result the last day of the previous month */
+		if($result->format('d') != $this->format('d')) {
+			$result = $result->subMonths(1);
+			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
+		}
+
+		return $result;
 	}
 
 	/**
@@ -367,7 +375,15 @@ class DateTime
 	 */
 	public function addYears($value)
 	{
-		return $this->calc($value, 'P%dY');
+		$result = $this->calc($value, 'P%dY');
+
+		/** If a day has changed, set as a result the last day of the previous month */
+		if($result->format('d') != $this->format('d')) {
+			$result = $result->subMonths(1);
+			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
+		}
+
+		return $result;
 	}
 
 	/**
@@ -797,12 +813,12 @@ class DateTime
 	}
 
 	/**
-	 * Creates a \DateInterval object for date calculations.
+	 * Creates a DateTime by adding or subtacting interval.
 	 *
 	 * @param   integer  $value   The value for the format.
 	 * @param   string   $format  The interval_spec for sprintf(), eg. 'P%sD'.
 	 *
-	 * @return \DateInterval
+	 * @return DateTime
 	 */
 	private function calc($value, $format)
 	{

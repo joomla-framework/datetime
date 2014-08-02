@@ -149,13 +149,13 @@ final class DataProviderForDateTime
 		return array(
 			array($date1, 1,  new DateTime('2014-09-01')),
 			array($date1, -1, new DateTime('2014-07-01')),
-			array($date2, 1,  new DateTime('2014-10-01')), // @todo check!
+			array($date2, 1,  new DateTime('2014-09-30')),
 			array($date2, -1, new DateTime('2014-07-31')),
 			array($date3, 1,  new DateTime('2015-01-01')),
 			array($date3, -1, new DateTime('2014-11-01')),
 			array($date4, 1,  new DateTime('2015-01-31')),
-			array($date4, -1, new DateTime('2014-12-01')),  // @todo check!
-			array($date5, 1,  new DateTime('2014-03-03')),  // @todo check!
+			array($date4, -1, new DateTime('2014-11-30')),
+			array($date5, 1,  new DateTime('2014-02-28')),
 			array($date5, -1, new DateTime('2013-12-31')),
 		);
 	}
@@ -177,13 +177,13 @@ final class DataProviderForDateTime
 			array($date1, 1,  new DateTime('2014-07-01')),
 			array($date1, -1, new DateTime('2014-09-01')),
 			array($date2, 1,  new DateTime('2014-07-31')),
-			array($date2, -1, new DateTime('2014-10-01')), // @todo check!
+			array($date2, -1, new DateTime('2014-09-30')),
 			array($date3, 1,  new DateTime('2014-11-01')),
 			array($date3, -1, new DateTime('2015-01-01')),
-			array($date4, 1,  new DateTime('2014-12-01')), // @todo check!
+			array($date4, 1,  new DateTime('2014-11-30')),
 			array($date4, -1, new DateTime('2015-01-31')),
 			array($date5, 1,  new DateTime('2013-12-31')),
-			array($date5, -1, new DateTime('2014-03-03')), // @todo check!
+			array($date5, -1, new DateTime('2014-02-28')),
 		);
 	}
 
@@ -200,8 +200,8 @@ final class DataProviderForDateTime
 		return array(
 			array($date1, 1,  new DateTime('2015-07-01')),
 			array($date1, -1, new DateTime('2013-07-01')),
-			array($date2, 1,  new DateTime('2017-03-01')), // @todo check!
-			array($date2, -1, new DateTime('2015-03-01')), // @todo check!
+			array($date2, 1,  new DateTime('2017-02-28')),
+			array($date2, -1, new DateTime('2015-02-28')),
 		);
 	}
 
@@ -218,8 +218,8 @@ final class DataProviderForDateTime
 		return array(
 			array($date1, 1,  new DateTime('2013-07-01')),
 			array($date1, -1, new DateTime('2015-07-01')),
-			array($date2, 1,  new DateTime('2015-03-01')), // @todo check!
-			array($date2, -1, new DateTime('2017-03-01')), // @todo check!
+			array($date2, 1,  new DateTime('2015-02-28')),
+			array($date2, -1, new DateTime('2017-02-28')),
 		);
 	}
 
