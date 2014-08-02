@@ -578,4 +578,18 @@ final class DataProviderForDateTime
 			)
 		);
 	}
+
+	/**
+	 * Test cases for parse.
+	 *
+	 * @return array
+	 */
+	public static function DummyParser()
+	{
+		return array(
+			array('fromString', '2014-08-24 12:30:20', new DateTime('2014-08-24 12:30:20')),
+			array('fromDate', new \Joomla\DateTime\Date('2014-08-24'), new DateTime('2014-08-24')),
+			array('fromPHPDateTime', new \DateTime('2014-08-24'), new DateTime('2014-08-24'))
+		);
+	}
 }

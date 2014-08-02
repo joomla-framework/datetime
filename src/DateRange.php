@@ -13,11 +13,8 @@ namespace Joomla\DateTime;
  */
 final class DateRange implements \IteratorAggregate
 {
-	/** @var Date */
-	private $start;
-
-	/** @var Date */
-	private $end;
+	/** @var DateTimeRange */
+	private $range;
 
 	/**
 	 * Constructor.
@@ -27,8 +24,33 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function __construct(Date $start, Date $end)
 	{
-		$this->start = $start;
-		$this->end = $end;
+		$this->range = new DateTimeRange(new DateTime($start), new DateTime($end), new \DateInterval('P1D'));
+	}
+
+	/**
+	 * Creates a DateRange object from the start date for the given amount of days.
+	 *
+	 * @param   Date     $start   The start date.
+	 * @param   integer  $amount  The amount of dates included in a period.
+	 *
+	 * @return DateRange
+	 */
+	public static function from(Date $start, $amount)
+	{
+		return static::cast(DateTimeRange::from(new DateTime($start), $amount, new \DateInterval('P1D')));
+	}
+
+	/**
+	 * Creates a DateRange object to the end date for the given amount of days.
+	 *
+	 * @param   Date     $end     The end date.
+	 * @param   integer  $amount  The amount of dates included in a period.
+	 *
+	 * @return DateRange
+	 */
+	public static function to(Date $end, $amount)
+	{
+		return static::cast(DateTimeRange::to(new DateTime($end), $amount, new \DateInterval('P1D')));
 	}
 
 	/**
@@ -38,7 +60,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function emptyRange()
 	{
-		return new DateRange(Date::tomorrow(), Date::yesterday());
+		return static::cast(DateTimeRange::emptyRange());
 	}
 
 	/**
@@ -48,7 +70,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function start()
 	{
-		return $this->start;
+		return new Date($this->range->start());
 	}
 
 	/**
@@ -58,7 +80,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function end()
 	{
-		return $this->end;
+		return new Date($this->range->end());
 	}
 
 	/**
@@ -68,7 +90,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function isEmpty()
 	{
-		return $this->start->isAfter($this->end);
+		return $this->range->isEmpty();
 	}
 
 	/**
@@ -80,7 +102,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function includes(Date $date)
 	{
-		return !$date->isBefore($this->start) && !$date->isAfter($this->end);
+		return $this->range->includes(new DateTime($date));
 	}
 
 	/**
@@ -92,7 +114,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function equals(DateRange $range)
 	{
-		return $this->start->equals($range->start) && $this->end->equals($range->end);
+		return $this->range->equals($range->range);
 	}
 
 	/**
@@ -104,7 +126,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function overlaps(DateRange $range)
 	{
-		return $range->includes($this->start) || $range->includes($this->end) || $this->includesRange($range);
+		return $this->range->overlaps($range->range);
 	}
 
 	/**
@@ -116,7 +138,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function includesRange(DateRange $range)
 	{
-		return $this->includes($range->start) && $this->includes($range->end);
+		return $this->range->includesRange($range->range);
 	}
 
 	/**
@@ -128,25 +150,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function gap(DateRange $range)
 	{
-		if ($this->overlaps($range))
-		{
-			return self::emptyRange();
-		}
-
-		$lower = $higher = null;
-
-		if ($this->start->isBefore($range->start))
-		{
-			$lower = $this;
-			$higher = $range;
-		}
-		else
-		{
-			$lower = $range;
-			$higher = $this;
-		}
-
-		return new DateRange($lower->end->addDays(1), $higher->start->subDays(1));
+		return static::cast($this->range->gap($range->range));
 	}
 
 	/**
@@ -158,7 +162,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function abuts(DateRange $range)
 	{
-		return !$this->overlaps($range) && $this->gap($range)->isEmpty();
+		return $this->range->abuts($range->range);
 	}
 
 	/**
@@ -185,7 +189,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function getIterator()
 	{
-		return new DateIterator($this->start, $this->end, new \DateInterval('P1D'));
+		return new DateIterator($this->start(), $this->end());
 	}
 
 	/**
@@ -195,7 +199,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function __toString()
 	{
-		return sprintf('%s - %s', $this->start->format('Y-m-d'), $this->end->format('Y-m-d'));
+		return sprintf('%s - %s', $this->start()->format('Y-m-d'), $this->end()->format('Y-m-d'));
 	}
 
 	/**
@@ -210,14 +214,14 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function combination(array $ranges)
 	{
-		$ranges = self::sortArrayOfRanges($ranges);
+		$dateTimeRanges = array();
 
-		if (!self::isContiguous($ranges))
+		foreach ($ranges as $range)
 		{
-			throw new \InvalidArgumentException('Unable to combine date ranges');
+			$dateTimeRanges[] = $range->range;
 		}
 
-		return new DateRange($ranges[0]->start, $ranges[count($ranges) - 1]->end);
+		return static::cast(DateTimeRange::combination($dateTimeRanges));
 	}
 
 	/**
@@ -229,50 +233,28 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function isContiguous(array $ranges)
 	{
-		$ranges = self::sortArrayOfRanges($ranges);
+		$dateTimeRange = array();
 
-		for ($i = 0; $i < count($ranges) - 1; $i++)
+		foreach ($ranges as $range)
 		{
-			if (!$ranges[$i]->abuts($ranges[$i + 1]))
-			{
-				return false;
-			}
+			$dateTimeRange[] = $range->range;
 		}
 
-		return true;
+		return DateTimeRange::isContiguous($dateTimeRange);
 	}
 
 	/**
-	 * Sorts an array of ranges.
+	 * Casts an DateTimeRange object into DateRange.
 	 *
-	 * @param   DateRange[]  $ranges  An array of ranges to sort.
+	 * @param   DateTimeRange[]  $range  A DateTimeRange object
 	 *
-	 * @return DateRange[]
+	 * @return DateRange
 	 */
-	private static function sortArrayOfRanges(array $ranges)
+	private static function cast(DateTimeRange $range)
 	{
-		usort(
-			$ranges, function(DateRange $a, DateRange $b)
-			{
-				if ($a->equals($b))
-				{
-					return 0;
-				}
+		$start = new Date($range->start());
+		$end   = new Date($range->end());
 
-				if ($a->start()->isAfter($b->start()))
-				{
-					return 1;
-				}
-
-				if ($a->start()->isBefore($b->start()) || $a->end()->isBefore($b->end()))
-				{
-					return -1;
-				}
-
-				return 1;
-			}
-		);
-
-		return array_values($ranges);
+		return new DateRange($start, $end);
 	}
 }

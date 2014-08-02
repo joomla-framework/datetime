@@ -531,6 +531,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testHasProperties(DateTime $datetime, $property, $propertyValue)
 	{
 		$this->assertEquals($propertyValue, $datetime->$property);
+		$this->assertEquals($propertyValue, $datetime->get($property));
 	}
 
 	/**
@@ -560,6 +561,34 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	{
 		DateTime::setGetter(new Fixture\DummyGetter(new Getter\DateTimeGetter));
 		$this->assertEquals($propertyValue, $datetime->$property);
+	}
+
+	/**
+	 * Testing a default parser.
+	 *
+	 * @return void
+	 */
+	public function testThereIsNoDefaultParserMethod()
+	{
+		$this->setExpectedException('\BadMethodCallException');
+		DateTime::parse('test', 'test');
+	}
+
+	/**
+	 * Testing a custom parser.
+	 *
+	 * @param   string    $name      A name of a parser.
+	 * @param   mixed     $value     A value to parse.
+	 * @param   DateTime  $expected  An expected DateTime object.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForDummyParser
+	 */
+	public function testCanBeEasilyExtendedByCustomParsers($name, $value, DateTime $expected)
+	{
+		DateTime::setParser(new Fixture\DummyParser);
+		$this->assertEquals($expected, DateTime::parse($name, $value));
 	}
 
 	/**
@@ -770,6 +799,16 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function seedForDummyGetter()
 	{
 		return Fixture\DataProviderForDateTime::DummyGetter();
+	}
+
+	/**
+	 * Test cases for parse.
+	 *
+	 * @return array
+	 */
+	public function seedForDummyParser()
+	{
+		return Fixture\DataProviderForDateTime::DummyParser();
 	}
 
 	/**

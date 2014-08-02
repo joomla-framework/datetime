@@ -14,6 +14,40 @@ namespace Joomla\DateTime;
 final class DateRangeTest extends \PHPUnit_Framework_TestCase
 {
 	/**
+	 * Testing from.
+	 *
+	 * @return void
+	 */
+	public function testCanCreateAPeriodForAStartDateWithAnExactNumberOfDaysInIt()
+	{
+		$period = DateRange::from(new Date('2014-07-27'), 5);
+
+		$this->assertEquals(
+			array(
+				new Date('2014-07-27'), new Date('2014-07-28'), new Date('2014-07-29'),
+				new Date('2014-07-30'), new Date('2014-07-31'),
+			), $period->toArray()
+		);
+	}
+
+	/**
+	 * Testing to.
+	 *
+	 * @return void
+	 */
+	public function testCanCreateAPeriodForAnEndDateWithAnExactNumberOfDaysInIt()
+	{
+		$period = DateRange::to(new Date('2014-07-27'), 5);
+
+		$this->assertEquals(
+			array(
+				new Date('2014-07-23'), new Date('2014-07-24'), new Date('2014-07-25'),
+				new Date('2014-07-26'), new Date('2014-07-27'),
+			), $period->toArray()
+		);
+	}
+
+	/**
 	 * Testing emptyRange.
 	 *
 	 * @return void
@@ -315,9 +349,9 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 
 		return array(
 			array($sut, new DateRange(new Date('2014-06-07'), new Date('2014-06-08')),
-				        new DateRange(new Date('2014-06-09'), new Date('2014-06-09'))),
+						new DateRange(new Date('2014-06-09'), new Date('2014-06-09'))),
 			array($sut, new DateRange(new Date('2014-06-16'), new Date('2014-06-17')),
-				        new DateRange(new Date('2014-06-14'), new Date('2014-06-15'))),
+						new DateRange(new Date('2014-06-14'), new Date('2014-06-15'))),
 			array($sut, new DateRange(new Date('2014-06-12'), new Date('2014-06-17')),
 						DateRange::emptyRange())
 		);

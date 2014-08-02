@@ -98,9 +98,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing addDays.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of days to add.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of days to add.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -114,9 +114,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing subDays.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of days to substract.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of days to substract.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -130,9 +130,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing addWeeks.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of weeks to add.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of weeks to add.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -146,9 +146,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing subWeeks.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of weeks to substract.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of weeks to substract.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -162,9 +162,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing addMonths.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of months to add.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of months to add.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -178,9 +178,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing subMonths.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of months to substract.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of months to substract.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -194,9 +194,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing addYears.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of years to add.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of years to add.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *
@@ -210,9 +210,9 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing subYears.
 	 *
-	 * @param   Date    $sut       The object to test.
-	 * @param   integer $value     Number of years to substract.
-	 * @param   Date    $expected  An expected object.
+	 * @param   Date     $sut       The object to test.
+	 * @param   integer  $value     Number of years to substract.
+	 * @param   Date     $expected  An expected object.
 	 *
 	 * @return void
 	 *

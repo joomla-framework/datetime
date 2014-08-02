@@ -29,6 +29,9 @@ class DateTime
 	/** @var Getter\Getter */
 	private static $getter;
 
+	/** @var Parser\Parser */
+	private static $parser;
+
 	/** @var Since\Since */
 	private static $since;
 
@@ -67,6 +70,19 @@ class DateTime
 		{
 			$this->datetime->setTimezone($timezone);
 		}
+	}
+
+	/**
+	 * Parses to DateTime object.
+	 *
+	 * @param   string  $name   Name of the parser.
+	 * @param   mixed   $value  The value to parse.
+	 *
+	 * @return DateTime
+	 */
+	public static function parse($name, $value)
+	{
+		return static::getParser()->parse($name, $value);
 	}
 
 	/**
@@ -627,6 +643,18 @@ class DateTime
 	}
 
 	/**
+	 * Alias for __get.
+	 *
+	 * @param   string  $name  The name of the property.
+	 *
+	 * @return mixed
+	 */
+	public function get($name)
+	{
+		return $this->$name;
+	}
+
+	/**
 	 * Returns the timezone offset.
 	 *
 	 * @return integer
@@ -700,6 +728,18 @@ class DateTime
 	public static function setGetter(Getter\Getter $getter)
 	{
 		static::$getter = $getter;
+	}
+
+	/**
+	 * Sets the Parser implementation.
+	 *
+	 * @param   Parser\Parser  $parser  The Parser implementation.
+	 *
+	 * @return void
+	 */
+	public static function setParser(Parser\Parser $parser)
+	{
+		static::$parser = $parser;
 	}
 
 	/**
@@ -815,5 +855,20 @@ class DateTime
 		}
 
 		return static::$getter;
+	}
+
+	/**
+	 * Gets the Parser implementation.
+	 *
+	 * @return Parser\Parser
+	 */
+	private static function getParser()
+	{
+		if (is_null(static::$parser))
+		{
+			static::$parser = new Parser\DateTimeParser;
+		}
+
+		return static::$parser;
 	}
 }
