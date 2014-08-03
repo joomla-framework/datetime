@@ -53,6 +53,41 @@ final class DateInterval
 	}
 
 	/**
+	 * Creates a DateInterval object by adding another interval into it.
+	 * Uses absolute values for addition process.
+	 *
+	 * @param   DateInterval  $interval  The interval to be added.
+	 *
+	 * @return DateInterval
+	 */
+	public function add(DateInterval $interval)
+	{
+		$years   = $this->y + $interval->y;
+		$months  = $this->m + $interval->m;
+		$days    = $this->d + $interval->d;
+		$hours   = $this->h + $interval->h;
+		$minutes = $this->i + $interval->i;
+		$seconds = $this->s + $interval->s;
+
+		$spec = sprintf('P%sY%sM%sDT%sH%sM%sS', $years, $months, $days, $hours, $minutes, $seconds);
+
+		return new DateInterval($spec);
+	}
+
+	/**
+	 * Creates a DateInterval object by inverting the value of the current one.
+	 *
+	 * @return DateInterval
+	 */
+	public function invert()
+	{
+		$interval = $this->copy($this->interval);
+		$interval->invert = $interval->invert ? false : true;
+
+		return new DateInterval($interval);
+	}
+
+	/**
 	 * Formats the interval.
 	 *
 	 * @param   string  $format  Format accepted by PHP DateInterval::format().
@@ -95,6 +130,9 @@ final class DateInterval
 	 */
 	private static function copy(\DateInterval $interval)
 	{
-		return new \DateInterval($interval->format('P%yY%mM%dDT%hH%iM%sS'));
+		$copy = new \DateInterval($interval->format('P%yY%mM%dDT%hH%iM%sS'));
+		$copy->invert = $interval->invert;
+
+		return $copy;
 	}
 }

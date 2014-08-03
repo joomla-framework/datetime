@@ -45,6 +45,42 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Testing add.
+	 *
+	 * @param   DateInterval  $sut       DateInterval to test.
+	 * @param   DateInterval  $interval  DateInterval to add.
+	 * @param   DateInterval  $expected  An expected DateInterval.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForAdd
+	 */
+	public function testCanCreateAnObjectByAddingAnotherIntervalIntoIt(DateInterval $sut, DateInterval $interval, DateInterval $expected)
+	{
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->add($interval));
+	}
+
+	/**
+	 * Testing invert.
+	 *
+	 * @return void
+	 */
+	public function testCanCreateAnObjectByInvertingTheCurrentOne()
+	{
+		$sut = new DateInterval("P1D");
+
+		$phpDateInterval = new \DateInterval("P1D");
+		$phpDateInterval->invert = true;
+
+		$invert = new DateInterval($phpDateInterval);
+
+		$this->assertEquals($phpDateInterval, $sut->invert()->getDateInterval());
+		$this->assertCorrectCalculationWithoutChangingSUT($sut, $invert, $sut->invert());
+
+		$this->assertEquals($sut, $sut->invert()->invert());
+	}
+
+	/**
 	 * Test cases for __get.
 	 *
 	 * @return array
@@ -80,6 +116,42 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 			array('1 year + 1 day',		new DateInterval('P1Y1D')),
 			array('1 day + 12 hours',	new DateInterval('P1DT12H')),
 			array('3600 seconds',		new DateInterval('PT3600S')),
+			array('tomorrow',			new DateInterval('P1D')),
 		);
+	}
+
+	/**
+	 * Test cases for add.
+	 *
+	 * @return array
+	 */
+	public function seedForAdd()
+	{
+		$interval = new DateInterval('P1D');
+		$invert = $interval->invert();
+
+		return array(
+			array(new DateInterval('P1D'), new DateInterval('P1D'), new DateInterval('P2D')),
+			array(new DateInterval('P20D'), new DateInterval('P30D'), new DateInterval('P50D')),
+			array(new DateInterval('PT100H'), new DateInterval('PT30H'), new DateInterval('PT130H')),
+			array(new DateInterval('P10D'), new DateInterval('PT30H'), new DateInterval('P10DT30H')),
+			array(new DateInterval('P1Y2M3DT4H5M6S'), new DateInterval('P7Y8M9DT10H11M12S'), new DateInterval('P8Y10M12DT14H16M18S')),
+			array(new DateInterval('P10D'), $invert, new DateInterval('P11D')),
+		);
+	}
+
+	/**
+	 * Assertion.
+	 *
+	 * @param   DateInterval  $sut       The object to test.
+	 * @param   DateInterval  $expected  An expected object.
+	 * @param   DateInterval  $actual    An actual object.
+	 *
+	 * @return void
+	 */
+	private function assertCorrectCalculationWithoutChangingSUT(DateInterval $sut, DateInterval $expected, DateInterval $actual)
+	{
+		$this->assertEquals($expected, $actual);
+		$this->assertNotEquals($actual, $sut);
 	}
 }
