@@ -1,13 +1,22 @@
 <?php
+/**
+ * @copyright  Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
 namespace Joomla\DateTime;
 
+/**
+ * Tests for DateInterval class.
+ *
+ * @since  2.0
+ */
 final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Testing createFromDateString.
 	 *
-	 * @param   sttring       $string    Date string.
+	 * @param   string        $string    Date string.
 	 * @param   DateInterval  $expected  An expected object.
 	 *
 	 * @return void
