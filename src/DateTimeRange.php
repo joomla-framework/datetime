@@ -21,17 +21,17 @@ final class DateTimeRange implements \IteratorAggregate
 	/** @var DateTime */
 	protected $end;
 
-	/** @var \DateInterval */
+	/** @var DateInterval */
 	protected $interval;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param   DateTime       $start     The start date.
-	 * @param   DateTime       $end       The end date.
-	 * @param   \DateInterval  $interval  The interval between adjacent dates.
+	 * @param   DateTime      $start     The start date.
+	 * @param   DateTime      $end       The end date.
+	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 */
-	public function __construct(DateTime $start, DateTime $end, \DateInterval $interval)
+	public function __construct(DateTime $start, DateTime $end, DateInterval $interval)
 	{
 		if ($start->isBefore($end) && $start->add($interval)->isAfter($end))
 		{
@@ -46,13 +46,13 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Creates a DateTimePeriod object from the start date for the given amount od dates.
 	 *
-	 * @param   DateTime       $start     The start date.
-	 * @param   integer        $amount    The amount of dates included in a period.
-	 * @param   \DateInterval  $interval  The interval between adjacent dates.
+	 * @param   DateTime      $start     The start date.
+	 * @param   integer       $amount    The amount of dates included in a period.
+	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
 	 * @return DateTimeRange
 	 */
-	public static function from(DateTime $start, $amount, \DateInterval $interval)
+	public static function from(DateTime $start, $amount, DateInterval $interval)
 	{
 		$end = self::buildDatetime($start, $amount, $interval, true);
 
@@ -62,13 +62,13 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Creates a DateTimePeriod object to the end date for the given amount od dates.
 	 *
-	 * @param   DateTime       $end       The end date.
-	 * @param   integer        $amount    The amount of dates included in a period.
-	 * @param   \DateInterval  $interval  The interval between adjacent dates.
+	 * @param   DateTime      $end       The end date.
+	 * @param   integer       $amount    The amount of dates included in a period.
+	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
 	 * @return DateTimeRange
 	 */
-	public static function to(DateTime $end, $amount, \DateInterval $interval)
+	public static function to(DateTime $end, $amount, DateInterval $interval)
 	{
 		$start = self::buildDatetime($end, $amount, $interval, false);
 
@@ -82,7 +82,7 @@ final class DateTimeRange implements \IteratorAggregate
 	 */
 	public static function emptyRange()
 	{
-		return new DateTimeRange(DateTime::tomorrow(), DateTime::yesterday(), new \DateInterval('P1D'));
+		return new DateTimeRange(DateTime::tomorrow(), DateTime::yesterday(), new DateInterval('P1D'));
 	}
 
 	/**
@@ -328,16 +328,16 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Builds the date.
 	 *
-	 * @param   DateTime       $base        The base date.
-	 * @param   integer        $amount      The amount of dates included in a period.
-	 * @param   \DateInterval  $interval    The interval between adjacent dates.
-	 * @param   boolean        $byAddition  Should build the final date using addition or subtraction?
+	 * @param   DateTime      $base        The base date.
+	 * @param   integer       $amount      The amount of dates included in a period.
+	 * @param   DateInterval  $interval    The interval between adjacent dates.
+	 * @param   boolean       $byAddition  Should build the final date using addition or subtraction?
 	 *
 	 * @return DateTime
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	private static function buildDatetime(DateTime $base, $amount, \DateInterval $interval, $byAddition = true)
+	private static function buildDatetime(DateTime $base, $amount, DateInterval $interval, $byAddition = true)
 	{
 		if (intval($amount) < 2)
 		{

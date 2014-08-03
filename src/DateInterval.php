@@ -48,6 +48,11 @@ final class DateInterval
 		return $this->interval->$name;
 	}
 
+	public function getDateInterval()
+	{
+		return $this->copy($this->interval);
+	}
+
 	private static function copy(\DateInterval $interval)
 	{
 		return new \DateInterval($interval->format('P%yY%mM%dDT%hH%iM%sS'));

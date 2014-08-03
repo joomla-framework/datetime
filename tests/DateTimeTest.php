@@ -142,7 +142,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectByAddingIntervalToIt()
 	{
 		$today = DateTime::today();
-		$tomorrow = $today->add(new \DateInterval('P1D'));
+		$tomorrow = $today->add(new DateInterval('P1D'));
 		$this->assertCorrectCalculationWithoutChangingSUT($today, DateTime::tomorrow(), $tomorrow);
 	}
 
@@ -154,7 +154,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectBySubtractingIntervalFromIt()
 	{
 		$today = DateTime::today();
-		$yesterday = $today->sub(new \DateInterval('P1D'));
+		$yesterday = $today->sub(new DateInterval('P1D'));
 		$this->assertCorrectCalculationWithoutChangingSUT($today, DateTime::yesterday(), $yesterday);
 	}
 

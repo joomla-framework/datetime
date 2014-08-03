@@ -7,6 +7,7 @@
 
 namespace Joomla\DateTime\Since;
 
+use Joomla\DateTime\DateInterval;
 use Joomla\DateTime\DateTime;
 use Joomla\DateTime\Translator\Translator;
 
@@ -86,12 +87,12 @@ final class DateTimeSince implements Since
 	/**
 	 * Calculates the difference between dates for all units of a time.
 	 *
-	 * @param   \DateInterval  $interval     The difference between dates.
-	 * @param   integer        $detailLevel  How much details do you want to get.
+	 * @param   DateInterval  $interval     The difference between dates.
+	 * @param   integer       $detailLevel  How much details do you want to get.
 	 *
 	 * @return array()
 	 */
-	private function diffInUnits(\DateInterval $interval, $detailLevel)
+	private function diffInUnits(DateInterval $interval, $detailLevel)
 	{
 		$units = array('y' => 'year', 'm' => 'month', 'd' => 'day',
 			'h' => 'hour', 'i' => 'minute', 's' => 'second'

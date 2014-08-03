@@ -76,11 +76,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	public function testCanReturnADateIntervalObjectAsADifferenceBetweenTwoObjects()
 	{
 		$today = Date::today();
-
-		$datetime = new \DateTime('2014-08-24');
-		$interval = $datetime->diff(new \DateTime('2014-08-25'));
-
-		$this->assertEquals($interval, $today->diff(Date::tomorrow()));
+		$this->assertEquals(new DateInterval('P1D'), $today->diff(Date::tomorrow()));
 	}
 
 	/**

@@ -24,7 +24,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function __construct(Date $start, Date $end)
 	{
-		$this->range = new DateTimeRange(new DateTime($start), new DateTime($end), new \DateInterval('P1D'));
+		$this->range = new DateTimeRange(new DateTime($start), new DateTime($end), new DateInterval('P1D'));
 	}
 
 	/**
@@ -37,7 +37,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function from(Date $start, $amount)
 	{
-		return static::cast(DateTimeRange::from(new DateTime($start), $amount, new \DateInterval('P1D')));
+		return static::cast(DateTimeRange::from(new DateTime($start), $amount, new DateInterval('P1D')));
 	}
 
 	/**
@@ -50,7 +50,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function to(Date $end, $amount)
 	{
-		return static::cast(DateTimeRange::to(new DateTime($end), $amount, new \DateInterval('P1D')));
+		return static::cast(DateTimeRange::to(new DateTime($end), $amount, new DateInterval('P1D')));
 	}
 
 	/**

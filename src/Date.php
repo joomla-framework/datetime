@@ -110,7 +110,7 @@ class Date
 	 * @param   Date     $date      The date to compare to.
 	 * @param   boolean  $absolute  Should the interval be forced to be positive?
 	 *
-	 * @return \DateInterval
+	 * @return DateInterval
 	 */
 	public function diff(Date $date, $absolute = false)
 	{

@@ -19,7 +19,7 @@ class DateTimeIterator implements \Iterator
 	/** @var DateTime */
 	private $end;
 
-	/** @var \DateInterval */
+	/** @var DateInterval */
 	private $interval;
 
 	/** @var DateTime */
@@ -31,11 +31,11 @@ class DateTimeIterator implements \Iterator
 	/**
 	 * Constructor.
 	 *
-	 * @param   DateTime       $start     The start date.
-	 * @param   DateTime       $end       The end date.
-	 * @param   \DateInterval  $interval  The interval between adjacent dates.
+	 * @param   DateTime      $start     The start date.
+	 * @param   DateTime      $end       The end date.
+	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 */
-	public function __construct(DateTime $start, DateTime $end, \DateInterval $interval)
+	public function __construct(DateTime $start, DateTime $end, DateInterval $interval)
 	{
 		$this->start = $this->current = $start;
 		$this->end = $end;

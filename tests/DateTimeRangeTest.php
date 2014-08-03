@@ -22,7 +22,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	public function testCannotCreateAPeriodForIntervalBiggerThanGivenPeriod()
 	{
 		$this->setExpectedException('\InvalidArgumentException');
-		new DateTimeRange(new DateTime('2014-07-21'), new DateTime('2014-07-22'), new \DateInterval('P2D'));
+		new DateTimeRange(new DateTime('2014-07-21'), new DateTime('2014-07-22'), new DateInterval('P2D'));
 	}
 
 	/**
@@ -33,7 +33,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	public function testCannotCreateAPeriodForLessThanTwoDatesInIt()
 	{
 		$this->setExpectedException('\InvalidArgumentException');
-		DateTimeRange::from(new DateTime('2014-07-20'), 1, new \DateInterval('PT1H'));
+		DateTimeRange::from(new DateTime('2014-07-20'), 1, new DateInterval('PT1H'));
 	}
 
 	/**
@@ -43,7 +43,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAPeriodForAStartDateWithAnExactNumberOfDatesInIt()
 	{
-		$period = DateTimeRange::from(new DateTime('2014-07-27'), 5, new \DateInterval('PT1H'));
+		$period = DateTimeRange::from(new DateTime('2014-07-27'), 5, new DateInterval('PT1H'));
 
 		$this->assertEquals(
 			array(
@@ -60,7 +60,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAPeriodForAnEndDateWithAnExactNumberOfDatesInIt()
 	{
-		$period = DateTimeRange::to(new DateTime('2014-07-27'), 5, new \DateInterval('PT1H'));
+		$period = DateTimeRange::to(new DateTime('2014-07-27'), 5, new DateInterval('PT1H'));
 
 		$this->assertEquals(
 			array(
@@ -88,10 +88,10 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanDetermineIfTwoRangesAreEqual()
 	{
-		$range = new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'), new \DateInterval('PT1H'));
+		$range = new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'), new DateInterval('PT1H'));
 
-		$this->assertTrue($range->equals(new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'), new \DateInterval('PT1H'))));
-		$this->assertFalse($range->equals(new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-12'), new \DateInterval('PT1H'))));
+		$this->assertTrue($range->equals(new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-13'), new DateInterval('PT1H'))));
+		$this->assertFalse($range->equals(new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-07-12'), new DateInterval('PT1H'))));
 	}
 
 	/**
@@ -276,7 +276,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanConvertToString()
 	{
-		$range = new DateTimeRange(new DateTime('2014-05-19'), new DateTime('2014-08-15'), new \DateInterval('P1D'));
+		$range = new DateTimeRange(new DateTime('2014-05-19'), new DateTime('2014-08-15'), new DateInterval('P1D'));
 
 		$this->assertSame('2014-05-19 00:00:00 - 2014-08-15 00:00:00', (string) $range);
 	}
@@ -291,7 +291,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 		$start = new DateTime('2014-06-12');
 		$end = new DateTime('2014-07-13');
 
-		$range = new DateTimeRange($start, $end, new \DateInterval('PT1H'));
+		$range = new DateTimeRange($start, $end, new DateInterval('PT1H'));
 
 		return array(
 			array(true, $range, $start),
@@ -309,19 +309,19 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForOverlaps()
 	{
-		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-20'), new \DateInterval('P1D'));
+		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-20'), new DateInterval('P1D'));
 
 		return array(
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-10'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-11'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-11'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-16'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-20'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-21'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-20'), new DateTime('2014-06-21'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-21'), new DateTime('2014-06-22'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-21'), new \DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-10'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-11'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-11'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-16'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-20'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-21'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-20'), new DateTime('2014-06-21'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-21'), new DateTime('2014-06-22'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-21'), new DateInterval('P1D'))),
 		);
 	}
 
@@ -332,19 +332,19 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForIncludesARange()
 	{
-		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-20'), new \DateInterval('P1D'));
+		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-20'), new DateInterval('P1D'));
 
 		return array(
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-10'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-11'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-11'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-16'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-20'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-21'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-20'), new DateTime('2014-06-21'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-21'), new DateTime('2014-06-22'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-21'), new \DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-10'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-11'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-11'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-16'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-20'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-21'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-20'), new DateTime('2014-06-21'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-21'), new DateTime('2014-06-22'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-21'), new DateInterval('P1D'))),
 		);
 	}
 
@@ -355,14 +355,14 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForGap()
 	{
-		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-13'), new \DateInterval('P1D'));
+		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-13'), new DateInterval('P1D'));
 
 		return array(
-			array($sut, new DateTimeRange(new DateTime('2014-06-07'), new DateTime('2014-06-08'), new \DateInterval('P1D')),
-						new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-09'), new \DateInterval('P1D'))),
-			array($sut, new DateTimeRange(new DateTime('2014-06-16'), new DateTime('2014-06-17'), new \DateInterval('P1D')),
-						new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-15'), new \DateInterval('P1D'))),
-			array($sut, new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-17'), new \DateInterval('P1D')),
+			array($sut, new DateTimeRange(new DateTime('2014-06-07'), new DateTime('2014-06-08'), new DateInterval('P1D')),
+						new DateTimeRange(new DateTime('2014-06-09'), new DateTime('2014-06-09'), new DateInterval('P1D'))),
+			array($sut, new DateTimeRange(new DateTime('2014-06-16'), new DateTime('2014-06-17'), new DateInterval('P1D')),
+						new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-15'), new DateInterval('P1D'))),
+			array($sut, new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-17'), new DateInterval('P1D')),
 						DateTimeRange::emptyRange())
 		);
 	}
@@ -374,14 +374,14 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForAbuts()
 	{
-		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-13'), new \DateInterval('P1D'));
+		$sut = new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-13'), new DateInterval('P1D'));
 
 		return array(
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-13'), new DateTime('2014-06-15'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-15'), new \DateInterval('P1D'))),
-			array(false, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-10'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new \DateInterval('P1D'))),
-			array(true, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new \DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-13'), new DateTime('2014-06-15'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-15'), new DateInterval('P1D'))),
+			array(false, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-10'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new DateInterval('P1D'))),
+			array(true, $sut, new DateTimeRange(new DateTime('2014-06-08'), new DateTime('2014-06-09'), new DateInterval('P1D'))),
 		);
 	}
 
@@ -394,14 +394,14 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	{
 		return array(
 			array(true, array(
-					new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-13'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-16'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-06-17'), new DateTime('2014-06-18'), new \DateInterval('P1D'))
+					new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-13'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-06-14'), new DateTime('2014-06-16'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-06-17'), new DateTime('2014-06-18'), new DateInterval('P1D'))
 				)),
 			array(false, array(
-					new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-12'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-15'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-06-16'), new DateTime('2014-06-18'), new \DateInterval('P1D'))
+					new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-12'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-06-12'), new DateTime('2014-06-15'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-06-16'), new DateTime('2014-06-18'), new DateInterval('P1D'))
 				))
 		);
 	}
@@ -415,11 +415,11 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	{
 		return array(
 			array(
-				new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-07-18'), new \DateInterval('P1D')),
+				new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-07-18'), new DateInterval('P1D')),
 				array(
-					new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-18'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-29'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-06-30'), new DateTime('2014-07-18'), new \DateInterval('P1D'))
+					new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-18'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-06-19'), new DateTime('2014-06-29'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-06-30'), new DateTime('2014-07-18'), new DateInterval('P1D'))
 				)
 			),
 		);
@@ -435,20 +435,20 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 		return array(
 			array(
 				array(
-					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-16'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-07-25'), new DateTime('2014-07-26'), new \DateInterval('P1D')))),
+					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-16'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-07-25'), new DateTime('2014-07-26'), new DateInterval('P1D')))),
 			array(
 				array(
-					new DateTimeRange(DateTime::today(), DateTime::tomorrow(), new \DateInterval('P1D')),
-					new DateTimeRange(DateTime::today(), DateTime::tomorrow(), new \DateInterval('P1D')))),
+					new DateTimeRange(DateTime::today(), DateTime::tomorrow(), new DateInterval('P1D')),
+					new DateTimeRange(DateTime::today(), DateTime::tomorrow(), new DateInterval('P1D')))),
 			array(
 				array(
-					new DateTimeRange(new DateTime('2014-07-16'), new DateTime('2014-07-26'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-20'), new \DateInterval('P1D')))),
+					new DateTimeRange(new DateTime('2014-07-16'), new DateTime('2014-07-26'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-20'), new DateInterval('P1D')))),
 			array(
 				array(
-					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-26'), new \DateInterval('P1D')),
-					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-20'), new \DateInterval('P1D')))),
+					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-26'), new DateInterval('P1D')),
+					new DateTimeRange(new DateTime('2014-07-15'), new DateTime('2014-07-20'), new DateInterval('P1D')))),
 		);
 	}
 
@@ -459,11 +459,11 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function seedForToArray()
 	{
-		$day = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2014-08-06'), new \DateInterval('P2D'));
-		$week = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2014-08-30'), new \DateInterval('P2W'));
-		$month = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2015-02-05'), new \DateInterval('P3M'));
-		$year = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2017-02-05'), new \DateInterval('P1Y'));
-		$second = new DateTimeRange(new DateTime('2014-07-27 12:00:00'), new DateTime('2014-07-27 12:00:06'), new \DateInterval('PT2S'));
+		$day = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2014-08-06'), new DateInterval('P2D'));
+		$week = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2014-08-30'), new DateInterval('P2W'));
+		$month = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2015-02-05'), new DateInterval('P3M'));
+		$year = new DateTimeRange(new DateTime('2014-07-27'), new DateTime('2017-02-05'), new DateInterval('P1Y'));
+		$second = new DateTimeRange(new DateTime('2014-07-27 12:00:00'), new DateTime('2014-07-27 12:00:06'), new DateInterval('PT2S'));
 
 		return array(
 			array($day, array(new DateTime('2014-07-27'), new DateTime('2014-07-29'), new DateTime('2014-07-31'),

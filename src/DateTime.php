@@ -245,11 +245,11 @@ class DateTime
 	 * @param   DateTime  $datetime  The date to compare to.
 	 * @param   boolean   $absolute  Should the interval be forced to be positive?
 	 *
-	 * @return \DateInterval
+	 * @return DateInterval
 	 */
 	public function diff(DateTime $datetime, $absolute = false)
 	{
-		return $this->datetime->diff($datetime->datetime, $absolute);
+		return new DateInterval($this->datetime->diff($datetime->datetime, $absolute));
 	}
 
 	/**
@@ -259,12 +259,12 @@ class DateTime
 	 *
 	 * @return DateTime
 	 */
-	public function add(\DateInterval $interval)
+	public function add(DateInterval $interval)
 	{
 		return $this->modify(
 			function(\DateTime $datetime) use($interval)
 			{
-				$datetime->add($interval);
+				$datetime->add($interval->getDateInterval());
 			}
 		);
 	}
@@ -276,12 +276,12 @@ class DateTime
 	 *
 	 * @return DateTime
 	 */
-	public function sub(\DateInterval $interval)
+	public function sub(DateInterval $interval)
 	{
 		return $this->modify(
 			function(\DateTime $datetime) use($interval)
 			{
-				$datetime->sub($interval);
+				$datetime->sub($interval->getDateInterval());
 			}
 		);
 	}
@@ -827,7 +827,7 @@ class DateTime
 		$value = intval($value);
 		$spec = sprintf($format, abs($value));
 
-		return $value > 0 ? $this->add(new \DateInterval($spec)) : $this->sub(new \DateInterval($spec));
+		return $value > 0 ? $this->add(new DateInterval($spec)) : $this->sub(new DateInterval($spec));
 	}
 
 	/**
