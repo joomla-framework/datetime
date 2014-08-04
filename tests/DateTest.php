@@ -286,25 +286,25 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Testing timeSince.
+	 * Testing since.
 	 *
 	 * @return void
 	 */
 	public function testCanCreateAStringOfATimeDifference()
 	{
 		$date = new Date('2014-08-24');
-		$this->assertEquals('2 days ago', $date->timeSince($date->addDays(2)));
+		$this->assertEquals('2 days ago', $date->since($date->addDays(2)));
 	}
 
 	/**
-	 * Testing almostTimeSince.
+	 * Testing sinceAlmost.
 	 *
 	 * @return void
 	 */
 	public function testCanCreateAStringOfAlmostTimeDifference()
 	{
 		$date = new Date('2014-08-24');
-		$this->assertEquals('almost 1 month ago', $date->almostTimeSince($date->addDays(28)));
+		$this->assertEquals('almost 1 month ago', $date->sinceAlmost($date->addDays(28)));
 	}
 
 	/**

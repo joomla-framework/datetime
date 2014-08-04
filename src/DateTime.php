@@ -630,7 +630,7 @@ class DateTime
 	 *
 	 * @return string
 	 */
-	public function timeSince(DateTime $datetime = null, $detailLevel = 1)
+	public function since(DateTime $datetime = null, $detailLevel = 1)
 	{
 		return $this->getSince()->since($this, $datetime, $detailLevel);
 	}
@@ -643,7 +643,7 @@ class DateTime
 	 *
 	 * @return string
 	 */
-	public function almostTimeSince(DateTime $datetime = null)
+	public function sinceAlmost(DateTime $datetime = null)
 	{
 		return $this->getSince()->almost($this, $datetime);
 	}

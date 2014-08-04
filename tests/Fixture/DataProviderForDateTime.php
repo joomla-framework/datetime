@@ -332,11 +332,11 @@ final class DataProviderForDateTime
 	}
 
 	/**
-	 * Test cases for timeSince.
+	 * Test cases for since.
 	 *
 	 * @return array
 	 */
-	public static function timeSince()
+	public static function since()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
 		$someDate = $since->subYears(1)->subMonths(1)->subWeeks(2)->subDays(4)->subHours(6)->subMinutes(15)->subSeconds(25);
@@ -408,11 +408,11 @@ final class DataProviderForDateTime
 	}
 
 	/**
-	 * Test cases for timeSince in polish.
+	 * Test cases for since in polish.
 	 *
 	 * @return array
 	 */
-	public static function timeSince_pl()
+	public static function since_pl()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
 		$someDate = $since->subYears(1)->subMonths(1)->subWeeks(2)->subDays(4)->subHours(6)->subMinutes(15)->subSeconds(25);
@@ -488,11 +488,11 @@ final class DataProviderForDateTime
 	}
 
 	/**
-	 * Test cases for almostTimeSince.
+	 * Test cases for sinceAlmost.
 	 *
 	 * @return array
 	 */
-	public static function almostTimeSince()
+	public static function sinceAlmost()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
 
@@ -512,11 +512,11 @@ final class DataProviderForDateTime
 	}
 
 	/**
-	 * Test cases for amostTimeSince in polish.
+	 * Test cases for sinceAlmost in polish.
 	 *
 	 * @return array
 	 */
-	public static function almostTimeSince_pl()
+	public static function sinceAlmost_pl()
 	{
 		$since = new DateTime('2014-06-30 12:00:00');
 

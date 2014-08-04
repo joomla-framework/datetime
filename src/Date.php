@@ -294,14 +294,14 @@ class Date
 	 *
 	 * @return string
 	 */
-	public function timeSince(Date $date = null, $detailLevel = 1)
+	public function since(Date $date = null, $detailLevel = 1)
 	{
 		if (!is_null($date))
 		{
 			$date = new DateTime($date);
 		}
 
-		return $this->datetime->timeSince($date, $detailLevel);
+		return $this->datetime->since($date, $detailLevel);
 	}
 
 	/**
@@ -312,14 +312,14 @@ class Date
 	 *
 	 * @return string
 	 */
-	public function almostTimeSince(Date $date = null)
+	public function sinceAlmost(Date $date = null)
 	{
 		if (!is_null($date))
 		{
 			$date = new DateTime($date);
 		}
 
-		return $this->datetime->almostTimeSince($date);
+		return $this->datetime->sinceAlmost($date);
 	}
 
 	/**

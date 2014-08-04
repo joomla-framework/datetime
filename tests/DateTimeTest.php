@@ -471,6 +471,39 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Testing since.
+	 *
+	 * @param   integer   $detailLevel  A level of details for since method.
+	 * @param   DateTime  $since        DateTime to test.
+	 * @param   DateTime  $sut          DateTime to test.
+	 * @param   string    $string       An expected string.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForSince
+	 */
+	public function testCanCreateAStringOfATimeDifference($detailLevel, DateTime $since, DateTime $sut, $string)
+	{
+		$this->assertEquals($string, $sut->since($since, $detailLevel));
+	}
+
+	/**
+	 * Testing sinceAlmost.
+	 *
+	 * @param   DateTime  $since        DateTime to test.
+	 * @param   DateTime  $sut          DateTime to test.
+	 * @param   string    $string       An expected string.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForSinceAlmost
+	 */
+	public function testCanCreateAStringOfAlmostTimeDifference(DateTime $since, DateTime $sut, $string)
+	{
+		$this->assertEquals($string, $sut->sinceAlmost($since));
+	}
+
+	/**
 	 * Testing getOffset.
 	 *
 	 * @return void
@@ -762,23 +795,23 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test cases for timeSince.
+	 * Test cases for since.
 	 *
 	 * @return array
 	 */
-	public function seedForTimeSince()
+	public function seedForSince()
 	{
-		return Fixture\DataProviderForDateTime::timeSince();
+		return Fixture\DataProviderForDateTime::since();
 	}
 
 	/**
-	 * Test cases for almostTimeSince.
+	 * Test cases for sinceAlmost.
 	 *
 	 * @return array
 	 */
-	public function seedForAlmostTimeSince()
+	public function seedForSinceAlmost()
 	{
-		return Fixture\DataProviderForDateTime::almostTimeSince();
+		return Fixture\DataProviderForDateTime::sinceAlmost();
 	}
 
 	/**
