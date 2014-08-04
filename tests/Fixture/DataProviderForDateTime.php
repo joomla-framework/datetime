@@ -23,13 +23,13 @@ final class DataProviderForDateTime
 	public static function createFactoryMethod()
 	{
 		return array(
-			array(DateTime::create('2014', '06', '12', '08', '04', '09'), new DateTime('2014-06-12 08:04:09')),
-			array(DateTime::create(2014, 6, 12, 8, 4, 9),	new DateTime('2014-06-12 08:04:09')),
-			array(DateTime::create(2014, 6, 12, 8, 4),		new DateTime('2014-06-12 08:04:00')),
-			array(DateTime::create(2014, 6, 12, 8),			new DateTime('2014-06-12 08:00:00')),
-			array(DateTime::create(2014, 6, 12),			new DateTime('2014-06-12 00:00:00')),
-			array(DateTime::create(2014, 6),				new DateTime('2014-06-01 00:00:00')),
-			array(DateTime::create(2014),					new DateTime('2014-01-01 00:00:00')),
+			array('2014', '06', '12', '08', '04', '09', new DateTime('2014-06-12 08:04:09')),
+			array(2014, 6, 12, 8, 4, 9,	new DateTime('2014-06-12 08:04:09')),
+			array(2014, 6, 12, 8, 4, 0,	new DateTime('2014-06-12 08:04:00')),
+			array(2014, 6, 12, 8, 0, 0,	new DateTime('2014-06-12 08:00:00')),
+			array(2014, 6, 12, 0, 0, 0,	new DateTime('2014-06-12 00:00:00')),
+			array(2014, 6, 1,  0, 0, 0, new DateTime('2014-06-01 00:00:00')),
+			array(2014, 1, 1,  0, 0, 0,	new DateTime('2014-01-01 00:00:00')),
 		);
 	}
 
@@ -41,9 +41,9 @@ final class DataProviderForDateTime
 	public static function createFromDateFactoryMethod()
 	{
 		return array(
-			array(DateTime::createFromDate(2014, 6, 12),	new DateTime('2014-06-12 00:00:00')),
-			array(DateTime::createFromDate(2014, 6),		new DateTime('2014-06-01 00:00:00')),
-			array(DateTime::createFromDate(2014),			new DateTime('2014-01-01 00:00:00')),
+			array(2014, 6, 12, new DateTime('2014-06-12 00:00:00')),
+			array(2014, 6, 1,  new DateTime('2014-06-01 00:00:00')),
+			array(2014, 1, 1,  new DateTime('2014-01-01 00:00:00')),
 		);
 	}
 
@@ -55,9 +55,9 @@ final class DataProviderForDateTime
 	public static function createFromTimeFactoryMethod()
 	{
 		return array(
-			array(DateTime::createFromTime(8, 4, 9),		new DateTime(sprintf('%s 08:04:09', date('Y-m-d')))),
-			array(DateTime::createFromTime(8, 4),			new DateTime(sprintf('%s 08:04:00', date('Y-m-d')))),
-			array(DateTime::createFromTime(8),				new DateTime(sprintf('%s 08:00:00', date('Y-m-d')))),
+			array(8, 4, 9, new DateTime(date('Y-m-d 08:04:09'))),
+			array(8, 4, 0, new DateTime(date('Y-m-d 08:04:00'))),
+			array(8, 0, 0, new DateTime(date('Y-m-d 08:00:00'))),
 		);
 	}
 

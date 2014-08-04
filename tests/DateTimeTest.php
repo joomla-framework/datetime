@@ -16,46 +16,55 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing create.
 	 *
-	 * @param   DateTime  $actual    An actual object.
+	 * @param   integer   $year      The year.
+	 * @param   integer   $month     The month.
+	 * @param   integer   $day       The day of the month.
+	 * @param   integer   $hour      The hour.
+	 * @param   integer   $minute    The minute.
+	 * @param   integer   $second    The second.
 	 * @param   DateTime  $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForCreateFactoryMethod
 	 */
-	public function testCanCreateAnObjectViaCreateFactoryMethod(DateTime $actual, DateTime $expected)
+	public function testCanCreateAnObjectViaCreateFactoryMethod($year, $month, $day, $hour, $minute, $second, DateTime $expected)
 	{
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals($expected, DateTime::create($year, $month, $day, $hour, $minute, $second));
 	}
 
 	/**
 	 * Testing createFromDate.
 	 *
-	 * @param   DateTime  $actual    An actual object.
+	 * @param   integer   $year      The year.
+	 * @param   integer   $month     The month.
+	 * @param   integer   $day       The day of the month.
 	 * @param   DateTime  $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForCreateFromDateFactoryMethod
 	 */
-	public function testCanCreateAnObjectViaCreateFromDateFactoryMethod(DateTime $actual, DateTime $expected)
+	public function testCanCreateAnObjectViaCreateFromDateFactoryMethod($year, $month, $day, DateTime $expected)
 	{
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals($expected, DateTime::createFromDate($year, $month, $day));
 	}
 
 	/**
 	 * Testing createFromTime.
 	 *
-	 * @param   DateTime  $actual    An actual object.
+	 * @param   integer   $hour      The hour.
+	 * @param   integer   $minute    The minute.
+	 * @param   integer   $second    The second.
 	 * @param   DateTime  $expected  An expected object.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForCreateFromTimeFactoryMethod
 	 */
-	public function testCanCreateAnObjectViaCreateFromTimeFactoryMethod(DateTime $actual, DateTime $expected)
+	public function testCanCreateAnObjectViaCreateFromTimeFactoryMethod($hour, $minute, $second, DateTime $expected)
 	{
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals($expected, DateTime::createFromTime($hour, $minute, $second));
 	}
 
 	/**
@@ -142,8 +151,8 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectByAddingIntervalToIt()
 	{
 		$today = DateTime::today();
-		$tomorrow = $today->add(new DateInterval('P1D'));
-		$this->assertCorrectCalculationWithoutChangingSUT($today, DateTime::tomorrow(), $tomorrow);
+		$expected = DateTime::tomorrow();
+		$this->assertEqualsWithoutChangingSUT($today, $expected, $today->add(new DateInterval('P1D')));
 	}
 
 	/**
@@ -154,8 +163,8 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectBySubtractingIntervalFromIt()
 	{
 		$today = DateTime::today();
-		$yesterday = $today->sub(new DateInterval('P1D'));
-		$this->assertCorrectCalculationWithoutChangingSUT($today, DateTime::yesterday(), $yesterday);
+		$expected = DateTime::yesterday();
+		$this->assertEqualsWithoutChangingSUT($today, $expected, $today->sub(new DateInterval('P1D')));
 	}
 
 	/**
@@ -171,7 +180,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingDaysToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addDays($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addDays($value));
 	}
 
 	/**
@@ -187,7 +196,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingDaysFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subDays($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subDays($value));
 	}
 
 	/**
@@ -203,7 +212,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingWeeksToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addWeeks($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addWeeks($value));
 	}
 
 	/**
@@ -219,7 +228,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingWeeksFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subWeeks($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subWeeks($value));
 	}
 
 	/**
@@ -235,7 +244,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingMonthsToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addMonths($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addMonths($value));
 	}
 
 	/**
@@ -251,7 +260,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingMonthsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subMonths($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subMonths($value));
 	}
 
 	/**
@@ -267,7 +276,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingYearsToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addYears($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addYears($value));
 	}
 
 	/**
@@ -283,7 +292,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingYearsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subYears($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subYears($value));
 	}
 
 	/**
@@ -299,7 +308,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingSecondsToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addSeconds($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addSeconds($value));
 	}
 
 	/**
@@ -315,7 +324,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingSecondsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subSeconds($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subSeconds($value));
 	}
 
 	/**
@@ -331,7 +340,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingMinutesToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addMinutes($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addMinutes($value));
 	}
 
 	/**
@@ -347,7 +356,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingMinutesFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subMinutes($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subMinutes($value));
 	}
 
 	/**
@@ -363,7 +372,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingHoursToIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->addHours($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->addHours($value));
 	}
 
 	/**
@@ -379,7 +388,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectBySubtractingHoursFromIt(DateTime $sut, $value, DateTime $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->subHours($value));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->subHours($value));
 	}
 
 	/**
@@ -387,10 +396,10 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfADay()
+	public function testCanCreateAnObjectForTheStartOfADay()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-15 00:00:00'), $date->startOfDay());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-07-15 00:00:00'), $date->startOfDay());
 	}
 
 	/**
@@ -401,7 +410,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheEndOfADay()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-15 23:59:59'), $date->endOfDay());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-07-15 23:59:59'), $date->endOfDay());
 	}
 
 	/**
@@ -409,10 +418,10 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfAWeek()
+	public function testCanCreateAnObjectForTheStartOfAWeek()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-14 00:00:00'), $date->startOfWeek());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-07-14 00:00:00'), $date->startOfWeek());
 	}
 
 	/**
@@ -423,7 +432,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheEndOfAWeek()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-20 23:59:59'), $date->endOfWeek());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-07-20 23:59:59'), $date->endOfWeek());
 	}
 
 	/**
@@ -431,10 +440,10 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfAMonth()
+	public function testCanCreateAnObjectForTheStartOfAMonth()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-01 00:00:00'), $date->startOfMonth());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-07-01 00:00:00'), $date->startOfMonth());
 	}
 
 	/**
@@ -445,7 +454,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheEndOfAMonth()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-07-31 23:59:59'), $date->endOfMonth());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-07-31 23:59:59'), $date->endOfMonth());
 	}
 
 	/**
@@ -453,10 +462,10 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfAYear()
+	public function testCanCreateAnObjectForTheStartOfAYear()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-01-01 00:00:00'), $date->startOfYear());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-01-01 00:00:00'), $date->startOfYear());
 	}
 
 	/**
@@ -467,7 +476,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testCanCreateAnObjectForTheEndOfAYear()
 	{
 		$date = new DateTime('2014-07-15 21:14:25');
-		$this->assertCorrectCalculationWithoutChangingSUT($date, new DateTime('2014-12-31 23:59:59'), $date->endOfYear());
+		$this->assertEqualsWithoutChangingSUT($date, new DateTime('2014-12-31 23:59:59'), $date->endOfYear());
 	}
 
 	/**
@@ -490,9 +499,9 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing sinceAlmost.
 	 *
-	 * @param   DateTime  $since        DateTime to test.
-	 * @param   DateTime  $sut          DateTime to test.
-	 * @param   string    $string       An expected string.
+	 * @param   DateTime  $since   DateTime to test.
+	 * @param   DateTime  $sut     DateTime to test.
+	 * @param   string    $string  An expected string.
 	 *
 	 * @return void
 	 *
@@ -542,7 +551,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateACopyOfPhpDatetimeObject()
+	public function testCanReturnACopyOfPhpDatetimeObject()
 	{
 		$today = DateTime::today();
 		$datetime = $today->getDateTime();
@@ -604,7 +613,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	public function testThereIsNoDefaultParserMethod()
 	{
 		$this->setExpectedException('\BadMethodCallException');
-		DateTime::parse('test', 'test');
+		DateTime::parse('iDoNotExist', 'iDoNotExist');
 	}
 
 	/**
@@ -853,7 +862,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	private function assertCorrectCalculationWithoutChangingSUT(DateTime $sut, DateTime $expected, DateTime $actual)
+	private function assertEqualsWithoutChangingSUT(DateTime $sut, DateTime $expected, DateTime $actual)
 	{
 		$this->assertEquals($expected, $actual);
 		$this->assertNotEquals($actual, $sut);
