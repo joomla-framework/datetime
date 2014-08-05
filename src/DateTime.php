@@ -343,16 +343,7 @@ class DateTime
 	 */
 	public function addMonths($value)
 	{
-		$result = $this->calc($value, 'P%dM');
-
-		/** If a day has changed, set as a result the last day of the previous month */
-		if ($result->format('d') != $this->format('d'))
-		{
-			$result = $result->subMonths(1);
-			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
-		}
-
-		return $result;
+		return $this->fixMonth($this->calc($value, 'P%dM'));
 	}
 
 	/**
@@ -376,16 +367,7 @@ class DateTime
 	 */
 	public function addYears($value)
 	{
-		$result = $this->calc($value, 'P%dY');
-
-		/** If a day has changed, set as a result the last day of the previous month */
-		if ($result->format('d') != $this->format('d'))
-		{
-			$result = $result->subMonths(1);
-			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
-		}
-
-		return $result;
+		return $this->fixMonth($this->calc($value, 'P%dY'));
 	}
 
 	/**
@@ -843,6 +825,24 @@ class DateTime
 		call_user_func_array($callable, array($datetime));
 
 		return new static($datetime);
+	}
+
+	/**
+	 * If a day has changed, sets the date on the last day of the previous month.
+	 *
+	 * @param   DateTime  $result  A result of months or years addition
+	 *
+	 * @return DateTime
+	 */
+	private function fixMonth(DateTime $result)
+	{
+		if ($result->format('d') != $this->format('d'))
+		{
+			$result = $result->subMonths(1);
+			$result->datetime->setDate($result->format('Y'), $result->format('m'), $result->format('t'));
+		}
+
+		return $result;
 	}
 
 	/**
