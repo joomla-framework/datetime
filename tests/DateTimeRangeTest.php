@@ -21,7 +21,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCannotCreateARangeWithIntervalBiggerThanGivenRange()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->setExpectedException('InvalidArgumentException');
 		new DateTimeRange(new DateTime('2014-07-21 13:00'), new DateTime('2014-07-21 14:00'), new DateInterval('PT2H'));
 	}
 
@@ -32,7 +32,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCannotCreateARangeForLessThanTwoDatesInIt()
 	{
-		$this->setExpectedException('\InvalidArgumentException');
+		$this->setExpectedException('InvalidArgumentException');
 		DateTimeRange::from(new DateTime('2014-07-20 13:00'), 1, new DateInterval('PT1H'));
 	}
 
@@ -232,7 +232,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillThrowAnExceptionIfRangesHaveADifferentIntervalDuringCombination()
 	{
-		$this->setExpectedException("\InvalidArgumentException");
+		$this->setExpectedException("InvalidArgumentException");
 		DateTimeRange::isContiguous(
 			array(
 				new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-12'), new DateInterval('PT1H')),
@@ -267,7 +267,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillThrowAnExceptionIfRangesAreNotContiguousDuringCombination(array $ranges)
 	{
-		$this->setExpectedException("\InvalidArgumentException");
+		$this->setExpectedException("InvalidArgumentException");
 		DateTimeRange::combination($ranges);
 	}
 

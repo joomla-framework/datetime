@@ -238,7 +238,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillThrowAnExceptionIfRangesAreNotContiguousDuringCombination(array $ranges)
 	{
-		$this->setExpectedException("\InvalidArgumentException");
+		$this->setExpectedException("InvalidArgumentException");
 		DateRange::combination($ranges);
 	}
 

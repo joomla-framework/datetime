@@ -657,7 +657,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testThereIsNoDefaultParserMethod()
 	{
-		$this->setExpectedException('\BadMethodCallException');
+		$this->setExpectedException('BadMethodCallException');
 		DateTime::parse('iDoNotExist', 'iDoNotExist');
 	}
 
