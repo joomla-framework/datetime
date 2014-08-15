@@ -1,4 +1,5 @@
 {
+	"name": "joomla/datetime",
 	"require": {
 		"symfony/translation": "~2.5"
 	},
