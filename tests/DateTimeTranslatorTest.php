@@ -52,9 +52,21 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 			'december'
 		);
 
+		$this->languages[] = 'iDontExist';
+
 		foreach ($this->languages as $language)
 		{
-			$translations = include $this->path . $language . '.php';
+			$pathToTranslation = $this->path . $language . '.php';
+
+			if (file_exists($pathToTranslation))
+			{
+				$translations = include $pathToTranslation;
+			}
+			else
+			{
+				/** If translation doesn't exist Translator should return the input without changes */
+				$translations = array_combine($months, $months);
+			}
 
 			foreach ($months as $month)
 			{
