@@ -136,7 +136,7 @@ final class DateTimeRange implements \IteratorAggregate
 	 */
 	public function equals(DateTimeRange $range)
 	{
-		return $this->start->equals($range->start) && $this->end->equals($range->end);
+		return $this->start->equals($range->start) && $this->end->equals($range->end) && $this->interval->equals($range->interval);
 	}
 
 	/**
