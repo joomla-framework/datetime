@@ -18,15 +18,15 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAPeriodFromAStartDateWithAnExactNumberOfDays()
+	public function testCanCreateARangeFromAStartDateWithAnExactNumberOfDays()
 	{
-		$period = DateRange::from(new Date('2014-07-27'), 5);
+		$range = DateRange::from(new Date('2014-07-27'), 5);
 
 		$this->assertEquals(
 			array(
 				new Date('2014-07-27'), new Date('2014-07-28'), new Date('2014-07-29'),
 				new Date('2014-07-30'), new Date('2014-07-31'),
-			), $period->toArray()
+			), $range->toArray()
 		);
 	}
 
@@ -35,15 +35,15 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAPeriodToAnEndDateWithAnExactNumberOfDays()
+	public function testCanCreateARangeToAnEndDateWithAnExactNumberOfDays()
 	{
-		$period = DateRange::to(new Date('2014-07-27'), 5);
+		$range = DateRange::to(new Date('2014-07-27'), 5);
 
 		$this->assertEquals(
 			array(
 				new Date('2014-07-23'), new Date('2014-07-24'), new Date('2014-07-25'),
 				new Date('2014-07-26'), new Date('2014-07-27'),
-			), $period->toArray()
+			), $range->toArray()
 		);
 	}
 

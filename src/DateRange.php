@@ -31,7 +31,7 @@ final class DateRange implements \IteratorAggregate
 	 * Creates a DateRange object from the start date for the given amount of days.
 	 *
 	 * @param   Date     $start   The start date.
-	 * @param   integer  $amount  The amount of dates included in a period.
+	 * @param   integer  $amount  The amount of dates included in a range.
 	 *
 	 * @return DateRange
 	 */
@@ -44,7 +44,7 @@ final class DateRange implements \IteratorAggregate
 	 * Creates a DateRange object to the end date for the given amount of days.
 	 *
 	 * @param   Date     $end     The end date.
-	 * @param   integer  $amount  The amount of dates included in a period.
+	 * @param   integer  $amount  The amount of dates included in a range.
 	 *
 	 * @return DateRange
 	 */

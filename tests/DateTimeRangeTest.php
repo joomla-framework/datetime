@@ -19,7 +19,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCannotCreateAPeriodForIntervalBiggerThanGivenPeriod()
+	public function testCannotCreateARangeWithIntervalBiggerThanGivenRange()
 	{
 		$this->setExpectedException('\InvalidArgumentException');
 		new DateTimeRange(new DateTime('2014-07-21'), new DateTime('2014-07-22'), new DateInterval('P2D'));
@@ -30,7 +30,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCannotCreateAPeriodForLessThanTwoDatesInIt()
+	public function testCannotCreateARangeForLessThanTwoDatesInIt()
 	{
 		$this->setExpectedException('\InvalidArgumentException');
 		DateTimeRange::from(new DateTime('2014-07-20'), 1, new DateInterval('PT1H'));
@@ -41,15 +41,15 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAPeriodForAStartDateWithAnExactNumberOfDatesInIt()
+	public function testCanCreateARangeFromAStartDateWithAnExactNumberOfDates()
 	{
-		$period = DateTimeRange::from(new DateTime('2014-07-27'), 5, new DateInterval('PT1H'));
+		$range = DateTimeRange::from(new DateTime('2014-07-27'), 5, new DateInterval('PT1H'));
 
 		$this->assertEquals(
 			array(
 				new DateTime('2014-07-27 00:00:00'), new DateTime('2014-07-27 01:00:00'), new DateTime('2014-07-27 02:00:00'),
 				new DateTime('2014-07-27 03:00:00'), new DateTime('2014-07-27 04:00:00'),
-			), $period->toArray()
+			), $range->toArray()
 		);
 	}
 
@@ -58,15 +58,15 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAPeriodForAnEndDateWithAnExactNumberOfDatesInIt()
+	public function testCanCreateARangeToAnEndDateWithAnExactNumberOfDates()
 	{
-		$period = DateTimeRange::to(new DateTime('2014-07-27'), 5, new DateInterval('PT1H'));
+		$range = DateTimeRange::to(new DateTime('2014-07-27'), 5, new DateInterval('PT1H'));
 
 		$this->assertEquals(
 			array(
 				new DateTime('2014-07-26 20:00:00'), new DateTime('2014-07-26 21:00:00'), new DateTime('2014-07-26 22:00:00'),
 				new DateTime('2014-07-26 23:00:00'), new DateTime('2014-07-27 00:00:00'),
-			), $period->toArray()
+			), $range->toArray()
 		);
 	}
 
@@ -98,7 +98,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 * Testing includes.
 	 *
 	 * @param   boolean        $includes  Does date include into a range?
-	 * @param   DateTimeRange  $sut       DateTimePeriod to test.
+	 * @param   DateTimeRange  $sut       DateTimeRange to test.
 	 * @param   DateTime       $date      DateTime to test.
 	 *
 	 * @return void
@@ -121,8 +121,8 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 * Testing overlaps.
 	 *
 	 * @param   boolean        $overlaps  Does one range overlaps with another range?
-	 * @param   DateTimeRange  $sut       DateTimePeriod to test.
-	 * @param   DateTimeRange  $range     DateTimePeriod to test.
+	 * @param   DateTimeRange  $sut       DateTimeRange to test.
+	 * @param   DateTimeRange  $range     DateTimeRange to test.
 	 *
 	 * @return void
 	 *
@@ -144,8 +144,8 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 * Testing includesRange.
 	 *
 	 * @param   boolean        $includes  Does one range inludesc into another range?
-	 * @param   DateTimeRange  $sut       DateTimePeriod to test.
-	 * @param   DateTimeRange  $range     DateTimePeriod to test.
+	 * @param   DateTimeRange  $sut       DateTimeRange to test.
+	 * @param   DateTimeRange  $range     DateTimeRange to test.
 	 *
 	 * @return void
 	 *
@@ -166,9 +166,9 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing gap.
 	 *
-	 * @param   DateTimeRange  $sut    DateTimePeriod to test.
-	 * @param   DateTimeRange  $range  DateTimePeriod to test.
-	 * @param   DateTimeRange  $gap    DateTimePeriod to test.
+	 * @param   DateTimeRange  $sut    DateTimeRange to test.
+	 * @param   DateTimeRange  $range  DateTimeRange to test.
+	 * @param   DateTimeRange  $gap    DateTimeRange to test.
 	 *
 	 * @return void
 	 *
@@ -183,8 +183,8 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 * Testing abuts.
 	 *
 	 * @param   boolean        $abuts  Does one range abuts with another range?
-	 * @param   DateTimeRange  $sut    DateTimePeriod to test.
-	 * @param   DateTimeRange  $range  DateTimePeriod to test.
+	 * @param   DateTimeRange  $sut    DateTimeRange to test.
+	 * @param   DateTimeRange  $range  DateTimeRange to test.
 	 *
 	 * @return void
 	 *
@@ -234,7 +234,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForCombination
 	 */
-	public function testCanCombinateManyContiguousRangesIntoOne(DateTimeRange $result, array $ranges)
+	public function testCanCombineManyContiguousRangesIntoOne(DateTimeRange $result, array $ranges)
 	{
 		$this->assertEquals($result, DateTimeRange::combination($ranges));
 	}
@@ -248,7 +248,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForCombinationWithNotContigousRanges
 	 */
-	public function testWillThrowAnExceptionIfRangesAreNotContiguous(array $ranges)
+	public function testWillThrowAnExceptionIfRangesAreNotContiguousDuringCombination(array $ranges)
 	{
 		$this->setExpectedException("\InvalidArgumentException");
 		DateTimeRange::combination($ranges);
@@ -257,16 +257,16 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing toArray().
 	 *
-	 * @param   DateTimeRange  $period    Object to test.
+	 * @param   DateTimeRange  $range    Object to test.
 	 * @param   array          $expected  An expected array.
 	 *
 	 * @return void
 	 *
 	 * @dataProvider seedForToArray
 	 */
-	public function testCanCreateAnArrayOfDateTimeOnObjectsForGivenInterval(DateTimeRange $period, $expected)
+	public function testCanReturnAnArrayOfDateTimeObjectsIncludedInARange(DateTimeRange $range, $expected)
 	{
-		$this->assertEquals($expected, $period->toArray());
+		$this->assertEquals($expected, $range->toArray());
 	}
 
 	/**
@@ -274,7 +274,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanConvertToString()
+	public function testCanCastToString()
 	{
 		$range = new DateTimeRange(new DateTime('2014-05-19'), new DateTime('2014-08-15'), new DateInterval('P1D'));
 

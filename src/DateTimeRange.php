@@ -8,7 +8,7 @@
 namespace Joomla\DateTime;
 
 /**
- * Class representing a period of a time. You can create a period from start to end date,
+ * Class representing a range of a time. You can create a range from start to end date,
  * but also from start date or end date for the given number of dates.
  *
  * @since  2.0
@@ -44,10 +44,10 @@ final class DateTimeRange implements \IteratorAggregate
 	}
 
 	/**
-	 * Creates a DateTimePeriod object from the start date for the given amount od dates.
+	 * Creates a DateTimeRange object from the start date for the given amount od dates.
 	 *
 	 * @param   DateTime      $start     The start date.
-	 * @param   integer       $amount    The amount of dates included in a period.
+	 * @param   integer       $amount    The amount of dates included in a range.
 	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
 	 * @return DateTimeRange
@@ -60,10 +60,10 @@ final class DateTimeRange implements \IteratorAggregate
 	}
 
 	/**
-	 * Creates a DateTimePeriod object to the end date for the given amount od dates.
+	 * Creates a DateTimeRange object to the end date for the given amount od dates.
 	 *
 	 * @param   DateTime      $end       The end date.
-	 * @param   integer       $amount    The amount of dates included in a period.
+	 * @param   integer       $amount    The amount of dates included in a range.
 	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
 	 * @return DateTimeRange
@@ -212,14 +212,14 @@ final class DateTimeRange implements \IteratorAggregate
 	 */
 	public function toArray()
 	{
-		$period = array();
+		$range = array();
 
 		foreach ($this as $datetime)
 		{
-			$period[] = $datetime;
+			$range[] = $datetime;
 		}
 
-		return $period;
+		return $range;
 	}
 
 	/**
@@ -329,7 +329,7 @@ final class DateTimeRange implements \IteratorAggregate
 	 * Builds the date.
 	 *
 	 * @param   DateTime      $base        The base date.
-	 * @param   integer       $amount      The amount of dates included in a period.
+	 * @param   integer       $amount      The amount of dates included in a range.
 	 * @param   DateInterval  $interval    The interval between adjacent dates.
 	 * @param   boolean       $byAddition  Should build the final date using addition or subtraction?
 	 *
