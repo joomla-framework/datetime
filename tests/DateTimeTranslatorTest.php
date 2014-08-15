@@ -31,46 +31,11 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Testing since for polish.
-	 *
-	 * @param   integer   $detailLevel  A level of details for since method.
-	 * @param   DateTime  $since        DateTime to test.
-	 * @param   DateTime  $sut          DateTime to test.
-	 * @param   string    $string       An expected string.
-	 *
-	 * @return void
-	 *
-	 * @dataProvider seedForSince_pl
-	 */
-	public function testSince_pl($detailLevel, DateTime $since, DateTime $sut, $string)
-	{
-		DateTime::setLocale('pl');
-		$this->assertEquals($string, $sut->since($since, $detailLevel));
-	}
-
-	/**
-	 * Testing sinceAlmost for polish.
-	 *
-	 * @param   DateTime  $since   DateTime to test.
-	 * @param   DateTime  $sut     DateTime to test.
-	 * @param   string    $string  An expected string.
-	 *
-	 * @return void
-	 *
-	 * @dataProvider seedForSinceAlmost_pl
-	 */
-	public function testSinceAlmost_pl(DateTime $since, DateTime $sut, $string)
-	{
-		DateTime::setLocale('pl');
-		$this->assertEquals($string, $sut->sinceAlmost($since));
-	}
-
-	/**
 	 * Testing translations of months.
 	 *
 	 * @return void
 	 */
-	public function testTranslatesMonths()
+	public function testCanTranslateNameOfMonths()
 	{
 		$months = array(
 			'january',
@@ -108,7 +73,7 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testTranslatesDays()
+	public function testCanTranslateNameOfDays()
 	{
 		$days = array(
 			'monday',
@@ -141,7 +106,7 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testTranslatesDiffForHumans()
+	public function testCanTranslateSomeStrings()
 	{
 		$items = array(
 			'in',
@@ -188,25 +153,5 @@ final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
 				}
 			}
 		}
-	}
-
-	/**
-	 * Test cases for since in polish.
-	 *
-	 * @return array
-	 */
-	public function seedForSince_pl()
-	{
-		return Fixture\DataProviderForDateTime::since_pl();
-	}
-
-	/**
-	 * Test cases for sinceAlmost in polish.
-	 *
-	 * @return array
-	 */
-	public function seedForSinceAlmost_pl()
-	{
-		return Fixture\DataProviderForDateTime::sinceAlmost_pl();
 	}
 }

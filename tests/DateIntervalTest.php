@@ -23,25 +23,9 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForCreateFromDateString
 	 */
-	public function testCanCreateAnObjectViaCreateFromDateStringFactoryMethod($string, DateInterval $expected)
+	public function testCanCreateAnObjectFromDateString($string, DateInterval $expected)
 	{
 		$this->assertEquals($expected, DateInterval::createFromDateString($string));
-	}
-
-	/**
-	 * Testing __get.
-	 *
-	 * @param   DateInterval  $interval       DateInterval to test.
-	 * @param   string        $property       A name of a property.
-	 * @param   mixed         $propertyValue  An expected value.
-	 *
-	 * @return void
-	 *
-	 * @dataProvider seedForGet
-	 */
-	public function testHasProperties(DateInterval $interval, $property, $propertyValue)
-	{
-		$this->assertEquals($propertyValue, $interval->$property);
 	}
 
 	/**
@@ -57,7 +41,7 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanCreateAnObjectByAddingAnotherIntervalIntoIt(DateInterval $sut, DateInterval $interval, DateInterval $expected)
 	{
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $expected, $sut->add($interval));
+		$this->assertEqualsWithoutChangingSUT($sut, $expected, $sut->add($interval));
 	}
 
 	/**
@@ -75,9 +59,25 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 		$invert = new DateInterval($phpDateInterval);
 
 		$this->assertEquals($phpDateInterval, $sut->invert()->getDateInterval());
-		$this->assertCorrectCalculationWithoutChangingSUT($sut, $invert, $sut->invert());
+		$this->assertEqualsWithoutChangingSUT($sut, $invert, $sut->invert());
 
 		$this->assertEquals($sut, $sut->invert()->invert());
+	}
+
+	/**
+	 * Testing __get.
+	 *
+	 * @param   DateInterval  $interval       DateInterval to test.
+	 * @param   string        $property       A name of a property.
+	 * @param   mixed         $propertyValue  An expected value.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForGet
+	 */
+	public function testHasProperties(DateInterval $interval, $property, $propertyValue)
+	{
+		$this->assertEquals($propertyValue, $interval->$property);
 	}
 
 	/**
@@ -149,7 +149,7 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	private function assertCorrectCalculationWithoutChangingSUT(DateInterval $sut, DateInterval $expected, DateInterval $actual)
+	private function assertEqualsWithoutChangingSUT(DateInterval $sut, DateInterval $expected, DateInterval $actual)
 	{
 		$this->assertEquals($expected, $actual);
 		$this->assertNotEquals($actual, $sut);

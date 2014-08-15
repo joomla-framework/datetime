@@ -13,7 +13,7 @@ use Joomla\DateTime\DateTime;
  *
  * @since  2.0
  */
-class SchoolYearDateTime extends DateTime
+class SchoolYear extends DateTime
 {
 	/**
 	 * Constructor.

@@ -14,6 +14,16 @@ namespace Joomla\DateTime;
 final class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
 	/**
+	 * Sets english language for every test.
+	 *
+	 * @return void
+	 */
+	protected function setUp()
+	{
+		DateTime::setLocale('en');
+	}
+
+	/**
 	 * Testing create.
 	 *
 	 * @param   integer   $year      The year.
@@ -26,7 +36,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForCreateFactoryMethod
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::createFactoryMethod
 	 */
 	public function testCanCreateAnObjectViaCreateFactoryMethod($year, $month, $day, $hour, $minute, $second, DateTime $expected)
 	{
@@ -43,7 +53,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForCreateFromDateFactoryMethod
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::createFromDateFactoryMethod
 	 */
 	public function testCanCreateAnObjectViaCreateFromDateFactoryMethod($year, $month, $day, DateTime $expected)
 	{
@@ -60,7 +70,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForCreateFromTimeFactoryMethod
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::createFromTimeFactoryMethod
 	 */
 	public function testCanCreateAnObjectViaCreateFromTimeFactoryMethod($hour, $minute, $second, DateTime $expected)
 	{
@@ -176,7 +186,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddDays
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addDays
 	 */
 	public function testCanCreateAnObjectByAddingDaysToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -192,7 +202,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubDays
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subDays
 	 */
 	public function testCanCreateAnObjectBySubtractingDaysFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -208,7 +218,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddWeeks
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addWeeks
 	 */
 	public function testCanCreateAnObjectByAddingWeeksToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -224,7 +234,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubWeeks
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subWeeks
 	 */
 	public function testCanCreateAnObjectBySubtractingWeeksFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -240,7 +250,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddMonths
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addMonths
 	 */
 	public function testCanCreateAnObjectByAddingMonthsToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -256,7 +266,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubMonths
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subMonths
 	 */
 	public function testCanCreateAnObjectBySubtractingMonthsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -272,7 +282,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddYears
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addYears
 	 */
 	public function testCanCreateAnObjectByAddingYearsToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -288,7 +298,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubYears
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subYears
 	 */
 	public function testCanCreateAnObjectBySubtractingYearsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -304,7 +314,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddSeconds
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addSeconds
 	 */
 	public function testCanCreateAnObjectByAddingSecondsToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -320,7 +330,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubSeconds
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subSeconds
 	 */
 	public function testCanCreateAnObjectBySubtractingSecondsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -336,7 +346,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddMinutes
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addMinutes
 	 */
 	public function testCanCreateAnObjectByAddingMinutesToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -352,7 +362,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubMinutes
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subMinutes
 	 */
 	public function testCanCreateAnObjectBySubtractingMinutesFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -368,7 +378,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddHours
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addHours
 	 */
 	public function testCanCreateAnObjectByAddingHoursToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -384,7 +394,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubHours
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subHours
 	 */
 	public function testCanCreateAnObjectBySubtractingHoursFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -489,10 +499,28 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSince
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::since
 	 */
 	public function testCanCreateAStringOfATimeDifference($detailLevel, DateTime $since, DateTime $sut, $string)
 	{
+		$this->assertEquals($string, $sut->since($since, $detailLevel));
+	}
+
+	/**
+	 * Testing since for polish.
+	 *
+	 * @param   integer   $detailLevel  A level of details for since method.
+	 * @param   DateTime  $since        DateTime to test.
+	 * @param   DateTime  $sut          DateTime to test.
+	 * @param   string    $string       An expected string.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::since_pl
+	 */
+	public function testCanCreateAStringOfATimeDifferenceInPolishLanguage($detailLevel, DateTime $since, DateTime $sut, $string)
+	{
+		DateTime::setLocale('pl');
 		$this->assertEquals($string, $sut->since($since, $detailLevel));
 	}
 
@@ -505,10 +533,27 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSinceAlmost
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::sinceAlmost
 	 */
 	public function testCanCreateAStringOfAlmostTimeDifference(DateTime $since, DateTime $sut, $string)
 	{
+		$this->assertEquals($string, $sut->sinceAlmost($since));
+	}
+
+	/**
+	 * Testing sinceAlmost for polish.
+	 *
+	 * @param   DateTime  $since   DateTime to test.
+	 * @param   DateTime  $sut     DateTime to test.
+	 * @param   string    $string  An expected string.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::sinceAlmost_pl
+	 */
+	public function testCanCreateAStringOfAlmostTimeDifferenceInPolishLanguage(DateTime $since, DateTime $sut, $string)
+	{
+		DateTime::setLocale('pl');
 		$this->assertEquals($string, $sut->sinceAlmost($since));
 	}
 
@@ -568,7 +613,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForGet
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::DateTimeGetter
 	 */
 	public function testHasProperties(DateTime $datetime, $property, $propertyValue)
 	{
@@ -597,7 +642,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForDummyGetter
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::DummyGetter
 	 */
 	public function testCanBeEasilyExtendedByCustomProperties(DateTime $datetime, $property, $propertyValue)
 	{
@@ -625,232 +670,12 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForDummyParser
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::DummyParser
 	 */
 	public function testCanBeEasilyExtendedByCustomParsers($name, $value, DateTime $expected)
 	{
 		DateTime::setParser(new Fixture\DummyParser);
 		$this->assertEquals($expected, DateTime::parse($name, $value));
-	}
-
-	/**
-	 * Test cases for create.
-	 *
-	 * @return array
-	 */
-	public function seedForCreateFactoryMethod()
-	{
-		return Fixture\DataProviderForDateTime::createFactoryMethod();
-	}
-
-	/**
-	 * Test cases for createFromDate.
-	 *
-	 * @return array
-	 */
-	public function seedForCreateFromDateFactoryMethod()
-	{
-		return Fixture\DataProviderForDateTime::createFromDateFactoryMethod();
-	}
-
-	/**
-	 * Test cases for createFromTime.
-	 *
-	 * @return array
-	 */
-	public function seedForCreateFromTimeFactoryMethod()
-	{
-		return Fixture\DataProviderForDateTime::createFromTimeFactoryMethod();
-	}
-
-	/**
-	 * Test cases for addDays.
-	 *
-	 * @return array
-	 */
-	public function seedForAddDays()
-	{
-		return Fixture\DataProviderForDateTime::addDays();
-	}
-
-	/**
-	 * Test cases for subDays.
-	 *
-	 * @return array
-	 */
-	public function seedForSubDays()
-	{
-		return Fixture\DataProviderForDateTime::subDays();
-	}
-
-	/**
-	 * Test cases for addMonths.
-	 *
-	 * @return array
-	 */
-	public function seedForAddMonths()
-	{
-		return Fixture\DataProviderForDateTime::addMonths();
-	}
-
-	/**
-	 * Test cases for subMonths.
-	 *
-	 * @return array
-	 */
-	public function seedForSubMonths()
-	{
-		return Fixture\DataProviderForDateTime::subMonths();
-	}
-
-	/**
-	 * Test cases for addWeeks.
-	 *
-	 * @return array
-	 */
-	public function seedForAddWeeks()
-	{
-		return Fixture\DataProviderForDateTime::addWeeks();
-	}
-
-	/**
-	 * Test cases for subWeeks.
-	 *
-	 * @return array
-	 */
-	public function seedForSubWeeks()
-	{
-		return Fixture\DataProviderForDateTime::subWeeks();
-	}
-
-	/**
-	 * Test cases for addYears.
-	 *
-	 * @return array
-	 */
-	public function seedForAddYears()
-	{
-		return Fixture\DataProviderForDateTime::addYears();
-	}
-
-	/**
-	 * Test cases for subYears.
-	 *
-	 * @return array
-	 */
-	public function seedForSubYears()
-	{
-		return Fixture\DataProviderForDateTime::subYears();
-	}
-
-	/**
-	 * Test cases for addSeconds.
-	 *
-	 * @return array
-	 */
-	public function seedForAddSeconds()
-	{
-		return Fixture\DataProviderForDateTime::addSeconds();
-	}
-
-	/**
-	 * Test cases for subSeconds.
-	 *
-	 * @return array
-	 */
-	public function seedForSubSeconds()
-	{
-		return Fixture\DataProviderForDateTime::subSeconds();
-	}
-
-	/**
-	 * Test cases for addMinutes.
-	 *
-	 * @return array
-	 */
-	public function seedForAddMinutes()
-	{
-		return Fixture\DataProviderForDateTime::addMinutes();
-	}
-
-	/**
-	 * Test cases for subMinutes.
-	 *
-	 * @return array
-	 */
-	public function seedForSubMinutes()
-	{
-		return Fixture\DataProviderForDateTime::subMinutes();
-	}
-
-	/**
-	 * Test cases for addHours.
-	 *
-	 * @return array
-	 */
-	public function seedForAddHours()
-	{
-		return Fixture\DataProviderForDateTime::addHours();
-	}
-
-	/**
-	 * Test cases for subHours.
-	 *
-	 * @return array
-	 */
-	public function seedForSubHours()
-	{
-		return Fixture\DataProviderForDateTime::subHours();
-	}
-
-	/**
-	 * Test cases for since.
-	 *
-	 * @return array
-	 */
-	public function seedForSince()
-	{
-		return Fixture\DataProviderForDateTime::since();
-	}
-
-	/**
-	 * Test cases for sinceAlmost.
-	 *
-	 * @return array
-	 */
-	public function seedForSinceAlmost()
-	{
-		return Fixture\DataProviderForDateTime::sinceAlmost();
-	}
-
-	/**
-	 * Test cases for __get.
-	 *
-	 * @return array
-	 */
-	public function seedForGet()
-	{
-		return Fixture\DataProviderForDateTime::DateTimeGetter();
-	}
-
-	/**
-	 * Test cases for __get.
-	 *
-	 * @return array
-	 */
-	public function seedForDummyGetter()
-	{
-		return Fixture\DataProviderForDateTime::DummyGetter();
-	}
-
-	/**
-	 * Test cases for parse.
-	 *
-	 * @return array
-	 */
-	public function seedForDummyParser()
-	{
-		return Fixture\DataProviderForDateTime::DummyParser();
 	}
 
 	/**

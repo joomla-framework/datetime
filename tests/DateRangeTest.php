@@ -18,7 +18,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAPeriodForAStartDateWithAnExactNumberOfDaysInIt()
+	public function testCanCreateAPeriodFromAStartDateWithAnExactNumberOfDays()
 	{
 		$period = DateRange::from(new Date('2014-07-27'), 5);
 
@@ -35,7 +35,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAPeriodForAnEndDateWithAnExactNumberOfDaysInIt()
+	public function testCanCreateAPeriodToAnEndDateWithAnExactNumberOfDays()
 	{
 		$period = DateRange::to(new Date('2014-07-27'), 5);
 
@@ -56,6 +56,22 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	{
 		$range = DateRange::emptyRange();
 		$this->assertTrue($range->isEmpty());
+	}
+
+	/**
+	 * Testing gap.
+	 *
+	 * @param   DateRange  $sut    DateRange to test.
+	 * @param   DateRange  $range  DateRange to test.
+	 * @param   DateRange  $gap    DateRange to test.
+	 *
+	 * @return void
+	 *
+	 * @dataProvider seedForGap
+	 */
+	public function testCanCreateAGapRangeBetweenTwoRanges(DateRange $sut, DateRange $range, DateRange $gap)
+	{
+		$this->assertEquals($gap, $sut->gap($range));
 	}
 
 	/**
@@ -116,7 +132,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForOverlaps
 	 */
-	public function testCanDetermineIfOneRangeOverlapsWithAnotherOne($overlaps, DateRange $sut, DateRange $range)
+	public function testCanDetermineIfOneRangeOverlapsWithAnother($overlaps, DateRange $sut, DateRange $range)
 	{
 		if ($overlaps)
 		{
@@ -139,7 +155,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForIncludesARange
 	 */
-	public function testCanDetermineIfOneRangeIncludesAnotherOne($includes, DateRange $sut, DateRange $range)
+	public function testCanDetermineIfOneRangeIncludesAnother($includes, DateRange $sut, DateRange $range)
 	{
 		if ($includes)
 		{
@@ -149,22 +165,6 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 		{
 			$this->assertFalse($sut->includesRange($range));
 		}
-	}
-
-	/**
-	 * Testing gap.
-	 *
-	 * @param   DateRange  $sut    DateRange to test.
-	 * @param   DateRange  $range  DateRange to test.
-	 * @param   DateRange  $gap    DateRange to test.
-	 *
-	 * @return void
-	 *
-	 * @dataProvider seedForGap
-	 */
-	public function testCanCreateAGapRangeBetweenTwoRanges(DateRange $sut, DateRange $range, DateRange $gap)
-	{
-		$this->assertEquals($gap, $sut->gap($range));
 	}
 
 	/**
@@ -222,7 +222,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForCombination
 	 */
-	public function testCanCombinateManyContiguousRangesIntoOne(DateRange $result, array $ranges)
+	public function testCanCombineManyContiguousRangesIntoOne(DateRange $result, array $ranges)
 	{
 		$this->assertEquals($result, DateRange::combination($ranges));
 	}
@@ -236,7 +236,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider seedForCombinationWithNotContigousRanges
 	 */
-	public function testWillThrowAnExceptionIfRangesAreNotContiguous(array $ranges)
+	public function testWillThrowAnExceptionIfRangesAreNotContiguousDuringCombination(array $ranges)
 	{
 		$this->setExpectedException("\InvalidArgumentException");
 		DateRange::combination($ranges);
@@ -247,7 +247,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanReturnAnArrayOfDatesIncludedInGivenRange()
+	public function testCanReturnAnArrayOfDatesIncludedInARange()
 	{
 		$range = new DateRange(new Date('2014-06-29'), new Date('2014-07-04'));
 
@@ -264,7 +264,7 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanConvertToString()
+	public function testCanCastToString()
 	{
 		$range = new DateRange(new Date('2014-05-19'), new Date('2014-08-15'));
 

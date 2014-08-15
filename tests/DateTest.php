@@ -100,7 +100,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddDays
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addDays
 	 */
 	public function testCanCreateAnObjectByAddingDaysToIt(Date $sut, $value, Date $expected)
 	{
@@ -116,7 +116,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubDays
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subDays
 	 */
 	public function testCanCreateAnObjectBySubtractingDaysFromIt(Date $sut, $value, Date $expected)
 	{
@@ -132,7 +132,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddWeeks
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addWeeks
 	 */
 	public function testCanCreateAnObjectByAddingWeeksToIt(Date $sut, $value, Date $expected)
 	{
@@ -148,7 +148,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubWeeks
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subWeeks
 	 */
 	public function testCanCreateAnObjectBySubtractingWeeksFromIt(Date $sut, $value, Date $expected)
 	{
@@ -164,7 +164,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddMonths
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addMonths
 	 */
 	public function testCanCreateAnObjectByAddingMonthsToIt(Date $sut, $value, Date $expected)
 	{
@@ -180,7 +180,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubMonths
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subMonths
 	 */
 	public function testCanCreateAnObjectBySubtractingMonthsFromIt(Date $sut, $value, Date $expected)
 	{
@@ -196,7 +196,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForAddYears
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addYears
 	 */
 	public function testCanCreateAnObjectByAddingYearsToIt(Date $sut, $value, Date $expected)
 	{
@@ -212,7 +212,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider seedForSubYears
+	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subYears
 	 */
 	public function testCanCreateAnObjectBySubtractingYearsFromIt(Date $sut, $value, Date $expected)
 	{
@@ -224,7 +224,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfAWeek()
+	public function testCanCreateAnObjectForTheStartOfAWeek()
 	{
 		$date = new Date('2014-07-15');
 		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-07-14'), $date->startOfWeek());
@@ -246,7 +246,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfAMonth()
+	public function testCanCreateAnObjectForTheStartOfAMonth()
 	{
 		$date = new Date('2014-07-15');
 		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-07-01'), $date->startOfMonth());
@@ -268,7 +268,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 */
-	public function testCanCreateAnObjectForTheBeginOfAYear()
+	public function testCanCreateAnObjectForTheStartOfAYear()
 	{
 		$date = new Date('2014-07-15');
 		$this->assertCorrectCalculationWithoutChangingSUT($date, new Date('2014-01-01'), $date->startOfYear());
@@ -305,86 +305,6 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	{
 		$date = new Date('2014-08-24');
 		$this->assertEquals('almost 1 month ago', $date->sinceAlmost($date->addDays(28)));
-	}
-
-	/**
-	 * Test cases for addDays.
-	 *
-	 * @return array
-	 */
-	public function seedForAddDays()
-	{
-		return Fixture\DataProviderForDate::addDays();
-	}
-
-	/**
-	 * Test cases for subDays.
-	 *
-	 * @return array
-	 */
-	public function seedForSubDays()
-	{
-		return Fixture\DataProviderForDate::subDays();
-	}
-
-	/**
-	 * Test cases for addMonths.
-	 *
-	 * @return array
-	 */
-	public function seedForAddMonths()
-	{
-		return Fixture\DataProviderForDate::addMonths();
-	}
-
-	/**
-	 * Test cases for subMonths.
-	 *
-	 * @return array
-	 */
-	public function seedForSubMonths()
-	{
-		return Fixture\DataProviderForDate::subMonths();
-	}
-
-	/**
-	 * Test cases for addWeeks.
-	 *
-	 * @return array
-	 */
-	public function seedForAddWeeks()
-	{
-		return Fixture\DataProviderForDate::addWeeks();
-	}
-
-	/**
-	 * Test cases for subWeeks.
-	 *
-	 * @return array
-	 */
-	public function seedForSubWeeks()
-	{
-		return Fixture\DataProviderForDate::subWeeks();
-	}
-
-	/**
-	 * Test cases for addYears.
-	 *
-	 * @return array
-	 */
-	public function seedForAddYears()
-	{
-		return Fixture\DataProviderForDate::addYears();
-	}
-
-	/**
-	 * Test cases for subYears.
-	 *
-	 * @return array
-	 */
-	public function seedForSubYears()
-	{
-		return Fixture\DataProviderForDate::subYears();
 	}
 
 	/**
