@@ -437,8 +437,8 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 					new DateRange(new Date('2014-07-15'), new Date('2014-07-20')))),
 			array(
 				array(
-					new DateRange(new Date('2014-07-15'), new Date('2014-07-26')),
-					new DateRange(new Date('2014-07-15'), new Date('2014-07-20')))),
+					new DateRange(new Date('2014-07-15'), new Date('2014-07-20')),
+					new DateRange(new Date('2014-07-15'), new Date('2014-07-26')))),
 		);
 	}
 }

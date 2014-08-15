@@ -254,8 +254,6 @@ final class DateTimeRange implements \IteratorAggregate
 	 */
 	public static function combination(array $ranges)
 	{
-		$ranges = self::sortArrayOfRanges($ranges);
-
 		if (!self::isContiguous($ranges))
 		{
 			throw new \InvalidArgumentException('Unable to combine date ranges');
@@ -298,7 +296,7 @@ final class DateTimeRange implements \IteratorAggregate
 		usort(
 			$ranges, function(DateTimeRange $a, DateTimeRange $b)
 			{
-				if ($a->interval != $b->interval)
+				if (!$a->interval->equals($b->interval))
 				{
 					throw new \InvalidArgumentException('Intervals of ranges are not equal.');
 				}

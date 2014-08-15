@@ -45,6 +45,20 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Testing equals.
+	 *
+	 * @return void
+	 */
+	public function testCanDetermineIfIsEqualToAnotherDateInterval()
+	{
+		$interval = new DateInterval('P1D');
+
+		$this->assertTrue($interval->equals(new DateInterval('P1D')));
+		$this->assertFalse($interval->equals(new DateInterval('PT1H')));
+		$this->assertFalse($interval->equals($interval->invert()));
+	}
+
+	/**
 	 * Testing invert.
 	 *
 	 * @return void

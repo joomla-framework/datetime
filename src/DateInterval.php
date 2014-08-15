@@ -75,6 +75,26 @@ final class DateInterval
 	}
 
 	/**
+	 * Checks if the current interval is equals to the interval given as parameter.
+	 *
+	 * @param   DateInterval  $interval  The interval to compare.
+	 *
+	 * @return boolean
+	 */
+	public function equals(DateInterval $interval)
+	{
+		$years   = $this->y == $interval->y;
+		$months  = $this->m == $interval->m;
+		$days    = $this->d == $interval->d;
+		$hours   = $this->h == $interval->h;
+		$minutes = $this->i == $interval->i;
+		$seconds = $this->s == $interval->s;
+		$invert  = $this->invert == $interval->invert;
+
+		return $years && $months && $days && $hours && $minutes && $seconds && $invert;
+	}
+
+	/**
 	 * Creates a DateInterval object by inverting the value of the current one.
 	 *
 	 * @return DateInterval

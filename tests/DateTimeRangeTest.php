@@ -225,6 +225,22 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Testing isContigous when ranges have a different interval
+	 *
+	 * @return void
+	 */
+	public function testWillThrowAnExceptionIfRangesHaveADifferentIntervalDuringCombination()
+	{
+		$this->setExpectedException("\InvalidArgumentException");
+		DateTimeRange::isContiguous(
+			array(
+				new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-12'), new DateInterval('PT1H')),
+				new DateTimeRange(new DateTime('2014-06-13'), new DateTime('2014-06-15'), new DateInterval('P1D'))
+			)
+		);
+	}
+
+	/**
 	 * Testing combination.
 	 *
 	 * @param   DateTimeRange  $result  Combination of date ranges from an array.
@@ -257,7 +273,7 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Testing toArray().
 	 *
-	 * @param   DateTimeRange  $range    Object to test.
+	 * @param   DateTimeRange  $range     Object to test.
 	 * @param   array          $expected  An expected array.
 	 *
 	 * @return void
