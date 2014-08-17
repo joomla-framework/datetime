@@ -93,7 +93,7 @@ final class DateTimeTranslator extends Translator
 	/**
 	 * Checks if a dictionary for the current locale is loaded.
 	 *
-	 * @return void
+	 * @return boolean
 	 */
 	private function isLoaded()
 	{

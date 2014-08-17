@@ -49,7 +49,7 @@ class DateTime
 	 *
 	 * @param   mixed          $datetime  Might be a Joomla\Date object or a PHP DateTime object
 	 *                                     or a string in a format accepted by strtotime().
-	 * @param   \DateTimeZine  $timezone  The timezone.
+	 * @param   \DateTimeZone  $timezone  The timezone.
 	 */
 	public function __construct($datetime, \DateTimeZone $timezone = null)
 	{

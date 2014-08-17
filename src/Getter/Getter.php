@@ -21,7 +21,7 @@ interface Getter
 	 * @param   DateTime  $datetime  The DateTime object.
 	 * @param   string    $name      The name of the property.
 	 *
-	 * @return string
+	 * @return mixed
 	 */
 	public function get(DateTime $datetime, $name);
 }

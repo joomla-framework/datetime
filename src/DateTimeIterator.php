@@ -45,7 +45,7 @@ class DateTimeIterator implements \Iterator
 	/**
 	 * Returns the current date.
 	 *
-	 * @return Date
+	 * @return DateTime
 	 */
 	public function current()
 	{

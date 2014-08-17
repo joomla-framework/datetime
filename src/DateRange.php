@@ -246,7 +246,7 @@ final class DateRange implements \IteratorAggregate
 	/**
 	 * Casts an DateTimeRange object into DateRange.
 	 *
-	 * @param   DateTimeRange[]  $range  A DateTimeRange object
+	 * @param   DateTimeRange  $range  A DateTimeRange object
 	 *
 	 * @return DateRange
 	 */
