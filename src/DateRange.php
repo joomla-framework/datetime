@@ -37,7 +37,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function from(Date $start, $amount)
 	{
-		return static::cast(DateTimeRange::from(new DateTime($start), $amount, new DateInterval('P1D')));
+		return self::cast(DateTimeRange::from(new DateTime($start), $amount, new DateInterval('P1D')));
 	}
 
 	/**
@@ -50,7 +50,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function to(Date $end, $amount)
 	{
-		return static::cast(DateTimeRange::to(new DateTime($end), $amount, new DateInterval('P1D')));
+		return self::cast(DateTimeRange::to(new DateTime($end), $amount, new DateInterval('P1D')));
 	}
 
 	/**
@@ -60,7 +60,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public static function emptyRange()
 	{
-		return static::cast(DateTimeRange::emptyRange());
+		return self::cast(DateTimeRange::emptyRange());
 	}
 
 	/**
@@ -86,7 +86,7 @@ final class DateRange implements \IteratorAggregate
 	/**
 	 * Checks if a range is empty.
 	 *
-	 * @return booleans
+	 * @return boolean
 	 */
 	public function isEmpty()
 	{
@@ -150,7 +150,7 @@ final class DateRange implements \IteratorAggregate
 	 */
 	public function gap(DateRange $range)
 	{
-		return static::cast($this->range->gap($range->range));
+		return self::cast($this->range->gap($range->range));
 	}
 
 	/**
@@ -221,7 +221,7 @@ final class DateRange implements \IteratorAggregate
 			$dateTimeRanges[] = $range->range;
 		}
 
-		return static::cast(DateTimeRange::combination($dateTimeRanges));
+		return self::cast(DateTimeRange::combination($dateTimeRanges));
 	}
 
 	/**

@@ -296,12 +296,7 @@ class Date
 	 */
 	public function since(Date $date = null, $detailLevel = 1)
 	{
-		if (!is_null($date))
-		{
-			$date = new DateTime($date);
-		}
-
-		return $this->datetime->since($date, $detailLevel);
+		return $this->datetime->since(static::cast($date), $detailLevel);
 	}
 
 	/**
@@ -314,12 +309,7 @@ class Date
 	 */
 	public function sinceAlmost(Date $date = null)
 	{
-		if (!is_null($date))
-		{
-			$date = new DateTime($date);
-		}
-
-		return $this->datetime->sinceAlmost($date);
+		return $this->datetime->sinceAlmost(static::cast($date));
 	}
 
 	/**
@@ -354,5 +344,22 @@ class Date
 	public static function setLocale($locale)
 	{
 		DateTime::setLocale($locale);
+	}
+
+	/**
+	 * Casts to DateTime.
+	 *
+	 * @param   Date  $date  Date to cast.
+	 *
+	 * @return DateTime | null
+	 */
+	private static function cast(Date $date = null)
+	{
+		if (!is_null($date))
+		{
+			$date = new DateTime($date);
+		}
+
+		return $date;
 	}
 }

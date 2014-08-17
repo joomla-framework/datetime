@@ -102,7 +102,7 @@ final class DateInterval
 	public function invert()
 	{
 		$interval = $this->copy($this->interval);
-		$interval->invert = $interval->invert ? false : true;
+		$interval->invert = $interval->invert ? 0 : 1;
 
 		return new DateInterval($interval);
 	}

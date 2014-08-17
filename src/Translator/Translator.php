@@ -36,7 +36,7 @@ abstract class Translator
 	 *
 	 * @return string
 	 */
-	abstract public function get($item, array $replace);
+	abstract public function get($item, array $replace = array());
 
 	/**
 	 * Returns a translated item with a proper form for pluralization.

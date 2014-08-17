@@ -25,7 +25,7 @@ interface Since
 	 *
 	 * @return string
 	 */
-	public function since(DateTime $base, DateTime $datetime, $detailLevel);
+	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1);
 
 	/**
 	 * Returns the almost difference in a human readable format.
@@ -33,8 +33,8 @@ interface Since
 	 * @param   DateTime  $base      The base date.
 	 * @param   DateTime  $datetime  The date to compare to. Default is null and this means that
 	 *                                the base date will be compared to the current time.
-	 * 
+	 *
 	 * @return string
 	 */
-	public function almost(DateTime $base, DateTime $datetime);
+	public function almost(DateTime $base, DateTime $datetime = null);
 }

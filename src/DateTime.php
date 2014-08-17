@@ -82,7 +82,7 @@ class DateTime
 	 */
 	public static function parse($name, $value)
 	{
-		return static::getParser()->parse($name, $value);
+		return self::getParser()->parse($name, $value);
 	}
 
 	/**
@@ -703,7 +703,7 @@ class DateTime
 	 */
 	public static function setSince(Since\Since $since)
 	{
-		static::$since = $since;
+		self::$since = $since;
 	}
 
 	/**
@@ -715,7 +715,7 @@ class DateTime
 	 */
 	public static function setTranslator(Translator\Translator $translator)
 	{
-		static::$translator = $translator;
+		self::$translator = $translator;
 	}
 
 	/**
@@ -727,7 +727,7 @@ class DateTime
 	 */
 	public static function setGetter(Getter\Getter $getter)
 	{
-		static::$getter = $getter;
+		self::$getter = $getter;
 	}
 
 	/**
@@ -739,7 +739,7 @@ class DateTime
 	 */
 	public static function setParser(Parser\Parser $parser)
 	{
-		static::$parser = $parser;
+		self::$parser = $parser;
 	}
 
 	/**
@@ -751,7 +751,7 @@ class DateTime
 	 */
 	public static function setLocale($locale)
 	{
-		static::getTranslator()->setLocale($locale);
+		self::getTranslator()->setLocale($locale);
 	}
 
 	/**
@@ -761,12 +761,12 @@ class DateTime
 	 */
 	public static function getTranslator()
 	{
-		if (is_null(static::$translator))
+		if (is_null(self::$translator))
 		{
-			static::$translator = new Translator\DateTimeTranslator;
+			self::$translator = new Translator\DateTimeTranslator;
 		}
 
-		return static::$translator;
+		return self::$translator;
 	}
 
 	/**
@@ -852,12 +852,12 @@ class DateTime
 	 */
 	private static function getSince()
 	{
-		if (is_null(static::$since))
+		if (is_null(self::$since))
 		{
-			static::$since = new Since\DateTimeSince;
+			self::$since = new Since\DateTimeSince;
 		}
 
-		return static::$since;
+		return self::$since;
 	}
 
 	/**
@@ -867,12 +867,12 @@ class DateTime
 	 */
 	private static function getGetter()
 	{
-		if (is_null(static::$getter))
+		if (is_null(self::$getter))
 		{
-			static::$getter = new Getter\DateTimeGetter;
+			self::$getter = new Getter\DateTimeGetter;
 		}
 
-		return static::$getter;
+		return self::$getter;
 	}
 
 	/**
@@ -882,11 +882,11 @@ class DateTime
 	 */
 	private static function getParser()
 	{
-		if (is_null(static::$parser))
+		if (is_null(self::$parser))
 		{
-			static::$parser = new Parser\DateTimeParser;
+			self::$parser = new Parser\DateTimeParser;
 		}
 
-		return static::$parser;
+		return self::$parser;
 	}
 }

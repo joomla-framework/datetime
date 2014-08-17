@@ -108,7 +108,7 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Checks if a range is empty.
 	 *
-	 * @return booleans
+	 * @return boolean
 	 */
 	public function isEmpty()
 	{
@@ -176,8 +176,6 @@ final class DateTimeRange implements \IteratorAggregate
 		{
 			return self::emptyRange();
 		}
-
-		$lower = $higher = null;
 
 		if ($this->start->isBefore($range->start))
 		{
