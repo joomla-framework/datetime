@@ -110,7 +110,6 @@ final class DateIntervalTest extends \PHPUnit_Framework_TestCase
 			array($interval, 'h', 4),
 			array($interval, 'i', 23),
 			array($interval, 's', 20),
-			array($interval, 'days', -99999),
 			array($interval, 'invert', 0),
 		);
 	}
