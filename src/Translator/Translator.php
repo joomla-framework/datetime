@@ -47,5 +47,5 @@ abstract class Translator
 	 *
 	 * @return string
 	 */
-	abstract public function choice($item, $number, array $replace);
+	abstract public function choice($item, $number, array $replace = array());
 }
