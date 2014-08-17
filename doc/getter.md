@@ -12,7 +12,8 @@ interface Getter
 }
 ```
 
-We don't wanna override all properties from default `Getter`. We want to extend it:
+We don't want to override all properties from default `Getter`. We want to extend it. To do that we will
+do our job for two new properties and delegate rest of the job to another `Getter`:
 ```php
 class MyGetter implements Getter
 {
@@ -55,7 +56,7 @@ $datetime = DateTime::now();
 
 echo $datetime->date;
 echo $datetime->time;
-
 echo $datetime->get('date');
 echo $datetime->get('time');
 ```
+Notice that `setGetter()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
