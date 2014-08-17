@@ -291,34 +291,44 @@ final class DateTimeRange implements \IteratorAggregate
 	 */
 	protected static function sortArrayOfRanges(array $ranges)
 	{
-		usort(
-			$ranges, function(DateTimeRange $a, DateTimeRange $b)
-			{
-				/*if (!$a->interval->equals($b->interval))
-				{
-					throw new \InvalidArgumentException('Intervals of ranges are not equal.');
-				}*/
-
-				if ($a->equals($b))
-				{
-					return 0;
-				}
-
-				if ($a->start()->isAfter($b->start()))
-				{
-					return 1;
-				}
-
-				if ($a->start()->isBefore($b->start()) || $a->end()->isBefore($b->end()))
-				{
-					return -1;
-				}
-
-				return 1;
-			}
-		);
+		usort($ranges, array("self", "compare"));
 
 		return array_values($ranges);
+	}
+
+	/**
+	 * Compares two objects.
+	 *
+	 * @param   DateTimeRange  $a  Base object.
+	 * @param   DateTimeRange  $b  Object to compare to.
+	 *
+	 * @return int
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	private static function compare(DateTimeRange $a, DateTimeRange $b)
+	{
+		if (!$a->interval->equals($b->interval))
+		{
+			throw new \InvalidArgumentException('Intervals of ranges are not equal.');
+		}
+
+		if ($a->equals($b))
+		{
+			return 0;
+		}
+
+		if ($a->start()->isAfter($b->start()))
+		{
+			return 1;
+		}
+
+		if ($a->start()->isBefore($b->start()) || $a->end()->isBefore($b->end()))
+		{
+			return -1;
+		}
+
+		return 1;
 	}
 
 	/**
