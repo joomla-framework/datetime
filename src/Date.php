@@ -296,7 +296,7 @@ class Date
 	 */
 	public function since(Date $date = null, $detailLevel = 1)
 	{
-		return $this->datetime->since(static::cast($date), $detailLevel);
+		return $this->datetime->since(self::cast($date), $detailLevel);
 	}
 
 	/**
@@ -309,7 +309,7 @@ class Date
 	 */
 	public function sinceAlmost(Date $date = null)
 	{
-		return $this->datetime->sinceAlmost(static::cast($date));
+		return $this->datetime->sinceAlmost(self::cast($date));
 	}
 
 	/**
