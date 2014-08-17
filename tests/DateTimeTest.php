@@ -575,8 +575,9 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCanReturnATimestamp()
 	{
-		$date = new DateTime('2014-08-24 00:00:00', new \DateTimeZone('Europe/Warsaw'));
-		$this->assertEquals(1408831200, $date->getTimestamp());
+		$date = new DateTime('2014-08-24');
+		$timestamp = 1408838400 - $date->getOffset();
+		$this->assertEquals($timestamp, $date->getTimestamp());
 	}
 
 	/**
