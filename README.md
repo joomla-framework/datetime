@@ -30,4 +30,4 @@ Every method of `DateTime` is returning a new object and is not changing the cur
 * [Strategy](doc/strategy.md)
 
 ## Credits
-[Jens Segers](http://github.com/jenssegers/laravel-date) for his approach to translations
+[Jens Segers](http://github.com/jenssegers/laravel-date) for their approach to translations
