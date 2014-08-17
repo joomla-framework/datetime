@@ -11,7 +11,7 @@ interface Parser
 	public function parse($name, $value);
 }
 ```
-We can take the same approach like when creating custom ['Getter'](getter.md), but we can do something
+We can take the same approach like when creating a custom ['Getter'](getter.md), but we can do something
 prettier. To do that we will create a `MyParser` class by extending `AbstractParser`:
 ```php
 abstract class AbstractParser implements Parser
@@ -42,6 +42,6 @@ And now we can inject `MyParser` into a `DateTime` class:
 DateTime::setParser(new MyParser());
 
 $datetime = DateTime::parse('fromTimestamp', 1408838400); // first argument is a name of the method in MyParser class
-echo $datetime->format('Y-m-d'); // '2014-08-24'
+echo $datetime->format('Y-m-d'); // 2014-08-24
 ```
 Notice that `setParser()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.

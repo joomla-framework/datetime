@@ -52,11 +52,11 @@ And now we can inject `MyGetter` into a `DateTime` class:
 ```php
 DateTime::setGetter(new MyGetter(new DateTimeGetter()));
 
-$datetime = DateTime::now();
+$datetime = new DateTime('2014-08-24 12:00:00');
 
-echo $datetime->date;
-echo $datetime->time;
-echo $datetime->get('date');
-echo $datetime->get('time');
+echo $datetime->date;        // 2014-08-24
+echo $datetime->time;        // 12:00:00
+echo $datetime->get('date'); // 2014-08-24
+echo $datetime->get('time'); // 12:00:00
 ```
 Notice that `setGetter()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
