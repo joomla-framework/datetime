@@ -103,20 +103,20 @@ The same rule as above - all those methods create a new object:
 ```php
 $date = Date::today();
 
-$date->startOfWeek();  // Monday of the current week at 00:00:00
-$date->endOfWeek();	   // Sunday of the current week at 23:59:59
+$date = $date->startOfWeek();  // Monday of the current week at 00:00:00
+$date = $date->endOfWeek();	   // Sunday of the current week at 23:59:59
 
-$date->startOfMonth(); // First day of the current month at 00:00:00
-$date->endOfMonth();   // Last day of the current month at 23:59:59
+$date = $date->startOfMonth(); // First day of the current month at 00:00:00
+$date = $date->endOfMonth();   // Last day of the current month at 23:59:59
 
-$date->startOfYear();  // First day of the current year at 00:00:00
-$date->endOfYear();    // Last day of the current year at 23:59:59
+$date = $date->startOfYear();  // First day of the current year at 00:00:00
+$date = $date->endOfYear();    // Last day of the current year at 23:59:59
 
 /** DateTime has all of above methods and two more */
 $datetime = DateTime::today();
 
-$datetime->startOfDay(); // The current day at 00:00:00
-$datetime->endOfDay();   // The current day at 23:59:59
+$datetime = $datetime->startOfDay(); // The current day at 00:00:00
+$datetime = $datetime->endOfDay();   // The current day at 23:59:59
 ```
 Behaviour of all of those methods can be changed using different Strategies. Read more about [Strategy](strategy.md).
 
@@ -135,26 +135,27 @@ It's possible to get translated values for name of days and name of months. For 
 Date::setLocale('pl');
 echo $date->format('l, d F Y') . "\n"; // Niedziela, 24 sierpień 2014
 ```
-Read more about [Translator](translator.md). Notice that `setLocale()` is a static method, so it'll be a good idea to call it
-in some bootstrap or setup file.
+Read more about [Translator](translator.md). 
 
-### 'since()', 'sinceAlmost()' method
-The easiest way to explain how this two works is by example:
+Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
+
+### `since()`, `sinceAlmost()` method
+The easiest way to explain what these two do is by an example:
 ```php
 $now = DateTime::now();
 
 /** We're using subtraction here because we want objects for dates before 'now' */
 
-$datetime = $now->subSeconds('30');
+$datetime = $now->subSeconds(30);
 echo $datetime->since(); // just now
 
-$datetime = $now->subMinutes('5');
+$datetime = $now->subMinutes(5);
 echo $datetime->since(); // 5 minutes ago
 
-$datetime = $now->subMinutes('75');
+$datetime = $now->subHours('1');
 echo $datetime->since(); // 1 hour ago
 
-/** Get difference between two dates is also possible */
+/** Getting difference between two dates is also possible */
 $today = DateTime::today();
 
 echo $today->since(DateTime::yesterday()); // in 1 day
@@ -164,12 +165,12 @@ echo $today->since(DateTime::tomorrow());  // 1 day ago
 $datetime = $now->subMinutes(55);
 echo $datetime->sinceAlmost(); // almost 1 hour ago
 ```
-`since()` method gets two arguments: date to compare to (defaults = null, which means `now`) and detailLevel (defaults = 1).
-The first one is obvious so let's focus on the second one - this is how many informations do you wanna get. Again an example
+`since()` method gets two arguments: date to compare to (defaults = `null`, which means `now`) and detailLevel (defaults = `1`). 
+The first one is obvious so let's focus on the second one - this is how many informations do you wanna get. Again, an example 
 will explain it better than my words:
 ```php
 $now = DateTime::now();
-$datetime = $now->subMinutes('75')->subSeconds(20);
+$datetime = $now->subMinutes(75)->subSeconds(20);
 
 echo $datetime->since();                   // 1 hour ago
 echo $datetime->since(DateTime::now(), 1); // 1 hour ago
@@ -190,5 +191,7 @@ echo $datetime->since(DateTime::now(), 1); // 1 godzinę temu
 echo $datetime->since(DateTime::now(), 2); // 1 godzinę i 15 minut temu
 echo $datetime->since(DateTime::now(), 3); // 1 godzinę, 15 minut i 20 sekund temu
 ```
-Read more about [Translator](translator.md). Notice that `setLocale()` is a static method, so it'll be a good idea to call it
-in some bootstrap or setup file.
+Read more about [Translator](translator.md). 
+
+Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
+
