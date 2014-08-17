@@ -89,10 +89,45 @@ $rangeA->gap($rangeC); // DateRange::emptyRange();
 ```
 
 ## Comparing ranges
-`equals()`
-`isEmpty()`
+```php
+$rangeA = new DateRange(new Date('2014-08-20'), new Date('2014-08-24'));
+$rangeB = new DateRange(new Date('2014-08-20'), new Date('2014-08-24'));
+$rangeA->equals($rangeB); // true
+
+$rangeA->isEmpty();                 // false
+$rangeB->isEmpty();                 // false
+DateRange::emptyRange()->isEmpty(); // true
 
 ## Combination of ranges
+If you have many ranges and they are contiguous then you can join them into one:
+```php
+$ranges = array(
+	new DateRange(new Date('2014-08-01'), new Date('2014-08-08')),
+	new DateRange(new Date('2014-08-09'), new Date('2014-08-15')),
+	new DateRange(new Date('2014-08-16'), new Date('2014-08-24')),
+);
 
-## `IteratorAggregate`
-[`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php)
+$range = DateRange::combination($ranges); // from 2014-08-01 to 2014-08-24
+```
+
+## Iterator
+Both classes implement [`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php) interface. Because of it
+you can use object of a range in a foreach loop. Besides that you can also get an array of all dates included in a range, by calling
+`toArray()` method.
+```php
+$range = new DateRange(new Date('2014-08-20'), new Date('2014-08-24'));
+
+foreach($range as $date) {
+	echo $date->format('Y-m-d');
+}
+
+/** Results:
+ 2014-08-20
+ 2014-08-21
+ 2014-08-22
+ 2014-08-23
+ 2014-08-24
+ */
+
+$array = $range->toArray(); // an array of five Date objects from 2014-08-20 to 2014-08-24
+```
