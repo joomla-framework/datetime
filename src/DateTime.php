@@ -819,7 +819,7 @@ class DateTime
 	 *
 	 * @return DateTime
 	 */
-	private function modify(callable $callable)
+	private function modify($callable)
 	{
 		$datetime = clone $this->datetime;
 		call_user_func_array($callable, array($datetime));
