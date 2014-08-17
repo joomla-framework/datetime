@@ -10,7 +10,6 @@ an [`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php) i
 ### Constructor
 ```php
 $dateRange = new DateRange(new Date('2014-08-01'), new Date('2014-08-05'));
-
 $datetimeRange = new DateTimeRange(new DateTime('2014-08-01 12:00'), new DateTime('2014-08-01 17:00'), new DateInterval('P1H'));
 ```
 
@@ -23,12 +22,11 @@ $dateRange = DateRange::to(new Date('2014-08-11'), 10);   // from 2014-08-02 to 
 $datetimeRange = DateTimeRange::from(new DateTime('2014-08-11 12:00'), 10, new DateInterval('P1H')); // from 2014-08-11 12:00 to 2014-08-11 21:00
 $datetimeRange = DateTimeRange::to(new DateTime('2014-08-11 12:00'), 10, new DateInterval('P1H'));   // from 2014-08-11 03:00 to 2014-08-11 12:00
 ```
-Instead of `null` value we can use `[null object](http://refactoring.com/catalog/introduceNullObject.html)`:
+Instead of `null` value we can use ['null object'](http://refactoring.com/catalog/introduceNullObject.html):
 ```php
 $empty = DateRange::emptyRange();
-
 $empty = DateTimeRange::emptyRange();
-``
+```
 
 ## Determining the correlation
 We have 5 methods to determine correlation between ranges or between a range and a date. Names of methods are the same for 
@@ -78,7 +76,7 @@ $rangeA->abuts($rangeC); // true
 ```
 
 ### `gap()`
-This one is different from others because it creates a gap range between two ranges.
+This one is different from others, because it creates a gap range between two ranges.
 If the gap doesn't exist then it will return an empty range.
 ```php
 $rangeA = new DateRange(new Date('2014-08-20'), new Date('2014-08-24'));
@@ -96,4 +94,5 @@ $rangeA->gap($rangeC); // DateRange::emptyRange();
 
 ## Combination of ranges
 
-## IteratorAggregate
+## `IteratorAggregate`
+[`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php)

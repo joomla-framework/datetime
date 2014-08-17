@@ -201,7 +201,7 @@ all properties and parsers for all cases. That's mission impossible. Anyway, hav
 not a good idea. I decided to use another approach: move whole properties and parsers functionality into separate 
 classes and give some way to customize it. That's how [`Getter`](getter.md) and [`Parser`](parser.md) interface were brought to life.
 
-### Getter
+### `Getter`
 We have some default properties:
 ```php
 $datetime = DateTime::now();
@@ -239,7 +239,7 @@ $datetime->get('year');
 Which method will you use isn't important. Both are doing exactly the same. It's just a matter of taste. If you don't find a 
 property which you need, you can add it for yourself. Read more about [`Getter`](getter.md).
 
-### Parser
+### `Parser`
 Unfortunately, there is no default parser, so if you need one you have to write it for yourself. Read more about [`Parser`](parser.md).
 
 ## Getting PHP `DateTime`
