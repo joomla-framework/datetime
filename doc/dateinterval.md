@@ -7,8 +7,8 @@ creating a new DateInterval, so don't treat that as a flaw.
 ##  Creating intervals
 
 ### Constructor
-We can create interval objects just like the PHP DateInterval object ([manual](http://php.net/manual/en/dateinterval.construct.php))
-or we can pass the PHP DateInterval into a constructor:
+We can create interval objects just like the PHP `DateInterval` object ([manual](http://php.net/manual/en/dateinterval.construct.php))
+or we can pass the PHP `DateInterval` into a constructor:
 ```php
 $phpInterval = new \DateInterval('P1D');
 
@@ -17,7 +17,7 @@ $interval = new DateInterval($phpInterval);
 ```
 
 ### Factory method
-The same as for PHP DateInterval object ([manual](http://php.net/manual/en/dateinterval.createfromdatestring.php)):
+The same as for PHP `DateInterval` object ([manual](http://php.net/manual/en/dateinterval.createfromdatestring.php)):
 ```php
 $interval = DateInterval::createFromDateString('1 day');
 $interval = DateInterval::createFromDateString('4 years');
