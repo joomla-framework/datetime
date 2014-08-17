@@ -97,6 +97,7 @@ $rangeA->equals($rangeB); // true
 $rangeA->isEmpty();                 // false
 $rangeB->isEmpty();                 // false
 DateRange::emptyRange()->isEmpty(); // true
+```
 
 ## Combination of ranges
 If you have many ranges and they are contiguous then you can join them into one:
