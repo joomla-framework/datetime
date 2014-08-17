@@ -6,7 +6,8 @@ The main goal for this library was to create DateTime object as an [immutable Va
 
 ## Immutability
 If you know how to use PHP `DateTime` object then you know almost everything about that package. 
-Before you start using it you need to know one more thing - this `DateTime` is immutable. Let's take a look at an example:
+Before you start using it you need to know one more thing - this `DateTime` is immutable. To explain what immutability means
+let's take a look at an example:
 
 ```php
 $start = new DateTime('2014-08-24');
