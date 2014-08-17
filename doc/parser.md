@@ -11,7 +11,7 @@ interface Parser
 	public function parse($name, $value);
 }
 ```
-We can take the same approach like when creating a custom ['Getter'](getter.md), but we can do something
+We can take the same approach like when creating a custom [`Getter`](getter.md), but we can do something
 prettier. To do that we will create a `MyParser` class by extending `AbstractParser`:
 ```php
 abstract class AbstractParser implements Parser
