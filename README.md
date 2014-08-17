@@ -6,7 +6,7 @@ The main goal for this library was to create DateTime object as an [immutable Va
 
 ## Immutability
 If you know how to use PHP `DateTime` object then you know almost everything about that package. 
-Before you start using it you need to know one thing - this `DateTime` is immutable. Let's take a look at an example:
+Before you start using it you need to know one more thing - this `DateTime` is immutable. Let's take a look at an example:
 
 ```php
 $start = new DateTime('2014-08-24');
@@ -16,8 +16,17 @@ echo $start->format('Y-m-d');  // 2014-08-24
 echo $end->format('Y-m-d');    // 2014-08-26
 ```
 
-Every method od `DateTime` is returning a new object and is not changing the current one. That's the most important thing you have to know.
+Every method of `DateTime` is returning a new object and is not changing the current one. That's the most important thing what you have to know.
 
-# Credits
+## Usage
+* [Date & DateTime](doc/date-and-datetime.md)
+* [DateRange & DateTimeRange](doc/daterange-and-datetimerange.md)
+* [DateInterval](doc/dateinterval.md)
+* [Getter](doc/getter.md)
+* [Parser](doc/parser.md)
+* [Since](doc/since.md)
+* [Translator](doc/translator.md)
+* [Strategy](doc/strategy.md)
 
+## Credits
 [Jens Segers](http://github.com/jenssegers/laravel-date) for his approach to translations
