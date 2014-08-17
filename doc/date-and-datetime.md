@@ -5,7 +5,7 @@ We have two different classes for dates: `Date` and `DateTime`. `Date` is just a
 ## Creating dates
 
 ### Constructor
-We can create date objects just like the PHP DateTime object ([manual](http://www.php.net/manual/en/datetime.construct.php)):
+We can create date objects just like the PHP `DateTime` object ([manual](http://www.php.net/manual/en/datetime.construct.php)):
 ```php
 $datetime = new DateTime('2014-08-24');
 $datetime = new DateTime('2014-08-24 12:00:00');
@@ -62,11 +62,11 @@ $today->equals(Date::today());       // true
 
 $interval = $today->diff(Date::tomorrow());
 ```
-`diff()` method is returning [DateInterval](dateinterval.md) object. It's not the PHP DateInterval.
+`diff()` method is returning [`DateInterval`](dateinterval.md) object. It's not the PHP `DateInterval`.
 
 ## Addition and subtraction
 We have a bunch of manipulating methods. __We have to remember that all those methods don't change the value of the current
-object. They create a new object:__
+object. They create a new one:__
 ```php
 $date = Date::today();
 
@@ -118,12 +118,12 @@ $datetime = DateTime::today();
 $datetime = $datetime->startOfDay(); // The current day at 00:00:00
 $datetime = $datetime->endOfDay();   // The current day at 23:59:59
 ```
-Behaviour of all of those methods can be changed using different Strategies. Read more about [Strategy](strategy.md).
+Behaviour of all of those methods can be changed using different strategies. Read more about [`Strategy`](strategy.md).
 
 ## Formating
 
 ### `format()` method
-We can format date objects like the PHP DateTime object ([manual](http://www.php.net/manual/en/function.date.php)):
+We can format date objects like the PHP `DateTime` object ([manual](http://www.php.net/manual/en/function.date.php)):
 ```php
 $date = new Date('2014-08-24');
 
@@ -135,7 +135,7 @@ It's possible to get translated values for name of days and name of months. For 
 Date::setLocale('pl');
 echo $date->format('l, d F Y') . "\n"; // Niedziela, 24 sierpień 2014
 ```
-Read more about [Translator](translator.md). 
+Read more about [`Translator`](translator.md). 
 
 Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
@@ -177,7 +177,7 @@ echo $datetime->since(DateTime::now(), 1); // 1 hour ago
 echo $datetime->since(DateTime::now(), 2); // 1 hour and 15 minutes ago
 echo $datetime->since(DateTime::now(), 3); // 1 hour, 15 minutes and 20 seconds ago
 ```
-If you don't like it you can provide your own object to handle creation process of these strings. Read more about [Since](since.md).
+If you don't like it you can provide your own object to handle creation process of these strings. Read more about [`Since`](since.md).
 
 It's possible to get translated values for these strings. For example for polish translations:
 ```php
@@ -191,18 +191,18 @@ echo $datetime->since(DateTime::now(), 1); // 1 godzinę temu
 echo $datetime->since(DateTime::now(), 2); // 1 godzinę i 15 minut temu
 echo $datetime->since(DateTime::now(), 3); // 1 godzinę, 15 minut i 20 sekund temu
 ```
-Read more about [Translator](translator.md). 
+Read more about [`Translator`](translator.md). 
 
 Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
 ## `Getter` (for properties) and `Parser` (for parsing to date objects)
 Parsers and getters which you need depends strongly from your project. There is no chance that anyone can provide 
-all properties and parsers for all cases. That's mission impossible. I decided to use another approach: move whole 
-properties and parsers functionality into separate classes and give some way to customize it. 
-That's how [Getter](getter.md) and [Parser](parser.md) interface were brought to life.
+all properties and parsers for all cases. That's mission impossible. Anyway, having a hundreds of getters and parsers inside a class is 
+not a good idea. I decided to use another approach: move whole properties and parsers functionality into separate 
+classes and give some way to customize it. That's how [`Getter`](getter.md) and [`Parser`](parser.md) interface were brought to life.
 
 ### Getter
-We have some default properties, eg:
+We have some default properties:
 ```php
 $datetime = DateTime::now();
 
@@ -243,7 +243,7 @@ property which you need, you can add it for yourself. Read more about [`Getter`]
 Unfortunately, there is no default parser, so if you need one you have to write it for yourself. Read more about [`Parser`](parser.md).
 
 ## Getting PHP `DateTime`
-Sometimes you may need a PHP `DateTime`. You can get by `getDateTime()` method:
+Sometimes you may need a PHP `DateTime`. You can get it by `getDateTime()` method:
 ```php
 $datetime = DateTime::today();
 $phpDatetime = $datetime->getDateTime();
