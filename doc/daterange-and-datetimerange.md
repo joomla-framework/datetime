@@ -22,7 +22,7 @@ $dateRange = DateRange::to(new Date('2014-08-11'), 10);   // from 2014-08-02 to 
 $datetimeRange = DateTimeRange::from(new DateTime('2014-08-11 12:00'), 10, new DateInterval('P1H')); // from 2014-08-11 12:00 to 2014-08-11 21:00
 $datetimeRange = DateTimeRange::to(new DateTime('2014-08-11 12:00'), 10, new DateInterval('P1H'));   // from 2014-08-11 03:00 to 2014-08-11 12:00
 ```
-Instead of `null` value we can use ['null object'](http://refactoring.com/catalog/introduceNullObject.html):
+Instead of `null` value we can use [`null object`](http://refactoring.com/catalog/introduceNullObject.html):
 ```php
 $empty = DateRange::emptyRange();
 $empty = DateTimeRange::emptyRange();
