@@ -294,10 +294,10 @@ final class DateTimeRange implements \IteratorAggregate
 		usort(
 			$ranges, function(DateTimeRange $a, DateTimeRange $b)
 			{
-				if (!$a->interval->equals($b->interval))
+				/*if (!$a->interval->equals($b->interval))
 				{
 					throw new \InvalidArgumentException('Intervals of ranges are not equal.');
-				}
+				}*/
 
 				if ($a->equals($b))
 				{
