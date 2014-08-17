@@ -195,3 +195,56 @@ Read more about [Translator](translator.md).
 
 Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
+## `Getter` (for properties) and `Parser` (for parsing to date objects)
+Parsers and getters which you need depends strongly from your project. There is no chance that anyone can provide 
+all properties and parsers for all cases. That's mission impossible. I decided to use another approach: move whole 
+properties and parsers functionality into separate classes and give some way to customize it. 
+That's how [Getter](getter.md) and [Parser](parser.md) interface were brought to life.
+
+### Getter
+We have some default properties, eg:
+```php
+$datetime = DateTime::now();
+
+$datetime->daysinmonth; // Number of days in the given month
+$datetime->dayofweek;   // ISO-8601 numeric representation of the day of the week
+$datetime->dayofyear;   // The day of the year (starting from 0)
+$datetime->isleapyear;  // Whether it's a leap year
+$datetime->day;         // Day of the month, 2 digits with leading zeros
+$datetime->hour;        // 24-hour format of an hour with leading zeros
+$datetime->minute;      // Minutes with leading zeros
+$datetime->second;      // Seconds with leading zeros
+$datetime->month;       // Numeric representation of a month, with leading zeros
+$datetime->ordinal;     // English ordinal suffix for the day of the month, 2 characters
+$datetime->week;        // Numeric representation of the day of the week
+$datetime->year;        // A full numeric representation of a year, 4 digits
+```
+That's the property-syntax access, but we can also get the same result by calling the `get()` method:
+```php
+$datetime = DateTime::now();
+
+$datetime->get('daysinmonth');
+$datetime->get('dayofweek');
+$datetime->get('dayofyear');
+$datetime->get('isleapyear');
+$datetime->get('day');
+$datetime->get('hour');
+$datetime->get('minute');
+$datetime->get('second');
+$datetime->get('month');
+$datetime->get('ordinal');
+$datetime->get('week');
+$datetime->get('year');
+```
+Which method will you use isn't important. Both are doing exactly the same. It's just a matter of taste. If you don't find a 
+property which you need, you can add it for yourself. Read more about [`Getter`](getter.md).
+
+### Parser
+Unfortunately, there is no default parser, so if you need one you have to write it for yourself. Read more about [`Parser`](parser.md).
+
+## Getting PHP `DateTime`
+Sometimes you may need a PHP `DateTime`. You can get by `getDateTime()` method:
+```php
+$datetime = DateTime::today();
+$phpDatetime = $datetime->getDateTime();
+```
