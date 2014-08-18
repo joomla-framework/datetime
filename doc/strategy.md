@@ -25,17 +25,17 @@ interface Strategy
 ```
 `DateTimeStrategy` implements that interface and returns the following values:
 ```php
-startOfDay()    // Monday of the current week at 00:00:00
-endOfDay()      // Sunday of the current week at 23:59:59
+startOfDay()    // The current day at 00:00:00
+endOfDay()      // The current day at 23:59:59
 
-startOfWeek()   // First day of the current month at 00:00:00
-endOfWeek()     // Last day of the current month at 23:59:59
+startOfWeek()   // Monday of the current week at 00:00:00
+endOfWeek()     // Sunday of the current week at 23:59:59
 
-startOfMonth()  // First day of the current year at 00:00:00
-endOfMonth()    // Last day of the current year at 23:59:59
+startOfMonth()  // First day of the current month at 00:00:00
+endOfMonth()    // Last day of the current month at 23:59:59
 
-startOfYear()   // The current day at 00:00:00
-endOfYear()     // The current day at 23:59:59
+startOfYear()   // First day of the current year at 00:00:00
+endOfYear()     // Last day of the current year at 23:59:59
 ```
 
 Let's say that we want to change the return values of `startOfDay()` and `endOfDay()` to 9.00 and 17.00. 
