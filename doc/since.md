@@ -1,7 +1,7 @@
 # Since
 Is used to provide creating nice strings for `DateTime`. There is a default `Since` object called `DateTimeSince`.
 `DateTimeSince` object uses [`Translator`](translator.md) to handling internalization of these strings. So if
-you would like to change only translation funcionality then you don't need change whole `Since` object, but
+you would like to change only translation funcionality then you don't need to change whole `Since` object, but
 only create a new [`Translator`](translator.md).
 
 ## Custom `Since`
@@ -14,7 +14,7 @@ interface Since
 	public function almost(DateTime $base, DateTime $datetime = null);
 }
 ```
-If you want to see any example of that class, let's look at [`DateTimeSince`](src/Since/DateTimeSince.php).
+If you want to see any example of that class, let's look at [`DateTimeSince`](../src/Since/DateTimeSince.php).
 
 To inject your `Since` object into `DateTime`:
 ```php
