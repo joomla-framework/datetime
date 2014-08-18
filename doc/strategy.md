@@ -1,5 +1,5 @@
 # Strategy
-Is used to provide behaviours for a few methods of `DateTime`. There is a default `Startegy` object called `DateTimeStrategy`.
+Is used to provide behaviours for a few methods of `DateTime`. There is a default `Strategy` object called `DateTimeStrategy`.
 
 ## Custom `Strategy`
 Create a class which will be implementing `Strategy` interface:
@@ -23,7 +23,7 @@ interface Strategy
 	public function endOfYear(\DateTime $datetime);
 }
 ```
-`DateTimeStartegy` implements that interface and returns the following values:
+`DateTimeStrategy` implements that interface and returns the following values:
 ```php
 startOfDay()    // Monday of the current week at 00:00:00
 endOfDay()      // Sunday of the current week at 23:59:59
