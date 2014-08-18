@@ -59,9 +59,9 @@ Notice that in all methods of a `Stategy` we get a PHP `DateTime` object and we 
 All changes we're making to that PHP `DateTime` object and we even don't need to return it.
 
 ## Custom `DateTime`
-In fact changing a `Strategy` is a important process. This is why there isn't a public static `setStrategy()` method, because
-it would make more troubles than gains. For example there would be impossible to have a two different strategies in our project. 
-Because when we makes a `Strategy` as a class property than we can have only one of it. Changing a `Strategy` back and forth is also not a 
+In fact changing a `Strategy` is an important process. This is why there isn't a public static `setStrategy()` method, because
+it would make more troubles than gains. For example there would be impossible to have two different strategies in our project. 
+Because when we make a `Strategy` as a class property than we can have only one of it. Changing a `Strategy` back and forth is also not a 
 good idea. We also can't set a `Strategy` for our objects because when we forgot about it that we set one we'll be getting
 not expecting results. So to don't remember if we set some or not, we need an object to tell us about it. How to do that? 
 Create a custom `DateTime` and set a `Strategy` in a `constructor`:
