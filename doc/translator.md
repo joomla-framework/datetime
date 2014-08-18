@@ -28,5 +28,5 @@ DateTime::setTranslator(new MyTranslator());
 ```
 Notice that `setTranslator()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
-# DateTimeTranslator
+## DateTimeTranslator
 This a default `Translator` for `DateTime`. It uses a Symfony's `MessageSelector` to handle pluralization.
