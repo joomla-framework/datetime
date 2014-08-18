@@ -56,7 +56,7 @@ class MyStrategy extends DateTimeStrategy
 }
 ```
 Notice that in all methods of a `Stategy` we get a PHP `DateTime` object and we make a use of its mutability.
-All changes we make to that PHP `DateTime` object and we even don't need to return it.
+All changes we're making to that PHP `DateTime` object and we even don't need to return it.
 
 ## Custom `DateTime`
 In fact changing a `Strategy` is a important process. This is why there isn't a public static `setStrategy()` method, because
