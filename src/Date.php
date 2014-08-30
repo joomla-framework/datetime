@@ -52,7 +52,7 @@ class Date
 	 */
 	public static function today(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::today($timezone));
+		return new static(DateTime::today($timezone));
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Date
 	 */
 	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::tomorrow($timezone));
+		return new static(DateTime::tomorrow($timezone));
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Date
 	 */
 	public static function yesterday(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::yesterday($timezone));
+		return new static(DateTime::yesterday($timezone));
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Date
 	 */
 	public function addDays($value)
 	{
-		return new Date($this->datetime->addDays($value));
+		return new static($this->datetime->addDays($value));
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Date
 	 */
 	public function subDays($value)
 	{
-		return new Date($this->datetime->subDays($value));
+		return new static($this->datetime->subDays($value));
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Date
 	 */
 	public function addWeeks($value)
 	{
-		return new Date($this->datetime->addWeeks($value));
+		return new static($this->datetime->addWeeks($value));
 	}
 
 	/**
@@ -193,7 +193,7 @@ class Date
 	 */
 	public function subWeeks($value)
 	{
-		return new Date($this->datetime->subWeeks($value));
+		return new static($this->datetime->subWeeks($value));
 	}
 
 	/**
@@ -207,7 +207,7 @@ class Date
 	 */
 	public function addMonths($value)
 	{
-		return new Date($this->datetime->addMonths($value));
+		return new static($this->datetime->addMonths($value));
 	}
 
 	/**
@@ -221,7 +221,7 @@ class Date
 	 */
 	public function subMonths($value)
 	{
-		return new Date($this->datetime->subMonths($value));
+		return new static($this->datetime->subMonths($value));
 	}
 
 	/**
@@ -235,7 +235,7 @@ class Date
 	 */
 	public function addYears($value)
 	{
-		return new Date($this->datetime->addYears($value));
+		return new static($this->datetime->addYears($value));
 	}
 
 	/**
@@ -249,7 +249,7 @@ class Date
 	 */
 	public function subYears($value)
 	{
-		return new Date($this->datetime->subYears($value));
+		return new static($this->datetime->subYears($value));
 	}
 
 	/**
@@ -261,7 +261,7 @@ class Date
 	 */
 	public function startOfWeek()
 	{
-		return new Date($this->datetime->startOfWeek());
+		return new static($this->datetime->startOfWeek());
 	}
 
 	/**
@@ -273,7 +273,7 @@ class Date
 	 */
 	public function endOfWeek()
 	{
-		return new Date($this->datetime->endOfWeek());
+		return new static($this->datetime->endOfWeek());
 	}
 
 	/**
@@ -285,7 +285,7 @@ class Date
 	 */
 	public function startOfMonth()
 	{
-		return new Date($this->datetime->startOfMonth());
+		return new static($this->datetime->startOfMonth());
 	}
 
 	/**
@@ -297,7 +297,7 @@ class Date
 	 */
 	public function endOfMonth()
 	{
-		return new Date($this->datetime->endOfMonth());
+		return new static($this->datetime->endOfMonth());
 	}
 
 	/**
@@ -309,7 +309,7 @@ class Date
 	 */
 	public function startOfYear()
 	{
-		return new Date($this->datetime->startOfYear());
+		return new static($this->datetime->startOfYear());
 	}
 
 	/**
@@ -321,7 +321,7 @@ class Date
 	 */
 	public function endOfYear()
 	{
-		return new Date($this->datetime->endOfYear());
+		return new static($this->datetime->endOfYear());
 	}
 
 	/**
