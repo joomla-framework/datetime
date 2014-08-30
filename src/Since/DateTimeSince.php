@@ -10,19 +10,19 @@ namespace Joomla\DateTime\Since;
 
 use Joomla\DateTime\DateInterval;
 use Joomla\DateTime\DateTime;
-use Joomla\DateTime\Translator\Translator;
+use Joomla\DateTime\Translator\AbstractTranslator;
 
 /**
- * Default implementation of Since interface.
+ * Default implementation of SinceInterface.
  *
  * @since  __DEPLOY_VERSION__
  */
-final class DateTimeSince implements Since
+final class DateTimeSince implements SinceInterface
 {
 	/**
 	 * Translator object
 	 *
-	 * @var    Translator
+	 * @var    AbstractTranslator
 	 * @since  __DEPLOY_VERSION__
 	 */
 	private $translator;

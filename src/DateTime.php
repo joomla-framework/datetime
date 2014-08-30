@@ -30,7 +30,7 @@ class DateTime
 	/**
 	 * Getter Interface
 	 *
-	 * @var    Getter\Getter
+	 * @var    Getter\GetterInterface
 	 * @since  __DEPLOY_VERSION__
 	 */
 	private static $getter;
@@ -38,7 +38,7 @@ class DateTime
 	/**
 	 * Parser Interface
 	 *
-	 * @var    Parser\Parser
+	 * @var    Parser\ParserInterface
 	 * @since  __DEPLOY_VERSION__
 	 */
 	private static $parser;
@@ -46,7 +46,7 @@ class DateTime
 	/**
 	 * Since Interface
 	 *
-	 * @var    Since\Since
+	 * @var    Since\SinceInterface
 	 * @since  __DEPLOY_VERSION__
 	 */
 	private static $since;
@@ -54,7 +54,7 @@ class DateTime
 	/**
 	 * Translator object
 	 *
-	 * @var    Translator\Translator
+	 * @var    Translator\AbstractTranslator
 	 * @since  __DEPLOY_VERSION__
 	 */
 	private static $translator;
@@ -62,7 +62,7 @@ class DateTime
 	/**
 	 * Strategy Interface
 	 *
-	 * @var    Strategy\Strategy
+	 * @var    Strategy\StrategyInterface
 	 * @since  __DEPLOY_VERSION__
 	 */
 	private $strategy;
@@ -822,13 +822,13 @@ class DateTime
 	/**
 	 * Sets the Since implementation.
 	 *
-	 * @param   Since\Since  $since  The Since implementation.
+	 * @param   Since\SinceInterface  $since  The Since implementation.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public static function setSince(Since\Since $since)
+	public static function setSince(Since\SinceInterface $since)
 	{
 		static::$since = $since;
 	}
@@ -836,13 +836,13 @@ class DateTime
 	/**
 	 * Sets the Translator implementation.
 	 *
-	 * @param   Translator\Translator  $translator  The Translator implementation.
+	 * @param   Translator\AbstractTranslator  $translator  The Translator implementation.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public static function setTranslator(Translator\Translator $translator)
+	public static function setTranslator(Translator\AbstractTranslator $translator)
 	{
 		static::$translator = $translator;
 	}
@@ -850,13 +850,13 @@ class DateTime
 	/**
 	 * Sets the Getter implementation.
 	 *
-	 * @param   Getter\Getter  $getter  The Getter implementation.
+	 * @param   Getter\GetterInterface  $getter  The Getter implementation.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public static function setGetter(Getter\Getter $getter)
+	public static function setGetter(Getter\GetterInterface $getter)
 	{
 		static::$getter = $getter;
 	}
@@ -864,13 +864,13 @@ class DateTime
 	/**
 	 * Sets the Parser implementation.
 	 *
-	 * @param   Parser\Parser  $parser  The Parser implementation.
+	 * @param   Parser\ParserInterface  $parser  The Parser implementation.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public static function setParser(Parser\Parser $parser)
+	public static function setParser(Parser\ParserInterface $parser)
 	{
 		static::$parser = $parser;
 	}
@@ -892,7 +892,7 @@ class DateTime
 	/**
 	 * Gets the Translator implementation.
 	 *
-	 * @return  Translator\Translator
+	 * @return  Translator\AbstractTranslator
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
@@ -909,13 +909,13 @@ class DateTime
 	/**
 	 * Sets the Strategy implementation.
 	 *
-	 * @param   Strategy\Strategy  $strategy  The Strategy implementation.
+	 * @param   Strategy\StrategyInterface  $strategy  The Strategy implementation.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	protected function setStrategy(Strategy\Strategy $strategy)
+	protected function setStrategy(Strategy\StrategyInterface $strategy)
 	{
 		$this->strategy = $strategy;
 	}
@@ -923,7 +923,7 @@ class DateTime
 	/**
 	 * Gets the Strategy implementation.
 	 *
-	 * @return  Strategy\Strategy
+	 * @return  Strategy\StrategyInterface
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
@@ -995,7 +995,7 @@ class DateTime
 	/**
 	 * Gets the Since implementation.
 	 *
-	 * @return  Since\Since
+	 * @return  Since\SinceInterface
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
@@ -1012,7 +1012,7 @@ class DateTime
 	/**
 	 * Gets the Getter implementation.
 	 *
-	 * @return  Getter\Getter
+	 * @return  Getter\GetterInterface
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
@@ -1029,7 +1029,7 @@ class DateTime
 	/**
 	 * Gets the Parser implementation.
 	 *
-	 * @return  Parser\Parser
+	 * @return  Parser\ParserInterface
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */

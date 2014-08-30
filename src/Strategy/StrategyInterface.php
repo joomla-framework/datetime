@@ -13,7 +13,7 @@ namespace Joomla\DateTime\Strategy;
  *
  * @since  __DEPLOY_VERSION__
  */
-interface Strategy
+interface StrategyInterface
 {
 	/**
 	 * Sets time for the start of a day.

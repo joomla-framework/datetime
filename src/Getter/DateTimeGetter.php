@@ -11,11 +11,11 @@ namespace Joomla\DateTime\Getter;
 use Joomla\DateTime\DateTime;
 
 /**
- * Default implementation of Getter interface.
+ * Default implementation of GetterInterface.
  *
  * @since  __DEPLOY_VERSION__
  */
-final class DateTimeGetter implements Getter
+final class DateTimeGetter implements GetterInterface
 {
 	/**
 	 * Return a value of the property.

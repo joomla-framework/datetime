@@ -1,21 +1,20 @@
-# Parser
-Is used to provide parsers for `DateTime`. There is no default `Parser` object so we will create
+# ParserInterface
+Is used to provide parsers for `DateTime`. There is no default `ParserInterface` object so we will create
 one. We will create a parser from `timestamp` to `DateTime`.
 
-## Custom `Parser`
-Creating a custom `Parser` is simple. We just need to create a class which will be implementing `Parser`
-interface:
+## Custom `ParserInterface`
+Creating a custom `ParserInterface` is simple. We just need to create a class which will be implementing `ParserInterface`:
 ```php
-interface Parser
-{	
+interface ParserInterface
+{
 	public function parse($name, $value);
 }
 ```
-We can take the same approach like when creating a custom [`Getter`](getter.md), but we can do something
+We can take the same approach like when creating a custom [`GetterInterface`](getter.md), but we can do something
 prettier. To do that we will create a `MyParser` class by extending `AbstractParser`:
 ```php
-abstract class AbstractParser implements Parser
-{	
+abstract class AbstractParser implements ParserInterface
+{
 	public function parse($name, $value)
 	{
 		return call_user_func_array(array($this, $name), array($value));

@@ -118,7 +118,7 @@ $datetime = DateTime::today();
 $datetime = $datetime->startOfDay(); // The current day at 00:00:00
 $datetime = $datetime->endOfDay();   // The current day at 23:59:59
 ```
-Behaviour of all of those methods can be changed using different strategies. Read more about [`Strategy`](strategy.md).
+Behaviour of all of those methods can be changed using different strategies. Read more about [`StrategyInterface`](strategy.md).
 
 ## Formating
 
@@ -135,7 +135,7 @@ It's possible to get translated values for name of days and name of months. For 
 Date::setLocale('pl');
 echo $date->format('l, d F Y') . "\n"; // Niedziela, 24 sierpień 2014
 ```
-Read more about [`Translator`](translator.md). 
+Read more about [`AbstractTranslator`](translator.md).
 
 Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
@@ -159,14 +159,14 @@ echo $datetime->since(); // 1 hour ago
 $today = DateTime::today();
 
 echo $today->since(DateTime::yesterday()); // in 1 day
-echo $today->since(DateTime::tomorrow());  // 1 day ago 
+echo $today->since(DateTime::tomorrow());  // 1 day ago
 
 /** And sinceAlmost() */
 $datetime = $now->subMinutes(55);
 echo $datetime->sinceAlmost(); // almost 1 hour ago
 ```
-`since()` method gets two arguments: date to compare to (defaults = `null`, which means `now`) and detailLevel (defaults = `1`). 
-The first one is obvious so let's focus on the second one - this is how many informations do you wanna get. Again, an example 
+`since()` method gets two arguments: date to compare to (defaults = `null`, which means `now`) and detailLevel (defaults = `1`).
+The first one is obvious so let's focus on the second one - this is how many informations do you wanna get. Again, an example
 will explain it better than my words:
 ```php
 $now = DateTime::now();
@@ -177,7 +177,7 @@ echo $datetime->since(DateTime::now(), 1); // 1 hour ago
 echo $datetime->since(DateTime::now(), 2); // 1 hour and 15 minutes ago
 echo $datetime->since(DateTime::now(), 3); // 1 hour, 15 minutes and 20 seconds ago
 ```
-If you don't like it you can provide your own object to handle creation process of these strings. Read more about [`Since`](since.md).
+If you don't like it you can provide your own object to handle creation process of these strings. Read more about [`SinceInterface`](since.md).
 
 It's possible to get translated values for these strings. For example for polish translations:
 ```php
@@ -191,17 +191,17 @@ echo $datetime->since(DateTime::now(), 1); // 1 godzinę temu
 echo $datetime->since(DateTime::now(), 2); // 1 godzinę i 15 minut temu
 echo $datetime->since(DateTime::now(), 3); // 1 godzinę, 15 minut i 20 sekund temu
 ```
-Read more about [`Translator`](translator.md). 
+Read more about [`AbstractTranslator`](translator.md).
 
 Notice that `setLocale()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
-## `Getter` (for properties) and `Parser` (for parsing to date objects)
-Parsers and getters which you need depends strongly from your project. There is no chance that anyone can provide 
-all properties and parsers for all cases. That's mission impossible. Anyway, having a hundreds of getters and parsers inside a class is 
-not a good idea. I decided to use another approach: move whole properties and parsers functionality into separate 
-classes and give some way to customize it. That's how [`Getter`](getter.md) and [`Parser`](parser.md) interface were brought to life.
+## `GetterInterface` (for properties) and `ParserInterface` (for parsing to date objects)
+Parsers and getters which you need depends strongly from your project. There is no chance that anyone can provide
+all properties and parsers for all cases. That's mission impossible. Anyway, having a hundreds of getters and parsers inside a class is
+not a good idea. I decided to use another approach: move whole properties and parsers functionality into separate
+classes and give some way to customize it. That's how [`GetterInterface`](getter.md) and [`ParserInterface`](parser.md) were brought to life.
 
-### `Getter`
+### `GetterInterface`
 We have some default properties:
 ```php
 $datetime = DateTime::now();
@@ -236,11 +236,11 @@ $datetime->get('ordinal');
 $datetime->get('week');
 $datetime->get('year');
 ```
-Which method will you use isn't important. Both are doing exactly the same. It's just a matter of taste. If you don't find a 
-property which you need, you can add it for yourself. Read more about [`Getter`](getter.md).
+Which method will you use isn't important. Both are doing exactly the same. It's just a matter of taste. If you don't find a
+property which you need, you can add it for yourself. Read more about [`GetterInterface`](getter.md).
 
 ### `Parser`
-Unfortunately, there is no default parser, so if you need one you have to write it for yourself. Read more about [`Parser`](parser.md).
+Unfortunately, there is no default parser, so if you need one you have to write it for yourself. Read more about [`ParserInterface`](parser.md).
 
 ## Getting PHP `DateTime`
 Sometimes you may need a PHP `DateTime`. You can get it by `getDateTime()` method:

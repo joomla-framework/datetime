@@ -11,11 +11,11 @@ namespace Joomla\DateTime\Translator;
 use Symfony\Component\Translation\MessageSelector;
 
 /**
- * Default implementation of Translator.
+ * Default implementation of AbstractTranslator.
  *
  * @since  __DEPLOY_VERSION__
  */
-final class DateTimeTranslator extends Translator
+final class DateTimeTranslator extends AbstractTranslator
 {
 	/**
 	 * @var    MessageSelector

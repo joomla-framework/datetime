@@ -1,13 +1,13 @@
-# Since
-Is used to provide creating nice strings for `DateTime`. There is a default `Since` object called `DateTimeSince`.
-`DateTimeSince` object uses [`Translator`](translator.md) to handling internalization of these strings. So if
-you would like to change only translation funcionality then you don't need to change whole `Since` object, but
-only create a new [`Translator`](translator.md).
+# SinceInterface
+Is used to provide creating nice strings for `DateTime`. There is a default `SinceInterface` object called `DateTimeSince`.
+`DateTimeSince` object uses [`AbstractTranslator`](translator.md) to handling internalization of these strings. So if
+you would like to change only translation funcionality then you don't need to change whole `SinceInterface` object, but
+only create a new [`AbstractTranslator`](translator.md).
 
-## Custom `Since`
-Create a class which will be implementing `Since` interface:
+## Custom `SinceInterface`
+Create a class which will be implementing `SinceInterface` interface:
 ```php
-interface Since
+interface SinceInterface
 {
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1);
 
@@ -16,7 +16,7 @@ interface Since
 ```
 If you want to see any example of that class, let's look at [`DateTimeSince`](../src/Since/DateTimeSince.php).
 
-To inject your `Since` object into `DateTime`:
+To inject your `SinceInterface` object into `DateTime`:
 ```php
 DateTime::setSince(new MySince());
 ```

@@ -9,11 +9,11 @@
 namespace Joomla\DateTime\Strategy;
 
 /**
- * Default implementation of Strategy interface.
+ * Default implementation of StrategyInterface.
  *
  * @since  __DEPLOY_VERSION__
  */
-class DateTimeStrategy implements Strategy
+class DateTimeStrategy implements StrategyInterface
 {
 	/**
 	 * Sets time for the start of a day.

@@ -15,7 +15,7 @@ use Joomla\DateTime\DateTime;
  *
  * @since  __DEPLOY_VERSION__
  */
-interface Parser
+interface ParserInterface
 {
 	/**
 	 * Parses to DateTime object.

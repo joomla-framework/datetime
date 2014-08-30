@@ -13,7 +13,7 @@ namespace Joomla\DateTime\Translator;
  *
  * @since  __DEPLOY_VERSION__
  */
-abstract class Translator
+abstract class AbstractTranslator
 {
 	/**
 	 * The locale to use.

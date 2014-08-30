@@ -1,26 +1,26 @@
-# Getter
-Is used to provide properties for `DateTime`. There is a default `Getter` object called `DateTimeGetter`. 
-Let's extend a default `Getter` and add two new properties to our `DateTime`.
+# GetterInterface
+Is used to provide properties for `DateTime`. There is a default `GetterInterface` object called `DateTimeGetter`.
+Let's extend a default `GetterInterface` and add two new properties to our `DateTime`.
 
-## Custom `Getter`
-Creating a custom `Getter` is simple. We just need to create a class which will be implementing `Getter`
+## Custom `GetterInterface`
+Creating a custom `Getter` is simple. We just need to create a class which will be implementing `GetterInterface`
 interface:
 ```php
-interface Getter
+interface GetterInterface
 {
 	public function get(DateTime $datetime, $name);
 }
 ```
 
-We don't want to override all properties from default `Getter`. We want to extend it. To do that we will
-do our job for two new properties and delegate rest of the job to another `Getter`:
+We don't want to override all properties from default `GetterInterface`. We want to extend it. To do that we will
+do our job for two new properties and delegate rest of the job to another `GetterInterface`:
 ```php
-class MyGetter implements Getter
+class MyGetter implements GetterInterface
 {
-	/** @var Getter */
+	/** @var GetterInterface */
 	private $getter;
 
-	public function __construct(Getter $getter)
+	public function __construct(GetterInterface $getter)
 	{
 		$this->getter = $getter;
 	}

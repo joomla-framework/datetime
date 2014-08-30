@@ -384,13 +384,13 @@ class Date
 	/**
 	 * Sets the Translator implementation.
 	 *
-	 * @param   Translator\Translator  $translator  The Translator implementation.
+	 * @param   Translator\AbstractTranslator  $translator  The Translator implementation.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public static function setTranslator(Translator\Translator $translator)
+	public static function setTranslator(Translator\AbstractTranslator $translator)
 	{
 		DateTime::setTranslator($translator);
 	}

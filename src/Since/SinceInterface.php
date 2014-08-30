@@ -15,7 +15,7 @@ use Joomla\DateTime\DateTime;
  *
  * @since  __DEPLOY_VERSION__
  */
-interface Since
+interface SinceInterface
 {
 	/**
 	 * Returns the difference in a human readable format.

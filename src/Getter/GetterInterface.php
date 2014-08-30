@@ -8,24 +8,22 @@
 
 namespace Joomla\DateTime\Getter;
 
-use Joomla\DateTime\DateTime;
-
 /**
  * Getter Interface for a DateTime object
  *
  * @since  __DEPLOY_VERSION__
  */
-interface Getter
+interface GetterInterface
 {
 	/**
 	 * Return a value of the property.
 	 *
-	 * @param   DateTime  $datetime  The DateTime object.
-	 * @param   string    $name      The name of the property.
+	 * @param   \Joomla\DateTime\DateTime  $datetime  The DateTime object.
+	 * @param   string                     $name      The name of the property.
 	 *
 	 * @return  mixed
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function get(DateTime $datetime, $name);
+	public function get(\Joomla\DateTime\DateTime $datetime, $name);
 }
