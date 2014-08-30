@@ -1,6 +1,7 @@
 <?php
-
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,46 +11,78 @@ namespace Joomla\DateTime;
 /**
  * DateTime.
  *
- * @property-read  string   $daysinmonth   t - Number of days in the given month.
- * @property-read  string   $dayofweek     N - ISO-8601 numeric representation of the day of the week.
- * @property-read  string   $dayofyear     z - The day of the year (starting from 0).
- * @property-read  boolean  $isleapyear    L - Whether it's a leap year.
- * @property-read  string   $day           d - Day of the month, 2 digits with leading zeros.
- * @property-read  string   $hour          H - 24-hour format of an hour with leading zeros.
- * @property-read  string   $minute        i - Minutes with leading zeros.
- * @property-read  string   $second        s - Seconds with leading zeros.
- * @property-read  string   $month         m - Numeric representation of a month, with leading zeros.
- * @property-read  string   $ordinal       S - English ordinal suffix for the day of the month, 2 characters.
- * @property-read  string   $week          W - Numeric representation of the day of the week.
- * @property-read  string   $year          Y - A full numeric representation of a year, 4 digits.
- * @since  2.0
+ * @property-read  string   $daysinmonth  t - Number of days in the given month.
+ * @property-read  string   $dayofweek    N - ISO-8601 numeric representation of the day of the week.
+ * @property-read  string   $dayofyear    z - The day of the year (starting from 0).
+ * @property-read  boolean  $isleapyear   L - Whether it's a leap year.
+ * @property-read  string   $day          d - Day of the month, 2 digits with leading zeros.
+ * @property-read  string   $hour         H - 24-hour format of an hour with leading zeros.
+ * @property-read  string   $minute       i - Minutes with leading zeros.
+ * @property-read  string   $second       s - Seconds with leading zeros.
+ * @property-read  string   $month        m - Numeric representation of a month, with leading zeros.
+ * @property-read  string   $ordinal      S - English ordinal suffix for the day of the month, 2 characters.
+ * @property-read  string   $week         W - Numeric representation of the day of the week.
+ * @property-read  string   $year         Y - A full numeric representation of a year, 4 digits.
+ * @since          __DEPLOY_VERSION__
  */
 class DateTime
 {
-	/** @var Getter\Getter */
+	/**
+	 * Getter Interface
+	 *
+	 * @var    Getter\Getter
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private static $getter;
 
-	/** @var Parser\Parser */
+	/**
+	 * Parser Interface
+	 *
+	 * @var    Parser\Parser
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private static $parser;
 
-	/** @var Since\Since */
+	/**
+	 * Since Interface
+	 *
+	 * @var    Since\Since
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private static $since;
 
-	/** @var Translator\Translator */
+	/**
+	 * Translator object
+	 *
+	 * @var    Translator\Translator
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private static $translator;
 
-	/** @var Strategy\Strategy */
+	/**
+	 * Strategy Interface
+	 *
+	 * @var    Strategy\Strategy
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private $strategy;
 
-	/** @var \DateTime */
+	/**
+	 * PHP DateTime object
+	 *
+	 * @var    \DateTime
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private $datetime;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param   mixed          $datetime  Might be a Joomla\Date object or a PHP DateTime object
-	 *                                     or a string in a format accepted by strtotime().
+	 * @param   mixed          $datetime  Either a Joomla\Date object, a PHP DateTime object
+	 *                                    or a string in a format accepted by strtotime().
 	 * @param   \DateTimeZone  $timezone  The timezone.
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __construct($datetime, \DateTimeZone $timezone = null)
 	{
@@ -78,7 +111,9 @@ class DateTime
 	 * @param   string  $name   Name of the parser.
 	 * @param   mixed   $value  The value to parse.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function parse($name, $value)
 	{
@@ -92,7 +127,9 @@ class DateTime
 	 * @param   string         $time      String representing the time.
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function createFromFormat($format, $time, \DateTimeZone $timezone = null)
 	{
@@ -112,7 +149,9 @@ class DateTime
 	 * @param   integer        $second    The second.
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function create($year, $month = '01', $day = '01', $hour = '00', $minute = '00', $second = '00', \DateTimeZone $timezone = null)
 	{
@@ -129,7 +168,9 @@ class DateTime
 	 * @param   integer        $day       The day of the month.
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function createFromDate($year, $month = '01', $day = '01', \DateTimeZone $timezone = null)
 	{
@@ -144,7 +185,9 @@ class DateTime
 	 * @param   integer        $second    The second.
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function createFromTime($hour = '00', $minute = '00', $second = '00', \DateTimeZone $timezone = null)
 	{
@@ -156,7 +199,9 @@ class DateTime
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function now(\DateTimeZone $timezone = null)
 	{
@@ -168,7 +213,9 @@ class DateTime
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function today(\DateTimeZone $timezone = null)
 	{
@@ -180,7 +227,9 @@ class DateTime
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
@@ -194,7 +243,9 @@ class DateTime
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function yesterday(\DateTimeZone $timezone = null)
 	{
@@ -208,7 +259,9 @@ class DateTime
 	 *
 	 * @param   DateTime  $datetime  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function isAfter(DateTime $datetime)
 	{
@@ -220,7 +273,9 @@ class DateTime
 	 *
 	 * @param   DateTime  $datetime  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function isBefore(DateTime $datetime)
 	{
@@ -232,7 +287,9 @@ class DateTime
 	 *
 	 * @param   DateTime  $datetime  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function equals(DateTime $datetime)
 	{
@@ -245,7 +302,9 @@ class DateTime
 	 * @param   DateTime  $datetime  The date to compare to.
 	 * @param   boolean   $absolute  Should the interval be forced to be positive?
 	 *
-	 * @return DateInterval
+	 * @return  DateInterval
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function diff(DateTime $datetime, $absolute = false)
 	{
@@ -257,12 +316,14 @@ class DateTime
 	 *
 	 * @param   DateInterval  $interval  The interval to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function add(DateInterval $interval)
 	{
 		return $this->modify(
-			function(\DateTime $datetime) use($interval)
+			function(\DateTime $datetime) use ($interval)
 			{
 				$datetime->add($interval->getDateInterval());
 			}
@@ -274,12 +335,14 @@ class DateTime
 	 *
 	 * @param   DateInterval  $interval  The interval to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function sub(DateInterval $interval)
 	{
 		return $this->modify(
-			function(\DateTime $datetime) use($interval)
+			function(\DateTime $datetime) use ($interval)
 			{
 				$datetime->sub($interval->getDateInterval());
 			}
@@ -287,11 +350,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding days to the current one.
+	 * Returns a new DateTime object by adding the specified number of days to the current one.
 	 *
 	 * @param   integer  $value  Number of days to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addDays($value)
 	{
@@ -299,11 +364,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting days from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of days from the current one.
 	 *
 	 * @param   integer  $value  Number of days to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subDays($value)
 	{
@@ -311,11 +378,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding weeks to the current one.
+	 * Returns a new DateTime object by adding the specified number of weeks to the current one.
 	 *
 	 * @param   integer  $value  Number of weeks to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addWeeks($value)
 	{
@@ -323,11 +392,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting weeks from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of weeks from the current one.
 	 *
 	 * @param   integer  $value  Number of weeks to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subWeeks($value)
 	{
@@ -335,11 +406,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding months to the current one.
+	 * Returns a new DateTime object by adding the specified number of months to the current one.
 	 *
 	 * @param   integer  $value  Number of months to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addMonths($value)
 	{
@@ -347,11 +420,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting months from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of months from the current one.
 	 *
 	 * @param   integer  $value  Number of months to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subMonths($value)
 	{
@@ -359,11 +434,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding years to the current one.
+	 * Returns a new DateTime object by adding the specified number of years to the current one.
 	 *
 	 * @param   integer  $value  Number of years to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addYears($value)
 	{
@@ -371,11 +448,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting years from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of years from the current one.
 	 *
 	 * @param   integer  $value  Number of years to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subYears($value)
 	{
@@ -383,11 +462,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding seconds to the current one.
+	 * Returns a new DateTime object by adding the specified number of seconds to the current one.
 	 *
 	 * @param   integer  $value  Number of seconds to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addSeconds($value)
 	{
@@ -395,11 +476,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting seconds from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of seconds from the current one.
 	 *
 	 * @param   integer  $value  Number of seconds to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subSeconds($value)
 	{
@@ -407,11 +490,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding minutes to the current one.
+	 * Returns a new DateTime object by adding the specified number of minutes to the current one.
 	 *
 	 * @param   integer  $value  Number of minutes to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addMinutes($value)
 	{
@@ -419,11 +504,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting minutes from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of minutes from the current one.
 	 *
 	 * @param   integer  $value  Number of minutes to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subMinutes($value)
 	{
@@ -431,11 +518,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by adding hours to the current one.
+	 * Returns a new DateTime object by adding the specified number of hours to the current one.
 	 *
 	 * @param   integer  $value  Number of hours to be added.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addHours($value)
 	{
@@ -443,11 +532,13 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object by subtracting hours from the current one.
+	 * Returns a new DateTime object by subtracting the specified number of hours from the current one.
 	 *
 	 * @param   integer  $value  Number of hours to be subtracted.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subHours($value)
 	{
@@ -455,9 +546,11 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object representing a start of the current day.
+	 * Returns a new DateTime object representing the start of the current day.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfDay()
 	{
@@ -467,7 +560,9 @@ class DateTime
 	/**
 	 * Returns a new DateTime object representing the end of the current day.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfDay()
 	{
@@ -475,9 +570,11 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object representing a start of the current week.
+	 * Returns a new DateTime object representing the start of the current week.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfWeek()
 	{
@@ -489,7 +586,9 @@ class DateTime
 	/**
 	 * Returns a new DateTime object representing the end of the current week.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfWeek()
 	{
@@ -499,9 +598,11 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object representing a start of the current month.
+	 * Returns a new DateTime object representing the start of the current month.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfMonth()
 	{
@@ -513,7 +614,9 @@ class DateTime
 	/**
 	 * Returns a new DateTime object representing the end of the current month.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfMonth()
 	{
@@ -523,9 +626,11 @@ class DateTime
 	}
 
 	/**
-	 * Returns a new DateTime object representing a start of the current year.
+	 * Returns a new DateTime object representing the start of the current year.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfYear()
 	{
@@ -537,7 +642,9 @@ class DateTime
 	/**
 	 * Returns a new DateTime object representing the end of the current year.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfYear()
 	{
@@ -551,18 +658,20 @@ class DateTime
 	 *
 	 * @param   string  $format  Format accepted by date().
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function format($format)
 	{
 		$replace = array();
 
-		/** Loop all format characters and check if we can translate them. */
+		// Loop all format characters and check if we can translate them.
 		for ($i = 0; $i < strlen($format); $i++)
 		{
 			$character = $format[$i];
 
-			/** Check if we can replace it with a translated version. */
+			// Check if we can replace it with a translated version.
 			if (in_array($character, array('D', 'l', 'F', 'M')))
 			{
 				switch ($character)
@@ -580,13 +689,13 @@ class DateTime
 				$original = $this->datetime->format($character);
 				$translated = $this->getTranslator()->get(strtolower($key));
 
-				/** Short notations. */
+				// Short notations.
 				if (in_array($character, array('D', 'M')))
 				{
 					$translated = substr($translated, 0, 3);
 				}
 
-				/** Add to replace list. */
+				// Add to replace list.
 				if ($translated && $original != $translated)
 				{
 					$replace[$original] = $translated;
@@ -594,7 +703,7 @@ class DateTime
 			}
 		}
 
-		/** Replace translations. */
+		// Replace translations.
 		if ($replace)
 		{
 			return str_replace(array_keys($replace), array_values($replace), $this->datetime->format($format));
@@ -610,7 +719,9 @@ class DateTime
 	 *                                   the current object will be compared to the current time.
 	 * @param   integer   $detailLevel  How much details do you want to get.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function since(DateTime $datetime = null, $detailLevel = 1)
 	{
@@ -623,7 +734,9 @@ class DateTime
 	 * @param   DateTime  $datetime  The date to compare to. Default is null and this means that
 	 *                                the current object will be compared to the current time.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function sinceAlmost(DateTime $datetime = null)
 	{
@@ -635,7 +748,9 @@ class DateTime
 	 *
 	 * @param   string  $name  The name of the property.
 	 *
-	 * @return mixed
+	 * @return  mixed
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __get($name)
 	{
@@ -647,7 +762,9 @@ class DateTime
 	 *
 	 * @param   string  $name  The name of the property.
 	 *
-	 * @return mixed
+	 * @return  mixed
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function get($name)
 	{
@@ -657,7 +774,9 @@ class DateTime
 	/**
 	 * Returns the timezone offset.
 	 *
-	 * @return integer
+	 * @return  integer
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getOffset()
 	{
@@ -667,7 +786,9 @@ class DateTime
 	/**
 	 * Returns the Unix timestamp representing the date.
 	 *
-	 * @return integer
+	 * @return  integer
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getTimestamp()
 	{
@@ -677,7 +798,9 @@ class DateTime
 	/**
 	 * Returns a DateTimeZone object.
 	 *
-	 * @return \DateTimeZone
+	 * @return  \DateTimeZone
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getTimezone()
 	{
@@ -687,7 +810,9 @@ class DateTime
 	/**
 	 * Returns a PHP DateTime object.
 	 *
-	 * @return \DateTime
+	 * @return  \DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getDateTime()
 	{
@@ -699,7 +824,9 @@ class DateTime
 	 *
 	 * @param   Since\Since  $since  The Since implementation.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function setSince(Since\Since $since)
 	{
@@ -711,7 +838,9 @@ class DateTime
 	 *
 	 * @param   Translator\Translator  $translator  The Translator implementation.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function setTranslator(Translator\Translator $translator)
 	{
@@ -723,7 +852,9 @@ class DateTime
 	 *
 	 * @param   Getter\Getter  $getter  The Getter implementation.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function setGetter(Getter\Getter $getter)
 	{
@@ -735,7 +866,9 @@ class DateTime
 	 *
 	 * @param   Parser\Parser  $parser  The Parser implementation.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function setParser(Parser\Parser $parser)
 	{
@@ -747,7 +880,9 @@ class DateTime
 	 *
 	 * @param   string  $locale  The locale to set.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function setLocale($locale)
 	{
@@ -757,7 +892,9 @@ class DateTime
 	/**
 	 * Gets the Translator implementation.
 	 *
-	 * @return Translator\Translator
+	 * @return  Translator\Translator
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function getTranslator()
 	{
@@ -774,7 +911,9 @@ class DateTime
 	 *
 	 * @param   Strategy\Strategy  $strategy  The Strategy implementation.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	protected function setStrategy(Strategy\Strategy $strategy)
 	{
@@ -784,7 +923,9 @@ class DateTime
 	/**
 	 * Gets the Strategy implementation.
 	 *
-	 * @return Strategy\Strategy
+	 * @return  Strategy\Strategy
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	protected function getStrategy()
 	{
@@ -802,7 +943,9 @@ class DateTime
 	 * @param   integer  $value   The value for the format.
 	 * @param   string   $format  The interval_spec for sprintf(), eg. 'P%sD'.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function calc($value, $format)
 	{
@@ -817,7 +960,9 @@ class DateTime
 	 *
 	 * @param   callable  $callable  The callable with modifications of PHP DateTime object.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function modify($callable)
 	{
@@ -832,7 +977,9 @@ class DateTime
 	 *
 	 * @param   DateTime  $result  A result of months or years addition
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function fixMonth(DateTime $result)
 	{
@@ -848,7 +995,9 @@ class DateTime
 	/**
 	 * Gets the Since implementation.
 	 *
-	 * @return Since\Since
+	 * @return  Since\Since
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private static function getSince()
 	{
@@ -863,7 +1012,9 @@ class DateTime
 	/**
 	 * Gets the Getter implementation.
 	 *
-	 * @return Getter\Getter
+	 * @return  Getter\Getter
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private static function getGetter()
 	{
@@ -878,7 +1029,9 @@ class DateTime
 	/**
 	 * Gets the Parser implementation.
 	 *
-	 * @return Parser\Parser
+	 * @return  Parser\Parser
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private static function getParser()
 	{

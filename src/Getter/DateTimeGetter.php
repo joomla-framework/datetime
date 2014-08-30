@@ -1,5 +1,7 @@
 <?php
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,9 +11,9 @@ namespace Joomla\DateTime\Getter;
 use Joomla\DateTime\DateTime;
 
 /**
- * Default implemenation of Getter interface.
+ * Default implementation of Getter interface.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
 final class DateTimeGetter implements Getter
 {
@@ -21,7 +23,9 @@ final class DateTimeGetter implements Getter
 	 * @param   DateTime  $datetime  The DateTime object.
 	 * @param   string    $name      The name of the property.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function get(DateTime $datetime, $name)
 	{
@@ -79,9 +83,7 @@ final class DateTimeGetter implements Getter
 
 			default:
 				$trace = debug_backtrace();
-				trigger_error(
-						'Undefined property: ' . $name . ' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_NOTICE
-				);
+				trigger_error('Undefined property: ' . $name . ' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_NOTICE);
 		}
 
 		return $value;

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,9 +11,9 @@ namespace Joomla\DateTime\Since;
 use Joomla\DateTime\DateTime;
 
 /**
- * Since.
+ * Since Interface for a DateTime object
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
 interface Since
 {
@@ -20,10 +22,12 @@ interface Since
 	 *
 	 * @param   DateTime  $base         The base date.
 	 * @param   DateTime  $datetime     The date to compare to. Default is null and this means that
-	 *                                   the base date will be compared to the current time.
-	 * @param   integer   $detailLevel  How much details do you want to get.
+	 *                                  the base date will be compared to the current time.
+	 * @param   integer   $detailLevel  The level of detail to retrieve.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1);
 
@@ -32,9 +36,11 @@ interface Since
 	 *
 	 * @param   DateTime  $base      The base date.
 	 * @param   DateTime  $datetime  The date to compare to. Default is null and this means that
-	 *                                the base date will be compared to the current time.
+	 *                               the base date will be compared to the current time.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function almost(DateTime $base, DateTime $datetime = null);
 }

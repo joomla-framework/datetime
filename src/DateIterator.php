@@ -1,5 +1,7 @@
 <?php
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,7 +11,7 @@ namespace Joomla\DateTime;
 /**
  * Iterator for ranges of Date objects.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
 class DateIterator extends DateTimeIterator
 {
@@ -18,6 +20,8 @@ class DateIterator extends DateTimeIterator
 	 *
 	 * @param   Date  $start  The start date.
 	 * @param   Date  $end    The end date.
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __construct(Date $start, Date $end)
 	{
@@ -27,7 +31,9 @@ class DateIterator extends DateTimeIterator
 	/**
 	 * Returns the current date.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function current()
 	{

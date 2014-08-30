@@ -1,5 +1,7 @@
 <?php
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -7,9 +9,9 @@
 namespace Joomla\DateTime\Strategy;
 
 /**
- * Strategy.
+ * Strategy Interface for a DateTime object
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
 interface Strategy
 {
@@ -18,7 +20,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfDay(\DateTime $datetime);
 
@@ -27,7 +31,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfDay(\DateTime $datetime);
 
@@ -36,7 +42,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfWeek(\DateTime $datetime);
 
@@ -45,7 +53,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfWeek(\DateTime $datetime);
 
@@ -54,7 +64,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfMonth(\DateTime $datetime);
 
@@ -63,7 +75,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfMonth(\DateTime $datetime);
 
@@ -72,7 +86,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfYear(\DateTime $datetime);
 
@@ -81,7 +97,9 @@ interface Strategy
 	 *
 	 * @param   \DateTime  $datetime  The DateTime object.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfYear(\DateTime $datetime);
 }
