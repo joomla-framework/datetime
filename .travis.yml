@@ -10,8 +10,9 @@ before_script:
     - composer require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
 
 script:
-    - mkdir -p build/logs
-    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+    - mkdir -p .travis/logs
+    - vendor/bin/phpunit --coverage-clover .travis/logs/clover.xml
+    - vendor/bin/phpcs -p --report=full --extensions=php --standard=.travis/phpcs/Joomla/ruleset.xml src/
 
 after_script:
     - php vendor/bin/coveralls -v
