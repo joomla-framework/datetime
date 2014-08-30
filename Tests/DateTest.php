@@ -5,7 +5,10 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\DateTime;
+namespace Joomla\DateTime\Test;
+
+use Joomla\DateTime\Date;
+use Joomla\DateTime\DateInterval;
 
 /**
  * Tests for Date class.
@@ -100,7 +103,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addDays
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::addDays
 	 */
 	public function testCanCreateAnObjectByAddingDaysToIt(Date $sut, $value, Date $expected)
 	{
@@ -116,7 +119,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subDays
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::subDays
 	 */
 	public function testCanCreateAnObjectBySubtractingDaysFromIt(Date $sut, $value, Date $expected)
 	{
@@ -132,7 +135,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addWeeks
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::addWeeks
 	 */
 	public function testCanCreateAnObjectByAddingWeeksToIt(Date $sut, $value, Date $expected)
 	{
@@ -148,7 +151,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subWeeks
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::subWeeks
 	 */
 	public function testCanCreateAnObjectBySubtractingWeeksFromIt(Date $sut, $value, Date $expected)
 	{
@@ -164,7 +167,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addMonths
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::addMonths
 	 */
 	public function testCanCreateAnObjectByAddingMonthsToIt(Date $sut, $value, Date $expected)
 	{
@@ -180,7 +183,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subMonths
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::subMonths
 	 */
 	public function testCanCreateAnObjectBySubtractingMonthsFromIt(Date $sut, $value, Date $expected)
 	{
@@ -196,7 +199,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::addYears
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::addYears
 	 */
 	public function testCanCreateAnObjectByAddingYearsToIt(Date $sut, $value, Date $expected)
 	{
@@ -212,7 +215,7 @@ final class DateTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDate::subYears
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDate::subYears
 	 */
 	public function testCanCreateAnObjectBySubtractingYearsFromIt(Date $sut, $value, Date $expected)
 	{

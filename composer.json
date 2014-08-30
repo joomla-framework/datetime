@@ -15,7 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Joomla\\DateTime\\": ["src/", "tests/"]
+            "Joomla\\DateTime\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Joomla\\DateTime\\Test\\": "Tests/"
         }
     }
 }

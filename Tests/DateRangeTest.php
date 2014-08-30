@@ -4,7 +4,10 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\DateTime;
+namespace Joomla\DateTime\Test;
+
+use Joomla\DateTime\Date;
+use Joomla\DateTime\DateRange;
 
 /**
  * Tests for DateRange class.

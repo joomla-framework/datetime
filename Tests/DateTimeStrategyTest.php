@@ -5,9 +5,10 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\DateTime;
+namespace Joomla\DateTime\Test;
 
-use Joomla\DateTime\Fixture\SchoolYear;
+use Joomla\DateTime\DateTime;
+use Joomla\DateTime\Test\Fixture\SchoolYear;
 
 /**
  * Tests for DateTimeStrategy class.
