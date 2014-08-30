@@ -166,7 +166,7 @@ final class DateInterval
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	private static function copy(\DateInterval $interval)
+	private function copy(\DateInterval $interval)
 	{
 		$copy = new \DateInterval($interval->format('P%yY%mM%dDT%hH%iM%sS'));
 		$copy->invert = $interval->invert;
