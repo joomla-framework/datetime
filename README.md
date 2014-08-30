@@ -1,8 +1,8 @@
 # The DateTime Package
 [![Build Status](https://travis-ci.org/tomaszhanc/gsoc-datetime.svg?branch=master)](https://travis-ci.org/tomaszhanc/gsoc-datetime) [![Coverage Status](https://img.shields.io/coveralls/tomaszhanc/gsoc-datetime.svg)](https://coveralls.io/r/tomaszhanc/gsoc-datetime?branch=master)
 
-This is a DateTime package built for Joomla! Framework during Google Summer of Code 2014.
-The main goal for this library was to create DateTime object as an [immutable Value Object](http://magazine.joomla.org/issues/issue-july-2014/item/2111-the-value-of-value-objects).
+This is a DateTime package built for the Joomla! Framework during Google Summer of Code 2014.
+The main goal for this library was to create a DateTime object as an [Immutable Value Object](http://magazine.joomla.org/issues/issue-july-2014/item/2111-the-value-of-value-objects).
 
 ## Immutability
 If you know how to use PHP `DateTime` object then you know almost everything about that package.

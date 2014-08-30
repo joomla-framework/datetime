@@ -20,13 +20,17 @@ abstract class AbstractTranslator
 	abstract public function choice($item, $number, array $replace = array());
 }
 ```
+
 If you want to see any example of that class, let's look at [`DateTimeTranslator`](../src/Translator/DateTimeTranslator.php).
 
 To inject your `AbstractTranslator` object into `DateTime`:
 ```php
+use Joomla\DateTime\DateTime;
+
 DateTime::setTranslator(new MyTranslator());
 ```
+
 Notice that `setTranslator()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
 
 ## DateTimeTranslator
-This a default `AbstractTranslator` for `DateTime`. It uses a Symfony's `MessageSelector` to handle pluralization.
+The default `AbstractTranslator` for `DateTime`. It uses a Symfony's `MessageSelector` to handle pluralization.

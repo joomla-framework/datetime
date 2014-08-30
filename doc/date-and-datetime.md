@@ -1,12 +1,15 @@
 # Date and DateTime
 
-We have two different classes for dates: `Date` and `DateTime`. `Date` is just a day-precision wrapper around `DateTime`. There is no inheritance between this two.
+We have two different classes for dates: `Date` and `DateTime`. `Date` is just a day-precision wrapper around `DateTime`.
+There is no inheritance between the two classes.
 
 ## Creating dates
 
 ### Constructor
 We can create date objects just like the PHP `DateTime` object ([manual](http://www.php.net/manual/en/datetime.construct.php)):
 ```php
+use Joomla\DateTime;
+
 $datetime = new DateTime('2014-08-24');
 $datetime = new DateTime('2014-08-24 12:00:00');
 
@@ -28,8 +31,10 @@ $date = new Date($datetime);
 ```
 
 ### Factory methods
-We have some factory methods which we can use to create date objects:
+We have several factory methods which can be used to create `Date` and `DateTime` objects:
 ```php
+use Joomla\DateTime;
+
 $datetime = DateTime::createFromFormat('Y-m-d', '2014-08-24');
 
 $datetime = DateTime::create(2014, 8, 24, 12, 0, 0);
@@ -47,7 +52,7 @@ $date = Date::yesterday();
 ```
 
 ## Comparing dates
-We have 4 methods to compare object with each other. Names of methods are the same for `Date` and `DateTime`:
+We have four methods to compare objects with each other. The names of the methods are the same for `Date` and `DateTime`:
 ```php
 $today = Date::today();
 
@@ -62,12 +67,15 @@ $today->equals(Date::today());       // true
 
 $interval = $today->diff(Date::tomorrow());
 ```
-`diff()` method is returning [`DateInterval`](dateinterval.md) object. It's not the PHP `DateInterval`.
+
+The `diff()` method is returning a [`\Joomla\DateTime\DateInterval`](dateinterval.md) object. It's not the PHP `\DateInterval`.
 
 ## Addition and subtraction
 We have a bunch of manipulating methods. __We have to remember that all those methods don't change the value of the current
 object. They create a new one:__
 ```php
+use Joomla\DateTime;
+
 $date = Date::today();
 
 $date = $date->addDays(1);
@@ -101,6 +109,8 @@ $datetime = $datetime->sub(new DateInterval('P1D'));
 ## Start date and end date
 The same rule as above - all those methods create a new object:
 ```php
+use Joomla\DateTime;
+
 $date = Date::today();
 
 $date = $date->startOfWeek();  // Monday of the current week at 00:00:00
@@ -125,13 +135,18 @@ Behaviour of all of those methods can be changed using different strategies. Rea
 ### `format()` method
 We can format date objects like the PHP `DateTime` object ([manual](http://www.php.net/manual/en/function.date.php)):
 ```php
+use Joomla\DateTime;
+
 $date = new Date('2014-08-24');
 
 echo $date->format('Y-m-d');    // 2014-08-24
 echo $date->format('l, d F Y'); // Sunday, 24 August 2014
 ```
-It's possible to get translated values for name of days and name of months. For example for polish translations:
+
+It's possible to get translated values for name of days and months. For example for Polish translations:
 ```php
+use Joomla\DateTime;
+
 Date::setLocale('pl');
 echo $date->format('l, d F Y') . "\n"; // Niedziela, 24 sierpień 2014
 ```
@@ -142,6 +157,8 @@ Notice that `setLocale()` is a static method, so it'll be a good idea to call it
 ### `since()`, `sinceAlmost()` method
 The easiest way to explain what these two do is by an example:
 ```php
+use Joomla\DateTime\DateTime;
+
 $now = DateTime::now();
 
 /** We're using subtraction here because we want objects for dates before 'now' */
@@ -165,10 +182,13 @@ echo $today->since(DateTime::tomorrow());  // 1 day ago
 $datetime = $now->subMinutes(55);
 echo $datetime->sinceAlmost(); // almost 1 hour ago
 ```
-`since()` method gets two arguments: date to compare to (defaults = `null`, which means `now`) and detailLevel (defaults = `1`).
-The first one is obvious so let's focus on the second one - this is how many informations do you wanna get. Again, an example
-will explain it better than my words:
+
+The `since()` method gets two arguments: date to compare to (defaults = `null`, which means `now`) and detailLevel (defaults = `1`).
+The first one is obvious so let's focus on the second one - this is the level of detail you want to retrieve. Again, an example
+will explain it better:
 ```php
+use Joomla\DateTime\DateTime;
+
 $now = DateTime::now();
 $datetime = $now->subMinutes(75)->subSeconds(20);
 
@@ -177,10 +197,13 @@ echo $datetime->since(DateTime::now(), 1); // 1 hour ago
 echo $datetime->since(DateTime::now(), 2); // 1 hour and 15 minutes ago
 echo $datetime->since(DateTime::now(), 3); // 1 hour, 15 minutes and 20 seconds ago
 ```
+
 If you don't like it you can provide your own object to handle creation process of these strings. Read more about [`SinceInterface`](since.md).
 
-It's possible to get translated values for these strings. For example for polish translations:
+It's possible to get translated values for these strings. For example for Polish translations:
 ```php
+use Joomla\DateTime;
+
 Date::setLocale('pl');
 
 $now = DateTime::now();
@@ -204,6 +227,8 @@ classes and give some way to customize it. That's how [`GetterInterface`](getter
 ### `GetterInterface`
 We have some default properties:
 ```php
+use Joomla\DateTime\DateTime;
+
 $datetime = DateTime::now();
 
 $datetime->daysinmonth; // Number of days in the given month
@@ -219,8 +244,11 @@ $datetime->ordinal;     // English ordinal suffix for the day of the month, 2 ch
 $datetime->week;        // Numeric representation of the day of the week
 $datetime->year;        // A full numeric representation of a year, 4 digits
 ```
+
 That's the property-syntax access, but we can also get the same result by calling the `get()` method:
 ```php
+use Joomla\DateTime\DateTime;
+
 $datetime = DateTime::now();
 
 $datetime->get('daysinmonth');
@@ -236,6 +264,7 @@ $datetime->get('ordinal');
 $datetime->get('week');
 $datetime->get('year');
 ```
+
 Which method will you use isn't important. Both are doing exactly the same. It's just a matter of taste. If you don't find a
 property which you need, you can add it for yourself. Read more about [`GetterInterface`](getter.md).
 
@@ -245,6 +274,8 @@ Unfortunately, there is no default parser, so if you need one you have to write 
 ## Getting PHP `DateTime`
 Sometimes you may need a PHP `DateTime`. You can get it by `getDateTime()` method:
 ```php
+use Joomla\DateTime\DateTime;
+
 $datetime = DateTime::today();
 $phpDatetime = $datetime->getDateTime();
 ```

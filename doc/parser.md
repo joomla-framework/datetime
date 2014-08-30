@@ -10,6 +10,7 @@ interface ParserInterface
 	public function parse($name, $value);
 }
 ```
+
 We can take the same approach like when creating a custom [`GetterInterface`](getter.md), but we can do something
 prettier. To do that we will create a `MyParser` class by extending `AbstractParser`:
 ```php
@@ -21,9 +22,12 @@ abstract class AbstractParser implements ParserInterface
 	}
 }
 ```
+
 `AbstractParser` implements a `parse()` method for us, so we don't need to do it. We just need to create
 a method for our parser:
 ```php
+use Joomla\DateTime\Parser\AbstractParser;
+
 class MyParser extends AbstractParser
 {
 	public function fromTimestamp($timestamp)
@@ -38,6 +42,8 @@ class MyParser extends AbstractParser
 
 And now we can inject `MyParser` into a `DateTime` class:
 ```php
+use Joomla\DateTime\DateTime;
+
 DateTime::setParser(new MyParser());
 
 $datetime = DateTime::parse('fromTimestamp', 1408838400); // first argument is a name of the method in MyParser class

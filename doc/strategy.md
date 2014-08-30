@@ -23,6 +23,7 @@ interface StrategyInterface
 	public function endOfYear(\DateTime $datetime);
 }
 ```
+
 `DateTimeStrategy` implements that interface and returns the following values:
 ```php
 startOfDay()    // The current day at 00:00:00
@@ -38,10 +39,12 @@ startOfYear()   // First day of the current year at 00:00:00
 endOfYear()     // Last day of the current year at 23:59:59
 ```
 
-Let's say that we want to change the return values of `startOfDay()` and `endOfDay()` to 9.00 and 17.00.
+Let's say that we want to change the return values of `startOfDay()` and `endOfDay()` to 9:00 and 17:00.
 In fact we want to only override two default behaviours so it's better to create class by extending `DateTimeStrategy`
 instead of by implementing `StrategyInterface`.
 ```php
+use Joomla\DateTime\Strategy\DateTimeStrategy;
+
 class MyStrategy extends DateTimeStrategy
 {
 	public function startOfDay(\DateTime $datetime)
@@ -55,6 +58,7 @@ class MyStrategy extends DateTimeStrategy
 	}
 }
 ```
+
 Notice that in all methods of a `StrategyInterface` we get a PHP `DateTime` object and we make a use of its mutability.
 All changes we're making to that PHP `DateTime` object and we even don't need to return it.
 
@@ -66,6 +70,8 @@ is also not a good idea. We also can't set a `StrategyInterface` for our objects
 not expecting results. So to don't remember if we set some or not, we need an object to tell us about it. How to do that?
 Create a custom `DateTime` and set a `StrategyInterface` in a `constructor`:
 ```php
+use Joomla\DateTime\DateTime;
+
 class MyDateTime extends DateTime
 {
 	public function __construct($datetime, \DateTimeZone $timezone = null)
@@ -75,4 +81,5 @@ class MyDateTime extends DateTime
 	}
 }
 ```
+
 And now everywhere when we would have a `MyDateTime` object we'll be certain that this object has changed behavior of some methods.

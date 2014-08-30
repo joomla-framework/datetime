@@ -3,7 +3,7 @@ Is used to provide properties for `DateTime`. There is a default `GetterInterfac
 Let's extend a default `GetterInterface` and add two new properties to our `DateTime`.
 
 ## Custom `GetterInterface`
-Creating a custom `Getter` is simple. We just need to create a class which will be implementing `GetterInterface`
+Creating a custom `GetterInterface` is simple. We just need to create a class which will be implementing `GetterInterface`
 interface:
 ```php
 interface GetterInterface
@@ -15,6 +15,9 @@ interface GetterInterface
 We don't want to override all properties from default `GetterInterface`. We want to extend it. To do that we will
 do our job for two new properties and delegate rest of the job to another `GetterInterface`:
 ```php
+use Joomla\DateTime\DateTime;
+use Joomla\DateTime\Getter\GetterInterface;
+
 class MyGetter implements GetterInterface
 {
 	/** @var GetterInterface */
@@ -50,6 +53,9 @@ class MyGetter implements GetterInterface
 
 And now we can inject `MyGetter` into a `DateTime` class:
 ```php
+use Joomla\DateTime\DateTime;
+use Joomla\DateTime\Getter\DateTimeGetter;
+
 DateTime::setGetter(new MyGetter(new DateTimeGetter()));
 
 $datetime = new DateTime('2014-08-24 12:00:00');

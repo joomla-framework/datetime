@@ -18,6 +18,8 @@ If you want to see any example of that class, let's look at [`DateTimeSince`](..
 
 To inject your `SinceInterface` object into `DateTime`:
 ```php
+use Joomla\DateTime\DateTime;
+
 DateTime::setSince(new MySince());
 ```
 Notice that `setSince()` is a static method, so it'll be a good idea to call it in some bootstrap or setup file.
