@@ -1,1 +1,14 @@
+# IDE #
+.buildpath
+.project
+.settings
+.DS_Store
+.idea
+
+# Composer #
 /vendor
+composer.phar
+composer.lock
+
+# PHPUnit #
+phpunit.xml
