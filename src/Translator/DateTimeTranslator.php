@@ -1,6 +1,7 @@
 <?php
-
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,20 +11,28 @@ namespace Joomla\DateTime\Translator;
 use Symfony\Component\Translation\MessageSelector;
 
 /**
- * Default implemenation of Translator.
+ * Default implementation of AbstractTranslator.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
-final class DateTimeTranslator extends Translator
+final class DateTimeTranslator extends AbstractTranslator
 {
-	/** @var MessageSelector */
+	/**
+	 * @var    MessageSelector
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private $selector;
 
-	/** @var  array */
+	/**
+	 * @var  array
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private $loaded = array();
 
 	/**
 	 * Constructor.
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __construct()
 	{
@@ -36,7 +45,9 @@ final class DateTimeTranslator extends Translator
 	 * @param   string  $item     The item to translate.
 	 * @param   array   $replace  An replace array.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function get($item, array $replace = array())
 	{
@@ -59,7 +70,9 @@ final class DateTimeTranslator extends Translator
 	 * @param   integer  $number   Number of items for pluralization.
 	 * @param   array    $replace  An replace array.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function choice($item, $number, array $replace = array())
 	{
@@ -73,7 +86,9 @@ final class DateTimeTranslator extends Translator
 	/**
 	 * Loads dictionary.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function load()
 	{
@@ -93,7 +108,9 @@ final class DateTimeTranslator extends Translator
 	/**
 	 * Checks if a dictionary for the current locale is loaded.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function isLoaded()
 	{
@@ -101,12 +118,14 @@ final class DateTimeTranslator extends Translator
 	}
 
 	/**
-	 * Makes replacements.
+	 * Replaces elements in a line.
 	 *
 	 * @param   string  $line     The original line.
 	 * @param   array   $replace  An replace array.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function makeReplacements($line, array $replace)
 	{

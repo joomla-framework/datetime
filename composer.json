@@ -1,12 +1,26 @@
 {
-	"name": "joomla/datetime",
-	"require": {
-		"symfony/translation": "~2.5"
-	},
-	
-	"autoload": {
+    "name": "joomla/datetime",
+    "type": "joomla-package",
+    "description": "Joomla DateTime Package",
+    "keywords": ["joomla", "framework", "datetime"],
+    "homepage": "https://github.com/joomla-framework/datetime",
+    "license": "GPL-2.0+",
+    "require": {
+        "php": ">=5.3.10",
+        "symfony/translation": "~2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "squizlabs/php_codesniffer": "1.*"
+    },
+    "autoload": {
         "psr-4": {
-            "Joomla\\DateTime\\": ["src/", "tests/"]
+            "Joomla\\DateTime\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Joomla\\DateTime\\Test\\": "Tests/"
         }
     }
 }

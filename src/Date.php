@@ -1,5 +1,7 @@
 <?php
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,18 +11,25 @@ namespace Joomla\DateTime;
 /**
  * Day-precision wrapper for a DateTime class.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
 class Date
 {
-	/** @var DateTime */
+	/**
+	 * DateTime object
+	 *
+	 * @var    DateTime
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private $datetime;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param   mixed  $date  Might be a Joomla\DateTime object or a PHP DateTime object
-	 *                         or a string in a format accepted by strtotime().
+	 * @param   mixed  $date  Either a Joomla\DateTime object, a PHP DateTime object
+	 *                        or a string in a format accepted by strtotime().
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __construct($date)
 	{
@@ -37,11 +46,13 @@ class Date
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function today(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::today($timezone));
+		return new static(DateTime::today($timezone));
 	}
 
 	/**
@@ -49,11 +60,13 @@ class Date
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::tomorrow($timezone));
+		return new static(DateTime::tomorrow($timezone));
 	}
 
 	/**
@@ -61,11 +74,13 @@ class Date
 	 *
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function yesterday(\DateTimeZone $timezone = null)
 	{
-		return new Date(DateTime::yesterday($timezone));
+		return new static(DateTime::yesterday($timezone));
 	}
 
 	/**
@@ -73,7 +88,9 @@ class Date
 	 *
 	 * @param   Date  $date  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function isAfter(Date $date)
 	{
@@ -85,7 +102,9 @@ class Date
 	 *
 	 * @param   Date  $date  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function isBefore(Date $date)
 	{
@@ -93,11 +112,13 @@ class Date
 	}
 
 	/**
-	 * Checks if the current date is equals to the date given as parameter.
+	 * Checks if the current date is equal to the date given as parameter.
 	 *
 	 * @param   Date  $date  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function equals(Date $date)
 	{
@@ -110,7 +131,9 @@ class Date
 	 * @param   Date     $date      The date to compare to.
 	 * @param   boolean  $absolute  Should the interval be forced to be positive?
 	 *
-	 * @return DateInterval
+	 * @return  DateInterval
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function diff(Date $date, $absolute = false)
 	{
@@ -118,159 +141,187 @@ class Date
 	}
 
 	/**
-	 * Returns a new Date object by adding days to the current one.
+	 * Returns a new Date object by adding the specified number of days to the current one.
 	 *
 	 * @param   integer  $value  Number of days to be added.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addDays($value)
 	{
-		return new Date($this->datetime->addDays($value));
+		return new static($this->datetime->addDays($value));
 	}
 
 	/**
-	 * Returns a new Date object by subtracting days from the current one.
+	 * Returns a new Date object by subtracting the specified number of days from the current one.
 	 *
 	 * @param   integer  $value  Number of days to be subtracted.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subDays($value)
 	{
-		return new Date($this->datetime->subDays($value));
+		return new static($this->datetime->subDays($value));
 	}
 
 	/**
-	 * Returns a new Date object by adding weeks to the current one.
+	 * Returns a new Date object by adding the specified number of weeks to the current one.
 	 *
 	 * @param   integer  $value  Number of weeks to be added.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addWeeks($value)
 	{
-		return new Date($this->datetime->addWeeks($value));
+		return new static($this->datetime->addWeeks($value));
 	}
 
 	/**
-	 * Returns a new Date object by subtracting weeks from the current one.
+	 * Returns a new Date object by subtracting the specified number of weeks from the current one.
 	 *
 	 * @param   integer  $value  Number of weeks to be subtracted.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subWeeks($value)
 	{
-		return new Date($this->datetime->subWeeks($value));
+		return new static($this->datetime->subWeeks($value));
 	}
 
 	/**
-	 * Returns a new Date object by adding months to the current one.
+	 * Returns a new Date object by adding the specified number of months to the current one.
 	 *
 	 * @param   integer  $value  Number of months to be added.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addMonths($value)
 	{
-		return new Date($this->datetime->addMonths($value));
+		return new static($this->datetime->addMonths($value));
 	}
 
 	/**
-	 * Returns a new Date object by subtracting months from the current one.
+	 * Returns a new Date object by subtracting the specified number of months from the current one.
 	 *
 	 * @param   integer  $value  Number of months to be subtracted.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subMonths($value)
 	{
-		return new Date($this->datetime->subMonths($value));
+		return new static($this->datetime->subMonths($value));
 	}
 
 	/**
-	 * Returns a new Date object by adding years to the current one.
+	 * Returns a new Date object by adding the specified number of years to the current one.
 	 *
 	 * @param   integer  $value  Number of years to be added.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function addYears($value)
 	{
-		return new Date($this->datetime->addYears($value));
+		return new static($this->datetime->addYears($value));
 	}
 
 	/**
-	 * Returns a new Date object by subtracting years from the current one.
+	 * Returns a new Date object by subtracting the specified number of years from the current one.
 	 *
 	 * @param   integer  $value  Number of years to be subtracted.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function subYears($value)
 	{
-		return new Date($this->datetime->subYears($value));
+		return new static($this->datetime->subYears($value));
 	}
 
 	/**
-	 * Returns a new Date object representing a start of the current week.
+	 * Returns a new Date object representing the start of the current week.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfWeek()
 	{
-		return new Date($this->datetime->startOfWeek());
+		return new static($this->datetime->startOfWeek());
 	}
 
 	/**
 	 * Returns a new Date object representing the end of the current week.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfWeek()
 	{
-		return new Date($this->datetime->endOfWeek());
+		return new static($this->datetime->endOfWeek());
 	}
 
 	/**
-	 * Returns a new Date object representing a start of the current month.
+	 * Returns a new Date object representing the start of the current month.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfMonth()
 	{
-		return new Date($this->datetime->startOfMonth());
+		return new static($this->datetime->startOfMonth());
 	}
 
 	/**
 	 * Returns a new Date object representing the end of the current month.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfMonth()
 	{
-		return new Date($this->datetime->endOfMonth());
+		return new static($this->datetime->endOfMonth());
 	}
 
 	/**
-	 * Returns a new Date object representing a start of the current year.
+	 * Returns a new Date object representing the start of the current year.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function startOfYear()
 	{
-		return new Date($this->datetime->startOfYear());
+		return new static($this->datetime->startOfYear());
 	}
 
 	/**
 	 * Returns a new Date object representing the end of the current year.
 	 *
-	 * @return Date
+	 * @return  Date
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function endOfYear()
 	{
-		return new Date($this->datetime->endOfYear());
+		return new static($this->datetime->endOfYear());
 	}
 
 	/**
@@ -278,7 +329,9 @@ class Date
 	 *
 	 * @param   string  $format  Format accepted by date().
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function format($format)
 	{
@@ -292,7 +345,9 @@ class Date
 	 *                                  the current object will be compared to the current time.
 	 * @param   integer  $detailLevel  How much details do you want to get
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function since(Date $date = null, $detailLevel = 1)
 	{
@@ -305,7 +360,9 @@ class Date
 	 * @param   Date  $date  The date to compare to. Default is null and this means that
 	 *                        the current object will be compared to the current time.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function sinceAlmost(Date $date = null)
 	{
@@ -315,7 +372,9 @@ class Date
 	/**
 	 * Returns a PHP DateTime object.
 	 *
-	 * @return \DateTime
+	 * @return  \DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getDateTime()
 	{
@@ -325,11 +384,13 @@ class Date
 	/**
 	 * Sets the Translator implementation.
 	 *
-	 * @param   Translator\Translator  $translator  The Translator implementation.
+	 * @param   Translator\AbstractTranslator  $translator  The Translator implementation.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
-	public static function setTranslator(Translator\Translator $translator)
+	public static function setTranslator(Translator\AbstractTranslator $translator)
 	{
 		DateTime::setTranslator($translator);
 	}
@@ -339,7 +400,9 @@ class Date
 	 *
 	 * @param   string  $locale  The locale to set.
 	 *
-	 * @return void
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function setLocale($locale)
 	{
@@ -351,7 +414,9 @@ class Date
 	 *
 	 * @param   Date  $date  Date to cast.
 	 *
-	 * @return DateTime | null
+	 * @return  DateTime|null
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private static function cast(Date $date = null)
 	{

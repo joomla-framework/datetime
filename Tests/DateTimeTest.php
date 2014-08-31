@@ -4,7 +4,11 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\DateTime;
+namespace Joomla\DateTime\Test;
+
+use Joomla\DateTime\DateInterval;
+use Joomla\DateTime\DateTime;
+use Joomla\DateTime\Getter\DateTimeGetter;
 
 /**
  * Tests for DateTime class.
@@ -36,7 +40,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::createFactoryMethod
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::createFactoryMethod
 	 */
 	public function testCanCreateAnObjectViaCreateFactoryMethod($year, $month, $day, $hour, $minute, $second, DateTime $expected)
 	{
@@ -53,7 +57,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::createFromDateFactoryMethod
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::createFromDateFactoryMethod
 	 */
 	public function testCanCreateAnObjectViaCreateFromDateFactoryMethod($year, $month, $day, DateTime $expected)
 	{
@@ -70,7 +74,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::createFromTimeFactoryMethod
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::createFromTimeFactoryMethod
 	 */
 	public function testCanCreateAnObjectViaCreateFromTimeFactoryMethod($hour, $minute, $second, DateTime $expected)
 	{
@@ -186,7 +190,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addDays
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addDays
 	 */
 	public function testCanCreateAnObjectByAddingDaysToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -202,7 +206,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subDays
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subDays
 	 */
 	public function testCanCreateAnObjectBySubtractingDaysFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -218,7 +222,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addWeeks
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addWeeks
 	 */
 	public function testCanCreateAnObjectByAddingWeeksToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -234,7 +238,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subWeeks
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subWeeks
 	 */
 	public function testCanCreateAnObjectBySubtractingWeeksFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -250,7 +254,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addMonths
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addMonths
 	 */
 	public function testCanCreateAnObjectByAddingMonthsToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -266,7 +270,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subMonths
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subMonths
 	 */
 	public function testCanCreateAnObjectBySubtractingMonthsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -282,7 +286,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addYears
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addYears
 	 */
 	public function testCanCreateAnObjectByAddingYearsToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -298,7 +302,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subYears
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subYears
 	 */
 	public function testCanCreateAnObjectBySubtractingYearsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -314,7 +318,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addSeconds
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addSeconds
 	 */
 	public function testCanCreateAnObjectByAddingSecondsToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -330,7 +334,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subSeconds
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subSeconds
 	 */
 	public function testCanCreateAnObjectBySubtractingSecondsFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -346,7 +350,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addMinutes
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addMinutes
 	 */
 	public function testCanCreateAnObjectByAddingMinutesToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -362,7 +366,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subMinutes
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subMinutes
 	 */
 	public function testCanCreateAnObjectBySubtractingMinutesFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -378,7 +382,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::addHours
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::addHours
 	 */
 	public function testCanCreateAnObjectByAddingHoursToIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -394,7 +398,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::subHours
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::subHours
 	 */
 	public function testCanCreateAnObjectBySubtractingHoursFromIt(DateTime $sut, $value, DateTime $expected)
 	{
@@ -499,7 +503,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::since
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::since
 	 */
 	public function testCanCreateAStringOfATimeDifference($detailLevel, DateTime $since, DateTime $sut, $string)
 	{
@@ -516,7 +520,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::since_pl
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::since_pl
 	 */
 	public function testCanCreateAStringOfATimeDifferenceInPolishLanguage($detailLevel, DateTime $since, DateTime $sut, $string)
 	{
@@ -533,7 +537,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::sinceAlmost
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::sinceAlmost
 	 */
 	public function testCanCreateAStringOfAlmostTimeDifference(DateTime $since, DateTime $sut, $string)
 	{
@@ -549,7 +553,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::sinceAlmost_pl
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::sinceAlmost_pl
 	 */
 	public function testCanCreateAStringOfAlmostTimeDifferenceInPolishLanguage(DateTime $since, DateTime $sut, $string)
 	{
@@ -614,7 +618,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::DateTimeGetter
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::DateTimeGetter
 	 */
 	public function testHasProperties(DateTime $datetime, $property, $propertyValue)
 	{
@@ -643,11 +647,11 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::DummyGetter
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::DummyGetter
 	 */
 	public function testCanBeEasilyExtendedByCustomProperties(DateTime $datetime, $property, $propertyValue)
 	{
-		DateTime::setGetter(new Fixture\DummyGetter(new Getter\DateTimeGetter));
+		DateTime::setGetter(new Fixture\DummyGetter(new DateTimeGetter));
 		$this->assertEquals($propertyValue, $datetime->$property);
 	}
 
@@ -671,7 +675,7 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 *
-	 * @dataProvider Joomla\DateTime\Fixture\DataProviderForDateTime::DummyParser
+	 * @dataProvider Joomla\DateTime\Test\Fixture\DataProviderForDateTime::DummyParser
 	 */
 	public function testCanBeEasilyExtendedByCustomParsers($name, $value, DateTime $expected)
 	{

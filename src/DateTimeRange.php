@@ -1,6 +1,7 @@
 <?php
-
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,17 +12,32 @@ namespace Joomla\DateTime;
  * Class representing a range of a time. You can create a range from start to end date,
  * but also from start date or end date for the given number of dates.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
 final class DateTimeRange implements \IteratorAggregate
 {
-	/** @var DateTime */
+	/**
+	 * DateTime object representing the start date of the iterator
+	 *
+	 * @var    DateTime
+	 * @since  __DEPLOY_VERSION__
+	 */
 	protected $start;
 
-	/** @var DateTime */
+	/**
+	 * DateTime object representing the end date of the iterator
+	 *
+	 * @var    DateTime
+	 * @since  __DEPLOY_VERSION__
+	 */
 	protected $end;
 
-	/** @var DateInterval */
+	/**
+	 * Interval between dates
+	 *
+	 * @var    DateInterval
+	 * @since  __DEPLOY_VERSION__
+	 */
 	protected $interval;
 
 	/**
@@ -30,6 +46,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 * @param   DateTime      $start     The start date.
 	 * @param   DateTime      $end       The end date.
 	 * @param   DateInterval  $interval  The interval between adjacent dates.
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 * @throws  \InvalidArgumentException
 	 */
 	public function __construct(DateTime $start, DateTime $end, DateInterval $interval)
 	{
@@ -50,7 +69,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 * @param   integer       $amount    The amount of dates included in a range.
 	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
-	 * @return DateTimeRange
+	 * @return  DateTimeRange
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function from(DateTime $start, $amount, DateInterval $interval)
 	{
@@ -66,7 +87,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 * @param   integer       $amount    The amount of dates included in a range.
 	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
-	 * @return DateTimeRange
+	 * @return  DateTimeRange
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function to(DateTime $end, $amount, DateInterval $interval)
 	{
@@ -78,7 +101,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Returns an empty range.
 	 *
-	 * @return DateTimeRange
+	 * @return  DateTimeRange
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function emptyRange()
 	{
@@ -88,7 +113,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Returns the start date.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function start()
 	{
@@ -98,7 +125,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Returns the end date.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function end()
 	{
@@ -108,7 +137,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Checks if a range is empty.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function isEmpty()
 	{
@@ -120,7 +151,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTime  $datetime  The date to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function includes(DateTime $datetime)
 	{
@@ -132,7 +165,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange  $range  The range to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function equals(DateTimeRange $range)
 	{
@@ -144,7 +179,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange  $range  The range to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function overlaps(DateTimeRange $range)
 	{
@@ -156,7 +193,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange  $range  The range to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function includesRange(DateTimeRange $range)
 	{
@@ -168,7 +207,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange  $range  The range to compare to.
 	 *
-	 * @return DateTimeRange
+	 * @return  DateTimeRange
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function gap(DateTimeRange $range)
 	{
@@ -196,7 +237,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange  $range  The range to compare to.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function abuts(DateTimeRange $range)
 	{
@@ -206,7 +249,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Returns an array of dates which are included in the current range.
 	 *
-	 * @return DateTime[]
+	 * @return  DateTime[]
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function toArray()
 	{
@@ -223,7 +268,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Returns an external iterator.
 	 *
-	 * @return \Iterator
+	 * @return  DateTimeIterator
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getIterator()
 	{
@@ -233,7 +280,9 @@ final class DateTimeRange implements \IteratorAggregate
 	/**
 	 * Returns string representation of the range.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __toString()
 	{
@@ -246,9 +295,10 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange[]  $ranges  An array of ranges to combine.
 	 *
-	 * @return DateTimeRange
+	 * @return  DateTimeRange
 	 *
-	 * @throws \InvalidArgumentException
+	 * @since   __DEPLOY_VERSION__
+	 * @throws  \InvalidArgumentException
 	 */
 	public static function combination(array $ranges)
 	{
@@ -265,7 +315,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange[]  $ranges  An array of ranges to combine.
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public static function isContiguous(array $ranges)
 	{
@@ -287,7 +339,9 @@ final class DateTimeRange implements \IteratorAggregate
 	 *
 	 * @param   DateTimeRange[]  $ranges  An array of ranges to sort.
 	 *
-	 * @return DateTimeRange[]
+	 * @return  DateTimeRange[]
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	protected static function sortArrayOfRanges(array $ranges)
 	{
@@ -302,9 +356,10 @@ final class DateTimeRange implements \IteratorAggregate
 	 * @param   DateTimeRange  $a  Base object.
 	 * @param   DateTimeRange  $b  Object to compare to.
 	 *
-	 * @return int
+	 * @return  integer
 	 *
-	 * @throws \InvalidArgumentException
+	 * @since   __DEPLOY_VERSION__
+	 * @throws  \InvalidArgumentException
 	 */
 	private static function compare(DateTimeRange $a, DateTimeRange $b)
 	{
@@ -339,9 +394,10 @@ final class DateTimeRange implements \IteratorAggregate
 	 * @param   DateInterval  $interval    The interval between adjacent dates.
 	 * @param   boolean       $byAddition  Should build the final date using addition or subtraction?
 	 *
-	 * @return DateTime
+	 * @return  DateTime
 	 *
-	 * @throws \InvalidArgumentException
+	 * @since   __DEPLOY_VERSION__
+	 * @throws  \InvalidArgumentException
 	 */
 	private static function buildDatetime(DateTime $base, $amount, DateInterval $interval, $byAddition = true)
 	{
@@ -350,7 +406,7 @@ final class DateTimeRange implements \IteratorAggregate
 			throw new \InvalidArgumentException('Amount have to be greater than 2');
 		}
 
-		/** Start from 2, because start date and end date also count */
+		// Start from 2, because start date and end date also count
 		for ($i = 2; $i <= $amount; $i++)
 		{
 			$base = $byAddition ? $base->add($interval) : $base->sub($interval);

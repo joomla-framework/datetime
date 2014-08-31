@@ -1,6 +1,7 @@
 <?php
-
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,16 +10,21 @@ namespace Joomla\DateTime\Since;
 
 use Joomla\DateTime\DateInterval;
 use Joomla\DateTime\DateTime;
-use Joomla\DateTime\Translator\Translator;
+use Joomla\DateTime\Translator\AbstractTranslator;
 
 /**
- * Default implemenation of Since interface.
+ * Default implementation of SinceInterface.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
-final class DateTimeSince implements Since
+final class DateTimeSince implements SinceInterface
 {
-	/** @var Translator */
+	/**
+	 * Translator object
+	 *
+	 * @var    AbstractTranslator
+	 * @since  __DEPLOY_VERSION__
+	 */
 	private $translator;
 
 	/**
@@ -26,10 +32,12 @@ final class DateTimeSince implements Since
 	 *
 	 * @param   DateTime  $base         The base date.
 	 * @param   DateTime  $datetime     The date to compare to. Default is null and this means that
-	 *                                   the base date will be compared to the current time.
-	 * @param   integer   $detailLevel  How much details do you want to get.
+	 *                                  the base date will be compared to the current time.
+	 * @param   integer   $detailLevel  The level of detail to retrieve.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
@@ -43,9 +51,11 @@ final class DateTimeSince implements Since
 	 *
 	 * @param   DateTime  $base      The base date.
 	 * @param   DateTime  $datetime  The date to compare to. Default is null and this means that
-	 *                                the base date will be compared to the current time.
+	 *                               the base date will be compared to the current time.
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function almost(DateTime $base, DateTime $datetime = null)
 	{
@@ -59,11 +69,13 @@ final class DateTimeSince implements Since
 	 *
 	 * @param   DateTime  $base         The base date.
 	 * @param   DateTime  $datetime     The date to compare to. Default is null and this means that
-	 *                                   the base date will be compared to the current time.
+	 *                                  the base date will be compared to the current time.
 	 *
-	 * @param   integer   $detailLevel  How much details do you want to get.
+	 * @param   integer   $detailLevel  The level of detail to retrieve.
 	 *
-	 * @return array()
+	 * @return  array
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function calc(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
@@ -88,9 +100,11 @@ final class DateTimeSince implements Since
 	 * Calculates the difference between dates for all units of a time.
 	 *
 	 * @param   DateInterval  $interval     The difference between dates.
-	 * @param   integer       $detailLevel  How much details do you want to get.
+	 * @param   integer       $detailLevel  The level of detail to retrieve.
 	 *
-	 * @return array()
+	 * @return  array
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function diffInUnits(DateInterval $interval, $detailLevel)
 	{
@@ -117,7 +131,7 @@ final class DateTimeSince implements Since
 				$detailLevel--;
 			}
 
-			/** Save only non-zero units of time */
+			// Save only non-zero units of time
 			if ($amount > 0 && $detailLevel > 0)
 			{
 				$diff[] = array(
@@ -143,7 +157,9 @@ final class DateTimeSince implements Since
 	 * @param   array    $diff         An array of differences for every unit of a time.
 	 * @param   boolean  $allowAlmost  Do you want to get an almost difference?
 	 *
-	 * @return string
+	 * @return  string
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function parseUnits($diff, $allowAlmost = false)
 	{
@@ -167,7 +183,7 @@ final class DateTimeSince implements Since
 
 		$parsed = $string[0];
 
-		/** Add 'and' separator */
+		// Add 'and' separator
 		if (count($string) > 1)
 		{
 			$theLastOne = $string[count($string) - 1];
@@ -191,7 +207,9 @@ final class DateTimeSince implements Since
 	 *
 	 * @param   array  &$time  An array of a time, eg: array('unit' => 'hour', 'amount' => 4)
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function isAlmost(&$time)
 	{
@@ -199,7 +217,7 @@ final class DateTimeSince implements Since
 			'day' => 7, 'week' => 4, 'month' => 12, 'year' => null
 		);
 
-		/** Finds the next unit of a time */
+		// Finds the next unit of a time
 		while (key($units) !== $time['unit'])
 		{
 			if (!next($units))
@@ -211,7 +229,7 @@ final class DateTimeSince implements Since
 		$current = current($units);
 		next($units);
 
-		/** Checks if the current amount is 'almost' the next one */
+		// Checks if the current amount is 'almost' the next one
 		if ($current && $current < $time['amount'] * 1.2)
 		{
 			$time = array(
@@ -230,11 +248,13 @@ final class DateTimeSince implements Since
 	 *
 	 * @param   array  $diff  An array of all units of a time
 	 *
-	 * @return boolean
+	 * @return  boolean
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	private function isNow($diff)
 	{
-		/** For all differences below one minute */
+		// For all differences below one minute
 		return empty($diff) || $diff[0]['unit'] == 'second';
 	}
 }

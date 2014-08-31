@@ -1,5 +1,7 @@
 <?php
 /**
+ * Part of the Joomla Framework DateTime Package
+ *
  * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,9 +13,9 @@ use Joomla\DateTime\DateTime;
 /**
  * AbstractParser.
  *
- * @since  2.0
+ * @since  __DEPLOY_VERSION__
  */
-abstract class AbstractParser implements Parser
+abstract class AbstractParser implements ParserInterface
 {
 	/**
 	 * Parses to DateTime object.
@@ -21,7 +23,9 @@ abstract class AbstractParser implements Parser
 	 * @param   string  $name   Name of the parser.
 	 * @param   mixed   $value  The value to parse.
 	 *
-	 * @return DateTime
+	 * @return  DateTime
+	 *
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function parse($name, $value)
 	{

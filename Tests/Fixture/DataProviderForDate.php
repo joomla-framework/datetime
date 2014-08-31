@@ -4,7 +4,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\DateTime\Fixture;
+namespace Joomla\DateTime\Test\Fixture;
 
 use Joomla\DateTime\Date;
 

@@ -4,27 +4,27 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\DateTime\Fixture;
+namespace Joomla\DateTime\Test\Fixture;
 
 use Joomla\DateTime\DateTime;
-use Joomla\DateTime\Getter\Getter;
+use Joomla\DateTime\Getter\GetterInterface;
 
 /**
  * DummyGetter.
  *
  * @since  2.0
  */
-final class DummyGetter implements Getter
+final class DummyGetter implements GetterInterface
 {
-	/** @var Getter */
+	/** @var GetterInterface */
 	private $getter;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param   Getter\Getter  $getter  The Getter implementation.
+	 * @param   GetterInterface  $getter  The Getter implementation.
 	 */
-	public function __construct(Getter $getter)
+	public function __construct(GetterInterface $getter)
 	{
 		$this->getter = $getter;
 	}
