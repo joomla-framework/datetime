@@ -4,7 +4,7 @@
     "description": "Joomla DateTime Package",
     "keywords": ["joomla", "framework", "datetime"],
     "homepage": "https://github.com/joomla-framework/datetime",
-    "license": "GPL-2.0+",
+    "license": "LGPL-2.1+",
     "require": {
         "php": ">=5.3.10",
         "symfony/translation": "~2.5"
