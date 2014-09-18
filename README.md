@@ -1,5 +1,5 @@
 # The DateTime Package
-[![Build Status](https://travis-ci.org/tomaszhanc/gsoc-datetime.svg?branch=master)](https://travis-ci.org/tomaszhanc/gsoc-datetime) [![Coverage Status](https://img.shields.io/coveralls/tomaszhanc/gsoc-datetime.svg)](https://coveralls.io/r/tomaszhanc/gsoc-datetime?branch=master)
+[![Build Status](https://travis-ci.org/joomla-framework/datetime.svg?branch=master)](https://travis-ci.org/joomla-framework/datetime) [![Coverage Status](https://img.shields.io/coveralls/joomla-framework/datetime.svg)](https://coveralls.io/r/joomla-framework/datetime?branch=master)
 
 This is a DateTime package built for the Joomla! Framework during Google Summer of Code 2014.
 The main goal for this library was to create a DateTime object as an [Immutable Value Object](http://magazine.joomla.org/issues/issue-july-2014/item/2111-the-value-of-value-objects).
@@ -31,3 +31,21 @@ Every method of `DateTime` is returning a new object and is not changing the cur
 
 ## Credits
 [Jens Segers](http://github.com/jenssegers/laravel-date) for their approach to translations
+
+## Installation via Composer
+
+Add `"joomla/datetime": "~2.0"` to the require block in your composer.json and then run `composer install`.
+
+```json
+{
+	"require": {
+		"joomla/datetime": "~2.0"
+	}
+}
+```
+
+Alternatively, you can simply run the following from the command line:
+
+```sh
+composer require joomla/date "~2.0"
+```
