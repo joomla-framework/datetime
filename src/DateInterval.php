@@ -18,7 +18,7 @@ namespace Joomla\DateTime;
  * @property-read  integer  $i       Number of minutes.
  * @property-read  integer  $s       Number of seconds.
  * @property-read  integer  $invert  Is 1 if the interval represents a negative time period and 0 otherwise.
- * @since          __DEPLOY_VERSION__
+ * @since          2.0.0
  */
 final class DateInterval
 {
@@ -26,7 +26,7 @@ final class DateInterval
 	 * PHP DateInverval object
 	 *
 	 * @var    \DateInterval
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $interval;
 
@@ -35,7 +35,7 @@ final class DateInterval
 	 *
 	 * @param   \DateInterval|string  $interval  Either a PHP DateInterval object or a string with an interval specification.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __construct($interval)
 	{
@@ -49,7 +49,7 @@ final class DateInterval
 	 *
 	 * @return  DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function createFromDateString($time)
 	{
@@ -64,7 +64,7 @@ final class DateInterval
 	 *
 	 * @return  DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function add(DateInterval $interval)
 	{
@@ -87,7 +87,7 @@ final class DateInterval
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function equals(DateInterval $interval)
 	{
@@ -107,7 +107,7 @@ final class DateInterval
 	 *
 	 * @return  DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function invert()
 	{
@@ -124,7 +124,7 @@ final class DateInterval
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function format($format)
 	{
@@ -138,7 +138,7 @@ final class DateInterval
 	 *
 	 * @return  mixed
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __get($name)
 	{
@@ -150,7 +150,7 @@ final class DateInterval
 	 *
 	 * @return  \DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function getDateInterval()
 	{
@@ -164,7 +164,7 @@ final class DateInterval
 	 *
 	 * @return  \DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function copy(\DateInterval $interval)
 	{

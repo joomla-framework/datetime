@@ -23,7 +23,7 @@ namespace Joomla\DateTime;
  * @property-read  string   $ordinal      S - English ordinal suffix for the day of the month, 2 characters.
  * @property-read  string   $week         W - Numeric representation of the day of the week.
  * @property-read  string   $year         Y - A full numeric representation of a year, 4 digits.
- * @since          __DEPLOY_VERSION__
+ * @since          2.0.0
  */
 class DateTime
 {
@@ -31,7 +31,7 @@ class DateTime
 	 * Getter Interface
 	 *
 	 * @var    Getter\GetterInterface
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private static $getter;
 
@@ -39,7 +39,7 @@ class DateTime
 	 * Parser Interface
 	 *
 	 * @var    Parser\ParserInterface
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private static $parser;
 
@@ -47,7 +47,7 @@ class DateTime
 	 * Since Interface
 	 *
 	 * @var    Since\SinceInterface
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private static $since;
 
@@ -55,7 +55,7 @@ class DateTime
 	 * Translator object
 	 *
 	 * @var    Translator\AbstractTranslator
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private static $translator;
 
@@ -63,7 +63,7 @@ class DateTime
 	 * Strategy Interface
 	 *
 	 * @var    Strategy\StrategyInterface
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $strategy;
 
@@ -71,7 +71,7 @@ class DateTime
 	 * PHP DateTime object
 	 *
 	 * @var    \DateTime
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $datetime;
 
@@ -82,7 +82,7 @@ class DateTime
 	 *                                    or a string in a format accepted by strtotime().
 	 * @param   \DateTimeZone  $timezone  The timezone.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __construct($datetime, \DateTimeZone $timezone = null)
 	{
@@ -113,7 +113,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function parse($name, $value)
 	{
@@ -129,7 +129,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function createFromFormat($format, $time, \DateTimeZone $timezone = null)
 	{
@@ -151,7 +151,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function create($year, $month = '01', $day = '01', $hour = '00', $minute = '00', $second = '00', \DateTimeZone $timezone = null)
 	{
@@ -170,7 +170,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function createFromDate($year, $month = '01', $day = '01', \DateTimeZone $timezone = null)
 	{
@@ -187,7 +187,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function createFromTime($hour = '00', $minute = '00', $second = '00', \DateTimeZone $timezone = null)
 	{
@@ -201,7 +201,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function now(\DateTimeZone $timezone = null)
 	{
@@ -215,7 +215,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function today(\DateTimeZone $timezone = null)
 	{
@@ -229,7 +229,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
@@ -245,7 +245,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function yesterday(\DateTimeZone $timezone = null)
 	{
@@ -261,7 +261,7 @@ class DateTime
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function isAfter(DateTime $datetime)
 	{
@@ -275,7 +275,7 @@ class DateTime
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function isBefore(DateTime $datetime)
 	{
@@ -289,7 +289,7 @@ class DateTime
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function equals(DateTime $datetime)
 	{
@@ -304,7 +304,7 @@ class DateTime
 	 *
 	 * @return  DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function diff(DateTime $datetime, $absolute = false)
 	{
@@ -318,7 +318,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function add(DateInterval $interval)
 	{
@@ -337,7 +337,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function sub(DateInterval $interval)
 	{
@@ -356,7 +356,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addDays($value)
 	{
@@ -370,7 +370,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subDays($value)
 	{
@@ -384,7 +384,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addWeeks($value)
 	{
@@ -398,7 +398,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subWeeks($value)
 	{
@@ -412,7 +412,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addMonths($value)
 	{
@@ -426,7 +426,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subMonths($value)
 	{
@@ -440,7 +440,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addYears($value)
 	{
@@ -454,7 +454,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subYears($value)
 	{
@@ -468,7 +468,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addSeconds($value)
 	{
@@ -482,7 +482,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subSeconds($value)
 	{
@@ -496,7 +496,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addMinutes($value)
 	{
@@ -510,7 +510,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subMinutes($value)
 	{
@@ -524,7 +524,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addHours($value)
 	{
@@ -538,7 +538,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subHours($value)
 	{
@@ -550,7 +550,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfDay()
 	{
@@ -562,7 +562,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfDay()
 	{
@@ -574,7 +574,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfWeek()
 	{
@@ -588,7 +588,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfWeek()
 	{
@@ -602,7 +602,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfMonth()
 	{
@@ -616,7 +616,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfMonth()
 	{
@@ -630,7 +630,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfYear()
 	{
@@ -644,7 +644,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfYear()
 	{
@@ -660,7 +660,7 @@ class DateTime
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function format($format)
 	{
@@ -721,7 +721,7 @@ class DateTime
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function since(DateTime $datetime = null, $detailLevel = 1)
 	{
@@ -736,7 +736,7 @@ class DateTime
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function sinceAlmost(DateTime $datetime = null)
 	{
@@ -750,7 +750,7 @@ class DateTime
 	 *
 	 * @return  mixed
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __get($name)
 	{
@@ -764,7 +764,7 @@ class DateTime
 	 *
 	 * @return  mixed
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function get($name)
 	{
@@ -776,7 +776,7 @@ class DateTime
 	 *
 	 * @return  integer
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function getOffset()
 	{
@@ -788,7 +788,7 @@ class DateTime
 	 *
 	 * @return  integer
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function getTimestamp()
 	{
@@ -800,7 +800,7 @@ class DateTime
 	 *
 	 * @return  \DateTimeZone
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function getTimezone()
 	{
@@ -812,7 +812,7 @@ class DateTime
 	 *
 	 * @return  \DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function getDateTime()
 	{
@@ -826,7 +826,7 @@ class DateTime
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setSince(Since\SinceInterface $since)
 	{
@@ -840,7 +840,7 @@ class DateTime
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setTranslator(Translator\AbstractTranslator $translator)
 	{
@@ -854,7 +854,7 @@ class DateTime
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setGetter(Getter\GetterInterface $getter)
 	{
@@ -868,7 +868,7 @@ class DateTime
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setParser(Parser\ParserInterface $parser)
 	{
@@ -882,7 +882,7 @@ class DateTime
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setLocale($locale)
 	{
@@ -894,7 +894,7 @@ class DateTime
 	 *
 	 * @return  Translator\AbstractTranslator
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function getTranslator()
 	{
@@ -913,7 +913,7 @@ class DateTime
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	protected function setStrategy(Strategy\StrategyInterface $strategy)
 	{
@@ -925,7 +925,7 @@ class DateTime
 	 *
 	 * @return  Strategy\StrategyInterface
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	protected function getStrategy()
 	{
@@ -945,7 +945,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function calc($value, $format)
 	{
@@ -962,7 +962,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function modify($callable)
 	{
@@ -979,7 +979,7 @@ class DateTime
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function fixMonth(DateTime $result)
 	{
@@ -997,7 +997,7 @@ class DateTime
 	 *
 	 * @return  Since\SinceInterface
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private static function getSince()
 	{
@@ -1014,7 +1014,7 @@ class DateTime
 	 *
 	 * @return  Getter\GetterInterface
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private static function getGetter()
 	{
@@ -1031,7 +1031,7 @@ class DateTime
 	 *
 	 * @return  Parser\ParserInterface
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private static function getParser()
 	{

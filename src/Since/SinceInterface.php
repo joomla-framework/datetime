@@ -13,7 +13,7 @@ use Joomla\DateTime\DateTime;
 /**
  * Since Interface for a DateTime object
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 interface SinceInterface
 {
@@ -27,7 +27,7 @@ interface SinceInterface
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1);
 
@@ -40,7 +40,7 @@ interface SinceInterface
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function almost(DateTime $base, DateTime $datetime = null);
 }

@@ -11,7 +11,7 @@ namespace Joomla\DateTime;
 /**
  * Day-precision wrapper for a DateTime class.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 class Date
 {
@@ -19,7 +19,7 @@ class Date
 	 * DateTime object
 	 *
 	 * @var    DateTime
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $datetime;
 
@@ -29,7 +29,7 @@ class Date
 	 * @param   mixed  $date  Either a Joomla\DateTime object, a PHP DateTime object
 	 *                        or a string in a format accepted by strtotime().
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __construct($date)
 	{
@@ -48,7 +48,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function today(\DateTimeZone $timezone = null)
 	{
@@ -62,7 +62,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function tomorrow(\DateTimeZone $timezone = null)
 	{
@@ -76,7 +76,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function yesterday(\DateTimeZone $timezone = null)
 	{
@@ -90,7 +90,7 @@ class Date
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function isAfter(Date $date)
 	{
@@ -104,7 +104,7 @@ class Date
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function isBefore(Date $date)
 	{
@@ -118,7 +118,7 @@ class Date
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function equals(Date $date)
 	{
@@ -133,7 +133,7 @@ class Date
 	 *
 	 * @return  DateInterval
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function diff(Date $date, $absolute = false)
 	{
@@ -147,7 +147,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addDays($value)
 	{
@@ -161,7 +161,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subDays($value)
 	{
@@ -175,7 +175,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addWeeks($value)
 	{
@@ -189,7 +189,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subWeeks($value)
 	{
@@ -203,7 +203,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addMonths($value)
 	{
@@ -217,7 +217,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subMonths($value)
 	{
@@ -231,7 +231,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function addYears($value)
 	{
@@ -245,7 +245,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function subYears($value)
 	{
@@ -257,7 +257,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfWeek()
 	{
@@ -269,7 +269,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfWeek()
 	{
@@ -281,7 +281,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfMonth()
 	{
@@ -293,7 +293,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfMonth()
 	{
@@ -305,7 +305,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfYear()
 	{
@@ -317,7 +317,7 @@ class Date
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfYear()
 	{
@@ -331,7 +331,7 @@ class Date
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function format($format)
 	{
@@ -347,7 +347,7 @@ class Date
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function since(Date $date = null, $detailLevel = 1)
 	{
@@ -362,7 +362,7 @@ class Date
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function sinceAlmost(Date $date = null)
 	{
@@ -374,7 +374,7 @@ class Date
 	 *
 	 * @return  \DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function getDateTime()
 	{
@@ -388,7 +388,7 @@ class Date
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setTranslator(Translator\AbstractTranslator $translator)
 	{
@@ -402,7 +402,7 @@ class Date
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public static function setLocale($locale)
 	{
@@ -416,7 +416,7 @@ class Date
 	 *
 	 * @return  DateTime|null
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private static function cast(Date $date = null)
 	{

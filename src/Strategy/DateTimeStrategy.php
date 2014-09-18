@@ -11,7 +11,7 @@ namespace Joomla\DateTime\Strategy;
 /**
  * Default implementation of StrategyInterface.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 class DateTimeStrategy implements StrategyInterface
 {
@@ -22,7 +22,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfDay(\DateTime $datetime)
 	{
@@ -36,7 +36,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfDay(\DateTime $datetime)
 	{
@@ -50,7 +50,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfWeek(\DateTime $datetime)
 	{
@@ -67,7 +67,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfWeek(\DateTime $datetime)
 	{
@@ -84,7 +84,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfMonth(\DateTime $datetime)
 	{
@@ -101,7 +101,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfMonth(\DateTime $datetime)
 	{
@@ -119,7 +119,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function startOfYear(\DateTime $datetime)
 	{
@@ -134,7 +134,7 @@ class DateTimeStrategy implements StrategyInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function endOfYear(\DateTime $datetime)
 	{

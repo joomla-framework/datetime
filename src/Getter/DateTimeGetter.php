@@ -13,7 +13,7 @@ use Joomla\DateTime\DateTime;
 /**
  * Default implementation of GetterInterface.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 final class DateTimeGetter implements GetterInterface
 {
@@ -25,7 +25,7 @@ final class DateTimeGetter implements GetterInterface
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function get(DateTime $datetime, $name)
 	{

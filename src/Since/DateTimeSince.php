@@ -15,7 +15,7 @@ use Joomla\DateTime\Translator\AbstractTranslator;
 /**
  * Default implementation of SinceInterface.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 final class DateTimeSince implements SinceInterface
 {
@@ -23,7 +23,7 @@ final class DateTimeSince implements SinceInterface
 	 * Translator object
 	 *
 	 * @var    AbstractTranslator
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $translator;
 
@@ -37,7 +37,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function since(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
@@ -55,7 +55,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function almost(DateTime $base, DateTime $datetime = null)
 	{
@@ -75,7 +75,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  array
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function calc(DateTime $base, DateTime $datetime = null, $detailLevel = 1)
 	{
@@ -104,7 +104,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  array
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function diffInUnits(DateInterval $interval, $detailLevel)
 	{
@@ -159,7 +159,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function parseUnits($diff, $allowAlmost = false)
 	{
@@ -209,7 +209,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function isAlmost(&$time)
 	{
@@ -250,7 +250,7 @@ final class DateTimeSince implements SinceInterface
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function isNow($diff)
 	{

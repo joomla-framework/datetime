@@ -11,7 +11,7 @@ namespace Joomla\DateTime\Getter;
 /**
  * Getter Interface for a DateTime object
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 interface GetterInterface
 {
@@ -23,7 +23,7 @@ interface GetterInterface
 	 *
 	 * @return  mixed
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function get(\Joomla\DateTime\DateTime $datetime, $name);
 }

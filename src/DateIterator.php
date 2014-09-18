@@ -11,7 +11,7 @@ namespace Joomla\DateTime;
 /**
  * Iterator for ranges of Date objects.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 class DateIterator extends DateTimeIterator
 {
@@ -21,7 +21,7 @@ class DateIterator extends DateTimeIterator
 	 * @param   Date  $start  The start date.
 	 * @param   Date  $end    The end date.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __construct(Date $start, Date $end)
 	{
@@ -33,7 +33,7 @@ class DateIterator extends DateTimeIterator
 	 *
 	 * @return  Date
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function current()
 	{

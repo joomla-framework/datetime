@@ -11,7 +11,7 @@ namespace Joomla\DateTime;
 /**
  * Iterator for ranges of DateTime objects.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 class DateTimeIterator implements \Iterator
 {
@@ -19,7 +19,7 @@ class DateTimeIterator implements \Iterator
 	 * DateTime object representing the start date of the iterator
 	 *
 	 * @var    DateTime
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $start;
 
@@ -27,7 +27,7 @@ class DateTimeIterator implements \Iterator
 	 * DateTime object representing the end date of the iterator
 	 *
 	 * @var    DateTime
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $end;
 
@@ -35,7 +35,7 @@ class DateTimeIterator implements \Iterator
 	 * Interval between dates
 	 *
 	 * @var    DateInterval
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $interval;
 
@@ -43,7 +43,7 @@ class DateTimeIterator implements \Iterator
 	 * DateTime object representing the current date
 	 *
 	 * @var    DateTime
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $current;
 
@@ -51,7 +51,7 @@ class DateTimeIterator implements \Iterator
 	 * The key of the current date
 	 *
 	 * @var    integer
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $key;
 
@@ -62,7 +62,7 @@ class DateTimeIterator implements \Iterator
 	 * @param   DateTime      $end       The end date.
 	 * @param   DateInterval  $interval  The interval between adjacent dates.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __construct(DateTime $start, DateTime $end, DateInterval $interval)
 	{
@@ -76,7 +76,7 @@ class DateTimeIterator implements \Iterator
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function current()
 	{
@@ -88,7 +88,7 @@ class DateTimeIterator implements \Iterator
 	 *
 	 * @return  integer
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function key()
 	{
@@ -100,7 +100,7 @@ class DateTimeIterator implements \Iterator
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function next()
 	{
@@ -113,7 +113,7 @@ class DateTimeIterator implements \Iterator
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function rewind()
 	{
@@ -126,7 +126,7 @@ class DateTimeIterator implements \Iterator
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function valid()
 	{

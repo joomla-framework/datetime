@@ -13,26 +13,26 @@ use Symfony\Component\Translation\MessageSelector;
 /**
  * Default implementation of AbstractTranslator.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 final class DateTimeTranslator extends AbstractTranslator
 {
 	/**
 	 * @var    MessageSelector
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $selector;
 
 	/**
 	 * @var  array
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	private $loaded = array();
 
 	/**
 	 * Constructor.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function __construct()
 	{
@@ -47,7 +47,7 @@ final class DateTimeTranslator extends AbstractTranslator
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function get($item, array $replace = array())
 	{
@@ -72,7 +72,7 @@ final class DateTimeTranslator extends AbstractTranslator
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function choice($item, $number, array $replace = array())
 	{
@@ -88,7 +88,7 @@ final class DateTimeTranslator extends AbstractTranslator
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function load()
 	{
@@ -110,7 +110,7 @@ final class DateTimeTranslator extends AbstractTranslator
 	 *
 	 * @return  boolean
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function isLoaded()
 	{
@@ -125,7 +125,7 @@ final class DateTimeTranslator extends AbstractTranslator
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	private function makeReplacements($line, array $replace)
 	{

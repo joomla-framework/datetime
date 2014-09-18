@@ -11,7 +11,7 @@ namespace Joomla\DateTime\Translator;
 /**
  * Base Translator class.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 abstract class AbstractTranslator
 {
@@ -19,7 +19,7 @@ abstract class AbstractTranslator
 	 * The locale to use.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0
 	 */
 	protected $locale = 'en';
 
@@ -30,7 +30,7 @@ abstract class AbstractTranslator
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function setLocale($locale)
 	{
@@ -45,7 +45,7 @@ abstract class AbstractTranslator
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	abstract public function get($item, array $replace = array());
 
@@ -58,7 +58,7 @@ abstract class AbstractTranslator
 	 *
 	 * @return  string
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	abstract public function choice($item, $number, array $replace = array());
 }

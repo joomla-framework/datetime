@@ -13,7 +13,7 @@ use Joomla\DateTime\DateTime;
 /**
  * AbstractParser.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0
  */
 abstract class AbstractParser implements ParserInterface
 {
@@ -25,7 +25,7 @@ abstract class AbstractParser implements ParserInterface
 	 *
 	 * @return  DateTime
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0
 	 */
 	public function parse($name, $value)
 	{
