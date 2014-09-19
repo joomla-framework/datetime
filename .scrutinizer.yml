@@ -3,3 +3,10 @@ imports:
 
 tools:
     external_code_coverage: true
+
+filter:
+    excluded_paths:
+        - Tests/*
+        - lang/*
+        - doc/*
+        - vendor/*
