@@ -11,7 +11,7 @@ namespace Joomla\DateTime;
 /**
  * DateInterval.
  *
- * @since          2.0.0
+ * @since  2.0.0
  *
  * @property-read  integer  $y       Number of years.
  * @property-read  integer  $m       Number of months.
