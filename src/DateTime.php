@@ -11,6 +11,8 @@ namespace Joomla\DateTime;
 /**
  * DateTime.
  *
+ * @since          2.0.0
+ *
  * @property-read  string   $daysinmonth  t - Number of days in the given month.
  * @property-read  string   $dayofweek    N - ISO-8601 numeric representation of the day of the week.
  * @property-read  string   $dayofyear    z - The day of the year (starting from 0).
@@ -23,7 +25,6 @@ namespace Joomla\DateTime;
  * @property-read  string   $ordinal      S - English ordinal suffix for the day of the month, 2 characters.
  * @property-read  string   $week         W - Numeric representation of the day of the week.
  * @property-read  string   $year         Y - A full numeric representation of a year, 4 digits.
- * @since          2.0.0
  */
 class DateTime
 {
