@@ -11,7 +11,7 @@ namespace Joomla\DateTime;
 /**
  * DateTime.
  *
- * @since          2.0.0
+ * @since  2.0.0
  *
  * @property-read  string   $daysinmonth  t - Number of days in the given month.
  * @property-read  string   $dayofweek    N - ISO-8601 numeric representation of the day of the week.
