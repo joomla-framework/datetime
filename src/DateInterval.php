@@ -11,6 +11,8 @@ namespace Joomla\DateTime;
 /**
  * DateInterval.
  *
+ * @since  2.0.0
+ *
  * @property-read  integer  $y       Number of years.
  * @property-read  integer  $m       Number of months.
  * @property-read  integer  $d       Number of days.
@@ -18,7 +20,6 @@ namespace Joomla\DateTime;
  * @property-read  integer  $i       Number of minutes.
  * @property-read  integer  $s       Number of seconds.
  * @property-read  integer  $invert  Is 1 if the interval represents a negative time period and 0 otherwise.
- * @since          2.0.0
  */
 final class DateInterval
 {
