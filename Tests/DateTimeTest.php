@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright  Copyright (C) 2005 - 2014 Open Source Matters. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.
  * @license    GNU Lesser General Public License version 2.1 or later; see LICENSE
  */
 

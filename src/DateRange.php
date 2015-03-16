@@ -2,7 +2,7 @@
 /**
  * Part of the Joomla Framework DateTime Package
  *
- * @copyright  Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
  * @license    GNU Lesser General Public License version 2.1 or later; see LICENSE
  */
 
