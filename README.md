@@ -1,6 +1,11 @@
 # The DateTime Package
 [![Build Status](https://travis-ci.org/joomla-framework/datetime.svg?branch=master)](https://travis-ci.org/joomla-framework/datetime) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/joomla-framework/datetime/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/joomla-framework/datetime/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/joomla-framework/datetime/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/joomla-framework/datetime/?branch=master)
 
+[![Latest Stable Version](https://poser.pugx.org/joomla/datetime/v/stable)](https://packagist.org/packages/joomla/datetime)
+[![Total Downloads](https://poser.pugx.org/joomla/datetime/downloads)](https://packagist.org/packages/joomla/datetime)
+[![Latest Unstable Version](https://poser.pugx.org/joomla/datetime/v/unstable)](https://packagist.org/packages/joomla/datetime)
+[![License](https://poser.pugx.org/joomla/datetime/license)](https://packagist.org/packages/joomla/datetime)
+
 This is a DateTime package built for the Joomla! Framework during Google Summer of Code 2014.
 The main goal for this library was to create a DateTime object as an [Immutable Value Object](http://magazine.joomla.org/issues/issue-july-2014/item/2111-the-value-of-value-objects).
 
