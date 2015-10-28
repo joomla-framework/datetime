@@ -404,6 +404,14 @@ final class DataProviderForDateTime
 			array(5, $since, $someDate, '1 year, 1 month, 2 weeks, 4 days and 6 hours ago'),
 			array(6, $since, $someDate, '1 year, 1 month, 2 weeks, 4 days, 6 hours and 15 minutes ago'),
 			array(7, $since, $someDate, '1 year, 1 month, 2 weeks, 4 days, 6 hours, 15 minutes and 25 seconds ago'),
+			/**
+			 * Daylight saving time for non UTC-zones.
+			 * When dates are in a different times (summer time and winter time),
+			 * unfortunately it adds an extra hour to the result.
+			 *
+			 * @see http://stackoverflow.com/questions/33392011/datetimediff-and-end-of-daylight-saving-time
+			 **/
+			// array(7, new DateTime('2015-10-28 12:50:00'), new DateTime('2015-10-19 13:20:00'), '1 week, 2 days and 30 minutes ago')
 		);
 	}
 
