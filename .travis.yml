@@ -23,15 +23,15 @@ matrix:
 
 before_script:
   # TODO - Remove @dev when Symfony 3.0 is tagged stable
-  - if [ "SYMFONY_VERSION" == "3" ]; then composer require --no-update symfony/yaml:3.0@dev; fi
-  - if [ "SCRUTINIZER_ENABLED" == "yes" ]; then composer require --no-update satooshi/php-coveralls:dev-master --prefer-source; fi
+  - if [ "$SYMFONY_VERSION" == "3" ]; then composer require --no-update symfony/yaml:3.0@dev; fi
+  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then composer require --no-update satooshi/php-coveralls:dev-master --prefer-source; fi
   - composer update
 
 script:
-  - if [ "SCRUTINIZER_ENABLED" == "yes" ]; then mkdir -p .travis/logs; fi
-  - vendor/bin/phpunit `if [[ "SCRUTINIZER_ENABLED" == "yes" ]]; then echo "--coverage-clover .travis/logs/clover.xml"; fi`
-  - if [ "SCRUTINIZER_ENABLED" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [ "SCRUTINIZER_ENABLED" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover .travis/logs/clover.xml; fi
+  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then mkdir -p .travis/logs; fi
+  - vendor/bin/phpunit `if [[ "$SCRUTINIZER_ENABLED" == "yes" ]]; then echo "--coverage-clover .travis/logs/clover.xml"; fi`
+  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover .travis/logs/clover.xml; fi
   - vendor/bin/phpcs -p --report=full --extensions=php --standard=.travis/phpcs/Joomla/ruleset.xml src/
 
 after_script:
