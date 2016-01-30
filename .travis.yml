@@ -2,37 +2,36 @@ language: php
 
 env:
   global:
-    - SCRUTINIZER_ENABLED="no"
-    - SYMFONY_VERSION="2"
+    - RUN_PHPCS="no"
+    - RUN_SCRUTINIZER="no"
+    - COMPOSER_FLAGS=""
+    - PHPUNIT_FLAGS=""
 
 matrix:
   include:
     - php: 5.3
+    - php: 5.3
+      env: COMPOSER_FLAGS="--prefer-lowest"
     - php: 5.4
     - php: 5.5
     - php: 5.6
-      env: SCRUTINIZER_ENABLED="yes"
-    - php: 5.6
-      env: SYMFONY_VERSION="3"
+      env: RUN_PHPCS="yes" RUN_SCRUTINIZER="yes" PHPUNIT_FLAGS="--coverage-clover .travis/logs/clover.xml"
     - php: 7.0
-    - php: 7.0
-      env: SYMFONY_VERSION="3"
     - php: hhvm
   allow_failures:
     - php: hhvm
 
 before_script:
-  # TODO - Remove @dev when Symfony 3.0 is tagged stable
-  - if [ "$SYMFONY_VERSION" == "3" ]; then composer require --no-update symfony/yaml:3.0.*@dev; fi
-  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then composer require --no-update satooshi/php-coveralls:dev-master --prefer-source; fi
-  - composer update
+  - composer self-update
+  - if [ "RUN_SCRUTINIZER" == "yes" ]; then composer require --no-update satooshi/php-coveralls:dev-master --prefer-source; fi
+  - composer update $COMPOSER_FLAGS
 
 script:
-  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then mkdir -p .travis/logs; fi
-  - vendor/bin/phpunit `if [[ "$SCRUTINIZER_ENABLED" == "yes" ]]; then echo "--coverage-clover .travis/logs/clover.xml"; fi`
-  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [ "$SCRUTINIZER_ENABLED" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover .travis/logs/clover.xml; fi
-  - vendor/bin/phpcs -p --report=full --extensions=php --standard=.travis/phpcs/Joomla/ruleset.xml src/
+  - if [ "$RUN_SCRUTINIZER" == "yes" ]; then mkdir -p .travis/logs; fi
+  - vendor/bin/phpunit $PHPUNIT_FLAGS
+  - if [ "$RUN_SCRUTINIZER" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [ "$RUN_SCRUTINIZER" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover .travis/logs/clover.xml; fi
+  - if [ "$RUN_PHPCS" == "yes" ]; then vendor/bin/phpcs -p --report=full --extensions=php --standard=.travis/phpcs/Joomla/ruleset.xml src/; fi;
 
 after_script:
   - php vendor/bin/coveralls -v
