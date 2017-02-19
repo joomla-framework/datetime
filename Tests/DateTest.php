@@ -9,13 +9,14 @@ namespace Joomla\DateTime\Test;
 
 use Joomla\DateTime\Date;
 use Joomla\DateTime\DateInterval;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for Date class.
  *
  * @since  2.0
  */
-final class DateTest extends \PHPUnit_Framework_TestCase
+final class DateTest extends TestCase
 {
 	/**
 	 * Testing today.

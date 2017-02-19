@@ -8,13 +8,14 @@ namespace Joomla\DateTime\Test;
 
 use Joomla\DateTime\Date;
 use Joomla\DateTime\DateRange;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for DateRange class.
  *
  * @since  2.0
  */
-final class DateRangeTest extends \PHPUnit_Framework_TestCase
+final class DateRangeTest extends TestCase
 {
 	/**
 	 * Testing from.
@@ -241,7 +242,16 @@ final class DateRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillThrowAnExceptionIfRangesAreNotContiguousDuringCombination(array $ranges)
 	{
-		$this->setExpectedException("InvalidArgumentException");
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$this->expectException('InvalidArgumentException');
+		}
+		else
+		{
+			$this->setExpectedException('InvalidArgumentException');
+		}
+
 		DateRange::combination($ranges);
 	}
 

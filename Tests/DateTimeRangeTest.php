@@ -10,13 +10,14 @@ namespace Joomla\DateTime\Test;
 use Joomla\DateTime\DateInterval;
 use Joomla\DateTime\DateTime;
 use Joomla\DateTime\DateTimeRange;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for DateTimeRange class.
  *
  * @since  2.0
  */
-final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
+final class DateTimeRangeTest extends TestCase
 {
 	/**
 	 * Testing __constructor.
@@ -25,7 +26,16 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCannotCreateARangeWithIntervalBiggerThanGivenRange()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$this->expectException('InvalidArgumentException');
+		}
+		else
+		{
+			$this->setExpectedException('InvalidArgumentException');
+		}
+
 		new DateTimeRange(new DateTime('2014-07-21 13:00'), new DateTime('2014-07-21 14:00'), new DateInterval('PT2H'));
 	}
 
@@ -36,7 +46,16 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCannotCreateARangeForLessThanTwoDatesInIt()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$this->expectException('InvalidArgumentException');
+		}
+		else
+		{
+			$this->setExpectedException('InvalidArgumentException');
+		}
+
 		DateTimeRange::from(new DateTime('2014-07-20 13:00'), 1, new DateInterval('PT1H'));
 	}
 
@@ -236,7 +255,16 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillThrowAnExceptionIfRangesHaveADifferentIntervalDuringCombination()
 	{
-		$this->setExpectedException("InvalidArgumentException");
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$this->expectException('InvalidArgumentException');
+		}
+		else
+		{
+			$this->setExpectedException('InvalidArgumentException');
+		}
+
 		DateTimeRange::isContiguous(
 			array(
 				new DateTimeRange(new DateTime('2014-06-10'), new DateTime('2014-06-12'), new DateInterval('PT1H')),
@@ -271,7 +299,16 @@ final class DateTimeRangeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillThrowAnExceptionIfRangesAreNotContiguousDuringCombination(array $ranges)
 	{
-		$this->setExpectedException("InvalidArgumentException");
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$this->expectException('InvalidArgumentException');
+		}
+		else
+		{
+			$this->setExpectedException('InvalidArgumentException');
+		}
+
 		DateTimeRange::combination($ranges);
 	}
 

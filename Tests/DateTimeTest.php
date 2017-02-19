@@ -9,13 +9,14 @@ namespace Joomla\DateTime\Test;
 use Joomla\DateTime\DateInterval;
 use Joomla\DateTime\DateTime;
 use Joomla\DateTime\Getter\DateTimeGetter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for DateTime class.
  *
  * @since  2.0
  */
-final class DateTimeTest extends \PHPUnit_Framework_TestCase
+final class DateTimeTest extends TestCase
 {
 	/**
 	 * Sets english language for every test.
@@ -633,7 +634,17 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testWillTriggerAnErrorIfAPropertyDoesNotExist()
 	{
-		$this->setExpectedException('PHPUnit_Framework_Error_Notice');
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$exceptionClass = class_exists('\\PHPUnit\\Framework\\Error\\Notice') ? '\\PHPUnit\\Framework\\Error\\Notice' : 'PHPUnit_Framework_Error_Notice';
+			$this->expectException($exceptionClass);
+		}
+		else
+		{
+			$this->setExpectedException('PHPUnit_Framework_Error_Notice');
+		}
+
 		$today = DateTime::today();
 		$today->iDoNotExist;
 	}
@@ -662,7 +673,16 @@ final class DateTimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testThereIsNoDefaultParserMethod()
 	{
-		$this->setExpectedException('BadMethodCallException');
+		// expectException was added in PHPUnit 5.2 and setExpectedException removed in 6.0
+		if (method_exists($this, 'expectException'))
+		{
+			$this->expectException('BadMethodCallException');
+		}
+		else
+		{
+			$this->setExpectedException('BadMethodCallException');
+		}
+
 		DateTime::parse('iDoNotExist', 'iDoNotExist');
 	}
 

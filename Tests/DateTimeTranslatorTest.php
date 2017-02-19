@@ -7,13 +7,14 @@
 namespace Joomla\DateTime\Test;
 
 use Joomla\DateTime\DateTime;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for DateTimeTranslator class.
  *
  * @since  2.0
  */
-final class DateTimeTranslatorTest extends \PHPUnit_Framework_TestCase
+final class DateTimeTranslatorTest extends TestCase
 {
 	/** string */
 	private $path;

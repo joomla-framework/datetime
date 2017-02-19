@@ -9,13 +9,14 @@ namespace Joomla\DateTime\Test;
 
 use Joomla\DateTime\DateTime;
 use Joomla\DateTime\Test\Fixture\SchoolYear;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for DateTimeStrategy class.
  *
  * @since  2.0
  */
-final class DateTimeStrategyTest extends \PHPUnit_Framework_TestCase
+final class DateTimeStrategyTest extends TestCase
 {
 	/**
 	 * Testing strategy.
