@@ -324,7 +324,7 @@ class DateTime
 	public function add(DateInterval $interval)
 	{
 		return $this->modify(
-			function(\DateTime $datetime) use ($interval)
+			function (\DateTime $datetime) use ($interval)
 			{
 				$datetime->add($interval->getDateInterval());
 			}
@@ -343,7 +343,7 @@ class DateTime
 	public function sub(DateInterval $interval)
 	{
 		return $this->modify(
-			function(\DateTime $datetime) use ($interval)
+			function (\DateTime $datetime) use ($interval)
 			{
 				$datetime->sub($interval->getDateInterval());
 			}

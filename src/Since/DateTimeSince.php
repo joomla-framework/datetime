@@ -165,7 +165,7 @@ final class DateTimeSince implements SinceInterface
 	{
 		if (empty($diff))
 		{
-			return;
+			return '';
 		}
 
 		$isAlmost = false;
@@ -205,7 +205,7 @@ final class DateTimeSince implements SinceInterface
 	 * Checks if a time is more than 80% of the another unit of a time.
 	 * (For example for 50 minutes it's FALSE, but for 55 minutes it's TRUE.)
 	 *
-	 * @param   array  &$time  An array of a time, eg: array('unit' => 'hour', 'amount' => 4)
+	 * @param   array  $time  An array of a time, eg: array('unit' => 'hour', 'amount' => 4)
 	 *
 	 * @return  boolean
 	 *
