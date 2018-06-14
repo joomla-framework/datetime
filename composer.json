@@ -1,5 +1,5 @@
 {
-    "name": "joomla/datetime",
+    "name": "tomaszhanc/datetime",
     "type": "joomla-package",
     "description": "Joomla DateTime Package",
     "keywords": ["joomla", "framework", "datetime"],

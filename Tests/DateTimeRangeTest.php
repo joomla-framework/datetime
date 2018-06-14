@@ -475,9 +475,9 @@ final class DateTimeRangeTest extends TestCase
 			array(
 				new DateTimeRange(new DateTime('2014-06-10 10:00'), new DateTime('2014-06-12 18:00'), new DateInterval('PT1H')),
 				array(
-					new DateTimeRange(new DateTime('2014-06-10 10:00'), new DateTime('2014-06-10 18:00'), new DateInterval('PT1H')),
 					new DateTimeRange(new DateTime('2014-06-10 19:00'), new DateTime('2014-06-12 11:00'), new DateInterval('PT1H')),
-					new DateTimeRange(new DateTime('2014-06-12 12:00'), new DateTime('2014-06-12 18:00'), new DateInterval('PT1H'))
+					new DateTimeRange(new DateTime('2014-06-12 12:00'), new DateTime('2014-06-12 18:00'), new DateInterval('PT1H')),
+					new DateTimeRange(new DateTime('2014-06-10 10:00'), new DateTime('2014-06-10 18:00'), new DateInterval('PT1H'))
 				)
 			),
 		);

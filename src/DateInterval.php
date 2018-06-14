@@ -169,7 +169,15 @@ final class DateInterval
 	 */
 	private function copy(\DateInterval $interval)
 	{
-		$copy = new \DateInterval($interval->format('P%yY%mM%dDT%hH%iM%sS'));
+		$copy = new \DateInterval('P0Y0M0DT0H0M0S');
+
+		$copy->y = $interval->y;
+		$copy->m = $interval->m;
+		$copy->d = $interval->d;
+		$copy->h = $interval->h;
+		$copy->i = $interval->i;
+		$copy->s = $interval->s;
+		$copy->days = $interval->days;
 		$copy->invert = $interval->invert;
 
 		return $copy;

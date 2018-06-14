@@ -307,6 +307,8 @@ final class DateTimeRange implements \IteratorAggregate
 			throw new \InvalidArgumentException('Unable to combine date ranges');
 		}
 
+		$ranges = self::sortArrayOfRanges($ranges);
+
 		return new DateTimeRange($ranges[0]->start, $ranges[count($ranges) - 1]->end, $ranges[0]->interval);
 	}
 
